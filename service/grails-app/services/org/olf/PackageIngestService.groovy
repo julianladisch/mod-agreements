@@ -32,6 +32,7 @@ class PackageIngestService implements DataBinder {
   private boolean PROXY_MISSING_PLATFORM = true
 
   TitleIngestService titleIngestService
+  IdentifierService identifierService
   CoverageService coverageService
   MatchKeyService matchKeyService
 
@@ -130,6 +131,10 @@ class PackageIngestService implements DataBinder {
           return
         }
       }
+
+      // Update identifiers from citation
+      identifierService.updatePackageIdentifiers(pkg, package_data.identifiers)
+
       result.packageId = pkg.id
     }
 

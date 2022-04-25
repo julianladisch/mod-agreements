@@ -12,6 +12,7 @@ import org.olf.kb.TitleInstance
 
 import com.k_int.okapi.OkapiTenantAwareController
 import grails.gorm.DetachedCriteria
+import org.hibernate.criterion.CriteriaSpecification
 import grails.gorm.multitenancy.CurrentTenant
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
@@ -26,16 +27,20 @@ class ResourceController extends OkapiTenantAwareController<ErmResource>  {
     // True means read only. This should block post and puts to this.
     super(ErmResource, true)
   }
-  
+
+  // LEFT JOIN query
   def electronic () {
-    
     respond doTheLookup ({
+      def res = ErmResource;
       or {
         eq 'class', Pkg
         
         and {
+          createAlias('platformInstances', 'presentPtis', CriteriaSpecification.LEFT_JOIN)
           eq 'class', TitleInstance
           eq 'subType', TitleInstance.lookupOrCreateSubType('electronic')
+          
+          isNotEmpty('presentPtis.packageOccurences')
         }
       }
     })

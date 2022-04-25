@@ -2,6 +2,8 @@ package org.olf.dataimport.erm
 
 import java.time.LocalDate
 
+import org.olf.dataimport.erm.Identifier
+
 import org.olf.dataimport.internal.PackageSchema
 import org.olf.dataimport.internal.PackageSchema.PackageHeaderSchema
 
@@ -16,6 +18,8 @@ class ErmPackageImpl implements PackageHeaderSchema, PackageSchema, Validateable
   String name
   PackageProvider packageProvider
   Boolean trustedSourceTI
+  List<Identifier> identifiers
+
   Set<ContentItem> contentItems = []
   
   // Defaults for internal scheam so we can make them optional in the constraints.
@@ -68,11 +72,15 @@ class ErmPackageImpl implements PackageHeaderSchema, PackageSchema, Validateable
     contentItems
   }
 
-    @Override
+  @Override
   public Boolean getTrustedSourceTI() {
     trustedSourceTI
   }
-  
+
+  @Override
+  public List<Identifier> getIdentifiers() {
+    identifiers
+  }
   
   String toString() {
     "${name} from ${packageProvider}"

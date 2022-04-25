@@ -158,7 +158,7 @@ dependencies {
   compile 'com.opencsv:opencsv:4.6'
   compile 'commons-io:commons-io:2.6'
 
-  compile 'com.k_int.grails:web-toolkit-ce:6.2.0-rc.4'
+  compile 'com.k_int.grails:web-toolkit-ce:6.2.0'
   compile 'com.k_int.okapi:grails-okapi:4.1.2'
 
   compile 'uk.co.cacoethes:groovy-handlebars-engine:0.2'

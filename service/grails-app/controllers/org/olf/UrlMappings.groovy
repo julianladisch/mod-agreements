@@ -167,9 +167,7 @@ class UrlMappings {
     
     '/erm/custprops'(resources: 'customPropertyDefinition') {
       collection {
-        "/" (controller: 'customPropertyDefinition', action: 'index') {
-          perPage = { params.perPage ?: 100 }
-        }
+        "/" (controller: 'customPropertyDefinition', action: 'index')
         "/contexts" (controller: 'customPropertyDefinition', action: "fetchContexts", method: 'GET')
       }
     }

@@ -15,7 +15,7 @@ json g.render(titleInstance, [expand: ['type', 'publicationType', 'subType', 'co
    * so keeping the same to avoid breaking change
    */
   identifiers (titleInstance.approvedIdentifierOccurrences) { IdentifierOccurrence occurrence ->
-    g.inline(occurrence, [excludes: ['title', 'id'], expand: ['identifier', 'status']])
+    g.inline(occurrence, [excludes: ['resource', 'id'], expand: ['identifier', 'status']])
   }
 
   relatedTitles (titleInstance.relatedTitles) { TitleInstance relation ->
@@ -26,7 +26,7 @@ json g.render(titleInstance, [expand: ['type', 'publicationType', 'subType', 'co
 
       // Make sure we only expand approvedIdentifiers on the relatedTitles as well
       identifiers (relation.approvedIdentifierOccurrences) { IdentifierOccurrence occurrence ->
-        g.inline(occurrence, [excludes: ['title', 'id'], expand: ['identifier', 'status']])
+        g.inline(occurrence, [excludes: ['resource', 'id'], expand: ['identifier', 'status']])
       }
     }
   }

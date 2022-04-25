@@ -1,7 +1,13 @@
 package org.olf
 
-import org.olf.kb.IdentifierOccurrence
+import org.olf.dataimport.erm.Identifier
+
 import org.olf.kb.TitleInstance
+import org.olf.kb.Pkg
+
+import org.olf.kb.IdentifierOccurrence
+import org.olf.kb.IdentifierNamespace
+import org.olf.kb.Identifier
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
@@ -15,7 +21,7 @@ public class IdentifierService {
   private static final String IDENTIFIER_OCCURRENCE_MATCH_HQL = '''
     SELECT io from IdentifierOccurrence as io
     WHERE 
-      io.title.id = :initialTitleInstanceId AND
+      io.resource.id = :initialTitleInstanceId AND
       io.identifier.ns.value = :identifierNamespace AND
       io.identifier.value = :identifierValue AND
       io.status.value = :status
@@ -71,7 +77,7 @@ public class IdentifierService {
               // Next we create a new IdentifierOccurrence on the targetTI
               IdentifierOccurrence newIdentifierOccurrence = new IdentifierOccurrence(
                 identifier: identifierOccurrence.identifier,
-                title: targetTI,
+                resource: targetTI,
                 status: IdentifierOccurrence.lookupOrCreateStatus('approved')
               ).save(failOnError: true)
 
@@ -113,5 +119,58 @@ public class IdentifierService {
 
     result
   }
-}
 
+  public void updatePackageIdentifiers(Pkg pkg, List<org.olf.dataimport.erm.Identifier> identifiers) {
+    // Assume any package identifier information is the truth, and upsert/delete as necessary
+    IdentifierOccurrence.withTransaction {
+      // Firstly add any new identifiers from the identifiers list
+      identifiers.each {ident ->
+        IdentifierOccurrence existingIo = IdentifierOccurrence.executeQuery("""
+          SELECT io FROM IdentifierOccurrence as io
+          WHERE io.resource.id = :pkgId AND
+            io.identifier.ns.value = :ns AND
+            io.identifier.value = :value
+        """.toString(), [pkgId: pkg.id, ns: ident.namespace, value: ident.value])[0]
+
+        if (!existingIo || existingIo.id == null) {
+          IdentifierNamespace ns = IdentifierNamespace.findByValue(ident.namespace) ?: new IdentifierNamespace([value: ident.namespace]).save(flush: true, failOnError: true)
+          org.olf.kb.Identifier identifier = org.olf.kb.Identifier.findByNsAndValue(ns, ident.value) ?: new org.olf.kb.Identifier([
+            ns: ns,
+            value: ident.value
+          ]).save(flush: true, failOnError: true)
+
+          IdentifierOccurrence newIo = new IdentifierOccurrence([
+            identifier: identifier,
+            status: IdentifierOccurrence.lookupOrCreateStatus('approved')
+          ])
+
+          pkg.addToIdentifiers(newIo)
+        } else if (existingIo && existingIo.status.value == 'error') {
+          // This Identifier Occurrence exists as ERROR, reset to APPROVED
+          existingIo.status = IdentifierOccurrence.lookupOrCreateStatus('approved')
+        }
+      }
+
+      // Next we "delete" (set as error) any identifiers on the package not present in the identifiers list.
+      List<IdentifierOccurrence> identsToRemove = IdentifierOccurrence.executeQuery("""
+        SELECT io FROM IdentifierOccurrence AS io
+        WHERE resource.id = :pkgId AND
+          io.identifier.ns.value NOT IN :nsList AND
+          io.identifier.value NOT IN :valueList AND
+          io.status.value = :approved
+      """.toString(), [
+        pkgId: pkg.id,
+        nsList: identifiers.collect{ it.namespace },
+        valueList: identifiers.collect{ it.value },
+        approved: 'approved'
+      ]);
+
+      identsToRemove.each { ident -> 
+        ident.status = IdentifierOccurrence.lookupOrCreateStatus('error')
+      }
+
+      // Finally save the package
+      pkg.save(failOnError: true)
+    }
+  }
+}

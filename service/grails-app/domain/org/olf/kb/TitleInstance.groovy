@@ -73,12 +73,10 @@ public class TitleInstance extends ErmResource implements MultiTenant<TitleInsta
   String monographVolume
 
   static hasMany = [
-    identifiers: IdentifierOccurrence,
     platformInstances: PlatformTitleInstance
   ]
 
   static mappedBy = [
-    identifiers: 'title',
     platformInstances: 'titleInstance'
   ]
 
@@ -104,7 +102,7 @@ public class TitleInstance extends ErmResource implements MultiTenant<TitleInsta
             monographVolume (nullable:true, blank:false)
   }
   
-  static transients = ['relatedTitles', 'approvedIdentifierOccurrences']
+  static transients = ['relatedTitles']
   
   private Set<TitleInstance> relatedTitles = null
   public Set<TitleInstance> getRelatedTitles() {
@@ -121,10 +119,6 @@ public class TitleInstance extends ErmResource implements MultiTenant<TitleInsta
       }
     }
     relatedTitles
-  }
-
-  public Set<IdentifierOccurrence> getApprovedIdentifierOccurrences() {
-    identifiers.findAll { it.status.value == 'approved' }
   }
 
   public String getCodexSummary() {

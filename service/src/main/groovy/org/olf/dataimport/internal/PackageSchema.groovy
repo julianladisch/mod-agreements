@@ -11,6 +11,7 @@ interface PackageSchema extends Validateable {
   
   PackageHeaderSchema getHeader()
   Collection<ContentItemSchema> getPackageContents()
+  Collection<IdentifierSchema> getIdentifiers()
   Errors getErrors()
   boolean validate()
   

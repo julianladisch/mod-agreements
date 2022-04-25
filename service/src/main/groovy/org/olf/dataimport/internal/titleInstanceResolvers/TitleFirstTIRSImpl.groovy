@@ -38,8 +38,8 @@ class TitleFirstTIRSImpl extends BaseTIRS implements TitleInstanceResolverServic
       '''
 
   private static final String ID_OCCURENCE_MATCH_HQL = '''
-    SELECT title.name from IdentifierOccurrence as io
-    LEFT JOIN io.title as title
+    SELECT res.name from IdentifierOccurrence as io
+    LEFT JOIN io.resource as res
       WHERE
         io.status.value = :approved
         AND io.identifier.id = :id_id
@@ -148,14 +148,14 @@ class TitleFirstTIRSImpl extends BaseTIRS implements TitleInstanceResolverServic
       String IO_MATCH_HQL = """
         SELECT io FROM IdentifierOccurrence AS io
           LEFT JOIN io.identifier AS id
-          LEFT JOIN io.title AS title
+          LEFT JOIN io.resource AS res
           WHERE
             id.value = :value AND
             id.ns.value = :ns AND
             io.status.value = :approved"""
 
       String IO_MATCH_TITLE_IDS = """ AND
-            title.id IN :titleCandidateIds
+            res.id IN :titleCandidateIds
       """
 
       if (titleCandidateIds.size() > 0) {
@@ -175,8 +175,8 @@ class TitleFirstTIRSImpl extends BaseTIRS implements TitleInstanceResolverServic
 
       // For each matched IdentifierOccurrence, add title if we haven't already
       io_matches.each {io ->
-        if ( !result.contains(io.title) ) {
-          result << io.title
+        if ( !result.contains(io.resource) ) {
+          result << io.resource
         }
       }
     }
@@ -298,7 +298,7 @@ class TitleFirstTIRSImpl extends BaseTIRS implements TitleInstanceResolverServic
       // We have no approved IOs linked to TIs with that identifier information. Create one
 
       def io_record = new IdentifierOccurrence(
-        title: title,
+        resource: title,
         identifier: id_lookup)
       
       io_record.setStatusFromString(APPROVED)

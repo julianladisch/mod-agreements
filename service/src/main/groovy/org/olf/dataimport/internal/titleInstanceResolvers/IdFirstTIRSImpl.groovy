@@ -336,12 +336,12 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder, TitleInstanceResol
           // For each occurrence where the STATUS is APPROVED
           matched_id.occurrences.each { io ->
             if ( io.status?.value == APPROVED ) {
-              if ( result.contains(io.title) ) {
+              if ( result.contains(io.resource) ) {
                 // We have already seen this title, so don't add it again
               }
               else {
-                // log.debug("Adding title ${io.title.id} ${io.title.title} to matches for ${matched_id}");
-                result << io.title
+                // log.debug("Adding title ${io.resource.id} ${io.resource.title} to matches for ${matched_id}");
+                result << io.resource
               }
             }
             // ERM-1986 Don't throw on non approved occurrence existing, just skip
@@ -373,7 +373,7 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder, TitleInstanceResol
         def id_lookup = lookupOrCreateIdentifier(id.value, id.namespace)
       
         def io_record = new IdentifierOccurrence(
-          title: result,
+          resource: result,
           identifier: id_lookup)
         
         io_record.setStatusFromString(APPROVED)

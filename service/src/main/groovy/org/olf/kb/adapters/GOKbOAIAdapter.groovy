@@ -320,6 +320,14 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
       def nominal_provider = package_record.nominalProvider?.name?.text()
       def package_status = package_record.status?.text()
 
+      def identifiers = package_record.identifiers?.identifier?.findAll {
+        it.@type?.text() == null || it.@type?.text()?.trim() == ''
+      }?.collect {
+        [
+          namespace: it.@namespaceName?.text()?.toLowerCase()?.replaceAll(/\s+/, "_"),
+          value: it.@value?.text()
+        ]
+      }
 
       result = [
         header:[
@@ -335,6 +343,7 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
           trustedSourceTI: trustedSourceTI,
           packageSlug: package_shortcode
         ],
+        identifiers: identifiers,
         packageContents: []
       ]
 

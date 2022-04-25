@@ -23,7 +23,7 @@ public class IdentifierOccurrence implements MultiTenant<IdentifierOccurrence> {
 
   String id
   Identifier identifier
-  TitleInstance title
+  ErmResource resource
   @CategoryId(defaultInternal=true)
   RefdataValue status
 
@@ -35,16 +35,15 @@ public class IdentifierOccurrence implements MultiTenant<IdentifierOccurrence> {
                    id column:'io_id', generator: 'uuid2', length:36
               version column:'io_version'
            identifier column:'io_identifier_fk'
-                title column:'io_ti_fk'
+             resource column:'io_res_fk'
                status column:'io_status_fk'
           dateCreated column:'io_date_created'
           lastUpdated column:'io_last_updated'
-
   }
 
   static constraints = {
       identifier(nullable:false, blank:false)
-           title(nullable:true, blank:false)
+        resource(nullable:true, blank:false)
           status(nullable:false, blank:false)
      dateCreated(nullable:true, blank:false)
      lastUpdated(nullable:true, blank:false)

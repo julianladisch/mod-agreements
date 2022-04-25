@@ -34,14 +34,16 @@ public class ErmResource extends ErmTitleList implements MultiTenant<ErmResource
     entitlements: Entitlement,
     tags: Tag,
     templatedUrls: TemplatedUrl,
-    matchKeys: MatchKey
+    matchKeys: MatchKey,
+    identifiers: IdentifierOccurrence,
   ]
 
   static mappedBy = [
     coverage: 'resource',
     entitlements: 'resource',
     templatedUrls: 'resource',
-    matchKeys: 'resource'
+    matchKeys: 'resource',
+    identifiers: 'resource',
   ]
 
   static mapping = {
@@ -95,6 +97,11 @@ public class ErmResource extends ErmTitleList implements MultiTenant<ErmResource
     name
   }
 
+  static transients = ['approvedIdentifierOccurrences']
+
+  public Set<IdentifierOccurrence> getApprovedIdentifierOccurrences() {
+    identifiers.findAll { it.status.value == 'approved' }
+  }
 
   private void trunc(String fieldName, String field, int truncateLength = 255) {
     if ( field?.length() > truncateLength ) {
