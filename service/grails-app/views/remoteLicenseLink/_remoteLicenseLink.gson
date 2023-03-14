@@ -8,6 +8,7 @@ inherits template: "/remoteOkapiLink/remoteOkapiLink"
 json {
   'status' g.render( remoteLicenseLink.status )
   'amendments' g.render( remoteLicenseLink.amendments )
+  'note' remoteLicenseLink.note
 
   if (params.controller == 'remoteLicenseLink') {
     'owner' g.render( remoteLicenseLink.owner )

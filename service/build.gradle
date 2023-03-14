@@ -1,7 +1,7 @@
-configurations.all {
+/* configurations.all {
   // Check for updates every build
   resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
+} */
 
 buildscript {
   repositories {
@@ -161,8 +161,8 @@ dependencies {
 
   /*** Application changes and requirements ***/
   compile "org.springframework.boot:spring-boot-starter-undertow" // Replaces spring-boot-starter-tomcat
-  compile "org.hibernate:hibernate-core:5.4.19.Final"             // Update to latest 5.4
-  compile "org.hibernate:hibernate-java8:5.4.19.Final"
+  compile "org.hibernate:hibernate-core:5.4.28.Final"             // Update to latest 5.4
+  compile "org.hibernate:hibernate-java8:5.4.28.Final"
   runtime "com.zaxxer:HikariCP:3.4.5"                             // Replaces Tomcat JDBC pool
   runtime "org.postgresql:postgresql:42.5.3"
 
@@ -179,7 +179,7 @@ dependencies {
   compile 'com.k_int.okapi:grails-okapi:5.0.1'
 
   compile 'uk.co.cacoethes:groovy-handlebars-engine:0.2'
-  compile 'com.github.jknack:handlebars-helpers:2.0.0'
+  compile 'com.github.jknack:handlebars-helpers:4.3.1'
   compile 'commons-fileupload:commons-fileupload:1.4'
 
   // Minio for file storage to S3

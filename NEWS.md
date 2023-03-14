@@ -1,3 +1,9 @@
+## 5.5.1 2023-03-14
+  * ERM-2791 Simplification of package status handling
+  * ERM-2643 handlebars rhino (XML External Entity (XXE) Injection)
+  * ERM-2642 Hibernate JPA Criteria SQL Injection (CVE-2020-25638)
+  * ERM-2639 Note not saved with license link
+
 ## 5.5.0 2023-02-20
   * ERM-2638 No name of linked agreement in license
   * ERM-2629 Add Description filter to Agreements dashboard widget

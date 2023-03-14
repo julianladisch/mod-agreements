@@ -230,22 +230,17 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
 
       log.debug("Processing OAI record :: ${result.count} ${record_identifier} ${package_name}")
 
-      if ( packageStatus == 'deleted' ) {
-        // ToDo: Decide what to do about deleted records
-      }
-      else {
-        if (!package_name) {
-          log.info("Ignoring Package '${record_identifier}' because package_name is missing")
-        } else if (!primary_slug) {
-          log.info("Ignoring Package '${record_identifier}' because primary_slug is missing")
-        } else if (editStatus.toLowerCase() == 'rejected') {
-          log.info("Ignoring Package '${package_name}' because editStatus=='${editStatus}'")
-        } else if (listStatus.toLowerCase() != 'checked') {
-          log.info("Ignoring Package '${package_name}' because listStatus=='${listStatus}' (required: 'checked')")
-        } else {
-          PackageSchema json_package_description = gokbToERM(record, trustedSourceTI)
-          cache.onPackageChange(source_name, json_package_description)
-        }
+      if (!package_name) {
+        log.info("Ignoring Package '${record_identifier}' because package_name is missing")
+      } else if (!primary_slug) {
+        log.info("Ignoring Package '${record_identifier}' because primary_slug is missing")
+      } else if (editStatus.toLowerCase() == 'rejected') {
+        log.info("Ignoring Package '${package_name}' because editStatus=='${editStatus}'")
+      } else if (listStatus.toLowerCase() != 'checked') {
+        log.info("Ignoring Package '${package_name}' because listStatus=='${listStatus}' (required: 'checked')")
+      } else {
+        PackageSchema json_package_description = gokbToERM(record, trustedSourceTI)
+        cache.onPackageChange(source_name, json_package_description)
       }
 
       if ( datestamp > result.new_cursor ) {
