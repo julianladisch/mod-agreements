@@ -5,6 +5,12 @@ import org.olf.erm.AlternateName
 
 @Field SubscriptionAgreement subscriptionAgreement
 
+/*
+ * to prevent expanding all entitlements (=items) for an agreement
+ * one can now set the "expandItems=false" query param
+ * default behaviour is "true"
+ */
+
 // We can start the pre-fetching of things we are going to need.
 final String objectProperty = 'orgsUuid_object'
 if ( controllerName == 'subscriptionAgreement' && actionName.toLowerCase() == 'show' ) {
@@ -45,8 +51,10 @@ if ( controllerName != 'usageDataProvider' ) {
   should_expand << 'usageDataProviders'
 }
 
-if ( ( controllerName == 'subscriptionAgreement' ) && ( ['save', 'show', 'edit', 'update'].contains(actionName) ) ) {
-  should_expand << 'items'
+if ( ( controllerName == 'subscriptionAgreement' ) &&
+ ( ['save', 'show', 'edit', 'update'].contains(actionName) ) &&
+ ( params.expandItems != 'false' ) ) {
+    should_expand << 'items'
 }
 
 def altNames = subscriptionAgreement.alternateNames?.toSorted { AlternateName a, AlternateName b -> a.name <=> b.name } ?: []
