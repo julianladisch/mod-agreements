@@ -15,6 +15,7 @@ jobs:
     - run: sudo systemctl start postgresql.service
     - run: >
         sudo -u postgres psql
+        -c "CREATE ROLE folio_admin WITH PASSWORD 'folio_admin' LOGIN SUPERUSER"
         -c "CREATE DATABASE okapi_modules_test"
         -c "GRANT ALL PRIVILEGES ON DATABASE okapi_modules_test to folio_admin"
     - uses: actions/checkout@v3
