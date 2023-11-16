@@ -14,8 +14,9 @@ jobs:
     steps:
     - run: sudo systemctl start postgresql.service
     - run: >
+        sleep 1;
         export PGPASSWORD=password;
-        psql -U postgres postgres
+        psql -U postgres
           -c "CREATE DATABASE okapi_modules_test;"
           -c "GRANT ALL PRIVILEGES ON DATABASE okapi_modules_test to folio_admin;"
     - uses: actions/checkout@v3
