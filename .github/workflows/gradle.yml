@@ -16,7 +16,7 @@ jobs:
     - run: >
         sleep 1;
         export PGPASSWORD=password;
-        psql -U postgres
+        psql -w -U postgres
           -c "CREATE DATABASE okapi_modules_test;"
           -c "GRANT ALL PRIVILEGES ON DATABASE okapi_modules_test to folio_admin;"
     - uses: actions/checkout@v3
