@@ -23,4 +23,4 @@ jobs:
       with:
         gradle-version: 7.2
         build-root-directory: service
-        arguments: assemble -Dorg.gradle.jvmargs=-Xmx6G
+        arguments: build -Dorg.gradle.jvmargs=-Xmx6G
