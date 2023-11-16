@@ -13,12 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: sudo systemctl start postgresql.service
-    - run: >
-        sleep 1;
-        export PGPASSWORD=password;
-        psql -w -U postgres
-          -c "CREATE DATABASE okapi_modules_test;"
-          -c "GRANT ALL PRIVILEGES ON DATABASE okapi_modules_test to folio_admin;"
+    - run: PGPASSWORD=password psql -U postgres -c "SELECT 7"
     - uses: actions/checkout@v3
     - name: Set up JDK 17
       uses: actions/setup-java@v3
