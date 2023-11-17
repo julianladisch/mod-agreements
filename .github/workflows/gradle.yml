@@ -19,7 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - run: sudo systemctl start postgresql.service
-    - run: sudo -u postgres psql -f /home/runner/work/mod-agreements/mod-agreements/tools/testing/init.sql
+    - run: sudo -u postgres psql -f /home/runner/work/mod-agreements/tools/testing/init.sql
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
