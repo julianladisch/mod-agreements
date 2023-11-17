@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: cd tools/testing; docker compose up
+    - run: cd tools/testing; docker compose up -d
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
