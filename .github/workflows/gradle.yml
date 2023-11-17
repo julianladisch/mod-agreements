@@ -18,13 +18,9 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: cp tools/testing/init.sql /tmp/
-    - run: chmod 444 /tmp/init.sql
-    - run: sudo systemctl start postgresql.service
-    - run: sudo -u postgres psql -f /tmp/init.sql
+    - run: cd tools/testing; docker compose up
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
-        gradle-version: 7.2
         build-root-directory: service
         arguments: build -Dorg.gradle.jvmargs=-Xmx6G
