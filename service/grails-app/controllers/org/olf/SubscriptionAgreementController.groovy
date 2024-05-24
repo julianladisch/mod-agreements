@@ -537,11 +537,9 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
     }
   }
 
-  // Subset can be "all", "current", "dropped" or "future"
-  // ASSUMES there is a subscription agreement
-  private String buildStaticResourceHQL(String subscriptionAgreementId, String subset, Boolean isCount = false) {
-    String topLine = """SELECT ${isCount ? 'COUNT(res.id)' : 'res'} FROM PackageContentItem as res""";
-    String bottomLine = """${isCount ? '' : 'ORDER BY res.pti.titleInstance.name'}"""
+  private String buildStaticResourceIdsHQL(String subset) {
+    String topLine = """SELECT res.id FROM PackageContentItem as res""";
+
     switch (subset) {
       case 'current':
         return """${topLine}
@@ -579,7 +577,6 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessEnd > :today
             )
           )
-        ${bottomLine}
         """.toString();
       case 'dropped':
         return """${topLine}
@@ -608,7 +605,6 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessEnd < :today
             )
           )
-        ${bottomLine}
         """.toString();
       case 'future':
         return """${topLine}
@@ -637,28 +633,31 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessStart > :today
             )
           )
-        ${bottomLine}
         """.toString();
       case 'all':
       default:
-        return """${topLine} WHERE
-          res.id IN (
-            SELECT ent.resource.id FROM Entitlement ent WHERE
-              ent.owner.id = :subscriptionAgreementId
-          ) OR
-          res.id IN (
-            SELECT pkg_link.id FROM PackageContentItem as pkg_link WHERE
-              pkg_link.pkg.id IN (
-                SELECT pkg.id FROM Pkg pkg WHERE
-                  pkg.id IN (
-                    SELECT ent.resource.id FROM Entitlement ent WHERE
-                    ent.owner.id = :subscriptionAgreementId
-                  )
-              ) AND
-              pkg_link.removedTimestamp IS NULL
-        ${bottomLine}
+        return """${topLine}
+          LEFT OUTER JOIN res.entitlements AS direct_ent
+          LEFT OUTER JOIN res.pkg.entitlements AS pkg_ent
+        WHERE
+          (
+            direct_ent.owner.id = :subscriptionAgreementId
+          ) OR (
+            res.removedTimestamp IS NULL AND
+            pkg_ent.owner.id = :subscriptionAgreementId
+          )
         """.toString()
     }
+  }
+
+  // Subset can be "all", "current", "dropped" or "future"
+  // ASSUMES there is a subscription agreement
+  private String buildStaticResourceHQL(Boolean isCount = false) {
+    String topLine = """
+      SELECT ${isCount ? 'COUNT(res.id)' : 'res'} FROM PackageContentItem as res
+      WHERE res.id IN :resIds
+      ${isCount ? '' : 'ORDER BY res.pti.titleInstance.name'}
+    """.toString();
   }
 
   // I'd like to move this "static fetch" code into a shared space if we get a chance before some kind of OS/ES implementation
@@ -673,13 +672,20 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
     if (subscriptionAgreementId) {
       // Now
       final LocalDate today = LocalDate.now()
-      final String hql = buildStaticResourceHQL(subscriptionAgreementId, subset);  
+      Map<String, Object> queryParams = [subscriptionAgreementId: subscriptionAgreementId]
+
+      if (subset in ['current', 'dropped', 'future']) {
+        queryParams.put('today', today)
+      }
+
+      final List<String> resIds = PackageContentItem.executeQuery(
+        buildStaticResourceIdsHQL(subset),
+        queryParams
+      );
+  
       final List<PackageContentItem> results = PackageContentItem.executeQuery(
-        hql,
-        [
-          subscriptionAgreementId: subscriptionAgreementId,
-          today: today
-        ],
+        buildStaticResourceHQL(),
+        [resIds: resIds],
         [
           max: perPage,
           offset: (page - 1) * perPage
@@ -689,11 +695,8 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
 
       if (params.boolean('stats')) {
         final Integer count = PackageContentItem.executeQuery(
-          buildStaticResourceHQL(subscriptionAgreementId, subset, true),
-          [
-            subscriptionAgreementId: subscriptionAgreementId,
-            today: today
-          ]
+          buildStaticResourceHQL(true),
+          [resIds: resIds],
         )[0].toInteger();
 
         final def resultsMap = [
