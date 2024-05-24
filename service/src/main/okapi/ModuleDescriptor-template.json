@@ -302,6 +302,11 @@
         },
         {
           "methods": ["GET"],
+          "pathPattern": "/erm/resource/{id}/static/entitlementOptions",
+          "permissionsRequired": [ "erm.resources.item.entitlementOptions.get" ]
+        },
+        {
+          "methods": ["GET"],
           "pathPattern": "/erm/titles",
           "permissionsRequired": [ "erm.titles.collection.get" ]
         },

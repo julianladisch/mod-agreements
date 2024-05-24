@@ -162,6 +162,7 @@ class UrlMappings {
       collection {
         "/electronic" ( action:'electronic', method: 'GET')
       }
+      "/static/entitlementOptions" ( action:'staticEntitlementOptions', method: 'GET')
       "/entitlementOptions" ( action:'entitlementOptions', method: 'GET')
       "/entitlements" ( action:'entitlements', method: 'GET' )
       "/entitlements/related" ( action:'relatedEntitlements', method: 'GET' )

@@ -155,7 +155,72 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
     })
     log.debug("completed in ${Duration.between(start, Instant.now()).toSeconds()} seconds")
   }
-  
+
+  private String buildStaticEntitlementOptionsHQL(Boolean isCount = false) {
+    return """
+      SELECT ${isCount ? 'COUNT(res.id)' : 'res'} FROM ErmResource as res WHERE
+      res.id IN :flattenedIds
+    """.toString();
+  }
+
+  // I'd like to move this "static fetch" code into a shared space if we get a chance before some kind of OS/ES implementation
+  @Transactional(readOnly=true)
+  def staticEntitlementOptions (final String resourceId) {
+    //final String resourceId = params.get("resourceId")
+    final Integer perPage = (params.get("perPage") ?: "10").toInteger();
+    
+    // Funky things will happen if you pass 0 or negative numbers...
+    final Integer page = (params.get("page") ?: "1").toInteger();
+
+    if (resourceId) {
+      // Splitting this into two queries to avoid unnecessary joins. Wish we could do this in one but there's
+      // seemingly no way to flatten results like this
+      List<String> flattenedIds = PackageContentItem.executeQuery("""
+        SELECT pci.id, pci.pkg.id FROM PackageContentItem as pci WHERE
+          pci.removedTimestamp IS NULL AND
+          pci.pti.titleInstance.id = :resourceId
+      """.toString(), [resourceId: resourceId]).flatten()
+
+      final List<PackageContentItem> results = PackageContentItem.executeQuery(
+        buildStaticEntitlementOptionsHQL(),
+        [
+          flattenedIds: flattenedIds,
+        ],
+        [
+          max: perPage,
+          offset: (page - 1) * perPage
+          //readOnly: true -- handled in the transaction, no?
+        ]
+      );
+
+      if (params.boolean('stats')) {
+        final Integer count = PackageContentItem.executeQuery(
+          buildStaticEntitlementOptionsHQL(true),
+          [
+            flattenedIds: flattenedIds,
+          ]
+        )[0].toInteger();
+
+        final def resultsMap = [
+          pageSize: perPage,
+          page: page,
+          totalPages: ((int)(count / perPage) + (count % perPage == 0 ? 0 : 1)),
+          meta: [:], // Idk what this is for
+          totalRecords: count,
+          total: count,
+          results: results
+        ];
+
+        // respond with full result set
+        respond resultsMap;
+      } else {
+
+        // Respond the list of items
+        respond results
+      }
+    }
+  }
+
   private final Closure entitlementCriteria = { final Class<? extends ErmResource> resClass, final ErmResource res ->
     switch (resClass) {
       case TitleInstance:

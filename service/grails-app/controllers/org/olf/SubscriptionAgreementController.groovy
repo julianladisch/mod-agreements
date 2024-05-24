@@ -661,6 +661,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
     }
   }
 
+  // I'd like to move this "static fetch" code into a shared space if we get a chance before some kind of OS/ES implementation
   @Transactional(readOnly=true)
   private def doStaticResourcesFetch (final String subset = 'all') {
     final String subscriptionAgreementId = params.get("subscriptionAgreementId")
