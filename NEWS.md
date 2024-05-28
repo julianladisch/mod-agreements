@@ -1,5 +1,10 @@
 ## 7.1.0 In progress
 
+## 7.0.5 2024-05-28
+  * ERM-3246 Improve performance of entitlementOptions endpoint
+  * ERM-3187 Re-write query to show "list of resources in an agreement" for improved performance
+  * Titles previously _always_ enriched, sometimes multiple times, on ingest. Fixed this behaviour where no changes occur
+
 ## 7.0.4 2024-05-03
   * ERM-3166 On encountering a GOKb title with the same ISSN assigned as both print and electronic ISSN, ingest stops
   * Refactored some TIRS methods to use Strings instead of Domain Objects for performance/transaction stability
