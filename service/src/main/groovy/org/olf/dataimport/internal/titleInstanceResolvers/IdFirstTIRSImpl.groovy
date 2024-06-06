@@ -32,18 +32,24 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
     List<String> candidate_list = classOneMatch(citation.instanceIdentifiers);
     int num_matches = candidate_list.size()
     int num_class_one_identifiers = countClassOneIDs(citation.instanceIdentifiers);
+    
+    // Ensure logging messages accurately reflect _which_ matching attempt
+    // caused the multiple title match problem or which match led to the exact match
+    String multiple_match_message;
+    String match_vector = "classOneMatch";
+
     if ( num_matches > 1 ) {
-      log.debug("Class one match found multiple titles:: ${candidate_list}");
+      multiple_match_message="Class one match found ${num_matches} records::${candidate_list}";
     }
 
     // We weren't able to match directly on an identifier for this instance - see if we have an identifier
     // for a sibling instance we can use to narrow down the list.
     if ( num_matches == 0 ) {
+      match_vector = "siblingMatch"
       candidate_list = siblingMatch(citation)
       num_matches = candidate_list.size()
-      log.debug("siblingMatch for ${citation.title} found ${num_matches} titles");
       if ( num_matches > 1 ) {
-        log.debug("Sibling match found multiple titles:: ${candidate_list}");
+        multiple_match_message="Sibling match found ${num_matches} records::${candidate_list}"
       }
     }
 
@@ -51,10 +57,12 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
     // a sibling match, try to do a fuzzy match as a last resort
     // DO NOT ATTEMPT if there is no title on the citation
     if ( ( num_matches == 0 ) && ( num_class_one_identifiers == 0 ) && citation.title ) {
-      log.debug("No matches on identifier - try a fuzzy text match on title(${citation.title})");
-      // No matches - try a simple title match
+      match_vector = "fuzzy title match"
       candidate_list = titleMatch(citation.title,MATCH_THRESHOLD);
       num_matches = candidate_list.size()
+      if ( num_matches > 1 ) {
+        multiple_match_message="Title fuzzy matched ${num_matches} records with a threshold >= ${MATCH_THRESHOLD}::${candidate_list}"
+      }
     }
 
     if ( candidate_list != null ) {
@@ -64,13 +72,18 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
           result = createNewTitleInstanceWithSiblings(citation).id
           break;
         case(1):
-          log.debug("Exact match. Enrich title.")
+          log.debug("Exact match via ${match_vector}.${trustedSourceTI ? ' Enrich title.' : ''}")
           result = candidate_list.get(0);
-          checkForEnrichment(candidate_list.get(0), citation, trustedSourceTI);
+
+          // This isn't logically necessary, but will cut down on a call to checkForEnrichment
+          // for WorkSourceIdTIRS per title.
+          if (trustedSourceTI) {
+            checkForEnrichment(candidate_list.get(0), citation, trustedSourceTI);
+          }
           break;
         default:
           throw new TIRSException(
-            "title matched ${num_matches} records with a threshold >= ${MATCH_THRESHOLD} . Unable to continue. Matching IDs: ${candidate_list.collect { it.id }}. class one identifier count: ${num_class_one_identifiers}",
+            "${multiple_match_message}. Class one identifier count: ${num_class_one_identifiers}",
             TIRSException.MULTIPLE_TITLE_MATCHES,
           );
           break;
@@ -157,7 +170,7 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
 
   protected static final float MATCH_THRESHOLD = 0.775f
   protected static final String TEXT_MATCH_TITLE_HQL = '''
-   SELECT ti from TitleInstance as ti
+   SELECT ti.id from TitleInstance as ti
     WHERE 
       trgm_match(ti.name, :qrytitle) = true
       AND similarity(ti.name, :qrytitle) > :threshold
@@ -280,16 +293,16 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
   }
 
   /**
-   * Attempt a fuzzy match on the title
+   * Attempt a fuzzy match on the title -- returns IDs now
    */
-  protected List<TitleInstance> titleMatch(String title, float threshold) {
+  protected List<String> titleMatch(String title, float threshold) {
     return titleMatch(title, threshold, 'electronic');
   }
 
-  protected List<TitleInstance> titleMatch(final String title, final float threshold, final String subtype) {
+  protected List<String> titleMatch(final String title, final float threshold, final String subtype) {
     String matchTitle = StringUtils.truncate(title);
 
-    List<TitleInstance> result = new ArrayList<TitleInstance>()
+    List<String> result = new ArrayList<String>()
     TitleInstance.withSession { session ->
       try {
         result = TitleInstance.executeQuery(TEXT_MATCH_TITLE_HQL,[qrytitle: (matchTitle),threshold: (threshold), subtype:subtype], [max:20])

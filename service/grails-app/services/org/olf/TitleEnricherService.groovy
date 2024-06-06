@@ -14,7 +14,7 @@ class TitleEnricherService {
   public static final ThreadLocal<Set> enrichedIds = new ThreadLocal<Set>()
 
   public void secondaryEnrichment(RemoteKB kb, String sourceIdentifier, String ermIdentifier) {
-    log.debug("TitleEnricherService::secondaryEnrichment called for title with source identifier: ${sourceIdentifier}, erm identifier: ${ermIdentifier} and RemoteKb: ${kb.name}")
+    //log.debug("TitleEnricherService::secondaryEnrichment called for title with source identifier: ${sourceIdentifier}, erm identifier: ${ermIdentifier} and RemoteKb: ${kb.name}")
     // Check for existence of sourceIdentifier. LOCAL source imports will pass null here.
     if (sourceIdentifier) {
 

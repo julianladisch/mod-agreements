@@ -36,8 +36,6 @@
     <level value="DEBUG" />
   </logger>
   
-  
-  
   <logger name="org.springframework.jdbc.support" >
     <level value="ERROR" />
   </logger>
@@ -85,6 +83,11 @@
 
   <logger name="com.k_int.web.toolkit">
     <level value="DEBUG" />
+  </logger>
+
+  <logger name="com.k_int.web.toolkit.refdata.GrailsDomainRefdataHelpers">
+    <!-- Set to INFO to see logs like TitleInstance.setTypeFromString ( 'monograph' ) -->
+    <level value="ERROR" />
   </logger>
 
   <if condition='isDefined("grails.util.BuildSettings.TARGET_DIR")'>

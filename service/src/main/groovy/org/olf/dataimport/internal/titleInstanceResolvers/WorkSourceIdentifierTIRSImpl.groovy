@@ -142,10 +142,11 @@ class WorkSourceIdentifierTIRSImpl extends IdFirstTIRSImpl implements DataBinder
       tiId = super.resolve(citation, false);
     } catch (TIRSException tirsException) {
       // We treat a multiple title match here as NBD and move onto creation
-      // Any other TIRSExceptions are legitimate concerns and we should rethrow
-      if (
-        tirsException.code != TIRSException.MULTIPLE_TITLE_MATCHES
-      ) {
+      if (tirsException.code == TIRSException.MULTIPLE_TITLE_MATCHES) {
+        // Logging out where we hit this so we can potentially make decisions from the logs
+        log.debug("MULTIPLE_TITLE_MATCHES in IdFirstTIRS. Creating new TitleInstance (${tirsException.message})")
+      } else {
+        // Any other TIRSExceptions are legitimate concerns and we should rethrow
         throw new TIRSException(tirsException.message, tirsException.code);
       }
     } //Dont catch any other exception, those are legitimate reasons to stop
@@ -191,7 +192,7 @@ class WorkSourceIdentifierTIRSImpl extends IdFirstTIRSImpl implements DataBinder
             status: IdentifierOccurrence.lookupOrCreateStatus('approved')
           ])
           work.setSourceIdentifier(sourceIdentifier);
-          work.save(failOnError: true);
+          work.save(failOnError: true); // We removed the withNewSession around sibling creation so that unflushed changes here are available to each
 
           // At this point we are assuming this TI is the right one, allow metadata updates
           checkForEnrichment(tiId, citation, true);
@@ -369,50 +370,44 @@ class WorkSourceIdentifierTIRSImpl extends IdFirstTIRSImpl implements DataBinder
       // We need previous sibling work to have _taken_
       // in the DB by the time we hit the next sibling citation
 
-      // Force withNewSession, but NOT withNewTransaction
-      // Not really sure on the nuance here, but prevents HibernateAccessException whilst
-      // Still ensuring that each directMatch has the DB changes from the previous citation
-      // in place?
-      TitleInstance.withNewSession {
-        // Match sibling citation to siblings already on the work (ONLY looking at approved identifiers)
-        List<String> matchedSiblings = directMatch(sibling_citation.instanceIdentifiers, workId, 'print');
+      // Match sibling citation to siblings already on the work (ONLY looking at approved identifiers)
+      List<String> matchedSiblings = directMatch(sibling_citation.instanceIdentifiers, workId, 'print');
 
-        switch(matchedSiblings.size()) {
-          case 0:
-            // No sibling found, add it.
-            createNewTitleInstance(sibling_citation, workId);
-            break;
-          case 1:
-            // Found single sibling citation, update identifiers and check for enrichment
-            String siblingId = matchedSiblings.get(0);
-            updateTIIdentifiers(siblingId, sibling_citation.instanceIdentifiers);
-            checkForEnrichment(siblingId , sibling_citation, true);
-            // We've matched this sibling, remove it from the unmatchedSiblings list.
-            unmatchedSiblings.removeIf { it == siblingId }
+      switch(matchedSiblings.size()) {
+        case 0:
+          // No sibling found, add it.
+          createNewTitleInstance(sibling_citation, workId);
+          break;
+        case 1:
+          // Found single sibling citation, update identifiers and check for enrichment
+          String siblingId = matchedSiblings.get(0);
+          updateTIIdentifiers(siblingId, sibling_citation.instanceIdentifiers);
+          checkForEnrichment(siblingId , sibling_citation, true);
+          // We've matched this sibling, remove it from the unmatchedSiblings list.
+          unmatchedSiblings.removeIf { it == siblingId }
 
-            // Force save + flush -- necessary
-            saveTitleInstance(TitleInstance.get(siblingId));
-            break;
-          default:
-            // Found multiple siblings which would match citation.
-            // Remove each from the work and progress
-            log.warn("Matched multiple siblings from single citation. Removing from work: ${matchedSiblings}")
-            matchedSiblings.each { matchedSibling ->
-              TitleInstance matchedSiblingDomainObject = TitleInstance.get(matchedSibling)
-              // Mark all identifier occurrences as error
-              matchedSiblingDomainObject.identifiers.each {io ->
-                io.setStatusFromString(ERROR)
-                io.save(failOnError: true);
-              }
-              // Remove Work
-              matchedSiblingDomainObject.work = null;
-              saveTitleInstance(matchedSiblingDomainObject);
-
-              // We've matched this sibling, remove it from the unmatchedSiblings list.
-              unmatchedSiblings.removeIf { it == matchedSibling }
+          // Force save + flush -- necessary
+          saveTitleInstance(TitleInstance.get(siblingId));
+          break;
+        default:
+          // Found multiple siblings which would match citation.
+          // Remove each from the work and progress
+          log.warn("Matched multiple siblings from single citation. Removing from work: ${matchedSiblings}")
+          matchedSiblings.each { matchedSibling ->
+            TitleInstance matchedSiblingDomainObject = TitleInstance.get(matchedSibling)
+            // Mark all identifier occurrences as error
+            matchedSiblingDomainObject.identifiers.each {io ->
+              io.setStatusFromString(ERROR)
+              io.save(failOnError: true);
             }
-            break;
-        }
+            // Remove Work
+            matchedSiblingDomainObject.work = null;
+            saveTitleInstance(matchedSiblingDomainObject);
+
+            // We've matched this sibling, remove it from the unmatchedSiblings list.
+            unmatchedSiblings.removeIf { it == matchedSibling }
+          }
+          break;
       }
     }
 

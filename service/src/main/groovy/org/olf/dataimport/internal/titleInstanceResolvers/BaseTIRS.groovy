@@ -191,7 +191,7 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
   // Different TIRS implementations will have different workflows with identifiers, but the vast majority of the creation will be the same
   // We assume that the incoming citation already has split ids and siblingIds
   protected TitleInstance createNewTitleInstanceWithoutIdentifiers(final ContentItemSchema citation, String workId = null) {
-    Work work = workId ? Work.get(workId) : null;
+    Work work = workId ? Work.get(workId) as Work : null;
     TitleInstance result = null
 
     // Ian: adding this - Attempt to make sense of the instanceMedia value we have been passed
