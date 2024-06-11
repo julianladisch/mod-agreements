@@ -265,7 +265,20 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
           status: IdentifierOccurrence.lookupOrCreateStatus('approved')
         ])
 
-        // Can you assign to incoming method param like this??
+        // This isn't something we should allow in production -- leave as debug code for later
+        /* String sourceIdConfig = System.getenv("STORE_SOURCE_IDENTIFIER");
+
+        if (sourceIdConfig && sourceIdConfig == 'NO') {
+          work = new Work([
+            title:citation.title,
+          ]).save(failOnError:true)
+        } else {
+          work = new Work([
+            title:citation.title,
+            sourceIdentifier: sourceIdentifier
+          ]).save(failOnError:true)
+        } */
+
         work = new Work([
           title:citation.title,
           sourceIdentifier: sourceIdentifier
@@ -275,8 +288,8 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
       // Print or Electronic
       def medium = citation.instanceMedium?.trim()
 
-      // FIXME This seems to be unused
-      def resource_coverage = citation?.coverage
+      // This seems to be unused
+      //def resource_coverage = citation?.coverage
       result = new TitleInstance(
         name: citation.title,
 
@@ -344,7 +357,6 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
           io.status.value = '${APPROVED}'
         )
       """
-      // TODO This doesn't look right
     }.join("""
       AND
     """)

@@ -21,6 +21,9 @@ import grails.gorm.multitenancy.Tenants
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 
+import java.util.regex.Matcher
+
+
 /**
  * See http://guides.grails.org/grails-scheduled/guide/index.html for info on this way of
  * scheduling tasks
@@ -28,6 +31,26 @@ import groovy.util.logging.Slf4j
 @Slf4j
 @CompileStatic
 class KbHarvestService {
+
+  private static final Long ONE_HOUR = new Long(1*60*60*1000)
+  private static final Long ZERO = new Long(0)
+
+  private Long getBufferDelay() {
+    String buffer = System.getenv("KB_HARVEST_BUFFER");
+
+    if (buffer) {
+      switch (buffer) {
+        case ~/([0-9]+)/:
+          return "${Matcher.lastMatcher.group(1)}".toLong()
+        case 'ZERO':
+          return ZERO
+        default:
+          return ONE_HOUR
+      }
+    }
+
+    return ONE_HOUR;
+  }
 
   // Without this, the service will be lazy initialised, and the tasks won't be scheduled until an external
   // tries to access the instance.
@@ -44,7 +67,7 @@ from RemoteKB as rkb
 where rkb.type is not null
   and rkb.active = :true
   and rkb.rectype = :rectype
-  and ( ( rkb.lastCheck is null ) OR ( ( :current_time - rkb.lastCheck ) > 1*60*60*1000 ) )
+  and ( ( rkb.lastCheck is null ) OR ( ( :current_time - rkb.lastCheck ) > :lastCheckBuffer ) )
   and ( ( rkb.syncStatus is null ) OR ( rkb.syncStatus <> :inprocess ) )
   and rkb.name <> :local
 '''
@@ -110,7 +133,9 @@ where rkb.type is not null
   }
 
 	// This task is only used directly through a call to the AdminController
+  // Default 1hr/1min -- leave commented out the do not run option
   @Scheduled(fixedDelay = 3600000L, initialDelay = 60000L) // Run task every hour, wait 1 minute.
+  //@Scheduled(fixedDelay = Long.MAX_VALUE, initialDelay = Long.MAX_VALUE) // Do not run on schedule
   void triggerSync() {
     log.debug "Running scheduled KB sync for all tenants :{}", Instant.now()
 
@@ -203,7 +228,9 @@ where rkb.type is not null
                                             'inprocess':'in-process',
                                             'rectype': RemoteKB.RECTYPE_PACKAGE,
                                             'current_time':System.currentTimeMillis(),
-                                            'local':'LOCAL'],[lock:false]).each(remoteKBProcessing)
+                                            'local':'LOCAL',
+                                            'lastCheckBuffer': getBufferDelay()
+                                            ],[lock:false]).each(remoteKBProcessing)
 
     log.info("KbHarvestService::triggerPackageCacheUpdate() completed")
   }
@@ -218,7 +245,9 @@ where rkb.type is not null
                                             'inprocess':'in-process',
                                             'rectype': RemoteKB.RECTYPE_TITLE,
                                             'current_time':System.currentTimeMillis(),
-                                            'local':'LOCAL'],[lock:false]).each(remoteKBProcessing)
+                                            'local':'LOCAL',
+                                            'lastCheckBuffer': getBufferDelay()
+                                            ],[lock:false]).each(remoteKBProcessing)
 
     log.debug("KbHarvestService::triggerTitleCacheUpdate() completed")
   }
@@ -236,14 +265,18 @@ where rkb.type is not null
                                             'inprocess':'in-process',
                                             'rectype': RemoteKB.RECTYPE_TITLE,
                                             'current_time':System.currentTimeMillis(),
-                                            'local':'LOCAL'],[lock:false]).each(remoteKBProcessing)
+                                            'local':'LOCAL',
+                                            'lastCheckBuffer': getBufferDelay()
+                                            ],[lock:false]).each(remoteKBProcessing)
     
     // Run through remote KBs of rectype PACKAGE second
     RemoteKB.executeQuery(PENDING_JOBS_HQL,['true':true,
                                             'inprocess':'in-process',
                                             'rectype': RemoteKB.RECTYPE_PACKAGE,
                                             'current_time':System.currentTimeMillis(),
-                                            'local':'LOCAL'],[lock:false]).each(remoteKBProcessing)
+                                            'local':'LOCAL',
+                                            'lastCheckBuffer': getBufferDelay()
+                                            ],[lock:false]).each(remoteKBProcessing)
 
     log.debug("KbHarvestService::triggerCacheUpdate() completed")
   }

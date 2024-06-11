@@ -111,7 +111,6 @@ abstract class BaseSpec extends HttpSpec {
   TitleInstanceResolverService titleInstanceResolverService
   @Ignore
   def injectedTIRS() {
-    log.debug("LOGDEBUG INJECTED TIRS CALLED: ${titleInstanceResolverService?.class?.name}")
     titleInstanceResolverService?.class?.name
   }
 
