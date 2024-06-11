@@ -8,10 +8,6 @@ import spock.lang.*
 @Stepwise
 @Integration
 class EntitlementLogSpec extends BaseSpec {
-
-  @Shared
-  int thisYear = LocalDate.now().year
-
   @Shared
   String itemId;
 
@@ -30,15 +26,18 @@ class EntitlementLogSpec extends BaseSpec {
   @Shared
   int totalExpectedRecords
 
-  @Shared
-  LocalDate today = LocalDate.now()
-
-  @Shared
-  LocalDate tomorrow = today.plusDays(1)
-  
   def 'Ingest a test package' () {
     when: 'Testing package added'
-      importPackageFromFileViaService('access_start_access_end_tests.json')
+      def package_data = jsonSlurper.parse(new File("src/integration-test/resources/packages/access_start_access_end_tests.json"))
+
+      // Relies on first PCI not having existing open ended coverage, remove that for this test
+      package_data.records[0].contentItems[0].coverage = []
+      
+      // Edit some of the data manually to follow date tests are run
+      package_data.records[0].contentItems[3].accessStart = "${nextWeek}"
+      package_data.records[0].contentItems[3].coverage[0].startDate = "${nextWeek}"
+
+      importPackageFromMapViaService( package_data )
     and: 'Find the package by name'
       List resp = doGet("/erm/packages", [filters: ['name==access_start_access_end_tests Package']])
       List pci_list = doGet("/erm/pci")

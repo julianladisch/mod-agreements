@@ -15,13 +15,28 @@ import spock.lang.Stepwise
 import spock.lang.Ignore
 import spock.util.concurrent.PollingConditions
 
+import java.time.LocalDate
 import groovy.json.JsonSlurper
+import spock.lang.*
 
 import groovy.util.logging.Slf4j
 
 @Slf4j
 @Stepwise
 abstract class BaseSpec extends HttpSpec {
+  // Some helper date shared across specs
+  @Shared
+  LocalDate today = LocalDate.now()
+
+  @Shared
+  int thisYear = today.year
+
+  @Shared
+  LocalDate tomorrow = today.plusDays(1)
+
+  @Shared
+  LocalDate nextWeek = today.plusWeeks(1)
+
   private static String baseTIRSPath = "org.olf.dataimport.internal.titleInstanceResolvers"
   static String TITLE_TIRS = "${baseTIRSPath}.TitleFirstTIRSImpl"
   static String ID_TIRS = "${baseTIRSPath}.IdFirstTIRSImpl"

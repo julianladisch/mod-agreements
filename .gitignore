@@ -1,6 +1,7 @@
 /.*
 !.gitignore
 !/.okapi
+!/.github
 .DS_Store
 /bin/
 

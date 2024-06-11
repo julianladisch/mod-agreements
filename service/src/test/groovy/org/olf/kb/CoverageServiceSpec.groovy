@@ -17,7 +17,7 @@ class CoverageServiceSpec extends Specification {
       List<CoverageStatementSchema> output = coverageService.collateCoverageStatements(coverages)
 
     then: 'output matches the expected output'
-      assert output.size == expectedCoverages.size
+      assert output.size() == expectedCoverages.size()
       output.eachWithIndex { CoverageStatementSchema cs, index ->
         CoverageStatementSchema relevantExpectedCs = expectedCoverages[index]
         assert relevantExpectedCs.startDate == cs.startDate

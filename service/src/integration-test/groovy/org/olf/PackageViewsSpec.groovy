@@ -8,12 +8,10 @@ import spock.lang.*
 @Integration
 @Stepwise
 class PackageViewsSpec extends BaseSpec {
-  
   @Shared
   String pkg_id
   
   def 'Ingest a test package' () {
-    final LocalDate nextWeek = LocalDate.now().plusWeeks(1)
     // Can't use the shared import from file method because we need the dates to be relevant to _today_
     when: 'Testing package added'
       def package_data = jsonSlurper.parse(new File("src/integration-test/resources/packages/access_start_access_end_tests.json"))
