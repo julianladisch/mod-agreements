@@ -35,11 +35,15 @@ jobs:
         working-directory: ./service
         run:
           ./gradlew integrationTest
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+      - name: Upload Test Results Files
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          files: "service/build/test-results/**/*.xml"
+          name: testLogfiles
+          path: |
+            service/build/test-results/**/*.xml
+            tools/testing/*.log
+          retention-days: 1
       - name: Capture container output
         if: always()
         run: |
@@ -55,12 +59,3 @@ jobs:
           cd tools/testing
           docker-compose down -v
           sleep 10
-      - name: Upload Test Results Files
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: testLogfiles
-          path: |
-            service/build/test-results/**/*.xml
-            tools/testing/*.log
-          retention-days: 1
