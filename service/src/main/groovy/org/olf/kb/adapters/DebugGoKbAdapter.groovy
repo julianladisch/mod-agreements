@@ -55,7 +55,7 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
 
     GPathResult xml
 
-    def pageXml = new XmlSlurper().parse(new File(getXMLFile()))
+    def pageXml = new XmlSlurper().parse(new File(base_url ?: getXMLFile()))
 
     if (( pageXml instanceof GPathResult ) ) {
       xml = (GPathResult) pageXml;

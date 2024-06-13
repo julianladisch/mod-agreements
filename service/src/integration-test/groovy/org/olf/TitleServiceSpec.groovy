@@ -60,12 +60,11 @@ class TitleServiceSpec extends BaseSpec {
 
       def title_instance = null
       def num_identifiers = 0
-      final String tenantid = currentTenant.toLowerCase()
       def matching_titles = []
 
       // We are exercising the service directly, normally a transactional context will
       // be supplied by the HTTPRequest, but we fake it here to talk directly to the service
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         // N.B. This is a groovy MAP, not a JSON document.
         TitleInstance.withNewTransaction {
           title_instance = TitleInstance.read(titleInstanceResolverService.resolve(content, true))
@@ -89,12 +88,11 @@ class TitleServiceSpec extends BaseSpec {
     when: 'Resolve the same title again'
       def title_instance = null
       def num_titles = 0
-      final String tenantid = currentTenant.toLowerCase()
       def matching_titles = []
 
       // We are exercising the service directly, normally a transactional context will
       // be supplied by the HTTPRequest, but we fake it here to talk directly to the service
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         TitleInstance.withNewTransaction {
           title_instance = TitleInstance.read(titleInstanceResolverService.resolve(content, true))
           assert title_instance != null

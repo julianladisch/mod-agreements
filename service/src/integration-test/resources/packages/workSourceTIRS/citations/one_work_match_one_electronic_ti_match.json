@@ -1,0 +1,15 @@
+{
+  "title":"One Work Match-One Electronic TI Match (RENAMED)",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "4567-8901"
+  }],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "defg-hijk"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aad-004"
+}

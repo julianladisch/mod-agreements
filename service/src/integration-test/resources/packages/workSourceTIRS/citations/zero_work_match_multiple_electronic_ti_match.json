@@ -1,0 +1,15 @@
+{
+  "title": "Brand new title with eissn 5678-9012",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "5678-9012"
+  }],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "efgh-ijkl"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aae-005"
+}

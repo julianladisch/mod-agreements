@@ -1,0 +1,23 @@
+{
+  "title":"Brain of the firm",
+  "instanceMedium": "electronic",
+  "instanceMedia": "monograph",
+  "instanceIdentifiers": [
+    {
+      "namespace": "eisbn",
+      "value": "0713902191"
+    },
+    {
+      "namespace": "eisbn",
+      "value": "9780713902198"
+    }
+  ],
+  "siblingInstanceIdentifiers": [ 
+    {
+      "namespace": "isbn",
+      "value": "047194839X"
+    }
+  ],
+  "sourceIdentifierNamespace": "k-int",
+  "sourceIdentifier": "botf-123"
+}

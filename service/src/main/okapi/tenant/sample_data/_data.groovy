@@ -29,6 +29,8 @@ RemoteKB.findByName('GOKb') ?: (new RemoteKB(
 /* RemoteKB.findByName('DEBUG') ?: (new RemoteKB(
     name:'DEBUG',
     type:'org.olf.kb.adapters.DebugGoKbAdapter',
+    // uri can be used to directly force a package from the resources folder
+    // uri: 'src/integration-test/resources/DebugGoKbAdapter/borked_ids.xml'
     rectype: RemoteKB.RECTYPE_PACKAGE,
     active:Boolean.TRUE,
     supportsHarvesting:true,

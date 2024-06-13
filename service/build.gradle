@@ -205,6 +205,11 @@ bootRun {
 	systemProperty springProfilesActive, System.getProperty(springProfilesActive)
 }
 
+integrationTest {
+	jvmArgs(
+    '-Xmx1592m')
+}
+
 project.gradle.projectsEvaluated {
   task generateDescriptors(type: Copy) {
 

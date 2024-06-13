@@ -1,0 +1,15 @@
+{
+  "title":"Duplicate work title",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "1234-5678"
+  }],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "abcd-efgh"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aaa-001"
+}

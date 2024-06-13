@@ -371,10 +371,9 @@ class AgreementLifecycleSpec extends BaseSpec {
 
     boolean ok = false;
     when: 'We upload a file'
-      final String tenantid = currentTenant.toLowerCase()
-      log.debug("Create new package with tenant ${tenantid}");
+      log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         FileUpload fu = null;
 
         FileUpload.withTransaction { status ->
@@ -395,10 +394,9 @@ class AgreementLifecycleSpec extends BaseSpec {
 
     boolean ok = false;
     when: 'We upload a file and then clone it'
-      final String tenantid = currentTenant.toLowerCase()
-      log.debug("Create new package with tenant ${tenantid}");
+      log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         FileUpload fu = null;
 
         FileUpload.withTransaction { status ->
@@ -423,10 +421,9 @@ class AgreementLifecycleSpec extends BaseSpec {
 
     boolean ok = false;
     when: 'We upload a file and then clone it'
-      final String tenantid = currentTenant.toLowerCase()
-      log.debug("Create new package with tenant ${tenantid}");
+      log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         String fu_id = null;
 
         FileUpload.withTransaction { status ->

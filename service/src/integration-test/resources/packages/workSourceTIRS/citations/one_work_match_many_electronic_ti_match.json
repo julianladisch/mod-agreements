@@ -1,0 +1,15 @@
+{
+  "title":"The contents of this file should never make it into the system so why should we care what it's called?",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "3456-7890"
+  }],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "cdef-ghij"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aac-003"
+}

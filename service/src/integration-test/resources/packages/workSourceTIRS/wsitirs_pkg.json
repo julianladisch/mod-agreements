@@ -1,0 +1,212 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "Work Source TIRS Package",
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "wsitirs_0001",
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current"
+  },
+  "packageContents": [
+    {
+      "title": "Multiple Work Match Case",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "1234-5678"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "abcd-efgh"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aaa-001",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aaa-001"
+    },
+    {
+      "title": "One Work Match-Zero Electronic TI Match",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "2345-6789"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "bcde-fghi"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aab-002",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aab-002"
+    },
+    {
+      "title": "One Work Match-Many Electronic TI Match",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "3456-7890"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "cdef-ghij"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aac-003",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aac-003"
+    },
+    {
+      "title": "One Work Match-One Electronic TI Match",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "4567-8901"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "defg-hijk"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aad-004",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aad-004"
+    },
+    {
+      "title": "Zero Work Match-Multiple TI Match",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "5678-9012"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "efgh-ijkl"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aae-005",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aae-005"
+    },
+    {
+      "title": "Zero Work Match-Single TI Out (A -- Match on identifiers)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "6789-0123-A"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aaf-006"
+    },
+    {
+      "title": "Zero Work Match-Single TI Out (B -- Match on sibling)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "fghi-jklm-B"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aag-007"
+    },
+    {
+      "title": "Totally unique title (C -- Match on title)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aah-008"
+    },
+    {
+      "title": "Zero Work Match-Single TI Out-No Source Id",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "6789-0123"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "fghi-jklm"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aba-010"
+    },
+    {
+      "title": "Zero Work Match-Single TI Out-Mismatch Source Id",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "7890-1234"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "ghij-klmn"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aca-020",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aca-020"
+    },
+    {
+      "title": "TI Wrangling New Ids",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "8901-2345"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "hijk-lmno"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aca-020",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "ada-030"
+    }
+  ]
+}

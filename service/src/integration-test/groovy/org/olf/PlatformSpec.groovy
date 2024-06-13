@@ -14,11 +14,10 @@ class PlatformSpec extends BaseSpec {
 
   @Unroll
   void "Test Platform #name creation" ( final String platformUrl, final String name ) {
-    final String tenantid = currentTenant.toLowerCase()
     when: 'Resolve platform from url #platformUrl'
     
       def platform = null
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
         platform = Platform.resolve(platformUrl)
       }
 

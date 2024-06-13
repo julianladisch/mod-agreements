@@ -64,11 +64,13 @@ abstract class BaseSpec extends HttpSpec {
   String getCurrentTenant() {
     allHeaders?.get(OkapiHeaders.TENANT)
   }
-  
-  void 'Pre purge tenant' () {
-    boolean resp = false
 
-    println("test");
+  final String getTenantId() {
+    currentTenant.toLowerCase()
+  }
+
+  void 'Pre purge test tenant'() {
+    boolean resp = false
     log.debug("Pre purge tenant");
 
     when: 'Purge the tenant'
@@ -82,7 +84,6 @@ abstract class BaseSpec extends HttpSpec {
   }
   
   void 'Ensure test tenant' () {
-
 		log.debug("Ensure test tenant ${baseUrl}");
     
     when: 'Create the tenant'
@@ -101,6 +102,31 @@ abstract class BaseSpec extends HttpSpec {
       conditions.eventually {
         (list = doGet('/erm/refdata')).size() > 0
       }
+  }
+
+  // Helper method to nuke tenant as cleanup if necessary
+  @Ignore
+  void cleanupTenant() {
+    def purgeResp;
+    try {
+      purgeResp = doDelete('/_/tenant', null)
+      purgeResp = true
+    } catch (HttpException ex) { resp = true }
+
+    def enableResp = doPost('/_/tenant', {
+      parameters ([["key": "loadReference", "value": true]])
+    })
+
+    // Get a response back from enable call
+    def conditions = new PollingConditions(timeout: 20)
+    conditions.eventually {
+      assert enableResp != null
+    }
+
+    // Refdata has been created
+    conditions.eventually {
+      assert doGet('/erm/refdata').size() > 0
+    }
   }
 
   // Setup shared JsonSlurper
@@ -128,9 +154,8 @@ abstract class BaseSpec extends HttpSpec {
   @Ignore
   def importPackageFromMapViaService(Map package_data) {
     Map result = [:]
-    final String tenantid = currentTenant.toLowerCase()
-    log.debug("Create new package with tenant ${tenantid}");
-    Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+    log.debug("Create new package with tenant ${tenantId}");
+    Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
       Pkg.withTransaction { status ->
         result = importService.importFromFile( package_data )
         log.debug("Package import complete - num packages: ${Pkg.executeQuery('select count(p.id) from Pkg as p')}");

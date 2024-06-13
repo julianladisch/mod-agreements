@@ -1,0 +1,15 @@
+{
+  "title": "One Work Match-Zero Electronic TI Match - NEW",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "2345-6789-x"
+  }],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "bcde-fghi-x"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aab-002"
+}

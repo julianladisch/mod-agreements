@@ -30,7 +30,6 @@ class StringTemplateSpec extends BaseSpec {
     final String the_context
   ) {
 
-    final String tenantid = currentTenant.toLowerCase()
     when: "Post to create new string template"
       Map respMap = doPost("/erm/sts", {
         'name' the_name
