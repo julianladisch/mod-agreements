@@ -4,71 +4,69 @@ on:
   push:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-      - name: Start containers
-        run: |
-          cd tools/testing
-          docker-compose down -v
-          docker-compose up -d &> dockerOutput.log
-          sleep 20
-      - name: Inject github build number
-        run: |
-          # Make github run id available to gradle script via env var BUILD_NUMBER so it ends up in our module descriptor version
-          # echo "BUILD_NUMBER=${{github.run_id}}" >> $GITHUB_ENV
-          echo "BUILD_NUMBER=${{github.run_number}}" >> $GITHUB_ENV
-      - name: Setup gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          build-root-directory: service
-      - name: Run integration test
-        working-directory: ./service
-        run:
-          ./gradlew integrationTest
-      - name: Upload Test Results Files
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: testLogfiles
-          path: |
-            service/build/test-results/**/*.xml
-            tools/testing/*.log
-          retention-days: 1
-      - name: Capture container output
-        if: always()
-        run: |
-          cd tools/testing
-          docker ps -a > ps.log
-          docker logs minio_tests > minio.log
-          docker logs testing_kafka > kafka.log
-          docker logs testing_pg > postgres.log
-          docker logs testing_zookeeper > zookeeper.log
-      - name: Stop containers
-        if: always()
-        run: |
-          cd tools/testing
-          docker-compose down -v
-          sleep 10
+  work-source-identifier-tirs-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.TIRS.WorkSourceIdentifier.*
+      outputDirectory: WorkSourceIdentifierTests
+  id-first-tirs-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.TIRS.IdFirstTIRS.*
+      outputDirectory: IdFirstTests
+      tirsEnvVar: IdFirst
+  agreement-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.Agreements.*
+      outputDirectory: Agreements
+  string-template-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.StringTemplate.*
+      outputDirectory: StringTemplate
+  general-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.General.*
+      outputDirectory: General
   publish-test-results:
-    needs: build
+    if: always()
+    needs: [work-source-identifier-tirs-tests, id-first-tirs-tests, agreement-tests, string-template-tests, general-tests]
     runs-on: ubuntu-latest
     steps:
-      - name: 'setup directory to accept test results'
-        run: mkdir -p testLogs/integrationTest
-      - name: 'download test results'
+      - name: 'setup directories to accept test results'
+        run: |
+          mkdir -p testLogs/WorkSourceIdentifierTests
+          mkdir -p testLogs/IdFirstTests
+          mkdir -p testLogs/Agreements
+          mkdir -p testLogs/StringTemplate
+          mkdir -p testLogs/General
+      - name: 'download WorkSourceIdentifier test results'
         uses: actions/download-artifact@v4
         with:
-          name: testLogfiles
-          path: testLogs/integrationTest
+          name: WorkSourceIdentifierTests
+          path: testLogs/WorkSourceIdentifierTests
+      - name: 'download IdFirst test results'
+        uses: actions/download-artifact@v4
+        with:
+          name: IdFirstTests
+          path: testLogs/IdFirstTests
+      - name: 'download Agreements test results'
+        uses: actions/download-artifact@v4
+        with:
+          name: Agreements
+          path: testLogs/Agreements
+      - name: 'download StringTemplate test results'
+        uses: actions/download-artifact@v4
+        with:
+          name: StringTemplate
+          path: testLogs/StringTemplate
+      - name: 'download General test results'
+        uses: actions/download-artifact@v4
+        with:
+          name: General
+          path: testLogs/General
       - name: Display structure of downloaded files
         run: ls -R
       - name: Publish Test Results

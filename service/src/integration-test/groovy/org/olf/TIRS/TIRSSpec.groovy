@@ -1,4 +1,4 @@
-package org.olf.tirs
+package org.olf.TIRS
 
 // Services
 import org.olf.general.jobs.JobRunnerService
@@ -34,6 +34,9 @@ import groovy.util.logging.Slf4j
 @Slf4j
 @Stepwise
 abstract class TIRSSpec extends BaseSpec {
+  @Shared
+  String base_resource_path = "src/integration-test/resources/packages"
+
   // titleInstanceResolverService is injected in baseSpec now
   KbHarvestService kbHarvestService
   JobRunnerService jobRunnerService

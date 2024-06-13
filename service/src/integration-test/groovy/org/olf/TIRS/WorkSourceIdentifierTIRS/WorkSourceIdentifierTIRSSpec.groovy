@@ -1,4 +1,6 @@
-package org.olf.tirs
+package org.olf.TIRS.WorkSourceIdentifier
+
+import org.olf.TIRS.TIRSSpec
 
 import org.olf.dataimport.internal.TitleInstanceResolverService
 import org.olf.dataimport.internal.titleInstanceResolvers.WorkSourceIdentifierTIRSImpl
@@ -41,7 +43,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
   String pkg_id
 
   @Shared
-  String resource_path = "src/integration-test/resources/packages/workSourceTIRS"
+  String resource_path = "${base_resource_path}/workSourceTIRS"
 
   @Shared
   String citation_path = "${resource_path}/citations"

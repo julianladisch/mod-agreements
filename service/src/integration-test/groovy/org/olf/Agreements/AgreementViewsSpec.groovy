@@ -1,6 +1,8 @@
-package org.olf
+package org.olf.Agreements
 
 import java.time.LocalDate
+
+import org.olf.BaseSpec
 
 import grails.testing.mixin.integration.Integration
 import spock.lang.*

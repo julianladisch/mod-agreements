@@ -1,6 +1,8 @@
-package org.olf
+package org.olf.Agreements
 
 import java.time.LocalDate
+
+import org.olf.BaseSpec
 
 import grails.gorm.transactions.Transactional
 import grails.testing.mixin.integration.Integration

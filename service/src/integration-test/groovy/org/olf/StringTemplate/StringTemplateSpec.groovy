@@ -1,4 +1,6 @@
-package org.olf
+package org.olf.StringTemplate
+
+import org.olf.BaseSpec
 
 import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertTrue
@@ -21,8 +23,6 @@ import groovy.util.logging.Slf4j
 @Integration
 @Stepwise
 class StringTemplateSpec extends BaseSpec {
-
-  ImportService importService
 
   void "Test creation of StringTemplates" (
     final String the_name,

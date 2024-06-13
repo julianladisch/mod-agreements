@@ -1,7 +1,9 @@
-package org.olf
+package org.olf.Agreements
 
 import java.time.LocalDate
 import groovy.json.JsonOutput
+
+import org.olf.BaseSpec
 
 import grails.testing.mixin.integration.Integration
 import spock.lang.*

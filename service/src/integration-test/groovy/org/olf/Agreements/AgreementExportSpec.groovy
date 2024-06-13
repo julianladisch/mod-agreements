@@ -1,6 +1,8 @@
-package org.olf
+package org.olf.Agreements
 
 import java.time.LocalDate
+
+import org.olf.BaseSpec
 
 import org.olf.kb.Pkg
 import org.olf.kb.TitleInstance
@@ -16,8 +18,6 @@ import spock.lang.*
 @Integration
 class AgreementExportSpec extends BaseSpec {
 
-  def importService
-  
   @Shared
   String pkg_id
   

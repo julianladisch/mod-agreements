@@ -1,4 +1,6 @@
-package org.olf
+package org.olf.General
+
+import org.olf.BaseSpec
 
 import grails.testing.mixin.integration.Integration
 import java.time.Instant

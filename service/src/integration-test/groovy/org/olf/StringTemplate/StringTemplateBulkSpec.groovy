@@ -1,4 +1,4 @@
-package org.olf
+package org.olf.StringTemplate
 //
 //import org.olf.general.StringTemplate
 //import org.olf.general.StringTemplatingService

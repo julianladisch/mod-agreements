@@ -1,8 +1,10 @@
-package org.olf
+package org.olf.Agreements
 
 import static groovyx.net.http.ContentTypes.*
 import static groovyx.net.http.HttpBuilder.configure
 import static org.springframework.http.HttpStatus.*
+
+import org.olf.BaseSpec
 
 import org.olf.kb.PackageContentItem
 import org.olf.kb.Pkg

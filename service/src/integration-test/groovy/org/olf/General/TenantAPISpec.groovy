@@ -1,4 +1,6 @@
-package org.olf
+package org.olf.General
+
+import org.olf.BaseSpec
 
 import com.k_int.okapi.OkapiHeaders
 import com.k_int.web.toolkit.testing.HttpSpec
