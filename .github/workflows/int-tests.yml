@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -59,3 +58,20 @@ jobs:
           cd tools/testing
           docker-compose down -v
           sleep 10
+  publish-test-results:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'setup directory to accept test results'
+        run: mkdir -p testLogs/integrationTest
+      - name: 'download test results'
+        uses: actions/download-artifact@v4
+        with:
+          name: testLogfiles
+          path: testLogs/integrationTest
+      - name: Display structure of downloaded files
+        run: ls -R
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: "testLogs/**/*.xml"
