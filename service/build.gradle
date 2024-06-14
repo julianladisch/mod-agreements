@@ -206,8 +206,11 @@ bootRun {
 }
 
 integrationTest {
+  maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 	jvmArgs(
-    '-Xmx1592m')
+    '-Xmx1592m',
+    '-XX:ReservedCodeCacheSize=256m'
+  )
 }
 
 project.gradle.projectsEvaluated {
