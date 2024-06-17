@@ -1,0 +1,11 @@
+{
+  "title":"TITLE MATCH on sibling identifier issn:fghi-jklm-B",
+  "instanceMedium": "electronic",
+  "instanceMedia": "journal",
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "fghi-jklm-B"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aag-007"
+}

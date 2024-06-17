@@ -1,0 +1,11 @@
+{
+  "title":"Totally unique title (C -- Match on title)",
+  "instanceMedium": "electronic",
+  "instanceMedia": "journal",
+  "instanceIdentifiers": [{
+    "namespace": "non-class-one-ns",
+    "value": "6789-0123-C-2"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aah-008"
+}

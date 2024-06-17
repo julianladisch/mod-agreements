@@ -529,7 +529,7 @@ order by pj.dateCreated
         org.slf4j.MDC.clear()
         org.slf4j.MDC.setContextMap( jobId: '' + jid, tenantId: '' + tid, 'tenant': '' + tenantName)
         JobContext.current.set(new JobContext( jobId: jid, tenantId: tid ))
-        log.debug("LOGDEBUG TID: ${tId}")
+        //log.debug("LOGDEBUG TID: ${tId}")
         Tenants.withId(tid) {
           beginJob(jid)
         }

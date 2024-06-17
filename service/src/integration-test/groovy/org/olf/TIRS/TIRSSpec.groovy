@@ -147,6 +147,23 @@ abstract class TIRSSpec extends BaseSpec {
   }
 
   @Ignore
+  List<TitleInstance> getFullTIsForWork(String workId, String subType = null) {
+    // Get list of all TIs for a work (full TI object)
+
+    String HQL = """
+      Select ti FROM TitleInstance AS ti
+        WHERE ti.work.id = :workId
+      """.toString()
+
+    if (subType) {
+      HQL += " AND ti.subType.value = :subType"
+      return TitleInstance.executeQuery(HQL, [workId:workId, subType: subType])
+    }
+
+    return TitleInstance.executeQuery(HQL, [workId:workId])
+  }
+
+  @Ignore
   void deleteTIsFromWork(String workId) {
     // Get list of all TIs we want to delete
     def tiDeleteList = getTIsForWork(workId)

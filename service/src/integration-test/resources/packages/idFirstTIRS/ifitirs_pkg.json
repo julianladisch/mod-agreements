@@ -1,0 +1,79 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "Id First TIRS Package",
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "iftirs_0001",
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current"
+  },
+  "packageContents": [
+    {
+      "title": "Example title (A -- Match on identifiers)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "6789-0123-A"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aaf-006",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aaf-006"
+    },
+    {
+      "title": "Example title (B -- Match on sibling)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "fghi-jklm-B"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aag-007",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aag-007"
+    },
+    {
+      "title": "Totally unique title (C -- Match on title)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "non-class-one-ns",
+        "value": "6789-0123-C-1"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aah-008",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aah-008"
+    },
+    {
+      "title": "Match multiple TIs",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "1234-5678-MM"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aah-008",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "xxx-001"
+    }
+  ]
+}

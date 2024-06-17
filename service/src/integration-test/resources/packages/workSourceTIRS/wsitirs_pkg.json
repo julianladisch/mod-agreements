@@ -120,7 +120,7 @@
       }],
       "coverage": [],
       "embargo": null,
-      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "url": "http://testpackage.com/journal/index.php?journalID=aaf-006",
       "platformName": "K-Int",
       "sourceIdentifierNamespace": "K-Int",
       "sourceIdentifier": "aaf-006"
@@ -135,7 +135,7 @@
       }],
       "coverage": [],
       "embargo": null,
-      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "url": "http://testpackage.com/journal/index.php?journalID=aag-007",
       "platformName": "K-Int",
       "sourceIdentifierNamespace": "K-Int",
       "sourceIdentifier": "aag-007"
@@ -144,9 +144,13 @@
       "title": "Totally unique title (C -- Match on title)",
       "instanceMedium": "electronic",
       "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "non-class-one-ns",
+        "value": "6789-0123-C-1"
+      }],
       "coverage": [],
       "embargo": null,
-      "url": "http://testpackage.com/journal/index.php?journalID=aba-010",
+      "url": "http://testpackage.com/journal/index.php?journalID=aah-008",
       "platformName": "K-Int",
       "sourceIdentifierNamespace": "K-Int",
       "sourceIdentifier": "aah-008"

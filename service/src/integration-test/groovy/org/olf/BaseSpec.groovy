@@ -158,11 +158,12 @@ abstract class BaseSpec extends HttpSpec {
     Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
       Pkg.withTransaction { status ->
         result = importService.importFromFile( package_data )
-        log.debug("Package import complete - num packages: ${Pkg.executeQuery('select count(p.id) from Pkg as p')}");
-        log.debug("                            num titles: ${TitleInstance.executeQuery('select count(t.id) from TitleInstance as t')}");
-        Pkg.executeQuery('select p.id, p.name from Pkg as p').each { p ->
+        // This logging causes issues with transactional test methods in WorkSourceIdentifierTIRSSpec -- commenting for now
+        //log.debug("Package import complete - num packages: ${Pkg.executeQuery('select count(p.id) from Pkg as p')}");
+        //log.debug("                            num titles: ${TitleInstance.executeQuery('select count(t.id) from TitleInstance as t')}");
+        /* Pkg.executeQuery('select p.id, p.name from Pkg as p').each { p ->
           log.debug("Package: ${p}");
-        }
+        } */
       }
     }
 

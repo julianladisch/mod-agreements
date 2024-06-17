@@ -1,0 +1,13 @@
+{
+  "title":"TITLE MATCH on identifier eissn:6789-0123-A",
+  "instanceMedium": "electronic",
+  "instanceMedia": "journal",
+  "instanceIdentifiers": [
+    {
+      "namespace": "eissn",
+      "value": "6789-0123-A"
+    }
+  ],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aaf-006"
+}

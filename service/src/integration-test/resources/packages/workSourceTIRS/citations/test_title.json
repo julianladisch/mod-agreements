@@ -1,0 +1,13 @@
+{
+  "title":"TestTitle",
+  "instanceMedium": "electronic",
+  "instanceMedia": "monograph",
+  "instanceIdentifiers": [
+    {
+      "namespace": "eisbn",
+      "value": "8293479823547893475"
+    }
+  ],
+  "sourceIdentifierNamespace": "k-int",
+  "sourceIdentifier": "tt-123-abc"
+}

@@ -1,0 +1,11 @@
+{
+  "title":"Match multiple TIs",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "eissn",
+    "value": "1234-5678-MM"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "xxx-001"
+}

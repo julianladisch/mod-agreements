@@ -1,0 +1,13 @@
+{
+  "title":"TestTitle but this one should not be able to match via fuzzy title match",
+  "instanceMedium": "electronic",
+  "instanceMedia": "monograph",
+  "instanceIdentifiers": [
+    {
+      "namespace": "eisbn",
+      "value": "123561238328757328923"
+    }
+  ],
+  "sourceIdentifierNamespace": "k-int",
+  "sourceIdentifier": "tt-123-abc"
+}
