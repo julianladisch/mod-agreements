@@ -250,7 +250,7 @@ class IdFirstTIRSSpec extends TIRSSpec {
   }
 
   // Set up case where a work does NOT have a sourceId, and there are multiple titles which are matchable from eissn
-  @Requires({ instance.isWorkSourceTIRS() })
+  @Requires({ instance.isIdTIRS() })
   void 'IdFirstTIRS behaves as expected when we match multiple TIs' () {
     when: 'We set up secondary TI that IdFirst fallback will find'
       String eissn = "1234-5678-MM"
