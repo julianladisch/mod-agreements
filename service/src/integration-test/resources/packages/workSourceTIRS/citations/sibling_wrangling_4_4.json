@@ -1,0 +1,17 @@
+{
+  "title":"Sibling Wrangling (4.4) - NEW",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [
+    {
+      "namespace": "eissn",
+      "value": "ABC-xxx-456"
+    }
+  ],
+  "siblingInstanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "ccc-ddd-444"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "aha-070"
+}

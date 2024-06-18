@@ -197,20 +197,127 @@
       "title": "TI Wrangling New Ids",
       "instanceMedium": "electronic",
       "instanceMedia": "journal",
-      "instanceIdentifiers": [{
-        "namespace": "eissn",
-        "value": "8901-2345"
-      }],
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "8901-2345"
+        },
+        {
+          "namespace": "kint-special",
+          "value": "afeukhasl"
+        }
+      ],
       "siblingInstanceIdentifiers": [{
         "namespace": "issn",
         "value": "hijk-lmno"
       }],
       "coverage": [],
       "embargo": null,
-      "url": "http://testpackage.com/journal/index.php?journalID=aca-020",
+      "url": "http://testpackage.com/journal/index.php?journalID=ada-030",
       "platformName": "K-Int",
       "sourceIdentifierNamespace": "K-Int",
       "sourceIdentifier": "ada-030"
+    },
+    {
+      "title": "Sibling Wrangling (4.1)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "ABC-xxx-123"
+        }
+      ],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "aaa-bbb-111"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aea-040",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aea-040"
+    },
+    {
+      "title": "Sibling Wrangling (4.2)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "ABC-xxx-234"
+        }
+      ],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=afa-050",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "afa-050"
+    },
+    {
+      "title": "Sibling Wrangling (4.3)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "ABC-xxx-345"
+        }
+      ],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "bbb-ccc-333"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aga-060",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aga-060"
+    },
+    {
+      "title": "Sibling Wrangling (4.4)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "ABC-xxx-456"
+        }
+      ],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "ccc-ddd-444"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=aha-070",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "aha-070"
+    },
+    {
+      "title": "Sibling Wrangling (4.6)",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "ABC-xxx-567"
+        }
+      ],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "ddd-eee-555"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=abb-011",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "abb-011"
     }
   ]
 }

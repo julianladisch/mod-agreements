@@ -1,0 +1,35 @@
+{
+  "title":"Identifier wrangling",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [
+    {
+      "namespace": "doi",
+      "value": "12345"
+    },
+    {
+      "namespace": "kint-special",
+      "value": "afeukhasl"
+    },
+    {
+      "namespace": "issn",
+      "value": "1234-5678"
+    }
+  ],
+  "siblingInstanceIdentifiers": [
+    {
+      "namespace": "issn",
+      "value": "hijk-lmno"
+    },
+    {
+      "namespace": "wibble",
+      "value": "wobble"
+    },
+    {
+      "namespace": "wabble",
+      "value": "wubble"
+    }
+],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "ada-030"
+}
