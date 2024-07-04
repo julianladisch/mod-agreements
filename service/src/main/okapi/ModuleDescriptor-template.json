@@ -405,22 +405,22 @@
         {
           "methods": ["POST"],
           "pathPattern": "/erm/validate/subscriptionAgreement",
-          "permissionsRequired": [ "erm.agreements.item.post", "erm.agreements.item.put" ]
+          "permissionsRequired": [ "erm.agreements.validate" ]
         },
         {
           "methods": ["POST"],
           "pathPattern": "/erm/validate/subscriptionAgreement/*",
-          "permissionsRequired": [ "erm.agreements.item.post", "erm.agreements.item.put" ]
+          "permissionsRequired": [ "erm.agreements.validate" ]
         },
         {
           "methods": ["POST"],
           "pathPattern": "/erm/validate/remoteKB",
-          "permissionsRequired": [ "erm.kbs.item.post", "erm.kbs.item.put" ]
+          "permissionsRequired": [ "erm.kbs.validate" ]
         },
         {
           "methods": ["POST"],
           "pathPattern": "/erm/validate/remoteKB/*",
-          "permissionsRequired": [ "erm.kbs.item.post", "erm.kbs.item.put" ]
+          "permissionsRequired": [ "erm.kbs.validate" ]
         },
         {
           "methods": ["GET"],
@@ -565,6 +565,11 @@
       "description": "Get the usage data providers for an agreement"
     },
     {
+      "permissionName": "erm.agreements.validate",
+      "displayName": "Validate subscription agreement post",
+      "description": "Validate subscription agreement information"
+    },
+    {
       "permissionName": "erm.agreements.view",
       "subPermissions": [
         "erm.agreements.collection.get",
@@ -597,7 +602,8 @@
         "erm.agreements.view",
         "erm.agreements.item.post",
         "erm.agreements.item.put",
-        "erm.agreements.item.clone"
+        "erm.agreements.item.clone",
+        "erm.agreements.validate"
       ]
     },
     {
@@ -632,10 +638,7 @@
     {
       "permissionName": "erm.files.item.download",
       "displayName": "Files item download",
-      "description": "Download a raw files record",
-      "subPermissions": [
-        "erm.files.view"
-      ]
+      "description": "Download a raw files record"
     },
     {
       "permissionName": "erm.files.item.post",
@@ -822,6 +825,11 @@
       "description": "Get knowledge base record"
     },
     {
+      "permissionName": "erm.kbs.validate",
+      "displayName": "Validate knowledge base post",
+      "description": "Validate knowledge base information"
+    },
+    {
       "permissionName": "erm.kbs.view",
       "subPermissions": [
         "erm.kbs.collection.get",
@@ -843,7 +851,8 @@
       "subPermissions": [
         "erm.kbs.view",
         "erm.kbs.item.post",
-        "erm.kbs.item.put"
+        "erm.kbs.item.put",
+        "erm.kbs.validate"
       ]
     },
     {
