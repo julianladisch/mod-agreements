@@ -1,5 +1,12 @@
 ## 7.1.0 In progress
 
+## 7.0.6 2024-07-05
+  * ERM-3291 Fix permissions on /erm/validate/remoteKB in mod-agreements
+  * ERM-3289 Fix permission on /erm/validate/subscriptionAgreement in mod-agreements
+  * ERM-3288 Fix permission on /erm/files/{id}/raw in mod-agreements
+  * ERM-3274 If a citation gets passed to BaseTIRS without an instancePublicationMedia field it will crash
+  * ERM-3254 With WorkSourceIDTIRS for GOKb we see "Field error in object" errors 
+
 ## 7.0.5 2024-05-28
   * ERM-3246 Improve performance of entitlementOptions endpoint
   * ERM-3187 Re-write query to show "list of resources in an agreement" for improved performance
