@@ -19,7 +19,7 @@ class PlatformSpec extends BaseSpec {
     when: 'Resolve platform from url #platformUrl'
     
       def platform = null
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         platform = Platform.resolve(platformUrl)
       }
 

@@ -1,0 +1,11 @@
+{
+  "title":"fixEquivalentIds-test3",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "issn",
+    "value": "fei-321-abc"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "fei-003"
+}

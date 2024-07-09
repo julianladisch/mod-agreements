@@ -70,10 +70,59 @@
       }],
       "coverage": [],
       "embargo": null,
-      "url": "http://testpackage.com/journal/index.php?journalID=aah-008",
+      "url": "http://testpackage.com/journal/index.php?journalID=xxx-001",
       "platformName": "K-Int",
       "sourceIdentifierNamespace": "K-Int",
       "sourceIdentifier": "xxx-001"
+    },
+    {
+      "title": "fixEquivalentIds-test1",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "fei-123-456"
+      }],
+      "siblingInstanceIdentifiers": [{
+        "namespace": "pissn",
+        "value": "fei-123-456"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=fei-001",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "fei-001"
+    },
+    {
+      "title": "fixEquivalentIds-test2",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "eissn",
+        "value": "fei-abc-def"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=fei-002",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "fei-002"
+    },
+    {
+      "title": "fixEquivalentIds-test3",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [{
+        "namespace": "issn",
+        "value": "fei-321-abc"
+      }],
+      "coverage": [],
+      "embargo": null,
+      "url": "http://testpackage.com/journal/index.php?journalID=fei-003",
+      "platformName": "K-Int",
+      "sourceIdentifierNamespace": "K-Int",
+      "sourceIdentifier": "fei-003"
     }
   ]
 }

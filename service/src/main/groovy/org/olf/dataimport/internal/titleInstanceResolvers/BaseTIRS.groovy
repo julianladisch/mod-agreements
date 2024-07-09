@@ -8,6 +8,7 @@ import org.olf.dataimport.internal.PackageContentImpl
 import org.olf.dataimport.internal.PackageSchema.ContentItemSchema
 import org.olf.dataimport.internal.PackageSchema.IdentifierSchema
 
+import org.olf.kb.IdentifierException
 import org.olf.kb.IdentifierOccurrence
 import org.olf.kb.Identifier
 import org.olf.kb.IdentifierNamespace
@@ -50,49 +51,28 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
     'doi'
   ];
 
-  protected ArrayList<String> lookupIdentifier(final String value, final String namespace) {
-    return Identifier.executeQuery("""
-      SELECT iden.id from Identifier as iden
-        where iden.value = :value and iden.ns.value = :ns
-      """.toString(),
-      [value:value, ns:namespaceMapping(namespace)]
-    );
-  }
-
   /*
-   * Given an identifier in a citation { value:'1234-5678', namespace:'isbn' } lookup or create an identifier in the DB to represent that info
+   * Given an identifier in a citation { value:'1234-5678', namespace:'isbn' }
+   * lookup or create an identifier in the DB to represent that info.
    */
   protected String lookupOrCreateIdentifier(final String value, final String namespace) {
     String result = null;
-
-    // Ensure we are looking up properly mapped namespace (pisbn -> isbn, etc)
-    def identifier_lookup = lookupIdentifier(value, namespace);
-
-    switch(identifier_lookup.size() ) {
-      case 0:
-        IdentifierNamespace ns = lookupOrCreateIdentifierNamespace(namespace);
-        result = new Identifier(ns:ns, value:value).save(failOnError:true, flush: true).id;
-        break;
-      case 1:
-        result = identifier_lookup[0];
-        break;
-      default:
+    try {
+      result = identifierService.lookupOrCreateIdentifier(value, namespace, true); // We need this to flush in TIRS logic
+    } catch (IdentifierException ie) {
+      // Any other exceptions should not be caught and rethrown -- leave them to be caught above as normal;
+      if (ie.code == IdentifierException.MULTIPLE_IDENTIFIER_MATCHES) {
         throw new TIRSException(
-          "Matched multiple identifiers for ${id}",
-          TIRSException.MULTIPLE_IDENTIFIER_MATCHES
-        );
-        break;
+          ie.message,
+          TIRSException.MULTIPLE_IDENTIFIER_MATCHES // We understand this error, rethrow as a TIRSException
+        )
+      }
+
+      throw ie // Otherwise rethrow as is
     }
+
     return result;
   }
-
-  /*
-   * This is where we can call the namespaceMapping function to ensure consistency in our DB
-   */
-  protected IdentifierNamespace lookupOrCreateIdentifierNamespace(final String ns) {
-    IdentifierNamespace.findOrCreateByValue(namespaceMapping(ns)).save(failOnError:true)
-  }
-
 
   /*
    * Check to see if the citation has properties that we really want to pull through to
@@ -334,36 +314,6 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
     result
   }
 
-  protected String buildIdentifierHQL(Collection<IdentifierSchema> identifiers, boolean approvedIdsOnly = true) {
-    String identifierHQL = identifiers.collect { id -> 
-      // Do we need all the namespace mapping variants?
-      String mainHQLBody = """(
-          (
-            io.identifier.ns.value = '${id.namespace.toLowerCase()}' OR
-            io.identifier.ns.value = '${namespaceMapping(id.namespace)}' OR
-            io.identifier.ns.value = '${mapNamespaceToElectronic(id.namespace)}' OR
-            io.identifier.ns.value = '${mapNamespaceToPrint(id.namespace)}'
-          ) AND
-          io.identifier.value = '${id.value}'
-      """
-
-      if (!approvedIdsOnly) {
-        return """${mainHQLBody}
-          )
-        """
-      }
-
-      return """${mainHQLBody} AND
-          io.status.value = '${APPROVED}'
-        )
-      """
-    }.join("""
-      AND
-    """)
-
-    return identifierHQL
-  }
-
   protected int countClassOneIDs(final Iterable<IdentifierSchema> identifiers) {
     identifiers?.findAll( { IdentifierSchema id -> class_one_namespaces?.contains( id.namespace.toLowerCase() ) })?.size() ?: 0
   }
@@ -448,17 +398,15 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
     }
   }
 
-  // Dedeuplicate a list of Ids
+  // Dedeuplicate a list of Ids by converting to HashSet and back
+  // This will LOSE order, but be O(n) instead of O(n^2) with "unique" etc.
   protected List<String> listDeduplictor(List<String> ids) {
-    // Need to deduplicate output -- Could probably be neater code than this
-    List<String> outputList = [];
-    ids.each { obj ->
-      if (!outputList.contains(obj)) {
-        outputList << obj
-      }
-    }
+    def uniqueIds = ids as HashSet<String>;
 
-    outputList
+    List<String> outputList = [];
+    outputList.addAll(uniqueIds);
+
+    return outputList
   }
 
   protected void ensureSourceIdentifierFields(final ContentItemSchema citation) {
@@ -473,5 +421,86 @@ abstract class BaseTIRS implements TitleInstanceResolverService {
         TIRSException.MISSING_MANDATORY_FIELD
       )
     }
+  }
+
+  // This will spit out HQL to be _directly_ used in a WHERE call for another HQL query looking for TitleInstance "ti"
+  // Can be used to match TIs from ANY identifiers (default) or ALL identifiers with mustMatchAll prop
+  protected String buildIdentifierHQL(
+    Collection<IdentifierSchema> identifiers,
+    boolean approvedIdsOnly = true,
+    String tiAlias = 'ti',
+    boolean mustMatchAll = false
+  ) {
+    String joiner = mustMatchAll ? 'AND' : 'OR';
+    String identifierHQL = identifiers.withIndex().collect { id, index ->
+      String ioAlias = "io${index}" // Keep these separate between multiple identifiers
+      String mainHQLBody = """${tiAlias}.id IN (
+        SELECT ${ioAlias}.resource.id FROM IdentifierOccurrence AS ${ioAlias} WHERE (
+            ${ioAlias}.identifier.ns.value = '${id.namespace.toLowerCase()}' OR
+            ${ioAlias}.identifier.ns.value = '${namespaceMapping(id.namespace)}' OR
+            ${ioAlias}.identifier.ns.value = '${mapNamespaceToElectronic(id.namespace)}' OR
+            ${ioAlias}.identifier.ns.value = '${mapNamespaceToPrint(id.namespace)}'
+          ) AND
+          ${ioAlias}.identifier.value = '${id.value}'
+      """
+
+      if (!approvedIdsOnly) {
+        return """${mainHQLBody}
+          )
+        """
+      }
+
+      return """${mainHQLBody} AND
+          ${ioAlias}.status.value = '${APPROVED}'
+        )
+      """
+    }.join("""
+      ${joiner}
+    """)
+
+    return identifierHQL
+  }
+
+  //Methods to do a "naive" identifier based match directly
+  protected String getDirectMatchHQL(
+    Collection<IdentifierSchema> identifiers,
+    String workId = null,
+    boolean approvedIdsOnly = true,
+    boolean mustMatchAll = false
+  ) {
+    String identifierHQL = buildIdentifierHQL(identifiers, approvedIdsOnly, 'ti', mustMatchAll)
+
+    String outputHQL = """
+      SELECT ti.id FROM TitleInstance as ti
+      WHERE
+        ${identifierHQL} AND
+        ti.subType.value = :subtype
+    """
+
+    if (workId !== null) {
+      outputHQL += """ AND
+        ti.work.id = '${workId}'
+      """
+    }
+    return outputHQL
+  }
+
+  // Direct match will find ALL title instances which match ANY of the instanceIdentifiers passed. Is extremely naive.
+  // (Can be swapped to match only TIs with _all_ of the identifiers)
+  // Allow for non-approved identifiers if we wish
+
+  // TODO -- we should make sure that if this ever ends up used in anger it gets integration test cases added
+  public List<String> directMatch(
+    final Iterable<IdentifierSchema> identifiers,
+    String workId = null,
+    String subtype = 'electronic',
+    boolean approvedIdsOnly = true,
+    boolean mustMatchAll = false // Turn this on to only match any TI with all of the identifiers present
+  ) {
+    if (identifiers.size() <= 0) {
+      return []
+    }
+    List<String> titleList = TitleInstance.executeQuery(getDirectMatchHQL(identifiers, workId, approvedIdsOnly, mustMatchAll),[subtype: subtype]);
+    return listDeduplictor(titleList)
   }
 }

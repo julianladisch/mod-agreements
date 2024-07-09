@@ -375,7 +375,7 @@ class AgreementLifecycleSpec extends BaseSpec {
     when: 'We upload a file'
       log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         FileUpload fu = null;
 
         FileUpload.withTransaction { status ->
@@ -398,7 +398,7 @@ class AgreementLifecycleSpec extends BaseSpec {
     when: 'We upload a file and then clone it'
       log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         FileUpload fu = null;
 
         FileUpload.withTransaction { status ->
@@ -425,7 +425,7 @@ class AgreementLifecycleSpec extends BaseSpec {
     when: 'We upload a file and then clone it'
       log.debug("Create new package with tenant ${tenantId}");
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         String fu_id = null;
 
         FileUpload.withTransaction { status ->

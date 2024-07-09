@@ -59,7 +59,7 @@ abstract class TIRSSpec extends BaseSpec {
 
   @Ignore
   protected RemoteKB setUpDebugKb(String xmlPackagePath) {
-    Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+    withTenant {
       RemoteKB.findByName('DEBUG') ?: (new RemoteKB(
         name:'DEBUG',
         type:'org.olf.kb.adapters.DebugGoKbAdapter',

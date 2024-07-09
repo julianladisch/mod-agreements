@@ -1,0 +1,11 @@
+{
+  "title":"fixEquivalentIds-test3",
+  "instanceMedium": "electronic",
+  "instanceMedia": "serial",
+  "instanceIdentifiers": [{
+    "namespace": "doi",
+    "value": "testing-identifier-123"
+  }],
+  "sourceIdentifierNamespace": "K-Int",
+  "sourceIdentifier": "fei-003"
+}

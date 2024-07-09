@@ -38,7 +38,7 @@ package org.olf.StringTemplate
 //      println "PKG DATA: ${package_data}"
 //      int result = 0
 //      final String tenantid = currentTenant.toLowerCase()
-//      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantid )) {
+//      withTenant {
 //        result = importService.importPackageUsingInternalSchema( package_data )
 //      }
 //      

@@ -155,7 +155,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
   @Requires({ instance.isWorkSourceTIRS() })
   void 'Test title creation' () {
     when: 'WorkSourceIdentifierTIRS is passed a title citation'
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         titleInstanceResolverService.resolve(brainOfTheFirm, true);
       }
     then: 'No exceptions'
@@ -189,7 +189,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
 
       Long code
       String message
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         try {
           String tiId = titleInstanceResolverService.resolve(brainOfTheFirm, true);
         } catch (TIRSException e) {
@@ -202,7 +202,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert message == 'Missing source identifier namespace'
     when: 'WorkSourceIdentifierTIRS is passed a title citation without sourceIdentifier'
       brainOfTheFirm.sourceIdentifier = null;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         try {
           String tiId = titleInstanceResolverService.resolve(brainOfTheFirm, true);
         } catch (TIRSException e) {
@@ -248,7 +248,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
   @Requires({ instance.isWorkSourceTIRS() })
   void 'WorkSourceIdentifierTIRS behaves as expected when matching multiple works' () {
     when: 'We create a work that duplicates one already in the system'
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         // Grab existing identifier
         Identifier identifier = Identifier.executeQuery("""
           SELECT iden from Identifier as iden
@@ -271,7 +271,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       noExceptionThrown()
     when: 'Looking up works for this sourceIdentifier' // There is no endpoint
       Integer workCount;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         workCount = Work.executeQuery("""
           SELECT COUNT(work.id) from Work as work
             WHERE work.sourceIdentifier.identifier.value = :value
@@ -284,7 +284,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'WorkSourceIdentifierTIRS attempts to match on this duplicated work'
       Long code
       String message
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         try {
           titleInstanceResolverService.resolve(citationFromFile('multiple_work_match.json'), true)
         } catch (TIRSException e) {
@@ -302,7 +302,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We remove the title instances set up for a work'
       Work work;
       Integer tiCount;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         // Grab existing work
         work = getWorkFromSourceId('aab-002')
 
@@ -319,7 +319,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     then: 'There are no TIs with works for this one.'
       assert tiCount == 0;
     when: 'We ingest a new electronic title for this work'
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         titleInstanceResolverService.resolve(citationFromFile('one_work_match_zero_electronic_ti_match.json'), true)
       }
     then: 'It ingests without error'
@@ -328,7 +328,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       // As seen above, API lookups need to occur in a separate transaction. Instead fetch direct from DB
       // We will continue this theme below -- we don't need to test the API in _this_ test suite
       List<TitleInstance> tis = [];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         tis = TitleInstance.executeQuery("""
           SELECT ti FROM TitleInstance AS ti
           WHERE ti.work.id = :workId
@@ -354,7 +354,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
   void 'WorkSourceIdentifierTIRS behaves as expected when matching work with many electronic TIs' () {
     when: 'We add a new electronic title instance for a work'
       Work work;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId('aac-003')
         TitleInstance newTI = new TitleInstance([
           name: 'Secondary Title Instance For Work aac-003',
@@ -367,7 +367,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       noExceptionThrown()
     when: 'We get electronic title instances for this work'
       List<TitleInstance> electronicTIs;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId('aac-003')
         electronicTIs = TitleInstance.executeQuery("""
           SELECT ti FROM TitleInstance ti
@@ -380,7 +380,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'WorkSourceIdentifierTIRS attempts to match on this work'
       Long code
       String message
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         try {
           titleInstanceResolverService.resolve(citationFromFile('one_work_match_many_electronic_ti_match.json'), true)
         } catch (TIRSException e) {
@@ -398,7 +398,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     given: 'We have a single electronic TI in the system for a given work'
       Work work;
       String tiId
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId('aad-004')
         def tisForWork = getTIsForWork(work.id, 'electronic')
         assert tisForWork.size() == 1; // Should only be one TI for this work
@@ -406,14 +406,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       }
     when: 'We resolve a title for this work'
       String resolvedTiId;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedTiId = titleInstanceResolverService.resolve(citationFromFile('one_work_match_one_electronic_ti_match.json'), true)
       }
     then: 'We resolve to the same title'
       assert tiId == resolvedTiId
     when: 'We inspect the title'
       TitleInstance theTi;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         theTi = TitleInstance.get(tiId);
       }
     then: 'It has been updated as part of the resolve'
@@ -429,7 +429,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String eissn = '5678-9012'
       String issn = 'efgh-ijkl'
       Work work;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         deleteWorkSourceIdentifier(workSourceId)
 
         // Attempt to grab work from sourceId
@@ -438,7 +438,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     then: 'Work is no longer findable from sourceId'
       assert work == null
     when: 'We set up secondary TI that IdFirst fallback will find'
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         Identifier eissnId = Identifier.executeQuery("""
           SELECT iden FROM Identifier iden
           WHERE iden.value = :eissn
@@ -462,7 +462,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       noExceptionThrown()
     when: "We count IdentifierOccurrences for the eissn ${eissn}"
       Integer ioCount;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         ioCount = IdentifierOccurrence.executeQuery("""
           SELECT COUNT(iden.id) FROM IdentifierOccurrence AS iden
           WHERE iden.identifier.value = :eissn
@@ -473,7 +473,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We fetch the existing TIs and Siblings'
       List<String> existingTiIds;
       List<String> existingSiblingIds;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         existingTiIds = IdentifierOccurrence.executeQuery("""
           SELECT io.resource.id FROM IdentifierOccurrence io
           WHERE io.identifier.value = :eissn
@@ -490,7 +490,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     
     when: 'We resolve a title with non-matching sourceId and there are multiple matches'
       String resolvedTiId;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedTiId = titleInstanceResolverService.resolve(citationFromFile('zero_work_match_multiple_electronic_ti_match.json'), true)
       }
     then: 'There are no exceptions thrown'
@@ -498,7 +498,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We get the resolved TI'
       TitleInstance resolvedTi
       Set<TitleInstance> relatedTitles;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedTi = TitleInstance.get(resolvedTiId);
         relatedTitles = resolvedTi.getRelatedTitles();
       }
@@ -510,7 +510,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
 
       assert resolvedTi.name == "Brand new title matching eissn 5678-9012"
     when: 'We double check that the numbers now line up'
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         existingTiIds = IdentifierOccurrence.executeQuery("""
           SELECT io.resource.id FROM IdentifierOccurrence io
           WHERE io.identifier.value = :eissn
@@ -530,7 +530,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
   void 'Creation of new TI within fallbackToIdFirstTIRS' () {
     when: 'We set up a work that does not have a sourceIdentifier'
       String originalTiId;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalTiId = titleInstanceResolverService.resolve(citationFromFile('test_title.json'), true);
         deleteWorkSourceIdentifier('tt-123-abc');
       }
@@ -538,7 +538,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       noExceptionThrown()
     when: 'We check number of Works in system without sourceIdentifiers'
       Integer worksWithoutSourceIds;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         worksWithoutSourceIds = Work.executeQuery("""
           SELECT COUNT(w) FROM Work w
           LEFT JOIN IdentifierOccurrence io ON io.resource = w.id
@@ -549,14 +549,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert worksWithoutSourceIds > 0
     when: 'We resolve a brand new title'
       String tiId;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         tiId = titleInstanceResolverService.resolve(citationFromFile('test_title2.json'), true);
       }
     then: 'All good'
       noExceptionThrown()
     when: 'We lookup the new title'
       TitleInstance newTI;
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         newTI = TitleInstance.get(tiId);
       }
     then: 'It is a brand new title created by IdFirstTIRS'
@@ -572,7 +572,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We remove work source id'
       String workSourceId = 'aaf-006'; // Making sure this is the same throughout the test
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
         deleteWorkSourceIdentifier(workSourceId);
       }
@@ -583,14 +583,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.electronicTi.id != null;
     when: 'We attempt to lookup the work by sourceId'
       Work work
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId(workSourceId)
       }
     then: 'We cannot find it'
       assert work == null;
     when: 'We resolve what should match on identifiers in IdFirstTIRS fallback'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('match_on_identifiers.json');
       }
     then: 'We have matched to the expected title and it has updated basic metadata'
@@ -608,7 +608,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String workSourceId = 'aag-007'; // Making sure this is the same throughout the test
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
         deleteWorkSourceIdentifier(workSourceId);
       }
@@ -622,14 +622,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.printTi.id != null
     when: 'We attempt to lookup the work by sourceId'
       Work work
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId(workSourceId)
       }
     then: 'We cannot find it'
       assert work == null;
     when: 'We resolve what should match on sibling in IdFirstTIRS fallback'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('match_on_sibling.json');
       }
     then: 'We have matched to the expected title and it has updated basic metadata'
@@ -650,7 +650,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We remove work source id'
       String workSourceId = 'aah-008'; // Making sure this is the same throughout the test
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
         deleteWorkSourceIdentifier(workSourceId);
       }
@@ -664,14 +664,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.electronicTi.id != null;
     when: 'We attempt to lookup the work by sourceId'
       Work work
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId(workSourceId)
       }
     then: 'We cannot find it'
       assert work == null;
     when: 'We resolve what should match on fuzzy title in IdFirstTIRS fallback'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('match_on_fuzzy_title.json');
       }
     then: 'We have matched to the expected title and it has updated basic metadata'
@@ -698,7 +698,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We remove work source id'
       String workSourceId = 'aba-010'; // Making sure this is the same throughout the test
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
         deleteWorkSourceIdentifier(workSourceId);
       }
@@ -707,14 +707,14 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.electronicTi.name == 'Zero Work Match-Single TI Out-No Source Id'
     when: 'We attempt to lookup the work by sourceId'
       Work work
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         work = getWorkFromSourceId(workSourceId)
       }
     then: 'We cannot find it'
       assert work == null;
      when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('zero_work_match_single_ti_match_no_source_id.json');
       }
     then: 'We have matched to the expected title and it has set the work source id'
@@ -728,7 +728,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We grab the original data from the system'
       String workSourceId = 'aca-020'; // Making sure this is the same throughout the test
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
       }
     then: 'We have the expected TIs'
@@ -736,7 +736,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.electronicTi.name == 'Zero Work Match-Single TI Out-Mismatch Source Id'
      when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('zero_work_match_single_ti_match_mismatched_source_id.json');
       }
     then: 'We have matched to the expected title, but since work source id was mismatched we have created a new title instance'
@@ -755,7 +755,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String existingIdentifierOccurrenceId;
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
 
         existingIdentifierId = Identifier.executeQuery("""
@@ -784,7 +784,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.printTi.identifiers.find { oi -> oi.identifier.value == 'hijk-lmno' && oi.identifier.ns.value == 'issn'} != null
     when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('ti_identifier_wrangling.json');        
       }
     then: 'We have matched to the expected title and updated all identifiers'
@@ -831,7 +831,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String existingIdentifierOccurrenceId;
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
   
         existingIdentifierOccurrenceId = IdentifierOccurrence.executeQuery("""
@@ -852,7 +852,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     
     when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('sibling_wrangling_4_1.json');        
       }
     then: 'We have matched to the expected title and siblings'
@@ -876,7 +876,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String workSourceId = 'afa-050'; // Making sure this is the same throughout the test
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
       }
     then: 'We have the expected TIs'
@@ -888,7 +888,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.printTi == null
     when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('sibling_wrangling_4_2.json');        
       }
     then: 'We have matched to the expected title and created new sibling'
@@ -907,7 +907,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String workSourceId = 'aga-060'; // Making sure this is the same throughout the test
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
       }
     then: 'We have the expected TIs'
@@ -922,7 +922,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
     when: 'We resolve what should match on identifier, and fetch pre-existing print sibling'
       Map resolvedData = [:];
       TitleInstance existingPrintSibling
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('sibling_wrangling_4_3.json');
         existingPrintSibling = TitleInstance.get(originalData.printTi.id);
       }
@@ -943,7 +943,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String erroneousSiblingIdentifierOccurrenceId;
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
 
         // We need to add a new Identifier to sibling to test marking of error
@@ -979,7 +979,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       assert originalData.printTi.name == 'Sibling Wrangling (4.4)'
     when: 'We resolve what should match on identifier'
       Map resolvedData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('sibling_wrangling_4_4.json');
       }
     then: 'We have matched to the expected title and sibling, and the erroneous identifier was removed'
@@ -1011,7 +1011,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       String printSiblingIdentifierId;
 
       Map originalData = [:];
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         originalData = getOriginalData(workSourceId);
         printSiblingIdentifierId = originalData.printTi.identifiers[0].id
 
@@ -1058,7 +1058,7 @@ class WorkSourceIdentifierTIRSSpec extends TIRSSpec {
       Set<IdentifierOccurrence> newSiblingApprovedIds
       Set<IdentifierOccurrence> newSiblingNonApprovedIds
 
-      Tenants.withId(OkapiTenantResolver.getTenantSchemaName( tenantId )) {
+      withTenant {
         resolvedData = resolveTIAndReturnNewData('sibling_wrangling_4_6.json');
 
         originalSibling = resolvedData.relatedTitles.find { rt -> rt.id == originalData.printTi.id }

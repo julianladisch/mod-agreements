@@ -32,5 +32,7 @@ public class Identifier implements MultiTenant<Identifier> {
              ns(nullable:false)
   }
 
-
+  String toString() {
+    "${ns.value}:${value}"
+  }
 }

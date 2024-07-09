@@ -14,7 +14,7 @@ dataSource:
   logSql: false
   properties:
       jmxEnabled: false
-      maximumPoolSize: ${db.maxpoolsize:10}
+      maximumPoolSize: ${db.maxpoolsize:50}
       transactionIsolation: TRANSACTION_READ_COMMITTED
 
   hibernate:
