@@ -55,6 +55,10 @@ This is the main starter repository for the Grails-based OLF - ERM backend modul
 
 - [Getting started](service/docs/getting-started.md "Getting started")
 
+There are a couple of differing ways to run this module as a developer, either via the (now defunct) vagrant images, or directly against an internal postgres via docker compose.
+
+Longer term there may be official rancher environments offered for dev, but our current workflow does not include those.
+
 ## Additional information
 
 ### Issue tracker
@@ -67,17 +71,34 @@ at the [FOLIO issue tracker](https://dev.folio.org/guidelines/issue-tracker/).
 Other [modules](https://dev.folio.org/source-code/#server-side) are described,
 with further FOLIO Developer documentation at [dev.folio.org](https://dev.folio.org/)
 
+## Docker compose
+This is the current recommended way to develop against this module, with a couple of key caveats. This setup runs the module standalone, without the okapi layer or the rest of FOLIO.
+Obviously this prevents full testing and development of permission based issues or any app interaction, but is sufficient for developing anything internal to the module.
 
-## Running using grails run-app with the vagrant-db profile
+### Setup
+The devloper will need `docker compose`, which should now be included in relatively new versions of `docker`. If not, either look to update docker or install the compatible standalone `docker-compose`. (Note that this will change the necessary commands later from `docker compose` to `docker-compose`)
 
-    grails -Dgrails.env=vagrant-db run-app
+### Run command
+First ensure that the postgres is up and running, by navigating to `mod-agreements/tools/testing` and running
+
+    docker compose up
+Then navigate in a separate terminal to `mod-agreements/service` and run with the `dc` profile
+
+    ./gradlew -Dgrails.env=dc bootRun
+
+This will run the module on port 8080, and it can be directly `curl`ed to on that port without having to pass through an okapi layer.
 
 
-## Initial Setup
+## Vagrant
+Using the now defunct vagrant images for snapshot allows for a full FOLIO system running in a virtual machine. This is highly costly resource-wise, and the lack of up to date images creates issues for development. However it is listed below for posterity.
 
+### Run command
+    ./gradlew -Dgrails.env=vagrant-db bootRun
+
+### Initial Setup
 Most developers will run some variant of the following commands the first time through
 
-### In window #1
+#### In window #1
 
 Start the vagrant image up from the project root
 
@@ -102,7 +123,7 @@ Finish the part off with
 
     tail -f /var/log/folio/okapi/okapi.log
 
-### In window #2
+#### In window #2
 
 Build and run mod-agreements stand alone
 
@@ -110,7 +131,7 @@ Build and run mod-agreements stand alone
     grails war
     ../scripts/run_external_reg.sh
 
-### In window #3
+#### In window #3
 
 Register the module and load some test data
 
@@ -119,7 +140,7 @@ Register the module and load some test data
   ./dev_submit_pkg.sh
   ./dev_trigger_kb_sync.sh 
 
-### In window #4
+#### In window #4
 
 Run up a stripes platform containing erm
 
