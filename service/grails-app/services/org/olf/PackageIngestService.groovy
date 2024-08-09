@@ -86,6 +86,18 @@ class PackageIngestService implements DataBinder {
   public Map upsertPackage(PackageSchema package_data, String remotekbname, boolean kbCreateReadOnly=false) {
 		// Really messy but required as withNew session does not work unless there is already a session
   	// bound.
+
+
+		final def result = [
+			startTime: System.currentTimeMillis(),
+			titleCount: 0,
+			newTitles: 0,
+			removedTitles: 0,
+			updatedTitles: 0,
+			updatedAccessStart: 0,
+			updatedAccessEnd: 0,
+		]
+				
 		Pkg.withSession { currentSess ->
 			Pkg.withTransaction {
 				Pkg.withNewSession { newSess ->
@@ -95,16 +107,6 @@ class PackageIngestService implements DataBinder {
 						MDC.remove('title')
             MDC.remove('packageSource')
 						MDC.remove('packageReference')
-						final def result = [
-							startTime: System.currentTimeMillis(),
-							titleCount: 0,
-							newTitles: 0,
-							removedTitles: 0,
-							updatedTitles: 0,
-							updatedAccessStart: 0,
-							updatedAccessEnd: 0,
-						]
-				
 				
 						// ERM caches many remote KB sources in it's local package inventory
 						// Look up which remote kb via the name
@@ -136,31 +138,35 @@ class PackageIngestService implements DataBinder {
 							// log.debug("Try to resolve ${pc}")
 				
 							try {
-								PackageContentItem.withNewTransaction { status ->
-									// Delegate out to TitleIngestService so that any shared steps can move there.
-									Map titleIngestResult = titleIngestService.upsertTitle(pc, kb, trustedSourceTI)
+								PackageContentItem.withNewSession { tsess ->
+  								PackageContentItem.withNewTransaction { status ->
+									  // Delegate out to TitleIngestService so that any shared steps can move there.
+								  	Map titleIngestResult = titleIngestService.upsertTitle(pc, kb, trustedSourceTI)
 				
-									// titleIngestResult.titleInstanceId will be non-null IFF TitleIngestService managed to find a title with that Id.
-									if ( titleIngestResult.titleInstanceId != null ) {
-										// Pass off to new hierarchy method (?)
-										Map hierarchyResult = lookupOrCreateTitleHierarchy(
-											titleIngestResult.titleInstanceId,
-											pkg.id,
-											trustedSourceTI,
-											pc,
-											result.updateTime,
-											result.titleCount
-										)
+							  		// titleIngestResult.titleInstanceId will be non-null IFF TitleIngestService managed to find a title with that Id.
+						  			if ( titleIngestResult.titleInstanceId != null ) {
+					  					// Pass off to new hierarchy method (?)
+				  						Map hierarchyResult = lookupOrCreateTitleHierarchy(
+			  								titleIngestResult.titleInstanceId,
+		  									pkg.id,
+	  										trustedSourceTI,
+  											pc,
+											  result.updateTime,
+										  	result.titleCount
+									  	)
 				
-										PackageContentItem pci = PackageContentItem.get(hierarchyResult.pciId)
-										hierarchyResultMapLogic(hierarchyResult, result, pci)
-									}
-									else {
-										// Almost the same message exists in TitleIngestService if result is null
-										//String message = "Skipping \"${pc.title}\". Unable to resolve title from ${pc.title} with identifiers ${pc.instanceIdentifiers}"
-										//log.error(message)
-									}
-								}
+								  		PackageContentItem pci = PackageContentItem.get(hierarchyResult.pciId)
+							  			hierarchyResultMapLogic(hierarchyResult, result, pci)
+						  			}
+					  				else {
+				  						// Almost the same message exists in TitleIngestService if result is null
+			  							//String message = "Skipping \"${pc.title}\". Unable to resolve title from ${pc.title} with identifiers ${pc.instanceIdentifiers}"
+		  								//log.error(message)
+	  								}
+  								}
+									// Without this, created objects live on in the hibernate cache and will balloon memory badly
+									tsess.clear();
+                }
 							} catch ( IngestException ie ) {
                 // When we've caught an ingest exception, should have helpful error log message
                 String message = "Skipping \"${pc.title}\": ${ie.message}"
@@ -177,8 +183,7 @@ class PackageIngestService implements DataBinder {
 								log.debug ("(Package in progress) processed ${result.titleCount} titles, average per title: ${result.averageTimePerTitle}s")
 							} */
 						}
-						long finishedTime = (System.currentTimeMillis()-result.startTime) // Don't divide by 1000 here, instead leave in ms for greater accuracy
-				
+
 						// This removed logic is WRONG under pushKB because it's chunked -- ensure pushKB does not call full upsertPackage method
 						// At the end - Any PCIs that are currently live (Don't have a removedTimestamp) but whos lastSeenTimestamp is < result.updateTime
 						// were not found on this run, and have been removed. We *may* introduce some extra checks here - like 3 times or a time delay, but for now,
@@ -200,18 +205,20 @@ class PackageIngestService implements DataBinder {
 								result.removedTitles++
 							}
 						}
-
-            // Not sure if MDC logic can go in shared method
-						MDC.remove('recordNumber')
-						MDC.remove('title')
-            logPackageResults(result, finishedTime);
-				//    MDC.clear()
-				
-						return result
 					}
+          newSess.clear();
 				}
 			}
 		}
+
+    // Not sure if MDC logic can go in shared method
+		//    MDC.clear()
+		MDC.remove('recordNumber')
+		MDC.remove('title')
+		long finishedTime = (System.currentTimeMillis()-result.startTime) // Don't divide by 1000 here, instead leave in ms for greater accuracy
+    logPackageResults(result, finishedTime);
+
+		return result
   }
 
   // Pass in finished time so we're not waiting for package content cleanup
