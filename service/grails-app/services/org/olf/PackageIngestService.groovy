@@ -605,8 +605,6 @@ class PackageIngestService implements DataBinder {
         result.pciStatus = 'new'
       }
 
-      pci.save(flush: true, failOnError: true)
-
       // ADD PTI AND PCI ID TO RESULT
       result.pciId = pci.id;
 
@@ -618,8 +616,11 @@ class PackageIngestService implements DataBinder {
         // We define coverage to be a list in the exchange format, but sometimes it comes just as a JSON map. Convert that
         // to the list of maps that coverageService.extend expects
         Iterable<CoverageStatementSchema> cov = pc.coverage instanceof Iterable ? pc.coverage : [ pc.coverage ]
-        coverageService.setCoverageFromSchema (pci, cov)
+        // Ensure this doesn't trigger the calculateCoverage, that will happen after in the pci.save
+        coverageService.setCoverageFromSchema (pci, cov, false)
       }
+
+      pci.save(failOnError: true, flush: true)
     }
     else {
       throw new IngestException("Unable to identify platform from ${platform_url_to_use} and ${pc.platformName}");

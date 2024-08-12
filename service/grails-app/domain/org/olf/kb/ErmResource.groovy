@@ -32,7 +32,11 @@ public class ErmResource extends ErmTitleList implements MultiTenant<ErmResource
   Set<AlternateResourceName> alternateResourceNames
   
   Set<TemplatedUrl> templatedUrls = []
-  
+
+  // Do not store this value, only used to check whether or not beforeValidate should calculate coverage
+  // We wish to avoid this during ingest process, for example, where we do this manually based on
+  // external information
+  boolean doNotCalculateCoverage
   
   static hasMany = [
     coverage: CoverageStatement,
@@ -82,12 +86,12 @@ alternateResourceNames cascade: 'all-delete-orphan'
                coverage (validator: CoverageStatement.STATEMENT_COLLECTION_VALIDATOR, sort:'startDate')
           templatedUrls (bindable: false)
   }
-  
+
   private validating = false  
   def beforeValidate() {
     this.name = StringUtils.truncate(name)
 
-    if (!validating) {
+    if (!validating && !doNotCalculateCoverage) {
       validating = true
       // Attempt to avoid session locking
       ErmResource.withSession {
@@ -97,13 +101,15 @@ alternateResourceNames cascade: 'all-delete-orphan'
       normalizedName = StringUtils.normaliseWhitespaceAndCase(name)
       validating = false
     }
+
+    this.doNotCalculateCoverage = false // Unset afterwards in case of a string of saves
   }
   
   String toString() {
     name
   }
 
-  static transients = ['approvedIdentifierOccurrences']
+  static transients = ['approvedIdentifierOccurrences', 'doNotCalculateCoverage']
 
   public Set<IdentifierOccurrence> getApprovedIdentifierOccurrences() {
     identifiers

@@ -127,10 +127,21 @@ public class CoverageService {
     return (value?.trim()?.length() ?: 0) > 0 ? value : null
   }
 
+  // FIXME this indicates a need to refactor the beforeValidate call which forces a calculate coverage on every save
+  public static void saveResourceWithoutCalculatingCoverage (ErmResource resource, boolean flush = true, boolean failOnError = true) {
+    resource.doNotCalculateCoverage = true;
+    resource.save(failOnError: failOnError, flush: flush)
+  }
+
   /**
    * Set coverage from schema
    */
-  public static void setCoverageFromSchema (final ErmResource resource, final Iterable<CoverageStatementSchema> coverage_statements) {
+  public static void setCoverageFromSchema (
+    final ErmResource resource,
+    final Iterable<CoverageStatementSchema> coverage_statements,
+    final boolean calculateCoverageAtEnd = true
+  ) {
+    //log.debug("CoverageService::setCoverageFromSchema(${resource}, ${coverage_statements}, ${calculateCoverageAtEnd})")
 
 //    ErmResource.withTransaction {
 
@@ -142,9 +153,9 @@ public class CoverageService {
         if (resource.coverage) {
           statements.addAll( resource.coverage.collect() )
           resource.coverage.clear()
-          resource.save(failOnError: true) // Necessary to remove the orphans.
-        }
 
+          saveResourceWithoutCalculatingCoverage(resource, false, true)
+        }
         for ( CoverageStatementSchema cs : coverage_statements ) {
           /* Not using utilityService.checkValidBinding here
            * because we have custom error logging behaviour
@@ -161,11 +172,12 @@ public class CoverageService {
 
             resource.addToCoverage( new_cs )
 
+            resource.doNotCalculateCoverage = true // Validate is called inside utility service here -- don't trigger calculate coverage
             if (!utilityService.checkValidBinding(resource)) {
               throw new ValidationException('Adding coverage statement invalidates Resource', resource.errors)
             }
 
-            resource.save()
+            saveResourceWithoutCalculatingCoverage(resource, false, false)
           } else {
 
             // Not valid coverage statement
@@ -193,7 +205,12 @@ public class CoverageService {
         }
       }
 
-      resource.save(failOnError: true, flush:true) // Save.
+      if (calculateCoverageAtEnd) {
+        // Final save needs to calculate coverage because it may impact things up the heirachy
+        resource.save(failOnError: true, flush: true) // Save.
+      } else {
+        saveResourceWithoutCalculatingCoverage(resource)
+      }
 //    }
   }
 
@@ -209,16 +226,15 @@ public class CoverageService {
 
       // Use a sub query to select all the coverage statements linked to PCIs,
       // linked to this pti
-      List<org.olf.dataimport.erm.CoverageStatement> allCoverage = CoverageStatement.createCriteria().list {
-        'in' 'resource.id', new DetachedCriteria(PackageContentItem).build {
-          readOnly (true)
-          eq 'pti.id', pti.id
-
-          projections {
-            property ('id')
-          }
-        }
-      }.collect{ CoverageStatement cs ->
+      List<org.olf.dataimport.erm.CoverageStatement> allCoverage = CoverageStatement.executeQuery(
+        """
+          SELECT cs FROM CoverageStatement cs WHERE
+          resource.id IN (
+            SELECT pci.id FROM PackageContentItem pci WHERE
+            pci.pti.id = :ptiId 
+          )
+        """.toString(), [ptiId: pti.id]
+      ).collect { CoverageStatement cs ->
         new org.olf.dataimport.erm.CoverageStatement([
           'startDate': cs.startDate,
           'endDate': cs.endDate
@@ -240,18 +256,16 @@ public class CoverageService {
     // Use a sub query to select all the coverage statements linked to PTIs,
     // linked to this TI
 //    TitleInstance.withTransaction {
-      List<CoverageStatement> results = CoverageStatement.createCriteria().list {
-        'in' 'resource.id', new DetachedCriteria(PlatformTitleInstance, 'linked_ptis').build {
-          readOnly (true)
-          eq 'titleInstance.id', ti.id
 
-          projections {
-            property ('id')
-          }
-        }
-      }
-
-      List<org.olf.dataimport.erm.CoverageStatement> allCoverage = results.collect { CoverageStatement cs ->
+      List<org.olf.dataimport.erm.CoverageStatement> allCoverage = CoverageStatement.executeQuery(
+        """
+          SELECT cs FROM CoverageStatement cs WHERE
+          resource.id IN (
+            SELECT pti.id FROM PlatformTitleInstance pti WHERE
+            pti.titleInstance.id = :tiId 
+          )
+        """.toString(), [tiId: ti.id]
+      ).collect { CoverageStatement cs ->
         new org.olf.dataimport.erm.CoverageStatement([
           'startDate': cs.startDate,
           'endDate': cs.endDate
@@ -426,18 +440,21 @@ public class CoverageService {
     final PackageContentItem pci = asPCI(res)
     if ( pci ) {
       log.trace "PCI updated, regenerate PTI's coverage"
+      //log.debug "PCI updated, regenerate PTI's coverage"
       calculateCoverage( pci.pti )
     }
 
     final PlatformTitleInstance pti = asPTI(res)
     if ( pti ) {
       log.trace "PTI updated regenerate TI's coverage"
+      //log.debug "PTI updated regenerate TI's coverage"
       calculateCoverage( pti.titleInstance )
     }
 
     final TitleInstance ti = asTI(res)
     if ( ti ) {
       log.trace 'TI updated'
+      //log.debug("TI updated")
     }
   }
 
