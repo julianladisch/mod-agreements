@@ -205,11 +205,16 @@ public class CoverageService {
         }
       }
 
+
+      // Save and flush (Don't propogate coverage changes yet)
+      // Flush is NECESSARY here so that changelistener lookups have access to all created coverageStatements
+      saveResourceWithoutCalculatingCoverage(resource)
+
       if (calculateCoverageAtEnd) {
-        // Final save needs to calculate coverage because it may impact things up the heirachy
-        resource.save(failOnError: true, flush: true) // Save.
-      } else {
-        saveResourceWithoutCalculatingCoverage(resource)
+        // If we want this to propogate down we need to run the change listener here specifically.
+        changeListener(resource);
+        // Again, if changeListener ends up doing more things
+        // we may need to separate out the coverage-only part
       }
 //    }
   }
@@ -221,7 +226,6 @@ public class CoverageService {
    * @param pti The PlatformTitleInstance
    */
   public static void calculateCoverage( final PlatformTitleInstance pti ) {
-
     // log.debug 'Calculate coverage for PlatformTitleInstance {}', pti.id
 
       // Use a sub query to select all the coverage statements linked to PCIs,
@@ -229,9 +233,9 @@ public class CoverageService {
       List<org.olf.dataimport.erm.CoverageStatement> allCoverage = CoverageStatement.executeQuery(
         """
           SELECT cs FROM CoverageStatement cs WHERE
-          resource.id IN (
+          cs.resource.id IN (
             SELECT pci.id FROM PackageContentItem pci WHERE
-            pci.pti.id = :ptiId 
+            pci.pti.id = :ptiId
           )
         """.toString(), [ptiId: pti.id]
       ).collect { CoverageStatement cs ->
@@ -240,7 +244,6 @@ public class CoverageService {
           'endDate': cs.endDate
         ])
       }
-
       allCoverage = collateCoverageStatements(allCoverage)
 
       setCoverageFromSchema(pti, allCoverage)
@@ -260,9 +263,9 @@ public class CoverageService {
       List<org.olf.dataimport.erm.CoverageStatement> allCoverage = CoverageStatement.executeQuery(
         """
           SELECT cs FROM CoverageStatement cs WHERE
-          resource.id IN (
+          cs.resource.id IN (
             SELECT pti.id FROM PlatformTitleInstance pti WHERE
-            pti.titleInstance.id = :tiId 
+            pti.titleInstance.id = :tiId
           )
         """.toString(), [tiId: ti.id]
       ).collect { CoverageStatement cs ->
@@ -435,6 +438,10 @@ public class CoverageService {
     res instanceof TitleInstance ? res : null
   }
 
+
+  // NOTE -- this is slightly misnamed. As of right now this is _only_ a change coverage listener.
+  // This means this whole method is not triggered when doNotCalculate coverage transient is
+  // set on the resource
   public static void changeListener(ErmResource res) {
 
     final PackageContentItem pci = asPCI(res)
