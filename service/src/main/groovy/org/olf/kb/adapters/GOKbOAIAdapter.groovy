@@ -469,7 +469,7 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
         packageContents: []
       ]
 
-      package_record.TIPPs?.TIPP.each { tipp_entry ->
+      package_record.TIPPs?.TIPP.eachWithIndex { tipp_entry, indx ->
         def tipp_status = tipp_entry?.status?.text()
         // Ensure logging below has correct title for log export
         if(tipp_entry?.title?.name?.text()) {
@@ -490,20 +490,20 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
 
           def tipp_coverage = [] // [ "startVolume": "8", "startIssue": "1", "startDate": "1982-01-01", "endVolume": null, "endIssue": null, "endDate": null ],
 
-          // Coverage node exists
-          if (tipp_entry.coverage.size()) {
+          tipp_coverage.addAll(tipp_entry.coverage.collect { cov ->
             // Our domain model does not allow null startDate or endDate
-            String start_date_string = tipp_entry.coverage?.@startDate?.toString()
-            String end_date_string = tipp_entry.coverage?.@endDate?.toString()
+            String start_date_string = cov.@startDate?.toString()
+            String end_date_string = cov.@endDate?.toString()
 
-            tipp_coverage.add(["startVolume": tipp_entry.coverage?.@startVolume?.toString(),
-              "startIssue": tipp_entry.coverage?.@startIssue?.toString(),
+            return [
+              "startVolume": cov.@startVolume?.toString(),
+              "startIssue": cov.@startIssue?.toString(),
               "startDate": start_date_string?.length() > 0 ? start_date_string : null,
-              "endVolume":tipp_entry.coverage?.@endVolume?.toString(),
-              "endIssue": tipp_entry.coverage?.@endIssue?.toString(),
-              "endDate": end_date_string?.length() > 0 ? end_date_string : null]
-            )
-          }
+              "endVolume": cov.@endVolume?.toString(),
+              "endIssue": cov.@endIssue?.toString(),
+              "endDate": end_date_string?.length() > 0 ? end_date_string : null
+            ]
+          });
 
           def tipp_coverage_depth = tipp_entry.coverage.@coverageDepth?.toString()
           def tipp_coverage_note = tipp_entry.coverage.@coverageNote?.toString()
