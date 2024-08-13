@@ -84,35 +84,17 @@ public class ErmHousekeepingService {
           RefdataValue.lookupOrCreate('Yes/No/Other', 'No')
           RefdataValue.lookupOrCreate('Yes/No/Other', 'Other (see notes)')
 
-          RefdataValue.lookupOrCreate('AuthIdent', 'Other')
-          RefdataValue.lookupOrCreate('AuthIdent', 'Email Domain')
-          RefdataValue.lookupOrCreate('AuthIdent', 'ORCID')
-          RefdataValue.lookupOrCreate('AuthIdent', 'Over Institute')
-          RefdataValue.lookupOrCreate('AuthIdent', 'Over IP Range')
-          RefdataValue.lookupOrCreate('AuthIdent', 'Ringgold ID')
-          RefdataValue.lookupOrCreate('AuthIdent', 'ROR ID')
-
           // Read the categories.
           final String yesno = RefdataCategory.findByDesc('Yes/No/Other').id
-          final String authident = RefdataCategory.findByDesc('AuthIdent').id
 
           [
-            [
-              "ctx" : "OpenAccess",
-              "name" : "AuthorIdentification",
-              "category" : authident,
-              "type" : "Refdata",
-              "label" : "Author Identification",
-              "description" : "Author Identification",
-              "primary": true
-            ],
             [
               "ctx" : "OpenAccess",
               "name" : "SupportPublishing",
               "type" : "Text",
               "label" : "Does this agreement support publishing",
               "description" : "Does this agreement support publishing",
-              "primary": true
+              "primary": false
             ]
           ].each { Map definition ->
             
