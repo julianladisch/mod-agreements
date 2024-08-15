@@ -12,7 +12,8 @@ import org.olf.kb.RemoteKB
     rectype: RemoteKB.RECTYPE_PACKAGE,
     active:Boolean.TRUE,
     supportsHarvesting:true,
-    activationEnabled:false
+    activationEnabled:false,
+    //cursor: "2022-08-09T19:34:42Z"
 ).save(failOnError:true)) */
 
 RemoteKB.findByName('GOKb') ?: (new RemoteKB(

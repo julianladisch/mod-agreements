@@ -29,15 +29,15 @@ class UtilityService {
   }
 
   // Small utility method to log out any errors
-  private void logErrors(Errors errors) {
+  private void logErrors(Errors errors, String extraContext = '') {
     errors.allErrors.each { ObjectError error ->
-      log.error "${ messageSource.getMessage(error, LocaleContextHolder.locale) }"
+      log.error "${ messageSource.getMessage(error, LocaleContextHolder.locale) }. ${extraContext}"
     }
   }
 
   // Small utility method to systematically check binding and log out any errors
   // Provide separate checkValidBinding for Validateable vs GormEntity objects
-  public boolean checkValidBinding(GormEntity obj) {
+  public boolean checkValidBinding(GormEntity obj, String extraContext = '') {
     boolean validBinding = false;
     // Check for binding errors.
     if (!obj.errors.hasErrors()) {
@@ -48,11 +48,11 @@ class UtilityService {
         validBinding = true;
       } else {
         // Log the errors.
-        logErrors(obj.errors)
+        logErrors(obj.errors, extraContext)
       }
     } else {
       // Log the errors.
-      logErrors(obj.errors)
+      logErrors(obj.errors, extraContext)
     }
 
     validBinding
@@ -60,7 +60,7 @@ class UtilityService {
 
   // Small utility method to systematically check binding and log out any errors
   // Provide separate checkValidBinding for Validateable vs GormEntity objects
-  public boolean checkValidBinding(Validateable obj) {
+  public boolean checkValidBinding(Validateable obj, String extraContext = '') {
     boolean validBinding = false;
     // Check for binding errors.
     if (!obj.errors.hasErrors()) {
@@ -71,11 +71,11 @@ class UtilityService {
         validBinding = true;
       } else {
         // Log the errors.
-        logErrors(obj.errors)
+        logErrors(obj.errors, extraContext)
       }
     } else {
       // Log the errors.
-      logErrors(obj.errors)
+      logErrors(obj.errors, extraContext)
     }
 
     validBinding

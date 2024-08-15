@@ -58,4 +58,9 @@ public class CoverageStatement extends AbstractCoverageStatement implements Vali
             endVolume column:'cs_end_volume'
              endIssue column:'cs_end_issue'
   }
+
+  // TODO is this a good enough toString to be official rather than "toGoKBString"?
+  String toString() {
+    "v${startVolume ?: '*'}/i${startIssue ?: '*'}/${startDate ?: '*'} - v${endVolume ?: '*'}/i${endIssue ?: '*'}/${endDate ?: '*'}"
+  }
 }

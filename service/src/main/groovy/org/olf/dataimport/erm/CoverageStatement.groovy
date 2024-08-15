@@ -30,4 +30,9 @@ class CoverageStatement extends AbstractCoverageStatement implements CoverageSta
     endVolume(nullable:true, blank:false)
     endIssue(nullable:true, blank:false)
   }
+
+  // Reflected by internal CoverageStatement toString...
+  String toString() {
+    "v${startVolume ?: '*'}/i${startIssue ?: '*'}/${startDate ?: '*'} - v${endVolume ?: '*'}/i${endIssue ?: '*'}/${endDate ?: '*'}"
+  }
 }

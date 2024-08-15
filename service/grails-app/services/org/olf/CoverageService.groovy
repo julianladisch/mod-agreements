@@ -141,20 +141,22 @@ public class CoverageService {
     final Iterable<CoverageStatementSchema> coverage_statements,
     final boolean calculateCoverageAtEnd = true
   ) {
+    // resource is null for logging unless a gorm operation is applied to it... something something proxying something :p
     //log.debug("CoverageService::setCoverageFromSchema(${resource}, ${coverage_statements}, ${calculateCoverageAtEnd})")
 
 //    ErmResource.withTransaction {
 
-      boolean changed = false
       final Set<CoverageStatement> statements = []
       try {
 
         // Clear the existing coverage, or initialize to empty set.
         if (resource.coverage) {
           statements.addAll( resource.coverage.collect() )
+
           resource.coverage.clear()
 
-          saveResourceWithoutCalculatingCoverage(resource, false, true)
+          // I don't think we need to save here... On my head be it :p
+          //saveResourceWithoutCalculatingCoverage(resource, false, true)
         }
         for ( CoverageStatementSchema cs : coverage_statements ) {
           /* Not using utilityService.checkValidBinding here
@@ -173,13 +175,13 @@ public class CoverageService {
             resource.addToCoverage( new_cs )
 
             resource.doNotCalculateCoverage = true // Validate is called inside utility service here -- don't trigger calculate coverage
-            if (!utilityService.checkValidBinding(resource)) {
+            // This will _already_ log out errors, add extra context around what a failure means in this case.
+            if (!utilityService.checkValidBinding(resource, "Coverage statements (${coverage_statements}) invalid. Coverage for ${resource} will be reset (${statements})")) {
               throw new ValidationException('Adding coverage statement invalidates Resource', resource.errors)
             }
 
             saveResourceWithoutCalculatingCoverage(resource, false, false)
           } else {
-
             // Not valid coverage statement
             cs.errors.allErrors.each { ObjectError error ->
               /* TODO Perhaps in future we can extend checkValidBinding to this use case */
@@ -188,23 +190,25 @@ public class CoverageService {
                 log.error (messageSource.getMessage(error, LocaleContextHolder.locale))
               }
             }
+
+            // Throwing a ValildationException here we "reset" if even one coverageStatement is wrong.
+            // Without this we simply ignore the incorrect statement and try to continue...
+            throw new ValidationException('Coverage statement is incorrect', cs.errors)
           }
         }
-
-        // log.debug("New coverage saved")
-        changed = true
       } catch (ValidationException e) {
-        log.error("Coverage changes to Resource ${resource.id} not saved")
-      }
+        // Don't bother erroring this to the user, the above validation errors will log through UtilityService
+        log.debug("Coverage changes to resource ${resource} not saved. \n${e.message}")
+        //e.printStackTrace() // Can turn off except for dev
 
-      if (!changed) {
-        // Revert the coverage set.
-        if (!resource.coverage) resource.coverage = []
+        // In this case we must RESET the coverage 
+        // This shouldn't need to be a log error, as the validation error above comes from somewhere which ALREADY logs as error.
+        resource.coverage?.clear();
+
         statements.each {
           resource.addToCoverage( it )
         }
       }
-
 
       // Save and flush (Don't propogate coverage changes yet)
       // Flush is NECESSARY here so that changelistener lookups have access to all created coverageStatements
