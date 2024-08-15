@@ -492,19 +492,24 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
 
           tipp_coverage.addAll(tipp_entry.coverage.collect { cov ->
             // Our domain model does not allow null startDate or endDate
-            String start_date_string = cov.@startDate?.toString()
-            String end_date_string = cov.@endDate?.toString()
+            String start_date_string = cov.@startDate?.toString()?.trim()
+            String end_date_string = cov.@endDate?.toString()?.trim()
 
-            return [
-              "startVolume": cov.@startVolume?.toString(),
-              "startIssue": cov.@startIssue?.toString(),
-              "startDate": start_date_string?.length() > 0 ? start_date_string : null,
-              "endVolume": cov.@endVolume?.toString(),
-              "endIssue": cov.@endIssue?.toString(),
-              "endDate": end_date_string?.length() > 0 ? end_date_string : null
-            ]
-          });
+            if (start_date_string && end_date_string) {
+              return [
+                "startVolume": cov.@startVolume?.toString(),
+                "startIssue": cov.@startIssue?.toString(),
+                "startDate": start_date_string?.length() > 0 ? start_date_string : null,
+                "endVolume": cov.@endVolume?.toString(),
+                "endIssue": cov.@endIssue?.toString(),
+                "endDate": end_date_string?.length() > 0 ? end_date_string : null
+              ]
+            } else {
+              // Rejected coverage statement which would fail anyway.
+            }
+          }.findAll { it != null })
 
+          // TODO if there are multiple coverages, these will get concatenated naively
           def tipp_coverage_depth = tipp_entry.coverage.@coverageDepth?.toString()
           def tipp_coverage_note = tipp_entry.coverage.@coverageNote?.toString()
 
