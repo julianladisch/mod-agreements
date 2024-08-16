@@ -64,7 +64,8 @@ class TitleIngestService implements DataBinder {
       trustedSourceTI = false
     }
     else {
-      log.debug("Not trusted source ti");
+      // Not really useful except for debugging
+      //log.debug("Not trusted source ti");
     }
 
     result.updateTime = System.currentTimeMillis()

@@ -122,7 +122,8 @@ class IdFirstTIRSImpl extends BaseTIRS implements DataBinder {
 
         switch ( candidate_list.size() ) {
           case 0:
-            log.debug("Create sibling print instance for citation ${sibling_citation}")
+            // We don't really need to log out that we're creating a sibling print instance, as it almost always happens 1 time per ingest title
+            //log.debug("Create sibling print instance for citation ${sibling_citation}")
             createNewTitleInstance(sibling_citation, workId)
             break
           case 1:
