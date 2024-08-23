@@ -1,5 +1,10 @@
 ## 7.1.0 In progress
 
+## 7.0.7 2024-08-23
+  * ERM-3310 Expose concurrent jobs as env var
+  * ERM-3308 Ingest process slows down dramatically on certain packages
+  * Tweaked processing log message for more accurate harvest performance numbers
+
 ## 7.0.6 2024-07-05
   * ERM-3291 Fix permissions on /erm/validate/remoteKB in mod-agreements
   * ERM-3289 Fix permission on /erm/validate/subscriptionAgreement in mod-agreements
