@@ -1,4 +1,5 @@
 ## 7.1.0 In progress
+  * Sample data now has Gokb RemoteKB OFF by default
 
 ## 7.0.7 2024-08-23
   * ERM-3310 Expose concurrent jobs as env var
