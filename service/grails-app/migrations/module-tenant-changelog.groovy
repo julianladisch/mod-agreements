@@ -28,7 +28,9 @@ databaseChangeLog = {
   include file: 'update-mod-agreements-5-3.groovy'
   include file: 'wtk/hidden-appsetting.feat.groovy'
   include file: 'update-mod-agreements-5-5.groovy'
+  include file: 'correct-gin-indices-pre-poppy.groovy'
   include file: 'update-mod-agreements-6-0.groovy'
+  include file: 'correct-gin-indices-pre-quesnalia.groovy'
   include file: 'add-quesnalia-indices-and-fk-constraints.groovy'
   include file: 'update-mod-agreements-6-1.groovy'
 }
