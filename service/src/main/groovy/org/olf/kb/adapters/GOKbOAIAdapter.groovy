@@ -495,17 +495,18 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
             String start_date_string = cov.@startDate?.toString()?.trim()
             String end_date_string = cov.@endDate?.toString()?.trim()
 
-            if (start_date_string && end_date_string) {
+            if (start_date_string) {
               return [
                 "startVolume": cov.@startVolume?.toString(),
                 "startIssue": cov.@startIssue?.toString(),
-                "startDate": start_date_string?.length() > 0 ? start_date_string : null,
+                "startDate": start_date_string ? start_date_string : null, // Making use of "" as falsey
                 "endVolume": cov.@endVolume?.toString(),
                 "endIssue": cov.@endIssue?.toString(),
-                "endDate": end_date_string?.length() > 0 ? end_date_string : null
+                "endDate": end_date_string ? end_date_string : null // Making use of "" as falsey
               ]
             } else {
-              // Rejected coverage statement which would fail anyway.
+              // Preventing downstream failure that'd throw anyway, where we were passed a coverage statement with nothing in it
+              // Namely an empty startDate, which is a required field for us.
             }
           }.findAll { it != null })
 
