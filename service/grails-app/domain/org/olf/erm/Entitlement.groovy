@@ -5,6 +5,9 @@ import java.time.LocalDate
 import javax.persistence.Transient
 
 import org.hibernate.Hibernate
+
+import org.olf.general.DocumentAttachment
+
 import org.olf.kb.ErmResource
 import org.olf.kb.PackageContentItem
 import org.olf.kb.Pkg
@@ -30,7 +33,8 @@ import groovy.util.logging.Slf4j
 public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitlement> {
   public static final Class<? extends ErmResource>[] ALLOWED_RESOURCES = [Pkg, PackageContentItem, PlatformTitleInstance] as Class[]
   
-  
+  static copyByCloning = ['docs'];
+
   /**
    * Need to resolve the conflict manually and add the call to the clonable method here.
    */
@@ -286,6 +290,7 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
     coverage: HoldingsCoverage,
      poLines: OrderLine,
         tags: Tag,
+        docs: DocumentAttachment
   ]
 
   Set<HoldingsCoverage> coverage = []
@@ -340,12 +345,14 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
              poLines cascade: 'all-delete-orphan'
             coverage cascade: 'all-delete-orphan'
                 tags cascade: 'save-update'
+                docs cascade: 'all-delete-orphan', joinTable: [name: 'entitlement_document_attachment', key: 'entitlement_docs_id', column: 'document_attachment_id']
   }
 
   static constraints = {
           owner(nullable:true,  blank:false)
     dateCreated(nullable:true, blank: true)
     lastUpdated(nullable:true, blank: true)
+
 
           // Now that resources can be internally or externally defined, the internal resource link CAN be null,
           // but if it is, there should be authorty, and reference properties.

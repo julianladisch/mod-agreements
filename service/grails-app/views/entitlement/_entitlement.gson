@@ -11,7 +11,7 @@ def should_render_default_coverage = false
 if (entitlement.type == 'external') {
   json tmpl."externalEntitlement"(entitlement)
 } else {
-  final def should_expand = ['poLines', 'resource', 'tags' ]
+  final def should_expand = ['poLines', 'resource', 'tags', 'docs' ]
   
   // Anything handled specifically below should always be excluded from the the general render
   final def should_exclude = [

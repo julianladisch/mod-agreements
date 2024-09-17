@@ -129,64 +129,73 @@ public class DocumentAttachmentService {
   }
 
   @Transactional
-  private void triggerCleanSuppDocs() {
-    
-    ['supplementaryDocs', 'docs', 'externalLicenseDocs'].each { final String prop ->
+  private triggerCleanDocsByClassAndProp(String domainClass, String prop) {
+    String tName, saCol, daCol
       
-      String tName, saCol, daCol
-      
-      // SO: Gorm creates in-flight metadata based on our classes to create hibernate domain objects.
-      // We should be able to get the metadata from the session. We use hibernate directly here...
-      // I'm not overly pleased with this but it beats hard-coding table and column names for
-      // references properties.
-      DocumentAttachment.withSession { Session sess ->
-        MetamodelImplementor hibMM = sess.getSessionFactory().metamodel
-        EntityPersister ep = hibMM.locateEntityPersister(SubscriptionAgreement)
-        AttributeDefinition ad = ep.getAttributes().find { AttributeDefinition theDef ->
-          theDef.name == prop
-        }
-        
-        tName = ad?.getAt('joinable')?.getAt('qualifiedTableName')
-        
-        String[] cols = ad?.getAt('joinable')?.getAt('elementColumnNames')
-        (cols?.length ?: 0) > 0 && (daCol = cols[0])
-        
-        cols = ad?.getAt('joinable')?.getAt('keyColumnNames')
-        (cols?.length ?: 0) > 0 && (saCol = cols[0])
+    // SO: Gorm creates in-flight metadata based on our classes to create hibernate domain objects.
+    // We should be able to get the metadata from the session. We use hibernate directly here...
+    // I'm not overly pleased with this but it beats hard-coding table and column names for
+    // references properties.
+    DocumentAttachment.withSession { Session sess ->
+      MetamodelImplementor hibMM = sess.getSessionFactory().metamodel
+      EntityPersister ep = hibMM.locateEntityPersister(SubscriptionAgreement)
+      AttributeDefinition ad = ep.getAttributes().find { AttributeDefinition theDef ->
+        theDef.name == prop
       }
       
-      if (tName && saCol && daCol) {       
-    
-        log.debug "Using relational join table ${tName} with columns ${saCol} and ${daCol}"
-    
-        final Map<String, List<String>> dupeMapping = [:]
-        SubscriptionAgreement.executeQuery(
-          
-          """
-            SELECT da.id, sa.id FROM SubscriptionAgreement AS sa INNER JOIN sa.${prop} AS da
-              WHERE da.id IN (
-                SELECT da.id FROM SubscriptionAgreement AS sa INNER JOIN sa.${prop} AS da GROUP BY da.id HAVING COUNT(*) > 1
-              )
-              ORDER BY da.id, sa.id
-          """.toString()
-          
-        ).each { final Object[] resultsArr ->
-          final String[] tuple = resultsArr as String[]
-          if (!dupeMapping.containsKey(tuple[0])) {
-            // add List
-            dupeMapping[tuple[0]] = []
-          }
-          dupeMapping[tuple[0]] << tuple[1]
-        }
-    
-        log.debug "dupeMapping = ${dupeMapping}"
-        
-        dupeMapping.each { final String docId, final List<String> saIds ->
-          splitDocuments(docId, saIds, prop, tName, saCol, daCol)
-        }
-      } else {
-        log.debug "Could not get join table for property ${prop}"
-      }
+      tName = ad?.getAt('joinable')?.getAt('qualifiedTableName')
+      
+      String[] cols = ad?.getAt('joinable')?.getAt('elementColumnNames')
+      (cols?.length ?: 0) > 0 && (daCol = cols[0])
+      
+      cols = ad?.getAt('joinable')?.getAt('keyColumnNames')
+      (cols?.length ?: 0) > 0 && (acCol = cols[0])
     }
+    
+    if (tName && acCol && daCol) {
+  
+      log.debug "Using relational join table ${tName} with columns ${acCol} and ${daCol}"
+  
+      final Map<String, List<String>> dupeMapping = [:]
+        DocumentAttachment.executeQuery(
+        """
+          SELECT da.id, ac.id FROM ${domainClass} AS ac INNER JOIN sa.${prop} AS da
+            WHERE da.id IN (
+              SELECT da.id FROM ${domainClass} AS ac INNER JOIN ac.${prop} AS da GROUP BY da.id HAVING COUNT(*) > 1
+            )
+            ORDER BY da.id, ac.id
+        """.toString()
+        
+      ).each { final Object[] resultsArr ->
+        final String[] tuple = resultsArr as String[]
+        if (!dupeMapping.containsKey(tuple[0])) {
+          // add List
+          dupeMapping[tuple[0]] = []
+        }
+        dupeMapping[tuple[0]] << tuple[1]
+      }
+  
+      log.debug "dupeMapping = ${dupeMapping}"
+      
+      dupeMapping.each { final String docId, final List<String> saIds ->
+        splitDocuments(docId, saIds, prop, tName, acCol, daCol)
+      }
+    } else {
+      log.debug "Could not get join table for property ${prop} on domain class ${domainClass}"
+    }
+  }
+
+  // Does this even actually get called?
+  private void triggerCleanSuppDocs() {
+    // On Agreements
+    ['supplementaryDocs', 'docs', 'externalLicenseDocs'].each { final String prop ->
+      triggerCleanDocsByClassAndProp('SubscriptionAgreement', prop)
+    }
+
+    // On Entitlements
+    ['docs'].each { final String prop ->
+      triggerCleanDocsByClassAndProp('Entitlement', prop)
+    }
+
   }
 }

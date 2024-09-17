@@ -60,6 +60,7 @@ json {
   'haveAccess' entitlement.getHaveAccess()
   'suppressFromDiscovery' entitlement.suppressFromDiscovery
   'note' entitlement.note
+  'docs'  g.render(entitlement.docs)
   
   if (renderOwnerSnippet) {
     'owner' g.render(entitlement.owner, [includes: ['id', 'name']])
