@@ -168,3 +168,35 @@ If you create a Service in Kubernetes named "okapi" and expose a port for Hazelc
 
 
 
+## Validating module descriptor
+There is a github action created to run the module descriptor validation on `push`, but if a developer wishes to run the validation locally there is some setup that needs doing. The validation script is a Maven plugin which does not work natively with our gradle based apps.
+### Maven
+Developer will need maven cli `mvn` installed on their machine.
+### settings.xml
+Create a `settings.xml` file within the "service" directory (DO NOT MERGE THIS) containing the following:
+```
+<settings>
+  <profiles>
+    <profile>
+      <id>folioMavenProfile</id>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>folio-nexus</id>
+          <name>FOLIO Maven repository</name>
+          <url>https://repository.folio.org/repository/maven-folio</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>folioMavenProfile</activeProfile>
+  </activeProfiles>
+</settings>
+```
+### Running
+Finally the developer can run this command from the root directory (ie `mod-agreements` not `mod-agreements/service`)
+```
+mvn org.folio:folio-module-descriptor-validator:1.0.0:validate -DmoduleDescriptorFile=service/src/main/okapi/ModuleDescriptor-template.json -s service/settings.xml -l validate_module_descriptor_output.txt
+```
+
+This will create a file called `validate_module_descriptor_output.txt` containing the output of the validator. The github action does some cleanup and comments the errors on a PR (if present). The `grep`/`sed` commands with regex can be found in the workflow file `.github/validate-module`.

@@ -50,10 +50,10 @@ class UrlMappings {
       }
 
       '/usageDataProviders' {
-  		  controller = 'usageDataProvider'
-  		  method = 'GET'
-  		  filters = { "owner==${params.subscriptionAgreementId}" }
-  	  }
+        controller = 'usageDataProvider'
+        method = 'GET'
+        filters = { "owner==${params.subscriptionAgreementId}" }
+      }
 
       // Root level extensions
       collection {
