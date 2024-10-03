@@ -52,11 +52,11 @@ public class ErmHousekeepingService {
           RefdataValue.lookupOrCreate('FileStorageEngines', 'LOB');
           RefdataValue.lookupOrCreate('FileStorageEngines', 'S3');
 
-          def default_aws_region = grailsApplication.config.kiwt?.filestore?.aws_region
-          def default_aws_url = grailsApplication.config.kiwt?.filestore?.aws_url
-          def default_aws_secret = grailsApplication.config.kiwt?.filestore?.aws_secret
-          def default_aws_bucket = grailsApplication.config.kiwt?.filestore?.aws_bucket
-          def default_aws_access_key_id = grailsApplication.config.kiwt?.filestore?.aws_access_key_id
+          def default_aws_region = grailsApplication.config.getProperty('kiwt.filestore.aws_region')
+          def default_aws_url = grailsApplication.config.getProperty('kiwt.filestore.aws_url')
+          def default_aws_secret = grailsApplication.config.getProperty('kiwt.filestore.aws_secret')
+          def default_aws_bucket = grailsApplication.config.getProperty('kiwt.filestore.aws_bucket')
+          def default_aws_access_key_id = grailsApplication.config.getProperty('kiwt.filestore.aws_access_key_id')
  
           // Bootstrap any app settings we may need
           [

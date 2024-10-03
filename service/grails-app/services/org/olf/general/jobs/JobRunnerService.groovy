@@ -88,13 +88,21 @@ order by pj.dateCreated
   @PostConstruct
   void init() {
     // Set up the Executor
-    if ( grailsApplication.config.concurrentJobsGlobal instanceof Integer && grailsApplication.config.concurrentJobsGlobal > 0 )
-      CONCURRENT_JOBS_GLOBAL = grailsApplication.config.concurrentJobsGlobal;
+    try {
+      def concurrentJobsGlobalConfig = grailsApplication.config.getProperty('concurrentJobsGlobal', int);
+      if (concurrentJobsGlobalConfig > 0) {
+        CONCURRENT_JOBS_GLOBAL = concurrentJobsGlobalConfig;
+      }
+    } catch (Exception e) {
+      log.error("Failed to read concurrentJobsGlobal from config: ${e}")
+    }
     
+    log.info("Configured jobConcurrency: ${CONCURRENT_JOBS_GLOBAL}")
 		// Base the number of small jobs executable on the limit imposed on the default runner.
 		taskConcurrency = CONCURRENT_JOBS_GLOBAL * 2
-		
-    // SO: This is not ideal. We don't want to limit jobs globally to 1 ideally. It should be 
+		log.info("Configured taskConcurrency: ${taskConcurrency}")
+
+    // SO: This is not ideal. We don't want to limit jobs globally to 1 ideally. It should be
     // 1 per tenant, but that will involve implementing custom handling for the queue and executor.
     // While we only have 1 tenant, this will suffice.
     executorSvc = new ThreadPoolExecutor(
@@ -111,7 +119,7 @@ order by pj.dateCreated
       5,
       TimeUnit.SECONDS, // Makes the above wait time in 'seconds'
       new LinkedBlockingQueue<Runnable>() // Blocking queue
-    )		
+    )
 
     // Raise an event to say we are ready.
     notify('jobs:job_runner_ready')

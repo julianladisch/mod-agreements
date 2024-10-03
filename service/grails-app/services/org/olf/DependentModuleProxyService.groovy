@@ -31,7 +31,7 @@ public class DependentModuleProxyService {
       log.debug "No local org for ${orgName}. Check vendors."
       
       def mod_vendor_lookup_result = null;
-      if ( grailsApplication.config.useModVendors ) {
+      if ( grailsApplication.config.getProperty('useModVendors', boolean) ) {
         // This fetches a max of 2 (we should decide how to handle multiple matches) vendors with an exact name match.
         mod_vendor_lookup_result = okapiClient.get("/vendor", [
           limit: 2,
@@ -68,7 +68,7 @@ public class DependentModuleProxyService {
         case 0:
           // No match
           // We should add in an option to create vendors if users configure that
-          if ( grailsApplication.config.createMissingVendors ) {
+          if ( grailsApplication.config.getProperty('createMissingVendors', boolean) ) {
             throw new RuntimeException("Not yet implemented");
           }
 

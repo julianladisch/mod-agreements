@@ -27,6 +27,7 @@ okapi:
 logging:
   config: classpath:logback-development.xml
 
+concurrentJobsGlobal: "${CONCURRENT_JOBS_GLOBAL:3}"
 
 
 #    register: true
