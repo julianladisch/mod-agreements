@@ -32,7 +32,7 @@ RemoteKB.findByName('GOKb') ?: (new RemoteKB(
     uri:'https://gokb.org/gokb/oai/index',
     fullPrefix:'gokb',
     rectype: RemoteKB.RECTYPE_PACKAGE,
-    active:Boolean.FALSE,
+    active:Boolean.TRUE,
     supportsHarvesting:true,
     activationEnabled:false
 ).save(failOnError:true))
