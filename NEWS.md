@@ -1,6 +1,9 @@
 ## 7.1.0 In progress
   * Sample data now has Gokb RemoteKB OFF by default
 
+## 7.0.9 2024-10-18
+  * Fixed problem with concurrentJobsGlobal not actually reading from environment variable
+
 ## 7.0.8 2024-09-09
   * ERM-3321 Description can be too long for index, causing mod-agreements error when updating from 6.0.x to later versions or failure on saving agreements with a long description
     * Swap basic GIN indices for GIN indices with trigram operator where they're not already set.
