@@ -4,6 +4,8 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 
 import java.util.concurrent.TimeUnit
 
+import org.olf.general.Org
+
 import org.olf.general.StringUtils
 import org.olf.general.IngestException
 
@@ -135,14 +137,11 @@ class PackageIngestService implements DataBinder {
 							// ENSURE MDC title is set as early as possible
 							MDC.put('title', StringUtils.truncate(pc.title.toString()))
 				
-							// log.debug("Try to resolve ${pc}")
-				
 							try {
 								PackageContentItem.withNewSession { tsess ->
   								PackageContentItem.withNewTransaction { status ->
 									  // Delegate out to TitleIngestService so that any shared steps can move there.
 								  	Map titleIngestResult = titleIngestService.upsertTitle(pc, kb, trustedSourceTI)
-				
 							  		// titleIngestResult.titleInstanceId will be non-null IFF TitleIngestService managed to find a title with that Id.
 						  			if ( titleIngestResult.titleInstanceId != null ) {
 					  					// Pass off to new hierarchy method (?)
@@ -243,14 +242,13 @@ class PackageIngestService implements DataBinder {
     }
   }
 
-  /* 
-   * Separate out the create or lookup pkg code, so that it can 
-   * be used both by the ingest service (via upsert pkg), as well
-   * as the pushKBService (directly)
-   *
-   * This method ALSO provides update information for packages.
+  /*
+   * We split out the lookup vs the update vs the create code for packages,
+   * as there is potentially differences in behaviour between pushKB and harvest.
    */
-  public Pkg lookupOrCreatePkg(PackageSchema package_data) {
+
+  // This WILL NOT update or create a package from the data.
+  public Pkg lookupPkg(PackageSchema package_data) {
     Pkg pkg = null
 
     // header.packageSlug contains the package maintainers authoritative identifier for this package.
@@ -266,8 +264,16 @@ class PackageIngestService implements DataBinder {
       }
     }
 
-    def vendor = null
-    if ( ( package_data.header?.packageProvider?.name != null ) && ( package_data.header?.packageProvider?.name.trim().length() > 0 ) ) {
+    return pkg;
+  }
+
+  public Org getVendorFromPackageData(PackageSchema package_data) {
+    Org vendor = null;
+
+    if (
+      package_data.header?.packageProvider?.name != null &&
+      package_data.header?.packageProvider?.name.trim().length() > 0
+    ) {
       log.debug("Package contains provider information: ${package_data.header?.packageProvider?.name} -- trying to match to an existing organisation.")
       vendor = dependentModuleProxyService.coordinateOrg(package_data.header?.packageProvider?.name)
       // reference has been removed at the request of the UI team
@@ -277,38 +283,14 @@ class PackageIngestService implements DataBinder {
       log.warn('Package ingest - no provider information present')
     }
 
-    if ( pkg == null ) {
-      pkg = new Pkg(
-                      name: package_data.header.packageName,
-                    source: package_data.header.packageSource,
-                reference: package_data.header.packageSlug,
-              description: package_data.header.description,
-        sourceDataCreated: package_data.header.sourceDataCreated,
-        sourceDataUpdated: package_data.header.sourceDataUpdated,
-         sourceTitleCount: package_data.header.sourceTitleCount,
-        availabilityScope: ( package_data.header.availabilityScope != null ? Pkg.lookupOrCreateAvailabilityScope(package_data.header.availabilityScope) : null ),
-          lifecycleStatus: Pkg.lookupOrCreateLifecycleStatus(package_data.header.lifecycleStatus != null ? package_data.header.lifecycleStatus : 'Unknown'),
-                    vendor: vendor,
-      ).save(flush:true, failOnError:true)
+    return vendor;
+  }
 
-      (package_data?.header?.contentTypes ?: []).each {
-        pkg.addToContentTypes(new ContentType([contentType: ContentType.lookupOrCreateContentType(it.contentType)]))
-      }
-
-      (package_data?.header?.alternateResourceNames ?: []).each {
-        pkg.addToAlternateResourceNames(new AlternateResourceName([name: it.name]))
-      }
-
-      (package_data?.header?.availabilityConstraints ?: []).each {
-        pkg.addToAvailabilityConstraints(new AvailabilityConstraint([body: AvailabilityConstraint.lookupOrCreateBody(it.body)]))
-      }
-
-      (package_data?.header?.packageDescriptionUrls ?: []).each {
-        pkg.addToPackageDescriptionUrls(new PackageDescriptionUrl([url: it.url]))
-      }
-
-      pkg.save(failOnError: true)
-    } else {
+  public Pkg lookupPkgAndUpdate(PackageSchema package_data) {
+    Pkg pkg = lookupPkg(package_data)
+    Org vendor = getVendorFromPackageData(package_data)
+    // Do update step but NOT create step
+    if (pkg != null) {
       pkg.sourceDataUpdated = package_data.header.sourceDataUpdated
 
       if (package_data.header.lifecycleStatus) {
@@ -330,6 +312,56 @@ class PackageIngestService implements DataBinder {
       updateAlternateNames(pkg.id, package_data)
       updateAvailabilityConstraints(pkg.id, package_data)
       updatePackageDescriptionUrls(pkg.id, package_data)
+    }
+
+    return pkg;
+  }
+
+
+  /*
+   * Separate out the create or lookup pkg code, so that it can
+   * be used both by the ingest service (via upsert pkg), as well
+   * as the pushKBService (directly)
+   *
+   * This method ALSO updates information for packages.
+   */
+  public Pkg lookupOrCreatePkg(PackageSchema package_data) {
+    // This takes care of any updates
+    Pkg pkg = lookupPkgAndUpdate(package_data);
+
+    // If pkg is null, then we can safely create a new one
+    if ( pkg == null ) {
+      Org vendor = getVendorFromPackageData(package_data)
+      pkg = new Pkg(
+                     name: package_data.header.packageName,
+                   source: package_data.header.packageSource,
+                reference: package_data.header.packageSlug,
+              description: package_data.header.description,
+        sourceDataCreated: package_data.header.sourceDataCreated,
+        sourceDataUpdated: package_data.header.sourceDataUpdated,
+         sourceTitleCount: package_data.header.sourceTitleCount,
+        availabilityScope: ( package_data.header.availabilityScope != null ? Pkg.lookupOrCreateAvailabilityScope(package_data.header.availabilityScope) : null ),
+          lifecycleStatus: Pkg.lookupOrCreateLifecycleStatus(package_data.header.lifecycleStatus != null ? package_data.header.lifecycleStatus : 'Unknown'),
+                   vendor: vendor,
+      ).save(flush:true, failOnError:true)
+
+      (package_data?.header?.contentTypes ?: []).each {
+        pkg.addToContentTypes(new ContentType([contentType: ContentType.lookupOrCreateContentType(it.contentType)]))
+      }
+
+      (package_data?.header?.alternateResourceNames ?: []).each {
+        pkg.addToAlternateResourceNames(new AlternateResourceName([name: it.name]))
+      }
+
+      (package_data?.header?.availabilityConstraints ?: []).each {
+        pkg.addToAvailabilityConstraints(new AvailabilityConstraint([body: AvailabilityConstraint.lookupOrCreateBody(it.body)]))
+      }
+
+      (package_data?.header?.packageDescriptionUrls ?: []).each {
+        pkg.addToPackageDescriptionUrls(new PackageDescriptionUrl([url: it.url]))
+      }
+
+      pkg.save(failOnError: true)
     }
 
     return pkg;
@@ -475,7 +507,6 @@ class PackageIngestService implements DataBinder {
     }
 
     Platform platform = Platform.resolve(platform_url_to_use, pc.platformName)
-    // log.debug("Platform: ${platform}")
 
     if ( platform == null && PROXY_MISSING_PLATFORM ) {
       platform = Platform.resolve('http://localhost.localdomain', 'This platform entry is used for error cases')
@@ -527,8 +558,6 @@ class PackageIngestService implements DataBinder {
     Map result = [
       pciStatus: 'none' // This should be 'none', 'updated' or 'new'
     ]
-
-    // log.debug("platform ${pc.platformUrl} ${pc.platformName} (item URL is ${pc.url})")
 
     // lets try and work out the platform for the item
     Platform platform = lookupOrCreatePlatform(pc);

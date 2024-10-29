@@ -36,7 +36,7 @@ class TitleIngestService implements DataBinder {
     TitleInstance.withNewTransaction {
       if (!kb) {
         // This KB is created without a Type... so if it was trusted for TI data then it'd fail secondary enrichment
-       kb = new RemoteKB( name:remotekbname,
+        kb = new RemoteKB( name:remotekbname,
                           rectype: RemoteKB.RECTYPE_TITLE,
                           active: Boolean.TRUE,
                           readonly:readOnly,
