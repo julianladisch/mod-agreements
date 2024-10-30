@@ -15,6 +15,7 @@
   * Automated integration test runners
   * Fix and automatically validate module descriptor (Eureka)
   * Tweaked how code reads from grailsApplication (getProperty(\*) instead of config.\*)
+  * Separate out interface and version number
 
 ## 7.0.9 2024-10-18
   * Fixed problem with concurrentJobsGlobal not actually reading from environment variable
