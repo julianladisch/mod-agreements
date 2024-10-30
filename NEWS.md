@@ -1,5 +1,20 @@
-## 7.1.0 In progress
+## 7.1.0 2024-10-30
+  * ERM-3394 Ensure initial pushkb support in Ramsons
+  * ERM-3284 GOKb ingest process should handle multiple coverage statements on a single TIPP/PCI
+  * ERM-3368 Update module license, guidance and dependencies for mod-agreements
+  * ERM-3331 Add documents to agreement lines
+  * ERM-3330 Open ended coverage statements not ingested from GOKb
+  * ERM-3299 Minimise supplementary term data populated as reference data
+  * ERM-3281 Design and implement process to resolve eissn, pissn, eisbn and pisbn namespaces
+  * ERM-3257 Write integration tests for title instance resolving use cases
+  * ERM-3225 Upgrade commons-fileupload from 1.4 to 1.5 fixing FileUpload DoS CVE-2023-24998
+  * Performance upgrades around session management for harvest
+  * Additional logging information for harvest
   * Sample data now has Gokb RemoteKB OFF by default
+  * Fix for connection closed error when changing schema
+  * Automated integration test runners
+  * Fix and automatically validate module descriptor (Eureka)
+  * Tweaked how code reads from grailsApplication (getProperty(\*) instead of config.\*)
 
 ## 7.0.9 2024-10-18
   * Fixed problem with concurrentJobsGlobal not actually reading from environment variable
