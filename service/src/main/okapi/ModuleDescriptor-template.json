@@ -1041,6 +1041,12 @@
       ]
     }
   ],
+  "optional": [
+    {
+      "id": "organizations.organizations",
+      "version": "1.0"
+    }
+  ],
   "permissionSets": [
     {
       "permissionName": "erm.agreements.collection.get",
