@@ -1,5 +1,8 @@
 ## 7.2.0 IN PROGRESS
 
+## 7.1.1 2024-11-27
+  * ERM-3425: Missing interface dependencies in module descriptor in mod-agreements
+
 ## 7.1.0 2024-10-30
   * ERM-3394 Ensure initial pushkb support in Ramsons
   * ERM-3284 GOKb ingest process should handle multiple coverage statements on a single TIPP/PCI
