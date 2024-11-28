@@ -71,20 +71,26 @@ class PushKBService implements DataBinder {
           if (utilityService.checkValidBinding(package_data)) {
 
             // Start a transaction -- method in packageIngestService needs this
-            Pkg.withNewTransaction { status ->
-              // Farm out package lookup and creation to a separate method
+            Pkg.withSession { currentSess ->
+              Pkg.withTransaction {
+                Pkg.withNewSession { newSess ->
+                  Pkg.withTransaction {
+                    // Farm out package lookup and creation to a separate method
 
-              // These calls mirror what's in upsertPackage but conveniently avoid the
-              // logic which handles TIPPS
-              Pkg pkg = packageIngestService.lookupOrCreatePkg(package_data);
-                // Retain logging information
-                MDC.put('packageSource', pkg.source.toString())
-                MDC.put('packageReference', pkg.reference.toString())
+                    // These calls mirror what's in upsertPackage but conveniently avoid the
+                    // logic which handles TIPPS
+                    Pkg pkg = packageIngestService.lookupOrCreatePkg(package_data);
+                      // Retain logging information
+                      MDC.put('packageSource', pkg.source.toString())
+                      MDC.put('packageReference', pkg.reference.toString())
 
-              // Update identifiers from citation
-              identifierService.updatePackageIdentifiers(pkg, package_data.identifiers)
+                    // Update identifiers from citation
+                    identifierService.updatePackageIdentifiers(pkg, package_data.identifiers)
+                  }
+                  newSess.clear()
+                }
+              }
             }
-
           }
         }
         result.success = true
