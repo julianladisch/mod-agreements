@@ -1,5 +1,8 @@
 ## 7.2.0 IN PROGRESS
 
+## 7.1.2 2024-11-28
+  * ERM-3455 pushPkg endpoint in mod-agreements works unexpectedly slowly
+
 ## 7.1.1 2024-11-27
   * ERM-3425: Missing interface dependencies in module descriptor in mod-agreements
 
