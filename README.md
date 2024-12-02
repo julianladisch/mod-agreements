@@ -20,6 +20,41 @@ Developers looking to access the services exposed by mod-agreements can find mor
 The module has important dependences on reference data. initial installations and module upgrades should specify loadReference=true. The module
 may not work as expected if this is omitted.
 
+While this README and the module description template offer some guidance on how to run this module and the resourcing required, it is not possible to anticipate all possible environmental configurations and deployment processes. Determining the exact resourcing, deployment processes and other aspects such as the size of database conneciton pools needed in any particular environment is down to those running the module and it is recommended that all such practices are fully documented by those responsible
+
+### Locks and failure to upgrade
+This module has a few "problem" scenarios that _shouldn't_ occur in general operation, but particular approaches to upgrades in particular can leave the module unable to self right. This occurs especially often where the module or container die/are killed regularly shortly after/during the upgrade.
+
+In order of importance to check:
+
+- **CPU resource**
+  - In the past we have had these particular issues reported commonly where the app was not getting enough CPU resources to run. Please ensure that the CPU resources being allocated to the application are sufficient, see the requisite module requirements for the version running ([Ramsons example matrix](https://folio-org.atlassian.net/wiki/spaces/REL/pages/398983244/Ramsons+R2+2024+-+Bugfest+env+preparation+-+Modules+configuration+details?focusedCommentId=608305153))
+- **Liquibase**
+  - The module uses liquibase in order to facilitate module data migrations
+  - Unfortunately this has a weakness to shutdown mid migration.
+  - Check `<tenantName>_mod_agreements.tenant_changelog_lock` does not have `locked` set to `true`
+    - If it does, the migration (and hence the upgrade itself) have failed, and it is difficult to extricate the module from this scenario.
+    - It may be most prudent to revert the data and retry the upgrade.
+  - In general, while the module is uploading it is most likely to succeed if after startup and tenant enabling/upgrading through okapi that the module and its container are NOT KILLED for at least 2 minutes.
+  - An addition, a death to the module while upgrading could be due to a lack of reasonable resourcing making it to the module
+- **Federated changelog lock**
+  - The module also has a manual lock which is managed by the application itself.
+  - This is to facilitate multiple instances accessing the same data
+  - In particular, this lock table "seeds" every 20 minutes or so, and a death in the middle of this _can_ lock up the application (Although it can sometimes self right from here)
+  - If the liquibase lock is clear, first try startup and leaving for a good 20 minutes
+    - If the module dies it's likely resourcing that's the issue
+    - The module may be able to self right
+  - If the module cannot self right
+    - Check the `mod_agreements_system.system_changelog_lock`
+      - The same applies from the above section as this is a liquibase lock, but this is seriously unlikely to get caught as the table is so small
+    - Finally check the `mod_agreements_system.federation_lock`
+      - If this table has entries, this can prevent the module from any and all operations
+      - It should self right from here, even if pointing at dead instances
+        - See `mod_agreements_system.app_instance` for a table of instance ids, a killed and restarted module should eventually get cleared from here.
+        - It is NOT RECOMMENDED to clear app_instances manually
+      - If there are entries in the federated lock table that do not clear after 20 minutes of uninterrupted running then this table should be manually emptied.
+
+
 ## Resources exposed by this module
 
 ### /erm/sas resource - SubscriptionAgreements
