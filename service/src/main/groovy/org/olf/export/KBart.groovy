@@ -349,14 +349,14 @@ public class KBart implements Serializable {
             //if (coverages.size() > 1 ) log.debug(resnum + ': title: '+ ti.name +' startDate: '+ coverage.startDate +" - endDate: "+ coverage.endDate )
             KBart kbartclone = new KBart();
             kbartclone = kbart.clone()
-            kbartclone.date_first_issue_online = coverage.startDate.toString()
-            kbartclone.date_last_issue_online = coverage.endDate.toString()
+            kbartclone.date_first_issue_online = coverage.startDate.toString() ?: ""
+            kbartclone.date_last_issue_online = coverage.endDate?.toString() ?: ""
 
-            kbartclone.num_first_issue_online = coverage.startIssue
-            kbartclone.num_last_issue_online = coverage.endIssue
+            kbartclone.num_first_issue_online = coverage.startIssue ?: ""
+            kbartclone.num_last_issue_online = coverage.endIssue ?: ""
 
-            kbartclone.num_first_vol_online = coverage.startVolume
-            kbartclone.num_last_vol_online = coverage.endVolume
+            kbartclone.num_first_vol_online = coverage.startVolume ?: ""
+            kbartclone.num_last_vol_online = coverage.endVolume ?: ""
             kbartList.add(kbartclone)
           }
         } else {
