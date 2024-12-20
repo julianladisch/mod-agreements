@@ -45,12 +45,12 @@ In order of importance to check:
     - If the module dies it's likely resourcing that's the issue
     - The module may be able to self right
   - If the module cannot self right
-    - Check the `mod_agreements_system.system_changelog_lock`
+    - Check the `mod_agreements__system.system_changelog_lock`
       - The same applies from the above section as this is a liquibase lock, but this is seriously unlikely to get caught as the table is so small
-    - Finally check the `mod_agreements_system.federation_lock`
+    - Finally check the `mod_agreements__system.federation_lock`
       - If this table has entries, this can prevent the module from any and all operations
       - It should self right from here, even if pointing at dead instances
-        - See `mod_agreements_system.app_instance` for a table of instance ids, a killed and restarted module should eventually get cleared from here.
+        - See `mod_agreements__system.app_instance` for a table of instance ids, a killed and restarted module should eventually get cleared from here.
         - It is NOT RECOMMENDED to clear app_instances manually
       - If there are entries in the federated lock table that do not clear after 20 minutes of uninterrupted running then this table should be manually emptied.
 
