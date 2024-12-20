@@ -5,10 +5,16 @@ import org.olf.erm.UsageDataProvider
 
 inherits template: "/remoteOkapiLink/remoteOkapiLink"
 
-def should_expand = ['usageDataProviderNote']
+json {
+  if (usageDataProvider.usageDataProviderNote){
+    'usageDataProviderNote' usageDataProvider.usageDataProviderNote
+  }
 
-if (params.controller == 'usageDataProvider' ) {
-  should_expand << 'owner'
+  if (params.controller == 'usageDataProvider') {
+    'owner' g.render( usageDataProvider.owner )
+  } else {
+    'owner' {
+      'id' usageDataProvider.owner.id
+    }
+  }
 }
-
-json g.render(usageDataProvider, ['excludes': ['id', 'version', 'remoteId'], 'expand':should_expand])
