@@ -1,5 +1,8 @@
 ## 7.2.0 IN PROGRESS
 
+## 7.1.4 2025-01-07
+  * ERM-3464 /erm/entitilements API returns invalid JSON data
+
 ## 7.1.3 2024-12-06
   * ERM-3436 When exporting a KBART file, the column date_last_issue_online should not contain a NULL value in case there is no end year
   * ERM-3432 Add documentation to mod-agreements README regarding upgrade / federated lock advice
