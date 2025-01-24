@@ -1043,6 +1043,18 @@
   ],
   "optional": [
     {
+      "id": "usage-data-providers",
+      "version": "3.0"
+    },
+    {
+      "id": "licenses",
+      "version": "6.1"
+    },
+    {
+      "id": "eholdings",
+      "version": "4.0"
+    },
+    {
       "id": "organizations.organizations",
       "version": "1.0"
     }
