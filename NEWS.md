@@ -1,3 +1,6 @@
+## 7.1.5 2025-01-24
+  * ERM-3570 Add missing required interfaces to Module Descriptor
+
 ## 7.1.4 2025-01-07
   * ERM-3464 /erm/entitilements API returns invalid JSON data
 
