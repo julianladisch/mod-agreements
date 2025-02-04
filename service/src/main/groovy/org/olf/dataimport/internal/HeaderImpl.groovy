@@ -22,6 +22,7 @@ class HeaderImpl implements PackageHeaderSchema, Validateable {
   String status
   String packageName
   Boolean trustedSourceTI
+  Boolean syncContentsFromSource = false
   LocalDate startDate
   LocalDate endDate
   String packageSlug

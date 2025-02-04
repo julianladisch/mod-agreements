@@ -34,4 +34,5 @@ databaseChangeLog = {
   include file: 'add-quesnalia-indices-and-fk-constraints.groovy'
   include file: 'update-mod-agreements-6-1.groovy'
   include file: 'update-mod-agreements-7-1.groovy'
+  include file: 'update-mod-agreements-7-2.groovy'
 }

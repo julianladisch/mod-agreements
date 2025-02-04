@@ -30,6 +30,25 @@ class PackageController extends OkapiTenantAwareController<Pkg> {
     super(Pkg)
   }
 
+  // We need to protect syncContentsFromSource on PUT.
+  //  We don't want this to be edited directly, instead it'll go via an action.
+  @Override
+  def update() {
+    Pkg instance = queryForResource(params.id);
+    Object object_to_bind = getObjectToBind();
+
+    // Check if Package has syncContentsFromSource set. If so,
+    // and we attempt to CHANGE it, refuse
+    if (
+        object_to_bind.syncContentsFromSource != null &&
+        instance.syncContentsFromSource != object_to_bind.syncContentsFromSource
+    ) {
+      response.sendError(422, "Directly editing syncContentsFromSource is not allowed");
+    } else {
+      super.update();
+    }
+  }
+
   def 'import' () {
     final bindObj = this.getObjectToBind()
     log.debug("Importing package: ${bindObj}")

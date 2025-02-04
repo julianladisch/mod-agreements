@@ -453,6 +453,7 @@ public class GOKbOAIAdapter extends WebSourceAdapter implements KBCacheUpdater, 
           packageSource:'GOKb',
           packageName: package_name,
           trustedSourceTI: trustedSourceTI,
+          syncContentsFromSource: true, // TODO this will eventually possibly not be hard coded to true
           packageSlug: primary_slug,
           sourceDataCreated: source_data_created,
           sourceDataUpdated: source_data_updated,

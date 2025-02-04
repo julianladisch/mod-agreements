@@ -15,16 +15,23 @@ import grails.gorm.MultiTenant
  */
 public class Pkg extends ErmResource implements MultiTenant<Pkg> {
   String source
-  String reference  // Reference contains the KBs authoritative ID for this package - Reference should be unique within KB
-  Platform nominalPlatform
-  Org vendor
   Date sourceDataCreated
   Date sourceDataUpdated
   Integer sourceTitleCount
+
+  // A boolean to track whether we are choosing to sync the contents from the source or not
+  Boolean syncContentsFromSource = false
+
+  String reference  // Reference contains the KBs authoritative ID for this package - Reference should be unique within KB
+
+  Platform nominalPlatform
+  Org vendor
+
   @Defaults(['Current', 'Retired', 'Expected', 'Deleted'])
   RefdataValue lifecycleStatus
   @Defaults(['Global'])
   RefdataValue availabilityScope
+
   Set<PackageDescriptionUrl> packageDescriptionUrls
   Set<ContentType> contentTypes
   Set<AvailabilityConstraint> availabilityConstraints
@@ -51,6 +58,7 @@ public class Pkg extends ErmResource implements MultiTenant<Pkg> {
   static mapping = {
                         table 'package'
                        source column:'pkg_source'
+       syncContentsFromSource column:'pkg_sync_contents_from_source'
                     reference column:'pkg_reference'
               nominalPlatform column:'pkg_nominal_platform_fk'
                        vendor column:'pkg_vendor_fk'
@@ -65,16 +73,17 @@ public class Pkg extends ErmResource implements MultiTenant<Pkg> {
   }
 
   static constraints = {
-               name(nullable:false, blank:false)
-             source(nullable:false, blank:false)
-          reference(nullable:false, blank:false)
-    nominalPlatform(nullable:true, blank:false)
-   sourceTitleCount(nullable:true, blank:false)
-             vendor(nullable:true, blank:false)
-  sourceDataCreated(nullable:true, blank:false)
-  sourceDataUpdated(nullable:true, blank:false)
-    lifecycleStatus(nullable:true, blank:false)
-  availabilityScope(nullable:true, blank:false)
+                         name(nullable:false, blank:false)
+                       source(nullable:false, blank:false)
+       syncContentsFromSource(nullable:true, blank:false) // Allow this to be null for now... will treat `null` as `false`)
+                    reference(nullable:false, blank:false)
+              nominalPlatform(nullable:true, blank:false)
+             sourceTitleCount(nullable:true, blank:false)
+                       vendor(nullable:true, blank:false)
+            sourceDataCreated(nullable:true, blank:false)
+            sourceDataUpdated(nullable:true, blank:false)
+              lifecycleStatus(nullable:true, blank:false)
+            availabilityScope(nullable:true, blank:false)
   }
 
   /*

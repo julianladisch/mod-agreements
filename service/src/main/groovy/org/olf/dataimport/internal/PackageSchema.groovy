@@ -68,6 +68,7 @@ interface PackageSchema extends Validateable {
     String getStatus()
     String get_intenalId()
     Boolean getTrustedSourceTI()
+    Boolean getSyncContentsFromSource()
     Date getSourceDataCreated()
     Date getSourceDataUpdated()
     Integer getSourceTitleCount()

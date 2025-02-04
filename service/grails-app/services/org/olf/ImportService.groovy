@@ -231,7 +231,8 @@ class ImportService implements DataBinder {
       packageSource: packageSource,
       packageSlug: packageReference,
       packageProvider: pkgPrv,
-      trustedSourceTI: trustedSourceTI
+      trustedSourceTI: trustedSourceTI,
+      syncContentsFromSource: true // This is defaulted right now, for more control the JSON import should be used
     )
 
     String[] record = file.readNext()

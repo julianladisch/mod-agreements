@@ -333,16 +333,17 @@ class PackageIngestService implements DataBinder {
     if ( pkg == null ) {
       Org vendor = getVendorFromPackageData(package_data)
       pkg = new Pkg(
-                     name: package_data.header.packageName,
-                   source: package_data.header.packageSource,
-                reference: package_data.header.packageSlug,
-              description: package_data.header.description,
-        sourceDataCreated: package_data.header.sourceDataCreated,
-        sourceDataUpdated: package_data.header.sourceDataUpdated,
-         sourceTitleCount: package_data.header.sourceTitleCount,
-        availabilityScope: ( package_data.header.availabilityScope != null ? Pkg.lookupOrCreateAvailabilityScope(package_data.header.availabilityScope) : null ),
-          lifecycleStatus: Pkg.lookupOrCreateLifecycleStatus(package_data.header.lifecycleStatus != null ? package_data.header.lifecycleStatus : 'Unknown'),
-                   vendor: vendor,
+                          name: package_data.header.packageName,
+                        source: package_data.header.packageSource,
+                     reference: package_data.header.packageSlug,
+                   description: package_data.header.description,
+             sourceDataCreated: package_data.header.sourceDataCreated,
+             sourceDataUpdated: package_data.header.sourceDataUpdated,
+              sourceTitleCount: package_data.header.sourceTitleCount,
+        syncContentsFromSource: package_data.header.syncContentsFromSource,
+             availabilityScope: ( package_data.header.availabilityScope != null ? Pkg.lookupOrCreateAvailabilityScope(package_data.header.availabilityScope) : null ),
+               lifecycleStatus: Pkg.lookupOrCreateLifecycleStatus(package_data.header.lifecycleStatus != null ? package_data.header.lifecycleStatus : 'Unknown'),
+                        vendor: vendor,
       ).save(flush:true, failOnError:true)
 
       (package_data?.header?.contentTypes ?: []).each {

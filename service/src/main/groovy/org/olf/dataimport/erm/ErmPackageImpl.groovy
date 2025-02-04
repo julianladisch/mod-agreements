@@ -20,6 +20,7 @@ class ErmPackageImpl implements PackageHeaderSchema, PackageSchema, Validateable
 
   String source
   String reference
+  Boolean syncContentsFromSource
   String name
   PackageProvider packageProvider
   Boolean trustedSourceTI
@@ -38,7 +39,7 @@ class ErmPackageImpl implements PackageHeaderSchema, PackageSchema, Validateable
 
   Set<ContentItem> contentItems = []
 
-  // Defaults for internal scheam so we can make them optional in the constraints.
+  // Defaults for internal schema so we can make them optional in the constraints.
   final LocalDate startDate = null
   final LocalDate endDate = null
   final String _intenalId = null
@@ -54,6 +55,7 @@ class ErmPackageImpl implements PackageHeaderSchema, PackageSchema, Validateable
     _intenalId nullable: true, blank: false
     status nullable: true, blank: false
     trustedSourceTI nullable: true
+    syncContentsFromSource nullable: true
     description nullable: true
 
     source             nullable: false, blank: false
