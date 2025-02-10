@@ -234,6 +234,7 @@ class WorkSourceIdentifierTIRSImpl extends IdFirstTIRSImpl implements DataBinder
   }
 
   // TODO We need to check this change to id only works as expected
+  // TODO can we do this query once and pass around?
   private List<String> getTISFromWork(String workId, String subtype = 'electronic') {
     return TitleInstance.executeQuery("""
       SELECT ti.id FROM TitleInstance as ti WHERE
