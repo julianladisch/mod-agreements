@@ -35,6 +35,8 @@ beans = {
 
   // Swap between PushKB and Harvest processes to get data into internal KB
   String INGRESS_TYPE = System.getenv("INGRESS_TYPE")
+  String SYNC_PACKAGES_VIA_HARVEST = System.getenv("SYNC_PACKAGES_VIA_HARVEST")
+
   kbManagementBean(KBManagementBean) {
     switch (INGRESS_TYPE) {
       case 'PushKB':
@@ -43,6 +45,20 @@ beans = {
       case 'Harvest':
       default:
         ingressType = KBIngressType.Harvest
+        break;
+    }
+
+    switch (SYNC_PACKAGES_VIA_HARVEST) {
+      case true:
+      case 'true':
+      case 'True':
+        syncPackagesViaHarvest = true
+        break;
+      case false:
+      case 'false':
+      case 'False':
+      default:
+        syncPackagesViaHarvest = false
         break;
     }
   }

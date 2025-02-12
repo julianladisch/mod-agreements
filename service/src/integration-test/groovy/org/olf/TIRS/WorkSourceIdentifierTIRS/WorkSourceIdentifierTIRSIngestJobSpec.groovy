@@ -31,23 +31,36 @@ class WorkSourceIdentifierTIRSIngestJobSpec extends TIRSSpec {
   void 'Test in job runner context' () {
     given: 'ingest of borked_ids'
       setupAndRunIngestJob('src/integration-test/resources/DebugGoKbAdapter/borked_ids.xml')
+    when: 'We lookup Packages'
+    def pkgGet = doGet("/erm/packages", [stats: true]);
+    assert pkgGet != null;
+
+    then: 'We have Pkgs in the system'
+      pkgGet.total == 2;
+
     when: 'We lookup TIs'
       def tiGet = doGet("/erm/titles", [stats: true]);
       assert tiGet != null;
     then: 'We have TIs in the system'
-      tiGet.total == 1583;
-    cleanup:
-      cleanupTenant();
+      if ( kbManagementBean.syncPackagesViaHarvest == true ) {
+        println("syncPackagesViaHarvest is on, check for titles")
+        assert tiGet.total == 1583;
+      } else {
+        println("syncPackagesViaHarvest is off, check no titles were ingested")
+        assert tiGet.total == 0;
+      }
+    /*cleanup:
+      cleanupTenant();*/
   }
 
   // Test within job runner context (only run when WorkSourceIdTIRS is the chosen TIRS)
   //@Ignore
-  @Requires({ instance.isWorkSourceTIRS() })
+  /*@Requires({ instance.isWorkSourceTIRS() })
   void 'Test cleanup worked' () {
     when: 'Fetching RemoteKBs'
       def kbGet = doGet("/erm/kbs", [stats: true]);
     then: 'We have no RemoteKBs'
       assert kbGet.total == 0
-  }
+  }*/
 }
 

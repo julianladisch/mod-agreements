@@ -17,6 +17,7 @@
       "lifecycleStatus": "Current",
       "sourceDataCreated": "2022-01-01",
       "sourceDataUpdated": "2022-01-01",
+      "syncContentsFromSource": true,
       "availabilityConstraints": [
         {
           "body": "Body 1"

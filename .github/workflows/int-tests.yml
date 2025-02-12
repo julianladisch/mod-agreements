@@ -9,12 +9,14 @@ jobs:
     with:
       testPath: org.olf.TIRS.WorkSourceIdentifier.*
       outputDirectory: WorkSourceIdentifierTests
+      syncViaHarvestEnvVar: true
   id-first-tirs-tests:
     uses: ./.github/workflows/run-int-tests.yml
     with:
       testPath: org.olf.TIRS.IdFirstTIRS.*
       outputDirectory: IdFirstTests
       tirsEnvVar: IdFirst
+      syncViaHarvestEnvVar: true
   agreement-tests:
     uses: ./.github/workflows/run-int-tests.yml
     with:

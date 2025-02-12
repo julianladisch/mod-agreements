@@ -7,14 +7,13 @@
       "name": "Knowledge Integration Ltd"
     },
     "packageSource": "k-int",
-    "packageName": "K-Int Test Package 001",
+    "packageName": "K-Int Test Package 002",
     "startDate": "2015-01-01T00:00:00Z",
     "endDate": "2020-12-31T00:00:00Z",
-    "packageSlug": "kint_test_001",
+    "packageSlug": "kint_test_002",
     "_intenalId": 276432871386,
     "availabilityScope": "Global",
-    "lifecycleStatus": "Current",
-    "syncContentsFromSource": true
+    "lifecycleStatus": "Current"
   },
   "packageContents": [{
     "title": "Clinical Cancer Drugs",
@@ -30,20 +29,20 @@
     }],
     "coverage": [
       {
-      "startVolume": "1",
-      "startIssue": "1",
-      "startDate": "2014-01-01",
-      "endVolume": "1",
-      "endIssue": "4",
-      "endDate": "2014-12-31"
+        "startVolume": "1",
+        "startIssue": "1",
+        "startDate": "2014-01-01",
+        "endVolume": "1",
+        "endIssue": "4",
+        "endDate": "2014-12-31"
       },
       {
-      "startVolume": "2",
-      "startIssue": "1",
-      "startDate": "2015-01-01",
-      "endVolume": null,
-      "endIssue": null,
-      "endDate": null
+        "startVolume": "2",
+        "startIssue": "1",
+        "startDate": "2015-01-01",
+        "endVolume": null,
+        "endIssue": null,
+        "endDate": null
       }
     ],
     "embargo": null,

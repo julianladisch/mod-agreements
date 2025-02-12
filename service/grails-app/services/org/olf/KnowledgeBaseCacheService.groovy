@@ -10,6 +10,8 @@ import org.olf.kb.PlatformTitleInstance
 import org.olf.kb.RemoteKB
 import org.springframework.transaction.TransactionDefinition
 
+import org.olf.dataimport.internal.KBManagementBean
+
 /**
  * This service works at the module level, it's often called without a tenant context.
  */
@@ -17,6 +19,7 @@ public class KnowledgeBaseCacheService implements KBCache {
 
   PackageIngestService packageIngestService
   TitleIngestService titleIngestService
+  KBManagementBean kbManagementBean // public available to `cache` passed down?
 
   private static final String PLATFORM_TITLES_QUERY = '''select pti, rkb, ent from PlatformTitleInstance as pti, Entitlement as ent, RemoteKB as rkb 
 where ( exists ( select pci.id 

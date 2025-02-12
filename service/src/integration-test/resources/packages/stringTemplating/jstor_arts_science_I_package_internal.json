@@ -10,7 +10,8 @@
         "packageName": "JSTOR:Jisc Collections:Arts and Sciences I Collection:2018-2021",
         "startDate": "2015-01-01T00:00:00Z",
         "endDate": "2030-10-10T00:00:00Z",
-        "packageSlug": "kbplus_2093"
+        "packageSlug": "kbplus_2093",
+        "syncContentsFromSource": true
     },
     "packageContents": [
         {

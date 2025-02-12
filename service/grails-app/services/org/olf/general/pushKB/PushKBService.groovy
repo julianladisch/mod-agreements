@@ -115,6 +115,7 @@ class PushKBService implements DataBinder {
       updatedTitles: 0,
       updatedAccessStart: 0,
       updatedAccessEnd: 0,
+      nonSyncedTitles: 0,
     ]
     KBIngressType ingressType = kbManagementBean.ingressType
     if (ingressType == KBIngressType.PushKB) {
@@ -151,49 +152,54 @@ class PushKBService implements DataBinder {
                 }
               }
 
-              TitleInstance.withSession { currentSess ->
-                TitleInstance.withTransaction {
-                  TitleInstance.withNewSession { newSess ->
-                    TitleInstance.withTransaction {
-                      Map titleIngestResult = titleIngestService.upsertTitleDirect(pc)
+              // We are treating `null` as `true`, but NOT overwriting it moving forward
+              // This is the analogue to the same check happening in PackageIngestService::upsertPackage
+              if (pkg.syncContentsFromSource != false) {
+                TitleInstance.withSession { currentSess ->
+                  TitleInstance.withTransaction {
+                    TitleInstance.withNewSession { newSess ->
+                      TitleInstance.withTransaction {
+                        Map titleIngestResult = titleIngestService.upsertTitleDirect(pc)
 
-                      if ( titleIngestResult.titleInstanceId != null ) {
+                        if (titleIngestResult.titleInstanceId != null) {
+                          Map hierarchyResult = packageIngestService.lookupOrCreateTitleHierarchy(
+                              titleIngestResult.titleInstanceId,
+                              pkg.id,
+                              true,
+                              pc,
+                              result.updateTime,
+                              result.titleCount // Not totally sure this is valuable here
+                          )
 
-                        Map hierarchyResult = packageIngestService.lookupOrCreateTitleHierarchy(
-                          titleIngestResult.titleInstanceId,
-                          pkg.id,
-                          true,
-                          pc,
-                          result.updateTime,
-                          result.titleCount // Not totally sure this is valuable here
-                        )
+                          PackageContentItem pci = PackageContentItem.get(hierarchyResult.pciId)
+                          packageIngestService.hierarchyResultMapLogic(hierarchyResult, result, pci)
 
-                        PackageContentItem pci = PackageContentItem.get(hierarchyResult.pciId)
-                        packageIngestService.hierarchyResultMapLogic(hierarchyResult, result, pci)
-
-                        /* TODO figure out if use of removedTimestamp
-                         * should be something harvest also needs to do directly
-                         * And whether we should be doing it after all the above
-                         * or before.
-                         */
-                        if (pc.removedTimestamp) {
+                          /* TODO figure out if use of removedTimestamp
+                           * should be something harvest also needs to do directly
+                           * And whether we should be doing it after all the above
+                           * or before.
+                           */
+                          if (pc.removedTimestamp) {
                             try {
                               log.debug("Removal candidate: pci.id #${pci.id} (Last seen ${pci.lastSeenTimestamp}, thisUpdate ${result.updateTime}) -- Set removed")
                               pci.removedTimestamp = pc.removedTimestamp
-                              pci.save(failOnError:true)
-                            } catch ( Exception e ) {
+                              pci.save(failOnError: true)
+                            } catch (Exception e) {
                               log.error("Problem removing ${pci} in package load", e)
                             }
-                          result.removedTitles++
+                            result.removedTitles++
+                          }
+                        } else {
+                          String message = "Skipping \"${pc.title}\". Unable to resolve title from ${pc.title} with identifiers ${pc.instanceIdentifiers}"
+                          log.error(message)
                         }
-                      } else {
-                        String message = "Skipping \"${pc.title}\". Unable to resolve title from ${pc.title} with identifiers ${pc.instanceIdentifiers}"
-                        log.error(message)
                       }
+                      newSess.clear()
                     }
-                    newSess.clear()
                   }
                 }
+              } else {
+                result.nonSyncedTitles++
               }
 
             } catch ( IngestException ie ) {

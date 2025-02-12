@@ -11,6 +11,9 @@ import org.olf.dataimport.internal.PackageSchema
 import org.olf.dataimport.internal.PackageSchema.ContentItemSchema
 import org.olf.kb.KBCache
 import org.olf.kb.KBCacheUpdater
+
+import org.olf.dataimport.internal.KBManagementBean
+
 import org.springframework.validation.BindingResult
 
 import grails.web.databinding.DataBinder
@@ -122,7 +125,7 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       } else if (listStatus.toLowerCase() != 'checked') {
         log.info("Ignoring Package '${package_name}' because listStatus=='${listStatus}' (required: 'checked')")
       } else {
-        PackageSchema json_package_description = gokbToERM(record, trustedSourceTI)
+        PackageSchema json_package_description = gokbToERM(record, trustedSourceTI, cache.kbManagementBean)
         cache.onPackageChange(source_name, json_package_description)
       }
 
@@ -144,7 +147,22 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
   }
 
   @CompileStatic(SKIP)
-  protected InternalPackageImplWithPackageContents gokbToERM(GPathResult xml_gokb_record, boolean trustedSourceTI) {
+  protected String obtainNamespace(GPathResult record) {
+    if (record.@namespaceName?.text() != null && record.@namespaceName?.text()?.trim() != '') {
+      return record.@namespaceName?.text()?.toLowerCase()?.replaceAll(/\s+/, "_")
+    } else if (record.@namespace?.text() != null && record.@namespace?.text()?.trim() != '') {
+      return record.@namespace?.text()?.toLowerCase()?.replaceAll(/\s+/, "_")
+    }
+  }
+
+  /**
+   * convert the gokb package metadataPrefix into our canonical ERM json structure as seen at
+   *   https://github.com/folio-org/mod-erm/blob/master/service/src/integration-test/resources/packages/apa_1062.json
+   * the GOKb records look like this
+   *   https://gokbt.gbv.de/gokb/oai/index/packages?verb=ListRecords&metadataPrefix=gokb
+   */
+  @CompileStatic(SKIP)
+  protected InternalPackageImplWithPackageContents gokbToERM(GPathResult xml_gokb_record, boolean trustedSourceTI, KBManagementBean kbManagementBean) {
 
     def package_record = xml_gokb_record?.metadata?.gokb?.package
     def header = xml_gokb_record?.header
@@ -175,9 +193,9 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       def alternate_slugs = [];
       if (package_shortcode != null && package_shortcode?.trim() != '') {
         alternate_slugs.add(
-          [
-            slug: package_shortcode
-          ]
+            [
+                slug: package_shortcode
+            ]
         )
       }
 
@@ -185,8 +203,8 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
         (it.@type?.text() == null || it.@type?.text()?.trim() == '') && obtainNamespace(it) != null
       }?.collect {
         [
-          namespace: obtainNamespace(it),
-          value: it.@value?.text()
+            namespace: obtainNamespace(it),
+            value: it.@value?.text()
         ]
       }
 
@@ -194,8 +212,8 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
         it.@type?.text()?.trim()?.toLowerCase() == 'ttl_prv' && obtainNamespace(it) != null
       }?.collect {
         [
-          namespace: "gokb_ttl_prv_${obtainNamespace(it)}",
-          value: it.@value?.text()
+            namespace: "gokb_ttl_prv_${obtainNamespace(it)}",
+            value: it.@value?.text()
         ]
       }
       if (ttl_prv_identifiers.size()) {
@@ -207,7 +225,7 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       }
       if (gokbId_identifier) {
         identifiers.add(
-          [ namespace: 'gokb_id', value: gokbId_identifier.@id?.text() ]
+            [ namespace: 'gokb_id', value: gokbId_identifier.@id?.text() ]
         )
       }
 
@@ -216,7 +234,7 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       }?.@uuid?.text();
       // we don't have to check here if primary_slug (gokb uuid) is present, because if not we're ignoring the package, see above
       identifiers.add(
-        [ namespace: 'gokb_uuid', value: primary_slug ]
+          [ namespace: 'gokb_uuid', value: primary_slug ]
       );
 
       def availability_constraints = []
@@ -225,22 +243,22 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       // Build up availabilityConstraints
       // Ignore if availability scope is not local, regional or consortium
       if (
-        (
-          availability_scope?.trim()?.toLowerCase() == 'regional' ||
-          availability_scope?.trim()?.toLowerCase() == 'consortium'
-        ) && global_note
+          (
+              availability_scope?.trim()?.toLowerCase() == 'regional' ||
+                  availability_scope?.trim()?.toLowerCase() == 'consortium'
+          ) && global_note
       ) {
 
         availability_constraints.add(
-          [
-            body: global_note
-          ]
+            [
+                body: global_note
+            ]
         )
       } else if (availability_scope?.trim()?.toLowerCase() == 'local') {
         def curatory_groups = package_record.curatoryGroups?.group?.name?.collect {
 
           return [
-            body: it?.text()?.trim(),
+              body: it?.text()?.trim(),
           ]
         }
 
@@ -262,34 +280,37 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
       }
 
       result = [
-        header:[
-          lifecycleStatus: package_status,
-          availability:[
-            type: 'general'
+          header:[
+              lifecycleStatus: package_status,
+              availability:[
+                  type: 'general'
+              ],
+              packageProvider:[
+                  name:nominal_provider
+              ],
+              packageSource:'GOKb',
+              packageName: package_name,
+              trustedSourceTI: trustedSourceTI,
+              // We send down `false` here as the default, crucially any
+              // pre-existing packages will not be overwritten from `null`
+              syncContentsFromSource: kbManagementBean.syncPackagesViaHarvest,
+              packageSlug: primary_slug,
+              sourceDataCreated: source_data_created,
+              sourceDataUpdated: source_data_updated,
+              sourceTitleCount: 0,
+              availabilityConstraints: availability_constraints,
+              availabilityScope: availability_scope,
+              contentTypes: content_types,
+              alternateResourceNames: alternate_resource_names,
+              alternateSlugs: alternate_slugs,
+              packageDescriptionUrls: package_description_urls,
+              description: package_description
           ],
-          packageProvider:[
-            name:nominal_provider
-          ],
-          packageSource:'GOKb',
-          packageName: package_name,
-          trustedSourceTI: trustedSourceTI,
-          packageSlug: primary_slug,
-          sourceDataCreated: source_data_created,
-          sourceDataUpdated: source_data_updated,
-          sourceTitleCount: 0,
-          availabilityConstraints: availability_constraints,
-          availabilityScope: availability_scope,
-          contentTypes: content_types,
-          alternateResourceNames: alternate_resource_names,
-          alternateSlugs: alternate_slugs,
-          packageDescriptionUrls: package_description_urls,
-          description: package_description
-        ],
-        identifiers: identifiers,
-        packageContents: []
+          identifiers: identifiers,
+          packageContents: []
       ]
 
-      package_record.TIPPs?.TIPP.each { tipp_entry ->
+      package_record.TIPPs?.TIPP.eachWithIndex { tipp_entry, indx ->
         def tipp_status = tipp_entry?.status?.text()
         // Ensure logging below has correct title for log export
         if(tipp_entry?.title?.name?.text()) {
@@ -310,21 +331,27 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
 
           def tipp_coverage = [] // [ "startVolume": "8", "startIssue": "1", "startDate": "1982-01-01", "endVolume": null, "endIssue": null, "endDate": null ],
 
-          // Coverage node exists
-          if (tipp_entry.coverage.size()) {
+          tipp_coverage.addAll(tipp_entry.coverage.collect { cov ->
             // Our domain model does not allow null startDate or endDate
-            String start_date_string = tipp_entry.coverage?.@startDate?.toString()
-            String end_date_string = tipp_entry.coverage?.@endDate?.toString()
+            String start_date_string = cov.@startDate?.toString()?.trim()
+            String end_date_string = cov.@endDate?.toString()?.trim()
 
-            tipp_coverage.add(["startVolume": tipp_entry.coverage?.@startVolume?.toString(),
-              "startIssue": tipp_entry.coverage?.@startIssue?.toString(),
-              "startDate": start_date_string?.length() > 0 ? start_date_string : null,
-              "endVolume":tipp_entry.coverage?.@endVolume?.toString(),
-              "endIssue": tipp_entry.coverage?.@endIssue?.toString(),
-              "endDate": end_date_string?.length() > 0 ? end_date_string : null]
-            )
-          }
+            if (start_date_string) {
+              return [
+                  "startVolume": cov.@startVolume?.toString(),
+                  "startIssue": cov.@startIssue?.toString(),
+                  "startDate": start_date_string ? start_date_string : null, // Making use of "" as falsey
+                  "endVolume": cov.@endVolume?.toString(),
+                  "endIssue": cov.@endIssue?.toString(),
+                  "endDate": end_date_string ? end_date_string : null // Making use of "" as falsey
+              ]
+            } else {
+              // Preventing downstream failure that'd throw anyway, where we were passed a coverage statement with nothing in it
+              // Namely an empty startDate, which is a required field for us.
+            }
+          }.findAll { it != null })
 
+          // TODO if there are multiple coverages, these will get concatenated naively
           def tipp_coverage_depth = tipp_entry.coverage.@coverageDepth?.toString()
           def tipp_coverage_note = tipp_entry.coverage.@coverageNote?.toString()
 
@@ -347,16 +374,16 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
           Map packageContent = parseTitleInformation(tipp_entry?.title, tipp_coverage)
 
           packageContent << [
-            "instanceMedium": tipp_medium,
-            "coverage": tipp_coverage,
-            "embargo": embargo,
-            "coverageDepth": tipp_coverage_depth,
-            "coverageNote": tipp_coverage_note,
-            "platformUrl": tipp_platform_url,
-            "platformName": tipp_platform_name,
-            "url": tipp_url,
-            "accessStart": access_start,
-            "accessEnd": access_end
+              "instanceMedium": tipp_medium,
+              "coverage": tipp_coverage,
+              "embargo": embargo,
+              "coverageDepth": tipp_coverage_depth,
+              "coverageNote": tipp_coverage_note,
+              "platformUrl": tipp_platform_url,
+              "platformName": tipp_platform_name,
+              "url": tipp_url,
+              "accessStart": access_start,
+              "accessEnd": access_end
           ]
 
           // log.debug("consider tipp ${tipp_title}")
@@ -380,9 +407,13 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
     pkg
   }
 
+  /* A unified method to parse a GPathResult title and return
+   * some of the necessary fields for the ingest. This method is used both
+   * by gokbToERM AND gokbToERMTitle
+   */
   @CompileStatic(SKIP)
   // Include tipp_coverage information for media logic
-  private Map parseTitleInformation(GPathResult title, def coverage = null) {
+  protected Map parseTitleInformation(GPathResult title, def coverage = null) {
     def titleText = title?.name?.text()
     def media = null
 
@@ -433,28 +464,19 @@ public class DebugGoKbAdapter extends GOKbOAIAdapter {
     def source_identifier = title?.@uuid?.toString()
 
     return ([
-      "title": titleText,
-      "instanceMedia": media,
-      "instancePublicationMedia": pub_media,
-      "sourceIdentifierNamespace": "GoKB",
-      "sourceIdentifier": source_identifier,
-      "instanceIdentifiers": instance_identifiers,
-      "siblingInstanceIdentifiers": sibling_identifiers,
-      "monographEdition": title?.editionStatement?.text(),
-      "monographVolume": title?.volumeNumber?.text(),
-      "firstAuthor": title?.firstAuthor?.text(),
-      "firstEditor": title?.firstEditor?.text(),
-      "dateMonographPublishedPrint": title?.dateFirstInPrint?.text(),
-      "dateMonographPublished": title?.dateFirstOnline?.text()
+        "title": titleText,
+        "instanceMedia": media,
+        "instancePublicationMedia": pub_media,
+        "sourceIdentifierNamespace": "GoKB",
+        "sourceIdentifier": source_identifier,
+        "instanceIdentifiers": instance_identifiers,
+        "siblingInstanceIdentifiers": sibling_identifiers,
+        "monographEdition": title?.editionStatement?.text(),
+        "monographVolume": title?.volumeNumber?.text(),
+        "firstAuthor": title?.firstAuthor?.text(),
+        "firstEditor": title?.firstEditor?.text(),
+        "dateMonographPublishedPrint": title?.dateFirstInPrint?.text(),
+        "dateMonographPublished": title?.dateFirstOnline?.text()
     ])
-  }
-
-  @CompileStatic(SKIP)
-  private String obtainNamespace(GPathResult record) {
-    if (record.@namespaceName?.text() != null && record.@namespaceName?.text()?.trim() != '') {
-      return record.@namespaceName?.text()?.toLowerCase()?.replaceAll(/\s+/, "_")
-    } else if (record.@namespace?.text() != null && record.@namespace?.text()?.trim() != '') {
-      return record.@namespace?.text()?.toLowerCase()?.replaceAll(/\s+/, "_")
-    }
   }
 }

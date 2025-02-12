@@ -12,7 +12,8 @@
     "endDate": "2020-12-31T00:00:00Z",
     "packageSlug": "wsitirs_0001",
     "availabilityScope": "Global",
-    "lifecycleStatus": "Current"
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": true
   },
   "packageContents": [
     {

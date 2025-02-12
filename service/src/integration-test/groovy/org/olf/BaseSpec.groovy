@@ -5,6 +5,9 @@ import com.k_int.okapi.OkapiTenantResolver
 import com.k_int.web.toolkit.testing.HttpSpec
 import org.olf.dataimport.internal.TitleInstanceResolverService
 
+import org.olf.dataimport.internal.KBManagementBean
+import org.olf.dataimport.internal.KBManagementBean.KBIngressType
+
 import org.olf.kb.Pkg
 import org.olf.kb.TitleInstance
 
@@ -168,6 +171,9 @@ abstract class BaseSpec extends HttpSpec {
   def injectedTIRS() {
     titleInstanceResolverService?.class?.name
   }
+
+  // KBManagementBean gets injected as a spring bean
+  KBManagementBean kbManagementBean
 
   // Set up helper methods to import test packages so we don't repeat that code throughout tests
   @Ignore

@@ -12,7 +12,8 @@
     "endDate": "2023-12-31T00:00:00Z",
     "packageSlug": "brill_1",
     "availabilityScope": "Global",
-    "lifecycleStatus": "Current"
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": true
   },
   "packageContents": [
     {

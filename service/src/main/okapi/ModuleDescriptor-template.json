@@ -821,6 +821,15 @@
           "methods": [
             "POST"
           ],
+          "pathPattern": "/erm/packages/controlSync",
+          "permissionsRequired": [
+            "erm.packages.collection.controlSync.execute"
+          ]
+        },
+        {
+          "methods": [
+            "POST"
+          ],
           "pathPattern": "/erm/validate/subscriptionAgreement",
           "permissionsRequired": [
             "erm.agreements.validate"
@@ -1866,6 +1875,11 @@
       "permissionName": "erm.packages.collection.import",
       "displayName": "Packages collection import",
       "description": "Import a collection of package records"
+    },
+    {
+      "permissionName": "erm.packages.collection.controlSync.execute",
+      "displayName": "Packages collection control sync",
+      "description": "Control the synchronization of a collection of package records"
     },
     {
       "permissionName": "erm.sts.collection.get",

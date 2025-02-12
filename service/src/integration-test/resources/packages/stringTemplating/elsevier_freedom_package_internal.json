@@ -10,7 +10,8 @@
         "packageName": "Elsevier:Jisc Collections:Elsevier ScienceDirect Journals Agreement 2017-2021:Elsevier ScienceDirect Freedom Collection 2017-2021",
         "startDate": "2015-01-01T00:00:00Z",
         "endDate": "2030-10-10T00:00:00Z",
-        "packageSlug": "kbplus_1789"
+        "packageSlug": "kbplus_1789",
+        "syncContentsFromSource": true
     },
     "packageContents": [
         {

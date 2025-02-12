@@ -13,7 +13,8 @@
     "packageSlug": "kint_test_002",
     "_intenalId": 193753621336,
     "availabilityScope": "Global",
-    "lifecycleStatus": "Current"
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": true
   },
   "packageContents": [{
     "title": "Arithmetic of Finite Fields",

@@ -11,6 +11,10 @@ on:
         required: false
         type: string
         default: WorkSourceIdentifier
+      syncViaHarvestEnvVar:
+        required: false
+        type: string
+        default: 'false'
 
 jobs:
   reusable_integration_test_job:
@@ -42,7 +46,7 @@ jobs:
       - name: Run integration test
         working-directory: ./service
         run:
-          export TIRS=${{ inputs.tirsEnvVar }}; ./gradlew integrationTest --tests ${{ inputs.testPath }}
+          export TIRS=${{ inputs.tirsEnvVar }}; export SYNC_PACKAGES_VIA_HARVEST=${{ inputs.syncViaHarvestEnvVar }}; ./gradlew integrationTest --tests ${{ inputs.testPath }}
       - name: Upload Test Results Files
         uses: actions/upload-artifact@v4
         if: always()

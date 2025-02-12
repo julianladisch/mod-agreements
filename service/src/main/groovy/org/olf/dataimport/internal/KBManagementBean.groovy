@@ -10,4 +10,7 @@ class KBManagementBean {
   }
 
   KBIngressType ingressType
+
+  // Add a way to override the "sync packages" default in the GOKBOAIAdapter
+  boolean syncPackagesViaHarvest = false
 }
