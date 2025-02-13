@@ -206,6 +206,8 @@ class PackageIngestService implements DataBinder {
                   result.removedTitles++
                 }
               }
+            } else {
+              log.info("Package: ${pkg.name}(${pkg.id}) has syncContentsFromSource: false, skipping title ingest")
             }
 					}
           newSess.clear();
