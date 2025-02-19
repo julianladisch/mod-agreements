@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 
 import org.olf.general.StringUtils
+import org.olf.kb.metadata.ResourceIngressType
 
 import org.olf.dataimport.erm.CoverageStatement
 import org.olf.dataimport.erm.ErmPackageImplWithContentItems
@@ -113,7 +114,7 @@ class ImportService implements DataBinder {
     // The whole envelope is a single package in this format.
     return importPackage (envelope, InternalPackageImplWithPackageContents)
   }
-  
+
   private Map importPackage (final Map record, final Class<? extends PackageSchema> schemaClass) {
     boolean packageImported = false
     String packageId = ""
@@ -328,7 +329,7 @@ class ImportService implements DataBinder {
     }
 
     if (pkg.packageContents.size() > 0) {
-      def result = packageIngestService.upsertPackage(pkg)
+      def result = packageIngestService.upsertPackage(pkg, [ingressType: ResourceIngressType.KBART_IMPORT])
       packageImported = true
     } else {
       log.error("Package contents empty, skipping package creation")

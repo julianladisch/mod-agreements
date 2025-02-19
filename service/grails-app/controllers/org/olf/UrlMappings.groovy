@@ -99,6 +99,7 @@ class UrlMappings {
         "/tsvParse" (controller: 'package', action: 'tsvParse', method: 'POST')
         "/sources" (controller: 'package', action: 'fetchSources', method: 'GET')
         "/controlSync" (controller: 'package', action: 'controlPackageSynchronization', method: 'POST')
+        '/metadata' (resources: 'packageIngressMetadata', excludes: ['update', 'patch', 'save', 'create', 'edit', 'delete'])
       }
 
       "/content"         (controller: 'package', action: 'content', method: 'GET')
@@ -106,6 +107,7 @@ class UrlMappings {
       "/content/current" (controller: 'package', action: 'currentContent', method: 'GET')
       "/content/future"  (controller: 'package', action: 'futureContent', method: 'GET')
       "/content/dropped" (controller: 'package', action: 'droppedContent', method: 'GET')
+      "/metadata"        (controller: 'packageIngressMetadata', action: 'getMetadataForPackage', method: 'GET')
     }
 
     "/erm/pci"(resources:'packageContentItem')

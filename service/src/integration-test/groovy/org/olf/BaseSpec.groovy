@@ -6,7 +6,7 @@ import com.k_int.web.toolkit.testing.HttpSpec
 import org.olf.dataimport.internal.TitleInstanceResolverService
 
 import org.olf.dataimport.internal.KBManagementBean
-import org.olf.dataimport.internal.KBManagementBean.KBIngressType
+import org.olf.kb.metadata.ResourceIngressType
 
 import org.olf.kb.Pkg
 import org.olf.kb.TitleInstance
@@ -174,6 +174,23 @@ abstract class BaseSpec extends HttpSpec {
 
   // KBManagementBean gets injected as a spring bean
   KBManagementBean kbManagementBean
+
+  @Ignore
+  Boolean isPushKb() {
+    kbManagementBean.ingressType == ResourceIngressType.PUSHKB
+  }
+
+  @Ignore
+  Boolean isHarvest() {
+    kbManagementBean.ingressType == ResourceIngressType.HARVEST
+  }
+
+  @Ignore
+  def getDataFromFile(String test_package_file_name, String path = "src/integration-test/resources/packages") {
+    String test_package_file = "${path}/${test_package_file_name}";
+
+    return jsonSlurper.parse(new File(test_package_file))
+  }
 
   // Set up helper methods to import test packages so we don't repeat that code throughout tests
   @Ignore

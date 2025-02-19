@@ -828,6 +828,33 @@
         },
         {
           "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/packages/metadata",
+          "permissionsRequired": [
+            "erm.packages.metadata.collection.get"
+          ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/packages/metadata/{id}",
+          "permissionsRequired": [
+            "erm.packages.metadata.item.get"
+          ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/packages/{id}/metadata",
+          "permissionsRequired": [
+            "erm.packages.item.metadata.item.get"
+          ]
+        },
+        {
+          "methods": [
             "POST"
           ],
           "pathPattern": "/erm/validate/subscriptionAgreement",
@@ -1334,11 +1361,34 @@
       ]
     },
     {
+      "permissionName": "erm.packages.metadata.collection.get",
+      "displayName": "Package ingress metadata collection get",
+      "description": "Get a collection of package ingress metadata objects"
+    },
+    {
+      "permissionName": "erm.packages.metadata.item.get",
+      "displayName": "Package ingress metadata item get",
+      "description": "Get a package ingress metadata item"
+    },
+    {
+      "permissionName": "erm.packages.item.metadata.item.get",
+      "displayName": "Package ingress metadata item get",
+      "description": "Get the package ingress metadata item for a package item"
+    },
+    {
       "permissionName": "erm.packages.content.subset.collection.get",
       "displayName": "Package item content subset get",
       "description": "Get a subset of a package record's contents",
       "replaces": [
         "erm.packages.item.content.get"
+      ]
+    },
+    {
+      "permissionName": "erm.packages.metadata.view",
+      "subPermissions": [
+        "erm.packages.metadata.collection.get",
+        "erm.packages.metadata.item.get",
+        "erm.packages.item.metadata.item.get"
       ]
     },
     {
@@ -1348,7 +1398,8 @@
         "erm.packages.sources.collection.get",
         "erm.packages.item.get",
         "erm.packages.content.collection.get",
-        "erm.packages.content.subset.collection.get"
+        "erm.packages.content.subset.collection.get",
+        "erm.packages.metadata.view"
       ]
     },
     {

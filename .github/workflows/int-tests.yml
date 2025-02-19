@@ -32,9 +32,15 @@ jobs:
     with:
       testPath: org.olf.General.*
       outputDirectory: General
+  pushkb-tests:
+    uses: ./.github/workflows/run-int-tests.yml
+    with:
+      testPath: org.olf.PushKB.*
+      ingressTypeEnvVar: 'PushKB'
+      outputDirectory: PushKB
   publish-test-results:
     if: always()
-    needs: [work-source-identifier-tirs-tests, id-first-tirs-tests, agreement-tests, string-template-tests, general-tests]
+    needs: [work-source-identifier-tirs-tests, id-first-tirs-tests, agreement-tests, string-template-tests, general-tests, pushkb-tests]
     runs-on: ubuntu-latest
     steps:
       - name: 'download test results'

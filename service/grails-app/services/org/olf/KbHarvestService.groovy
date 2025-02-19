@@ -6,7 +6,7 @@ import java.time.Instant
 import java.time.temporal.ChronoUnit
 
 import org.olf.dataimport.internal.KBManagementBean
-import org.olf.dataimport.internal.KBManagementBean.KBIngressType
+import org.olf.kb.metadata.ResourceIngressType
 
 import org.olf.general.jobs.PackageIngestJob
 import org.olf.general.jobs.TitleIngestJob
@@ -86,9 +86,9 @@ where rkb.type is not null
 
   @CompileStatic(SKIP)
   private void triggerUpdateForTenant(final String tenant_schema_id) {
-    KBIngressType ingressType = kbManagementBean.ingressType
+    ResourceIngressType ingressType = kbManagementBean.ingressType
 
-    if (ingressType == KBIngressType.Harvest) {
+    if (ingressType == ResourceIngressType.HARVEST) {
       /* ERM-1801.
        * We need to ensure TitleIngest happens BEFORE PackageIngest.
        * To avoid syncronisation errors, we trigger both daily and hourly tasks from the same method,
@@ -128,7 +128,7 @@ where rkb.type is not null
         }
       }
     } else {
-      log.info("triggerUpdateForTenant is not valid when KBIngressType is (${ingressType})")
+      log.info("triggerUpdateForTenant is not valid when ResourceIngressType is (${ingressType})")
     }
   }
 

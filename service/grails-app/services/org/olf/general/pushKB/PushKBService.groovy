@@ -21,7 +21,8 @@ import org.olf.dataimport.internal.PackageContentImpl
 import org.olf.dataimport.internal.PackageSchema.ContentItemSchema
 import org.olf.dataimport.internal.PackageSchema
 import org.olf.dataimport.internal.KBManagementBean
-import org.olf.dataimport.internal.KBManagementBean.KBIngressType
+import org.olf.kb.metadata.ResourceIngressType
+
 
 // Have moved to another package to help pull some of this work together, now need to import these beans
 import org.olf.UtilityService
@@ -57,13 +58,13 @@ class PushKBService implements DataBinder {
   // For now this is repeated in packageIngestService
   private static final def countChanges = ['accessStart', 'accessEnd']
 
-  public Map pushPackages(final List<Map> packages) {
+  public Map pushPackages(final List<Map> packages, final Map ingressMetadata = [:]) {
     Map result = [
       success: false
     ]
-    KBIngressType ingressType = kbManagementBean.ingressType
+    ResourceIngressType ingressType = kbManagementBean.ingressType
 
-    if (ingressType == KBIngressType.PushKB) {
+    if (ingressType == ResourceIngressType.PUSHKB) {
       try {
         packages.each { Map record ->
           final PackageSchema package_data = InternalPackageImpl.newInstance();
@@ -79,7 +80,7 @@ class PushKBService implements DataBinder {
 
                     // These calls mirror what's in upsertPackage but conveniently avoid the
                     // logic which handles TIPPS
-                    Pkg pkg = packageIngestService.lookupOrCreatePkg(package_data);
+                    Pkg pkg = packageIngestService.lookupOrCreatePkg(package_data, ingressMetadata);
                       // Retain logging information
                       MDC.put('packageSource', pkg.source.toString())
                       MDC.put('packageReference', pkg.reference.toString())
@@ -105,7 +106,7 @@ class PushKBService implements DataBinder {
     return result
   }
 
-  public Map pushPCIs(final List<Map> pcis) {
+  public Map pushPCIs(final List<Map> pcis, final Map packageIngressMetadata = [:]) {
     Map result = [
       success: false,
       startTime: System.currentTimeMillis(),
@@ -117,8 +118,8 @@ class PushKBService implements DataBinder {
       updatedAccessEnd: 0,
       nonSyncedTitles: 0,
     ]
-    KBIngressType ingressType = kbManagementBean.ingressType
-    if (ingressType == KBIngressType.PushKB) {
+    ResourceIngressType ingressType = kbManagementBean.ingressType
+    if (ingressType == ResourceIngressType.PUSHKB) {
       try {
         pcis.each { Map record ->
 
@@ -144,8 +145,7 @@ class PushKBService implements DataBinder {
                   Pkg.withNewSession { newSess ->
                     Pkg.withTransaction {
                       // TODO this will allow the PCI data to update the PKG record... do we want this?
-
-                      pkg = packageIngestService.lookupOrCreatePackageFromTitle(pc);
+                      pkg = packageIngestService.lookupOrCreatePackageFromTitle(pc, packageIngressMetadata);
                     }
                     newSess.clear()
                   }

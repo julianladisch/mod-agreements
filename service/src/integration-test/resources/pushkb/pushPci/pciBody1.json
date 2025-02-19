@@ -1,0 +1,4822 @@
+{
+  "sessionId": "pci-session-1",
+  "chunkId": "chunk1",
+  "pushableId": "pci-pushtask-id-1",
+  "pushKbUrl": "pci-pushkb-url-1",
+  "records": [
+    {
+      "title": "The journal of antimicrobial chemotherapy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jac/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "591921ac-6e09-4b80-8816-eb3a51630e21",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1460-2091"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1467478-6"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0305-7453"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "37",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of burn care & research",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jbcr",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "feece12c-c2b2-4cb1-ac2c-a18381e1dde5",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "17",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of chromatographic science",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/chromsci/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "a40c1d79-54bf-4be9-9cc1-2d43c429a41d",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1945-239X"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2044085-6"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0021-9665"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "34",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of Crohn's and Colitis",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ecco-jcc/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "67605e0e-bd32-4b82-9510-736ee0a30ea2",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1876-4479"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2389631-0"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1873-9946"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2007-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of crustacean biology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jcb/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "790379e8-01e1-4f0d-ac20-7ec664d4d98b",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1937-240X"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2173764-2"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0278-0372"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "16",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of economic entomology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jee/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "1fb7cb60-8f48-45bf-bda6-6a3bb8093a5a",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2030999-5"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1938-291X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-0493"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "89",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of experimental botany",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jxb/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "741c9fcf-f2b3-4ed4-b869-dce9a9bb45d8",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "47",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of forestry",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jof",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "afb8aa32-eaca-4f12-81f7-63e0889dbfb2",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1938-3746"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2043858-8"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-1201"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "94",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of heredity",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jhered/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "949bfe93-979d-4461-b204-f4f055151382",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1465-7333"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1466720-4"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-1503"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "87",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of logic and computation",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/logcom/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "222bd855-da0b-4922-89fa-c8fe7a8ae64a",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "6",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of mammalogy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jmammal/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "ec5e0160-3423-45d0-ae59-b1f11f3df748",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1545-1542"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2066602-0"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-2372"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "77",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of medical entomology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jme/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9087f0ee-2120-4602-bf9c-568a244bba23",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2031006-7"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1938-2928"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-2585"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "33",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of molecular cell biology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jmcb/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "11dfa8b4-8de5-4713-9e3d-66b321831751",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1759-4685"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2500949-7"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1674-2788"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2009-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of molluscan studies",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mollus/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "cc564bf0-747f-4cfd-ae95-82f537fe0291",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1482517-X"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1464-3766"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0260-1230"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "startVolume": "62",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of music therapy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jmt/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "266be68d-2933-4af8-a4c5-bbdaff9d6c1b",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "2053-7395"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2750286-7"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-2917"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "33",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of neuropathology and experimental neurology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jnen/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "d63b776c-9304-4a75-a8b4-3b8a4db9d5a6",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1554-6578"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2033048-0"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-3069"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "55",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of pediatric psychology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jpepsy/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e0887bf9-2582-4b5b-9ed1-7bd458435e45",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1470323-3"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1465-735X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0146-8693"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "21",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of petrology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/petrology/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "d298351c-dcb2-4ea6-9974-64033fb2c9be",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "37",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of plankton research",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/plankt/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "adac4a86-ed79-4ef6-af11-8defe024e31e",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1474909-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1464-3774"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0142-7873"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "18",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of plant ecology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jpe/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "6678d99b-0920-464d-951e-65e210eb0f5d",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1752-993X"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2381013-0"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1752-9921"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2008-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of public health",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jpubhealth/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "231529a1-ba5d-46b3-b942-836a63a3ca5a",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2004-01-01",
+          "startVolume": "26",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of the American Medical Informatics Association",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jamia/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "c526f621-031c-4052-94c7-8b79d1d2af25",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "22",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of the history of medicine and allied sciences",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jhmas/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "fba97c93-99bf-413a-9761-5fa0b18d7205",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1468-4373"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2009003-1"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-5045"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "51",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of the Pediatric Infectious Diseases Society",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jpids/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "2bf3dd3a-d1d5-4454-a58a-73065c4f45fa",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2668791-4"
+        },
+        {
+          "namespace": "eissn",
+          "value": "2048-7207"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "2048-7193"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2012-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of travel medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jtm/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "c9747f40-fefc-4795-a4a0-1200e33597a8",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "3",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of tropical pediatrics",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/tropej/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "d08505c0-13f1-437c-8d0b-199a67992eaf",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1497447-2"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1465-3664"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0142-6338"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "42",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Labmedicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/labmed/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "d1b6d227-868b-4502-aafa-37dcb24f56f9",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1943-7730"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2100869-3"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0007-5027"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "27",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Law, probability and risk",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/lpr/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9666890d-f629-49ad-9d5e-c32c2bef376f",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2084059-7"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1470-840X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1470-8396"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Logic journal of the IGPL",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jigpal/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "38275c9b-844d-481e-a827-52803ebe5c03",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1997-01-01",
+          "startVolume": "5",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Mammalian species",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mspecies/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e112e575-6e0c-48a5-bb4a-7c4ddd2d1ffe",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1545-1410"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2174980-2"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0076-3519"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "522",
+          "startDate": "1996-01-01",
+          "startVolume": "1996",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Mathematical medicine and biology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/imammb/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b019e38a-8055-41e9-b496-e821d4329403",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1477-8602"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2042047-X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1477-8599"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2003-01-01",
+          "startVolume": "20",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Medical law review",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/medlaw/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "c1d8bedc-3424-48ff-a782-381030b024e0",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1497475-7"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1464-3790"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0967-0742"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "4",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Medical mycology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mmy/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b44d07d7-d29d-4faa-b482-d69667aa84d6",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2020733-5"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1460-2709"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1369-3786"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1998-01-01",
+          "startVolume": "36",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Molecular human reproduction",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/molehr/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "7407443d-0c84-40a2-afca-897eb10c3985",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1460-2407"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1497467-8"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1360-9947"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "2",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Microscopy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jmicro/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "bbb0f779-f138-4587-9137-80cf46c1df54",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2708387-1"
+        },
+        {
+          "namespace": "eissn",
+          "value": "2050-5701"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "2050-5698"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2013-01-01",
+          "startVolume": "62",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Military medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/milmed",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "5dc2c588-c784-4d86-aaac-695a72cf2f91",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1930-613X"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2130577-8"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0026-4075"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2004-01-01",
+          "startVolume": "169",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Molecular biology and evolution",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mbe/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "4530b3b2-02cc-4a6c-94f9-ed24b71e6dd4",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "13",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Monthly notices of the Royal Astronomical Society",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mnras/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e7b8a74d-0c3d-4c5e-bdcf-05bd0463c7e1",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1365-2966"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2016084-7"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0035-8711"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "278",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Monthly notices of the Royal Astronomical Society / Letters",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mnrasl/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "71b57ea0-6038-400b-9b32-8cc0f3775daf",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2190759-6"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1745-3933"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1745-3925"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2005-01-01",
+          "startVolume": "356",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Music therapy perspectives",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mtp/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "d662a937-1a11-40b2-a296-8ac9958aedaf",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2754340-7"
+        },
+        {
+          "namespace": "eissn",
+          "value": "2053-7387"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0734-6875"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "14",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Mutagenesis",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/mutage/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "85f14271-565e-43a1-af68-45ae552a7215",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "11",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Nephrology, dialysis, transplantation",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ndt/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "f3ee123b-43c1-4f13-a159-496773cd3abd",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "11",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Neuro-Oncology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/neuro-oncology/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "770ddc22-5c2e-488b-a54d-c1653a43d685",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2094060-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1523-5866"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1522-8517"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1999-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Neurosurgery",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/neurosurgery/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b434ec72-30d6-4dd6-bbd6-bc86b3521b9e",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "38",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Nicotine & tobacco research",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ntr/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "8c62b0e6-e99a-475a-8a07-d89a80b24555",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1999-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Nutrition reviews",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/nutritionreviews/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "48af90de-8d31-4c08-baf5-e4081e10b02b",
+      "instanceIdentifiers": [
+        {
+          "namespace": "doi",
+          "value": "10.1111/(ISSN)1753-4887"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1753-4887"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2066844-2"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0029-6643"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "54",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Occupational medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/occmed/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "33efe313-95d9-4b33-b47e-91e51d9a13b2",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "46",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Operative neurosurgery",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ons/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "98424c6c-6ede-4b6f-9afd-3a8dd4148484",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2005-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Paediatrics & child health",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/pch/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "bfff3bd9-d225-46ba-bb03-e0a20ca8b000",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Pain medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/painmedicine/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e230a2d9-8155-4a64-983a-d08a9e0b361b",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2023869-1"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1526-4637"
+        },
+        {
+          "namespace": "doi",
+          "value": "10.1111/(ISSN)1526-4637"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1526-2375"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2000-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Pathogens and disease",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/femspd/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b8f13187-3d7d-40d9-bf7f-0a36e3ba806e",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2013-01-01",
+          "startVolume": "67",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Philosophia mathematica",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/philmat/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9a9d782c-1f4f-42ba-9469-d201e6b49f65",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2044485-0"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1744-6406"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0031-8019"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "4",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Physical therapy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ptj/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "22116a33-5405-4805-b083-ea91da66a0d3",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1538-6724"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2008745-7"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0031-9023"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "76",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Plant & cell physiology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/pcp/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9e190364-a2ee-4628-acc9-e3648009b198",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1471-9053"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2020758-X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0032-0781"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "37",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Poultry science",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ps/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "1525ab31-7f7a-41fe-8a6a-07351ca3fd5e",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "75",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Protein engineering design and selection",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/peds/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "29cd10c4-6487-4556-ba78-c4abbacd1370",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1466729-0"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1741-0134"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1741-0126"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2004-01-01",
+          "startVolume": "17",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Public health ethics",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/phe/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "4ee4a717-e722-40a1-bd5f-485ebf8e8090",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2438463-X"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1754-9981"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1754-9973"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2008-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Public policy & aging report",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ppar/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9b9b72dc-c46d-456b-81dd-f4db4f39153a",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2740987-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "2053-4892"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1055-3037"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "3",
+          "startDate": "1998-01-01",
+          "startVolume": "9",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Publications of the Astronomical Society of Japan",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/pasj/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "0fd5e03e-db1a-4400-9a7c-a6dc5de0cb0d",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2083084-1"
+        },
+        {
+          "namespace": "eissn",
+          "value": "2053-051X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0004-6264"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "startVolume": "48",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "QJM",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/qjmed/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b7d95a56-54ee-45aa-85b4-e14a0eeb8de3",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1492613-1"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1460-2393"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1460-2725"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "89",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Radiation protection dosimetry",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/rpd/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "07da2b24-7c92-49f7-a134-75d4fd204ade",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "63",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Research evaluation",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/rev/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "ab97b036-ae3c-4d32-82b7-e696310a4b28",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "6",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Rheumatology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/rheumatology/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "20957afd-0eaf-40e4-8dc5-58c1b032e57e",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "35",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Schizophrenia bulletin",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/schizophreniabulletin/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "b49bba01-5fcd-4bf8-a7bd-57a3661c18d8",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "22",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Science and public policy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/spp/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e28c8aca-b818-4dec-86bf-da9685fb1301",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1471-5430"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2019238-1"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0302-3427"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "23",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Sleep",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/sleep/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "0fbf7e85-225a-4e5e-8494-46b1516c73fb",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2056761-3"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1550-9109"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0161-8105"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "19",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Social history of medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/shm/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "96948bd2-85b4-4370-912b-431eab8acddc",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1477-4666"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2073560-1"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0951-631X"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "9",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Social work",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/sw/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "757b9b7e-6477-4af7-a7fa-7f1dc14f90ef",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2067028-X"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1545-6846"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0037-8046"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "41",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Social work research",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/swr/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "6fe5fe04-6aff-45cc-a157-72eacc9dfe62",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "20",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Systematic biology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/sysbio/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "231b22ca-855d-4e51-97bd-eace132489bb",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "45",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Teaching mathematics and its applications",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/teamat/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "f75859fe-e1fb-4690-9413-b460e3aa91e6",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2041679-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1471-6976"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0268-3679"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "15",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The American journal of clinical nutrition",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/ajcn",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "97d50e48-1c6d-459c-894c-d958e2b647ae",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1496439-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1938-3207"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0002-9165"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "63",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The British journal of social work",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/bjsw/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "a4c492a9-3f98-467c-8a1f-1d5cf2399fc9",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2012767-4"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1468-263X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0045-3102"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "26",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The computer journal",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/comjnl/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9102f526-2ea9-431e-b542-27931f920ce6",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1477172-x"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1460-2067"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0010-4620"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "39",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "European journal of public health",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/eurpub/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "37eef2ac-c23b-4320-962d-303d58d30f66",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1464-360X"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2033525-8"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1101-1262"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "6",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The gerontologist",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/gerontologist/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "de7bd5fb-103b-4bb8-9d00-b66a710e9faa",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1758-5341"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2043844-8"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0016-9013"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "36",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of applied poultry research",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/japr/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "65b51b7e-9492-499d-9105-ac173229c933",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1537-0437"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2086702-5"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1056-6171"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "5",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of biochemistry",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jb/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "af470a59-e967-4bfe-96f5-4692db78c988",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "119",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of clinical endocrinology & metabolism",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jcem/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "e0223e18-e0ef-4c0d-badb-ee84b5c82ba3",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1945-7197"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2026217-6"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0021-972X"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "81",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Journal of deaf studies and deaf education",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jdsde/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "206c8273-c368-4aff-b9c3-b0307c91a465",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1465-7325"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1494621-X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1081-4159"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of infectious diseases",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jid/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "ca3941f0-485a-4d12-ba7b-2f67f0d19952",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "173",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of medicine & philosophy",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jmp/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "8dcdcdf1-2a98-482b-83ed-0c1b9db3f635",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1744-5019"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1495591-X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0360-5310"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "21",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journal of nutrition",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/jn",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "39969494-63ce-42ee-9fec-a302ffadeaf7",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1541-6100"
+        },
+        {
+          "namespace": "zdb",
+          "value": "1469429-3"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0022-3166"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "126",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journals of gerontology / A",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/biomedgerontology/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "964446a9-2dbd-4898-b647-a13c98a89adf",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2043927-1"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1758-535X"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1079-5006"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "51A",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The journals of gerontology. Psychological sciences, social sciences",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/psychsocgerontology/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "5ad92237-a565-4b90-85d8-3426f378cbfd",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "51B",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The quarterly journal of mathematics",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/qjmath/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "0ee7443a-7b2f-4e07-8001-e6ea3f95e3b8",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "47",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "The quarterly journal of mechanics and applied mathematics",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/qjmam/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "9fb5f59f-dc5f-4dd0-b797-61754023dd13",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "49",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Toxicological sciences",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/toxsci/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "10eaa143-3a46-440f-b40c-03687bdcb6b7",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1998-01-01",
+          "startVolume": "41",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Transactions of the Royal Society of Tropical Medicine and Hygiene",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/trstmh/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "80c6566f-698a-4746-950a-ca7cf88bf8df",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2135136-3"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1878-3503"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0035-9203"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1996-01-01",
+          "startVolume": "90",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Translational Behavioral Medicine",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/tbm",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "dadced65-9f1e-46a9-9d17-14dee13db9f9",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2011-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Tree physiology",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/treephys/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "cd5d2c79-4632-4694-a92e-800a9faba518",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "01. Feb",
+          "startDate": "1996-01-01",
+          "startVolume": "16",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Zoological journal of the Linnean Society",
+      "platformUrl": "https://academic.oup.com",
+      "url": "https://academic.oup.com/zoolinnean/issue",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "a373862f-3260-4268-a1c7-02b9d4c6abcc",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "1471951-4"
+        },
+        {
+          "namespace": "doi",
+          "value": "10.1111/(ISSN)1096-3642"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1096-3642"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0024-4082"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "e2565ead-8b3a-49d7-83dc-be8414fd8ee1",
+          "packageName": "Oxford University Press: STM Collection 2017"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Oxford Academic Journals",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "01. Feb",
+          "startDate": "1996-01-01",
+          "startVolume": "116",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "American literary scholarship",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/am-lit-scholarship",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "dc162d72-6c14-45f0-8251-f4a22d2da0ad",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1998-01-01",
+          "startVolume": "1998",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "American literature",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/american-literature",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "3fba18ff-75b5-4f7b-9871-dfc0373a8226",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2000-01-01",
+          "startVolume": "72",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "American speech",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/american-speech",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "45f4e8cf-edd8-4471-813c-b41a2860706c",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1527-2133"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2021104-1"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0003-1283"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2000-01-01",
+          "startVolume": "75",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Publication of the American Dialect Society",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/pads",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "73c8ec7b-4137-4339-977c-a8ce2d3070cc",
+      "instanceIdentifiers": [],
+      "siblingInstanceIdentifiers": [],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "1944-01-01",
+          "startVolume": "1",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Archives of Asian art",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/archives-of-asian-art",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "25c23c41-fe9c-4b2a-86e7-533138600a31",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1944-6497"
+        },
+        {
+          "namespace": "zdb",
+          "value": "2482135-4"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0066-6637"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2001-01-01",
+          "startVolume": "52",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    },
+    {
+      "title": "Boundary 2",
+      "platformUrl": "https://www.dukeupress.edu/",
+      "url": "https://read.dukeupress.edu/boundary-2",
+      "sourceIdentifierNamespace": "GoKB",
+      "sourceIdentifier": "eeffd245-7f4b-40b2-b829-66820987293c",
+      "instanceIdentifiers": [
+        {
+          "namespace": "zdb",
+          "value": "2012778-9"
+        },
+        {
+          "namespace": "eissn",
+          "value": "1527-2141"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0190-3659"
+        }
+      ],
+      "instanceMedia": "Serial",
+      "instanceMedium": "Electronic",
+      "instancePublicationMedia": "Journal",
+      "contentItemPackage": {
+        "header": {
+          "packageSource": "PushKB::GOKb",
+          "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+          "packageName": "Duke University Press: E Duke Journals Expanded"
+        }
+      },
+      "firstAuthor": null,
+      "firstEditor": null,
+      "platformName": "Duke University Press",
+      "dateMonographPublishedPrint": null,
+      "dateMonographPublished": null,
+      "monographEdition": null,
+      "monographVolume": null,
+      "accessStart": "2023-09-30",
+      "coverage": [
+        {
+          "startIssue": "1",
+          "startDate": "2000-01-01",
+          "startVolume": "27",
+          "endIssue": "",
+          "endDate": null,
+          "endVolume": ""
+        }
+      ],
+      "embargo": "",
+      "coverageDepth": "Fulltext",
+      "accessEnd": "2024-01-01"
+    }
+  ]
+}

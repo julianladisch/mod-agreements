@@ -93,6 +93,8 @@ where ( exists ( select pci.id
     Map result = null
     RemoteKB.withTransaction([propagationBehavior: TransactionDefinition.PROPAGATION_REQUIRES_NEW]) {
       log.debug("onPackageChange(${rkb_name},...)")
+
+      // FIXME ADD INGRESS METADATA
       result = packageIngestService.upsertPackage(package_data, rkb_name, false)
     }
     log.debug("onPackageChange(${rkb_name},...) returning ${result}")
@@ -104,6 +106,7 @@ where ( exists ( select pci.id
     Map result = null
     RemoteKB.withTransaction([propagationBehavior: TransactionDefinition.PROPAGATION_REQUIRES_NEW]) {
       log.debug("onTitleChange(${rkb_name},...)")
+      // FIXME ADD INGRESS METADATA (?)
       result = titleIngestService.upsertTitle(title_data, rkb_name)
     }
     log.debug("onTitleChange(${rkb_name},...) returning ${result}")

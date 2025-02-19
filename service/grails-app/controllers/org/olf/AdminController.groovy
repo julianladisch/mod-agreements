@@ -51,7 +51,7 @@ class AdminController implements DataBinder{
         }
         return
       }
-      
+
       result = packageIngestService.upsertPackage(package_data)
     }
     else {
@@ -76,6 +76,7 @@ class AdminController implements DataBinder{
     render result as JSON
   }
 
+  // I don't believe this is used... I think the direct `importPackage` is not implemented for GOKBAdapter
   public pullPackage() {
     def result = [:]
     RemoteKB rkb = RemoteKB.findByName(params.kb)

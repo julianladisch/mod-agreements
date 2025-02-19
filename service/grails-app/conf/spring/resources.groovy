@@ -1,6 +1,6 @@
 import org.olf.dataimport.internal.titleInstanceResolvers.*
 import org.olf.dataimport.internal.KBManagementBean
-import org.olf.dataimport.internal.KBManagementBean.KBIngressType
+import org.olf.kb.metadata.ResourceIngressType
 
 // Place your Spring DSL code here
 beans = {
@@ -40,11 +40,11 @@ beans = {
   kbManagementBean(KBManagementBean) {
     switch (INGRESS_TYPE) {
       case 'PushKB':
-        ingressType = KBIngressType.PushKB
+        ingressType = ResourceIngressType.PUSHKB
         break;
       case 'Harvest':
       default:
-        ingressType = KBIngressType.Harvest
+        ingressType = ResourceIngressType.HARVEST
         break;
     }
 

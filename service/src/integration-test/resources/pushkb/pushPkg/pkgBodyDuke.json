@@ -1,0 +1,19 @@
+{
+  "sessionId": "package-session-1",
+  "chunkId": "chunk2",
+  "pushableId": "pkg-pushtask-id-duke",
+  "pushKbUrl": "pkg-pushkb-url-duke",
+  "records": [
+    {
+      "header": {
+        "packageSource": "PushKB::GOKb",
+        "packageSlug": "1c642ec7-c15d-4311-8fd7-8bca7975dda0",
+        "packageName": "Duke University Press: E Duke Journals Expanded",
+        "packageProvider": {
+          "name": "Duke University Press"
+        },
+        "lifecycleStatus": "Current"
+      }
+    }
+  ]
+}

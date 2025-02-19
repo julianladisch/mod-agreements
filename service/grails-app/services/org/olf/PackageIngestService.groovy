@@ -4,6 +4,8 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 
 import java.util.concurrent.TimeUnit
 
+import org.olf.kb.metadata.ResourceIngressType
+
 import org.olf.general.Org
 
 import org.olf.general.StringUtils
@@ -49,6 +51,7 @@ class PackageIngestService implements DataBinder {
   TitleIngestService titleIngestService
   IdentifierService identifierService
   CoverageService coverageService
+  IngressMetadataService ingressMetadataService
 
   // dependentModuleProxyService is a service which hides the fact that we might be dependent upon other
   // services for our reference data. In this class - vendors are erm Org entries, but in folio these are
@@ -56,8 +59,8 @@ class PackageIngestService implements DataBinder {
   // looking up an Org in vendors and stashing the vendor info in the local cache table.
   DependentModuleProxyService dependentModuleProxyService
 
-  public Map upsertPackage(PackageSchema package_data) {
-    return upsertPackage(package_data,'LOCAL',true)
+  public Map upsertPackage(PackageSchema package_data, Map ingressMetadata = [ingressType: ResourceIngressType.JSON_IMPORT]) {
+    return upsertPackage(package_data,'LOCAL',true, ingressMetadata)
   }
 
 
@@ -76,6 +79,11 @@ class PackageIngestService implements DataBinder {
 		kb
 	}
 
+
+  // TODO This is a bit of a mess now. PushKB does NOT use upsertPackage in the same way,
+  // instead kind of mirroring the process while skipping all the RemoteKB AND contents logic.
+  // This will be used, however, for all RemoteKB upserts
+  // We should try to identify more of the work
   /**
    * Load the paackage data (Given in the agreed canonical json package format) into the KB.
    * This function must be passed VALID package data. At this point, all package contents are
@@ -85,10 +93,14 @@ class PackageIngestService implements DataBinder {
    * package into the KB.
    * @return id of package upserted
    */
-  public Map upsertPackage(PackageSchema package_data, String remotekbname, boolean kbCreateReadOnly=false) {
+  public Map upsertPackage(
+      PackageSchema package_data,
+      String remotekbname,
+      boolean kbCreateReadOnly=false,
+      Map ingressMetadata = [:] // Allow JSON/KBART to pre-declare that they're coming from Json or Kbart, otherwise empty
+  ) {
 		// Really messy but required as withNew session does not work unless there is already a session
   	// bound.
-
 
 		final def result = [
 			startTime: System.currentTimeMillis(),
@@ -122,7 +134,13 @@ class PackageIngestService implements DataBinder {
 							log.info("Package header: ${package_data.header} - update start time is ${result.updateTime}")
 							
 							// Farm out package lookup and creation to a separate method
-							pkg = lookupOrCreatePkg(package_data);
+
+              if (ingressMetadata.ingressType == null) {
+                ingressMetadata.ingressType = ResourceIngressType.HARVEST
+              }
+              ingressMetadata.ingressId = kb.id;
+
+							pkg = lookupOrCreatePkg(package_data, ingressMetadata);
 							// Retain logging information
 							MDC.put('packageSource', pkg.source.toString())
 							MDC.put('packageReference', pkg.reference.toString())
@@ -300,7 +318,7 @@ AccessEnd/${result.updatedAccessEnd}\
     return vendor;
   }
 
-  public Pkg lookupPkgAndUpdate(PackageSchema package_data) {
+  public Pkg lookupPkgAndUpdate(PackageSchema package_data, final Map ingressMetadata = [:]) {
     Pkg pkg = lookupPkg(package_data)
     Org vendor = getVendorFromPackageData(package_data)
     // Do update step but NOT create step
@@ -328,6 +346,9 @@ AccessEnd/${result.updatedAccessEnd}\
       updateAlternateNames(pkg.id, package_data)
       updateAvailabilityConstraints(pkg.id, package_data)
       updatePackageDescriptionUrls(pkg.id, package_data)
+
+      // Handle "update" of ingressMetadata
+      ingressMetadataService.upsertPackageIngressMetadata(pkg.id, ingressMetadata)
     }
 
     return pkg;
@@ -341,9 +362,9 @@ AccessEnd/${result.updatedAccessEnd}\
    *
    * This method ALSO updates information for packages.
    */
-  public Pkg lookupOrCreatePkg(PackageSchema package_data) {
+  public Pkg lookupOrCreatePkg(PackageSchema package_data, final Map ingressMetadata = [:]) {
     // This takes care of any updates
-    Pkg pkg = lookupPkgAndUpdate(package_data);
+    Pkg pkg = lookupPkgAndUpdate(package_data, ingressMetadata);
 
     // If pkg is null, then we can safely create a new one
     if ( pkg == null ) {
@@ -361,6 +382,9 @@ AccessEnd/${result.updatedAccessEnd}\
                lifecycleStatus: Pkg.lookupOrCreateLifecycleStatus(package_data.header.lifecycleStatus != null ? package_data.header.lifecycleStatus : 'Unknown'),
                         vendor: vendor,
       ).save(flush:true, failOnError:true)
+
+      // Set up ingressMetadata for new packages
+      ingressMetadataService.createPackageIngressMetadata(pkg.id, ingressMetadata)
 
       (package_data?.header?.contentTypes ?: []).each {
         pkg.addToContentTypes(new ContentType([contentType: ContentType.lookupOrCreateContentType(it.contentType)]))
@@ -501,10 +525,10 @@ AccessEnd/${result.updatedAccessEnd}\
    * off chance that a PCI is attempting to be ingested when the package
    * for that title has not been yet.
    */
-  public Pkg lookupOrCreatePackageFromTitle(ContentItemSchema pc) {
+  public Pkg lookupOrCreatePackageFromTitle(ContentItemSchema pc, Map ingressMetadata = [:]) {
     Pkg pkg = null;
     if (pc?.contentItemPackage) {
-      pkg = lookupOrCreatePkg(pc.contentItemPackage)
+      pkg = lookupOrCreatePkg(pc.contentItemPackage, ingressMetadata)
     } else {
       /* WIP this feels like not the right thing to do */
       throw new Exception("Cannot create package from title if no contentItemPackage is provided.")

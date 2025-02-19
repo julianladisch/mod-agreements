@@ -6,6 +6,8 @@ import java.time.Instant
 import org.olf.general.pushKB.PushKBService
 import org.olf.general.jobs.JobContext
 
+import org.olf.kb.metadata.ResourceIngressType
+
 import grails.gorm.multitenancy.Tenants
 import grails.gorm.multitenancy.CurrentTenant
 import groovy.util.logging.Slf4j
@@ -28,7 +30,13 @@ class PushKBController {
     // Handle PushKBSession and PushKBChunk
     handleSessionAndChunk(bindObj, tenantId);
     try {
-      Map pushPkgResult = pushKBService.pushPackages(bindObj.records)
+      Map ingressMetadata = [
+          ingressType: ResourceIngressType.PUSHKB,
+          'ingressId': bindObj.pushableId,
+          'ingressUrl': bindObj.pushKbUrl,
+      ]
+
+      Map pushPkgResult = pushKBService.pushPackages(bindObj.records, ingressMetadata)
       if (pushPkgResult.success == false) {
         String messageString = pushPkgResult?.errorMessage ?: 'Something went wrong'
         respond ([message: messageString, statusCode: HttpStatus.INTERNAL_SERVER_ERROR.value(), pushPkgResult: pushPkgResult], status: HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -50,9 +58,16 @@ class PushKBController {
 
     // Handle PushKBSession and PushKBChunk
     handleSessionAndChunk(bindObj, tenantId);
+    Map packageIngressMetadata = [
+        ingressType: ResourceIngressType.PUSHKB,
+        'contentIngressId': bindObj.pushableId,
+        'contentIngressUrl': bindObj.pushKbUrl,
+    ]
+
+    // If we want to do metadata on PCI as well at some point we'd set up a separate Map for that.
 
     try {
-      Map pushPCIResult = pushKBService.pushPCIs(bindObj.records)
+      Map pushPCIResult = pushKBService.pushPCIs(bindObj.records, packageIngressMetadata)
       if (pushPCIResult.success == false) {
         String messageString = pushPCIResult?.errorMessage ?: 'Something went wrong'
         respond ([message: messageString, statusCode: HttpStatus.INTERNAL_SERVER_ERROR.value(), pushPCIResult: pushPCIResult], status: HttpStatus.INTERNAL_SERVER_ERROR.value())
