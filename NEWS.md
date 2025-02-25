@@ -1,4 +1,7 @@
 ## 7.2.0 IN PROGRESS
+  * ERM-3470 S3 environment variable settings
+    * Added new environment variable GLOBAL_S3_SECRET_KEY
+    * Deprecated environment variable AWS_SECRET_ACCESS_KEY
 
 ## 7.1.5 2025-01-24
   * ERM-3570 Add missing required interfaces to Module Descriptor
