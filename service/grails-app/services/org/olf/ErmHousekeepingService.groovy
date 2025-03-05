@@ -63,7 +63,7 @@ public class ErmHousekeepingService {
             [ 'fileStorage', 'storageEngine', 'String', 'FileStorageEngines', 'LOB' ],
             [ 'fileStorage', 'S3Endpoint',    'String', null,                 default_aws_url ?: 'http://s3_endpoint_host.domain:9000' ],
             [ 'fileStorage', 'S3AccessKey',   'String', null,                 default_aws_access_key_id ?: 'ACCESS_KEY' ],
-            [ 'fileStorage', 'S3SecretKey',   'String', null,                 default_aws_secret ?: 'SECRET_KEY' ],
+            [ 'fileStorage', 'S3SecretKey',   'String', null,                 default_aws_secret ],
             [ 'fileStorage', 'S3BucketName',  'String', null,                 default_aws_bucket ?: "${tenantId}-shared" ],
             [ 'fileStorage', 'S3ObjectPrefix','String', null,                 "/${tenantId}/agreements/" ],
             [ 'fileStorage', 'S3BucketRegion','String', null,                 default_aws_region ],
