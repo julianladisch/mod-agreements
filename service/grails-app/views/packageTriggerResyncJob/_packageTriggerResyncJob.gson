@@ -1,0 +1,8 @@
+import org.olf.general.jobs.PackageTriggerResyncJob
+
+import groovy.transform.Field
+
+@Field
+PackageTriggerResyncJob packageTriggerResyncJob
+
+json tmpl."/persistentJob/persistentJob" (persistentJob: packageTriggerResyncJob)

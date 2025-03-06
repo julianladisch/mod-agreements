@@ -34,4 +34,13 @@ databaseChangeLog = {
       referencedTableName: "erm_resource"
     )
   }
+
+  changeSet(author: "efreestone (manual)", id: "20250305-1458-001") {
+    createTable(tableName: "package_trigger_resync_job") {
+      column(name: "id", type: "VARCHAR(255)") {
+        constraints(nullable: "false")
+      }
+      column(name: "package_id", type: "VARCHAR(36)")
+    }
+  }
 }

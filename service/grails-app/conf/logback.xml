@@ -113,17 +113,26 @@
     <appender-ref ref="JOB" />
   </logger>
 
+  <logger name="org.olf.UtilityService">
+    <level value="DEBUG" />
+    <appender-ref ref="JOB" />
+  </logger>
+
   <!-- PushKBSpecific ones -->
   <logger name="org.olf.general.pushKB.PushKBService">
     <level value="DEBUG" />
     <appender-ref ref="JOB" />
   </logger>
 
-  <logger name="org.olf.UtilityService">
+  <logger name="org.olf.general.pushKB.PushKBClient">
     <level value="DEBUG" />
     <appender-ref ref="JOB" />
   </logger>
 
+  <logger name="org.olf.PackageSyncService">
+    <level value="DEBUG" />
+    <appender-ref ref="JOB" />
+  </logger>
 
 <!-- Default level should be info. -->
   <root level="warn">

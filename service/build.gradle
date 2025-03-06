@@ -123,7 +123,6 @@ dependencies {
 
   //testImplementation("org.grails:views-json-testing-support")
   //testImplementation("org.spockframework:spock-core")
-  //testImplementation("io.micronaut:micronaut-http-client")
 
   /*  ---- Manually installed dependencies ---- */
 	implementation 'com.k_int.grails:web-toolkit-ce:10.1.0'
@@ -132,6 +131,8 @@ dependencies {
   }
 
   implementation 'io.github.http-builder-ng:http-builder-ng-core:1.0.4'
+  implementation("io.micronaut:micronaut-http-client")
+
   implementation 'org.codehaus.janino:janino:3.1.9'
   implementation "org.springframework.boot:spring-boot-starter-undertow" // Replaces spring-boot-starter-tomcat
   implementation "org.hibernate:hibernate-java8"

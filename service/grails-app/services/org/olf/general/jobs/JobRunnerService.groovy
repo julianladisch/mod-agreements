@@ -25,6 +25,7 @@ import org.olf.ImportService
 import org.olf.IdentifierService
 import org.olf.KbHarvestService
 import org.olf.KbManagementService
+import org.olf.PackageSyncService
 import org.olf.general.jobs.PersistentJob.Type
 import org.springframework.jdbc.support.JdbcUtils
 
@@ -64,6 +65,7 @@ class JobRunnerService implements EventPublisher {
   ComparisonService comparisonService
   IdentifierService identifierService
   SessionFactory sessionFactory
+  PackageSyncService packageSyncService
   GrailsApplication grailsApplication
 
   // Access to the inputStream of FileObjects is now via this service instead of directly
