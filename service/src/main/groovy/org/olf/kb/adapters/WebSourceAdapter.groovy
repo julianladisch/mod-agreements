@@ -11,6 +11,10 @@ import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 
+import groovy.xml.XmlSlurper
+import groovyx.net.http.ChainedHttpConfig
+import groovyx.net.http.FromServer
+
 @CompileStatic
 public abstract class WebSourceAdapter {
 
@@ -81,6 +85,11 @@ public abstract class WebSourceAdapter {
       
       if (expand) {
         expand.rehydrate(delegate, expand.owner, thisObject)()
+      }
+
+      // Manually swap to newer GPathResult
+      response.parser('text/xml'){ ChainedHttpConfig cfg, FromServer fs ->
+        return new XmlSlurper().parse(fs.inputStream)
       }
     })
   }
