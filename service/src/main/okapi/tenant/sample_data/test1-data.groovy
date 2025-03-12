@@ -5,7 +5,7 @@ log.info "Running test1-data tenant sample data file"
 
 import org.olf.kb.RemoteKB
 
-/* RemoteKB.findByName('GOKb_TEST') ?: (new RemoteKB(
+ RemoteKB.findByName('GOKb_TEST') ?: (new RemoteKB(
     name:'GOKb_TEST',
     type:'org.olf.kb.adapters.GOKbOAIAdapter',
     uri:'https://gokbt.gbv.de/gokb/oai/index',
@@ -15,9 +15,9 @@ import org.olf.kb.RemoteKB
     supportsHarvesting:true,
     activationEnabled:false,
     //cursor: "2022-08-09T19:34:42Z"
-).save(failOnError:true)) */
+).save(failOnError:true))
 
-RemoteKB.findByName('GOKb') ?: (new RemoteKB(
+/*RemoteKB.findByName('GOKb') ?: (new RemoteKB(
     name:'GOKb',
     type:'org.olf.kb.adapters.GOKbOAIAdapter',
     uri:'https://gokb.org/gokb/oai/index',
@@ -26,7 +26,7 @@ RemoteKB.findByName('GOKb') ?: (new RemoteKB(
     active:Boolean.TRUE,
     supportsHarvesting:true,
     activationEnabled:false
-).save(failOnError:true))
+).save(failOnError:true))*/
 
 /* RemoteKB.findByName('DEBUG') ?: (new RemoteKB(
     name:'DEBUG',

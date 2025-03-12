@@ -201,7 +201,7 @@ bootRun {
     '-noverify',
     '-XX:TieredStopAtLevel=1',
     //'-Xmx1374m'
-    '-Xmx1592m'
+    '-Xmx2592m'
   )
 	sourceResources sourceSets.main
 	String springProfilesActive = 'spring.profiles.active'

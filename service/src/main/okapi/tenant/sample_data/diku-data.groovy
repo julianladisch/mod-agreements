@@ -7,7 +7,7 @@ RemoteKB.findByName('GOKb_TEST') ?: (new RemoteKB(
     uri:'https://gokbt.gbv.de/gokb/oai/index',
     fullPrefix:'gokb',
     rectype: RemoteKB.RECTYPE_PACKAGE,
-    active:Boolean.FALSE,
+    active:Boolean.TRUE,
     supportsHarvesting:true,
     activationEnabled:false,
     // Uncomment to use cursor
