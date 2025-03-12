@@ -244,3 +244,6 @@ mvn org.folio:folio-module-descriptor-validator:1.0.0:validate -DmoduleDescripto
 ```
 
 This will create a file called `validate_module_descriptor_output.txt` containing the output of the validator. The github action does some cleanup and comments the errors on a PR (if present). The `grep`/`sed` commands with regex can be found in the workflow file `.github/validate-module`.
+
+### Resourcing
+The "Memory" requirement listed in the module descriptor for this module is unusually high. This is because the memory requirement is made assuming full range of module functionality is in use, including GOKb Harvest and processing of thousands of TIPPs. Installations not making use of the harvest functionality can run with substantially lower memory.
