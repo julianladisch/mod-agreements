@@ -1,3 +1,5 @@
+## 7.3.0 IN PROGRESS
+
 ## 7.2.0 2025-03-13
   * ERM-3629 mod-agreements OOM killed during GOKb harvest
   * ERM-3581 Support changing the sync status of a single package in the local KB
