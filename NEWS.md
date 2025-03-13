@@ -1,4 +1,10 @@
-## 7.2.0 IN PROGRESS
+## 7.2.0 2025-03-13
+  * ERM-3629 mod-agreements OOM killed during GOKb harvest
+  * ERM-3581 Support changing the sync status of a single package in the local KB
+  * ERM-3580 Support changing the sync status of multiple packages in the local KB
+  * ERM-3579 Support re-starting synchronisation of pushKB ingested packages
+  * ERM-3578 Add ingest metadata to ERM Resources
+  * ERM-3567 Implement boolean “synchronise” property for packages: mod-agreements
   * ERM-3470 S3 environment variable settings
     * Added new environment variable GLOBAL_S3_SECRET_KEY
     * Deprecated environment variable AWS_SECRET_ACCESS_KEY
