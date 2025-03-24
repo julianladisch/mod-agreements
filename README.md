@@ -24,12 +24,13 @@ While this README and the module description template offer some guidance on how
 ### Environment variables 
 This is a NON-EXHAUSTIVE list of environment variables which tweak behaviour in this module
 
-| Variable | Description                                                                                                                                                                                                                                                         | Options                                                    | Default                       |
-| -- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|-------------------------------|
-| TIRS | Allows the switching of the default "matching" logic underpinning when we declare two incoming titles as equivalent                                                                                                                                                 | `'IdFirst'`/`'TitleFirst'`/`'WorkSourceIdentifier'`        | `WorkSourceIdentifier`        |
-| SYNC_PACKAGES_VIA_HARVEST | Allows the turning on/off of "sync" for packages harvested via the GokbOAIAdapter                                                                                                                                                                                   | `'true'`/`'false'`                                         | `'false'`                     |
-| INGRESS_TYPE | Allows the switching between the two main ingress methods to get packages/titles into the local KB. These are mutually exclusive options, which is why they are surfaced as an environment variable                                                                 | `PushKB`/`Harvest`                                         | `Harvest` (Subject to change) |
-| KB_HARVEST_BUFFER | Allows changing of the default time it takes for mod-agreements to consider its local KB "stale". Note that this will _not_ change the frequency with which the Jobs are created in the system, simply the rate at which those jobs will finish without doing work. | `ONE_HOUR`/`ZERO`/Any integer -- representing milliseconds | `1*60*60*1000` (`ONE_HOUR`)     |
+| Variable                  | Description                                                                                                                                                                                                                                                         | Options                                                    | Default                       |
+| ------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|-------------------------------|
+| TIRS                      | Allows the switching of the default "matching" logic underpinning when we declare two incoming titles as equivalent                                                                                                                                                  | `'IdFirst'`/`'TitleFirst'`/`'WorkSourceIdentifier'`        | `WorkSourceIdentifier`        |
+| SYNC_PACKAGES_VIA_HARVEST | Allows the turning on/off of "sync" for packages harvested via the GokbOAIAdapter                                                                                                                                                                                    | `'true'`/`'false'`                                         | `'false'`                     |
+| INGRESS_TYPE              | Allows the switching between the two main ingress methods to get packages/titles into the local KB. These are mutually exclusive options, which is why they are surfaced as an environment variable                                                                 | `PushKB`/`Harvest`                                         | `Harvest` (Subject to change) |
+| KB_HARVEST_BUFFER         | Allows changing of the default time it takes for mod-agreements to consider its local KB "stale". Note that this will _not_ change the frequency with which the Jobs are created in the system, simply the rate at which those jobs will finish without doing work. | `ONE_HOUR`/`ZERO`/Any integer -- representing milliseconds | `1*60*60*1000` (`ONE_HOUR`)   |
+| GLOBAL_S3_SECRET_KEY      | Allows the setting of a global S3 secret key fallback. First module checks older S3SecretKey AppSetting. If not present then it falls back to this value.                                                                                                            | S3 secret                                                  |                               |
 
 ### Locks and failure to upgrade
 This module has a few "problem" scenarios that _shouldn't_ occur in general operation, but particular approaches to upgrades in particular can leave the module unable to self right. This occurs especially often where the module or container die/are killed regularly shortly after/during the upgrade.
@@ -77,17 +78,17 @@ This resource allows module owners to obtain tenant extensible lists of controll
 As of 2019-02-20 the following are defined:
 
 | Refdata Category | URL for values |
-| --- | --- |
-|TitleInstance.SubType|/erm/refdataValues/TitleInstance/SubType|
-|TitleInstance.Type|/erm/refdataValues/TitleInstance/Type|
-|InternalContact.Role|/erm/refdataValues/InternalContact/Role|
-|SubscriptionAgreementOrg.Role|/erm/refdataValues/SubscriptionAgreementOrg/Role|
-|SubscriptionAgreement.AgreementType|/erm/refdataValues/SubscriptionAgreement/AgreementType|
-|SubscriptionAgreement.RenewalPriority|/erm/refdataValues/SubscriptionAgreement/RenewalPriority|
-|Global.Yes_No|/erm/refdataValues/Global/Yes_No|
-|SubscriptionAgreement.AgreementStatus|/erm/refdataValues/SubscriptionAgreement/AgreementStatus|
-|Pkg.Type|/erm/refdataValues/Pkg/Type|
-|IdentifierOccurrence.Status|/erm/refdataValues/IdentifierOccurrence/Status|
+| ------------------------------------- | -------------------------------------------------------- |
+| TitleInstance.SubType                 | /erm/refdataValues/TitleInstance/SubType                 |
+| TitleInstance.Type                    | /erm/refdataValues/TitleInstance/Type                    |
+| InternalContact.Role                  | /erm/refdataValues/InternalContact/Role                  |
+| SubscriptionAgreementOrg.Role         | /erm/refdataValues/SubscriptionAgreementOrg/Role         |
+| SubscriptionAgreement.AgreementType   | /erm/refdataValues/SubscriptionAgreement/AgreementType   |
+| SubscriptionAgreement.RenewalPriority | /erm/refdataValues/SubscriptionAgreement/RenewalPriority |
+| Global.Yes_No                         | /erm/refdataValues/Global/Yes_No                         |
+| SubscriptionAgreement.AgreementStatus | /erm/refdataValues/SubscriptionAgreement/AgreementStatus |
+| Pkg.Type                              | /erm/refdataValues/Pkg/Type                              |
+| IdentifierOccurrence.Status           | /erm/refdataValues/IdentifierOccurrence/Status           |
 
 ## ModuleDescriptor
 
