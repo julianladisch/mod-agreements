@@ -11,3 +11,5 @@
 ## only keep the .keep files
 tools/testing/zk-single-kafka-single
 !.keep
+
+*.iml
