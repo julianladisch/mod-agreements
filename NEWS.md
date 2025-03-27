@@ -1,4 +1,6 @@
-## 7.3.0 IN PROGRESS
+## 7.2.1 2025-03-27
+  * ERM-3662 Patch mod-agreements/licenses/serials/service-interaction/oa for instability during update
+  * Updated Env vars table to include S3_GLOBAL_SECRET_KEY
 
 ## 7.2.0 2025-03-13
   * ERM-3629 mod-agreements OOM killed during GOKb harvest
