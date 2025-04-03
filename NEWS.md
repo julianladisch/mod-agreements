@@ -1,3 +1,6 @@
+## 7.1.6 2025-04-03
+  * ERM-3666 Prevent instability of grails modules during updates: Ramsons
+
 ## 7.1.5 2025-01-24
   * ERM-3570 Add missing required interfaces to Module Descriptor
 
