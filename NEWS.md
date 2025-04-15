@@ -1,3 +1,10 @@
+## 7.2.2 2025-04-15
+  * ERM-3660 Upgrade undertow from 2.2.28.Final to 2.2.37.Final fixing vulns
+  * ERM-3659 minio 8.5.17, kafka-clients 3.7.2, jackson 2.18.3 fixing vulns
+  * ERM-3658 S3 secret key in Agreements and licenses app settings is pre-populated incorrectly
+  * ERM-3438 Agreement start date not showing as updated after period updated
+
+
 ## 7.2.1 2025-03-27
   * ERM-3662 Patch mod-agreements/licenses/serials/service-interaction/oa for instability during update
   * Updated Env vars table to include S3_GLOBAL_SECRET_KEY

@@ -244,8 +244,8 @@ environments:
     kiwt:
       filestore:
         aws_region: "${aws.region:us-east-1}"
-        aws_url: "${aws.url}"
-        aws_secret: "${aws.secret.access.key}"
+        aws_url: "${aws.url:}"
+        aws_secret: "${aws.secret.access.key:}"
         aws_bucket: "${aws.bucket:none}"
         aws_access_key_id: "${aws.access.key.id:none}"
 
