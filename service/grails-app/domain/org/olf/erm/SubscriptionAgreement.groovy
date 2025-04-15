@@ -225,9 +225,31 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
   }
 
   public void calculateDates () {
+    LocalDate originalStartDate = this.startDate
+    LocalDate originalEndDate = this.endDate
+    LocalDate originalCancellationDeadline = this.cancellationDeadline
+
     startDate = PeriodService.calculateStartDate(periods)
     endDate = PeriodService.calculateEndDate(periods)
     cancellationDeadline = PeriodService.calculateCancellationDeadline(periods)
+
+    if (
+        startDate != originalStartDate ||
+        endDate != originalEndDate ||
+        cancellationDeadline != originalCancellationDeadline
+    ) {
+      // This is currently ONLY required when SubscriptionAgreement
+      // has a customProperty of type "MultiRefdata". This behaviour is
+      // a complete mystery to me, and while the below solves it, it seems
+      // a quick-and-dirty (pardon the pun) fix for some complicated
+      // grails domain interactions happening under the hood.
+      // I'd like to return to this and understand what's going wrong.
+      //
+      // In general I think the use of `beforeValidate`
+      // everywhere to persist what would otherwise be transient
+      // values is a pattern we should really strive to stamp out anyway
+      this.markDirty()
+    }
   }
 
   /**
@@ -238,6 +260,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
     Clonable.super.clone()
   }
 
+  @Transient
   public LocalDate getLocalDate() {
     LocalDate ld
     // Use the request if possible
@@ -264,6 +287,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
     ld
   }
 
+  @Transient
   public String findCurrentPeriod() {
     log.debug "Find current period"
     LocalDate ld = getLocalDate()
@@ -276,6 +300,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
     cpId
   }
 
+  @Transient
   public String findPreviousPeriod() {
     log.debug "Find previous period"
     LocalDate ld = getLocalDate()
@@ -284,6 +309,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
     ppId
   }
 
+  @Transient
   public String findNextPeriod() {
     log.debug "Find next period"
     LocalDate ld = getLocalDate()
