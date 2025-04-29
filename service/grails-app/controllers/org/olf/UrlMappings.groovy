@@ -196,7 +196,7 @@ class UrlMappings {
 
     "/erm/entitlementLogEntry" ( resources: 'EntitlementLogEntry')
 
-    "/erm/settings/appSettings" (resources: 'setting');
+    "/erm/settings/appSettings" (resources: 'setting')
 
     "/erm/pushKB/pkg" (controller: 'pushKB', action: 'pushPkg', method: 'POST')
     "/erm/pushKB/pci" (controller: 'pushKB', action: 'pushPci', method: 'POST')
@@ -212,5 +212,9 @@ class UrlMappings {
     }
 
     "/dashboard/definitions" (controller: 'dashboardDefinitions', action: 'getDefinitions' ,method: 'GET')
+
+    // Statistics endpoints. I think that we should be able to do this in a better mapping, but I can't figure it out rn
+    "/erm/statistics/kbCount" (controller: 'statistics', action: 'kbCount', method: 'GET')
+    "/erm/statistics/sasCount" (controller: 'statistics', action: 'agreementCount', method: 'GET')
   }
 }

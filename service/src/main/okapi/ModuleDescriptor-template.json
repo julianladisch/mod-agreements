@@ -974,6 +974,15 @@
           "methods": [
             "GET"
           ],
+          "pathPattern": "/erm/statistics/*",
+          "permissionsRequired": [
+            "erm.statistics.get"
+          ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
           "pathPattern": "/erm/settings*",
           "permissionsRequired": [
             "erm.settings.get"
@@ -1207,7 +1216,8 @@
         "erm.agreements.linkedLicenses.collection.get",
         "erm.usageDataProviders.collection.get",
         "erm.agreements.usageDataProviders.collection.get",
-        "erm.resources.view"
+        "erm.resources.view",
+        "erm.statistics.get"
       ]
     },
     {
@@ -2000,6 +2010,12 @@
       "replaces": [
         "erm.admin.action"
       ]
+    },
+    {
+      "permissionName": "erm.statistics.get",
+      "displayName": "ERM Statistics get",
+      "description": "Allows GET of several statistics and counts from the DB",
+      "visible": false
     },
     {
       "permissionName": "erm.settings.get",
