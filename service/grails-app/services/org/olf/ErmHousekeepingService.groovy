@@ -33,7 +33,7 @@ public class ErmHousekeepingService {
 
     // A process to ensure any unused Org records are deleted
     subscriptionAgreementCleanupService.triggerOrgsCleanup();
-    
+
     remoteKbCleanupService.checkLocal();
   }
 
@@ -57,7 +57,7 @@ public class ErmHousekeepingService {
           def default_aws_secret = grailsApplication.config.getProperty('kiwt.filestore.aws_secret')
           def default_aws_bucket = grailsApplication.config.getProperty('kiwt.filestore.aws_bucket')
           def default_aws_access_key_id = grailsApplication.config.getProperty('kiwt.filestore.aws_access_key_id')
- 
+
           // Bootstrap any app settings we may need
           [
             [ 'fileStorage', 'storageEngine', 'String', 'FileStorageEngines', 'LOB' ],
@@ -67,16 +67,26 @@ public class ErmHousekeepingService {
             [ 'fileStorage', 'S3BucketName',  'String', null,                 default_aws_bucket ?: "${tenantId}-shared" ],
             [ 'fileStorage', 'S3ObjectPrefix','String', null,                 "/${tenantId}/agreements/" ],
             [ 'fileStorage', 'S3BucketRegion','String', null,                 default_aws_region ],
+            [ 'agreements_display_settings', 'displaysuppressfromdiscovery_pci', 'Boolean', null, true ],
+            [ 'agreements_display_settings', 'displaysuppressfromdiscovery_agreement_line', 'Boolean', null, true ],
+            [ 'agreements_display_settings', 'displaysuppressfromdiscovery_title', 'Boolean', null, true ],
+            [ 'agreements_display_settings', 'hideaccordions_usage_data', 'Boolean', null, false ],
+            [ 'agreements_display_settings', 'hideeresourcesfunctionality', 'Boolean', null, false ],
+            [ 'agreements_display_settings', 'pagesize_agreement_lines', 'Integer', null, 10 ],
+            [ 'agreements_display_settings', 'pagesize_agreement_eresources', 'Integer', null, 10 ],
+            [ 'agreements_display_settings', 'pagesize_entitlement_options', 'Integer', null, 10 ],
+            [ 'agreements_display_settings', 'pagesize_package_contents', 'Integer', null, 10 ],
+            [ 'agreements_display_settings', 'pagesize_entitlements', 'Integer', null, 10 ],
           ].each { st_row ->
             log.debug("Check app setting ${st_row}");
-  
+
             AppSetting new_as = AppSetting.findBySectionAndKey(st_row[0], st_row[1]) ?: new AppSetting(
                                               section:st_row[0],
                                               key:st_row[1],
                                               settingType:st_row[2],
                                               vocab:st_row[3],
                                               value:st_row[4]).save(flush:true, failOnError:true);
- 
+
           }
 
           // Ensure the categories for the License properties.
@@ -97,12 +107,12 @@ public class ErmHousekeepingService {
               "primary": false
             ]
           ].each { Map definition ->
-            
+
             if (CustomPropertyDefinition.findByName(definition['name'])) {
               log.info ("Skipping adding CustomPropertyDefinition named ${definition['name']} as it already exists.")
               return
             }
-            
+
             final String type = definition.remove('type')
             CustomPropertyDefinition cpd = CustomPropertyDefinition.forType(type, definition)
             cpd.save(failOnError:true)
