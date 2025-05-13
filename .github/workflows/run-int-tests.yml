@@ -50,6 +50,7 @@ jobs:
       - name: Run integration test
         working-directory: ./service
         env:
+          TEST_PATH: ${{inputs.testPath}}
           TIRS: ${{inputs.tirsEnvVar}}
           SYNC_PACKAGES_VIA_HARVEST: ${{inputs.syncViaHarvestEnvVar}}
           INGRESS_TYPE: ${{inputs.ingressTypeEnvVar}}
@@ -57,7 +58,7 @@ jobs:
           echo "TIRS=$TIRS"
           echo "SYNC_PACKAGES_VIA_HARVEST=$SYNC_PACKAGES_VIA_HARVEST"
           echo "INGRESS_TYPE=$INGRESS_TYPE"
-          ./gradlew integrationTest --tests ${{ inputs.testPath }}
+          ./gradlew integrationTest --tests "$TEST_PATH"
       - name: Upload Test Results Files
         uses: actions/upload-artifact@v4
         if: always()
