@@ -9,7 +9,6 @@ class UrlMappings {
     "/erm/compare" (controller: 'comparison', action: 'compare', method: 'POST')
 
     "/"(controller: 'application', action:'index')
-    "500"(view: '/error')
     "404"(view: '/notFound')
 
     // Map /kbs to RemoteKBController
