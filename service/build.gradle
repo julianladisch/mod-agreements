@@ -127,7 +127,7 @@ dependencies {
   //testImplementation("org.spockframework:spock-core")
 
   /*  ---- Manually installed dependencies ---- */
-	implementation 'com.k_int.grails:web-toolkit-ce:10.1.0'
+	implementation 'com.k_int.grails:web-toolkit-ce:10.2.0'
 	implementation('com.k_int.okapi:grails-okapi:7.4.0') {
     exclude group: 'com.vaadin.external.google', module: 'android-json'
   }
