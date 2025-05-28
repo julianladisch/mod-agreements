@@ -640,11 +640,18 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
   }
 
   // Subset can be "all", "current", "dropped" or "future"
-  // ASSUMES there is a subscription agreement
-  private String buildStaticResourceHQL(Boolean isCount = false) {
-    String topLine = """
+  private String buildStaticResourceHQL(String subset, Boolean isCount = false) {
+    // Build up a subquery of the resources
+    // We are doing this as a subquery
+    // because it will deduplicate the resources.... DISTINCT does not always work as expected
+    String subquery = """(
+      ${buildStaticResourceIdsHQL(subset)}
+    )
+    """;
+
+    return """
       SELECT ${isCount ? 'COUNT(res.id)' : 'res'} FROM PackageContentItem as res
-      WHERE res.id IN :resIds
+      WHERE res.id IN ${subquery}
       ${isCount ? '' : 'ORDER BY res.pti.titleInstance.name'}
     """.toString();
   }
@@ -667,14 +674,13 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
         queryParams.put('today', today)
       }
 
-      final List<String> resIds = PackageContentItem.executeQuery(
-        buildStaticResourceIdsHQL(subset),
-        queryParams
-      );
-  
+      // Build the query strings out (Could do inline)
+      String finalQuery = buildStaticResourceHQL(subset)
+      String finalQueryCount = buildStaticResourceHQL(subset, true)
+
       final List<PackageContentItem> results = PackageContentItem.executeQuery(
-        buildStaticResourceHQL(),
-        [resIds: resIds],
+        finalQuery,
+        queryParams,
         [
           max: perPage,
           offset: (page - 1) * perPage
@@ -684,8 +690,8 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
 
       if (params.boolean('stats')) {
         final Integer count = PackageContentItem.executeQuery(
-          buildStaticResourceHQL(true),
-          [resIds: resIds],
+          finalQueryCount,
+          queryParams,
         )[0].toInteger();
 
         final def resultsMap = [
