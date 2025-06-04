@@ -1,7 +1,30 @@
 import org.olf.kb.IdentifierOccurrence
+import org.olf.kb.ErmTitleList
+import org.olf.kb.ErmResource
+import org.olf.kb.Work
 
-import groovy.transform.*
+import org.grails.orm.hibernate.cfg.GrailsHibernateUtil
+
+import groovy.transform.Field
+
+def shouldExpand = ['status', 'identifier']
+def shouldExclude = ['id', 'resource']
+
+if (controllerName == 'identifier') {
+  shouldExclude << 'identifier'
+}
+
+ErmTitleList titleList = GrailsHibernateUtil.unwrapIfProxy(identifierOccurrence.resource) as ErmTitleList
 
 @Field
 IdentifierOccurrence identifierOccurrence
-json g.render(identifierOccurrence, [expand: ['identifier', 'status'], excludes: ['id']])
+json g.render(identifierOccurrence, [expand: shouldExpand, excludes: shouldExclude]) {
+  if (controllerName == 'identifier') {
+    resource {
+      // For now, ErmResource/Work are the important two
+      g.inline(titleList) {
+        'class' titleList.class.name
+      }
+    }
+  }
+}

@@ -215,5 +215,14 @@ class UrlMappings {
     // Statistics endpoints. I think that we should be able to do this in a better mapping, but I can't figure it out rn
     "/erm/statistics/kbCount" (controller: 'statistics', action: 'kbCount', method: 'GET')
     "/erm/statistics/sasCount" (controller: 'statistics', action: 'agreementCount', method: 'GET')
+
+
+
+    "/erm/identifiers"(resources: 'identifier', excludes: ['update', 'patch', 'save', 'edit', 'create']) { // GET ONLY
+      // TODO Other endpoints here
+      collection {
+        "/namespaces" (controller: 'identifier', action: 'namespaces', method: 'GET')
+      }
+    }
   }
 }

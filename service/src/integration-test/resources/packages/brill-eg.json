@@ -11976,5 +11976,15 @@
       "url": "https://brill.com/18750214",
       "platformName": "JSTOR"
     }
+  ],
+  "identifiers": [
+    {
+      "namespace": "gokb_uuid",
+      "value": "8f4f8080-4030-4636-8b56-1ef2bcc1f2a2"
+    },
+    {
+      "namespace": "gokb_id",
+      "value": "6406628"
+    }
   ]
 }

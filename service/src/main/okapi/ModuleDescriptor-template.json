@@ -1032,6 +1032,33 @@
           "permissionsRequired": [
             "erm.pushkb.get"
           ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/identifiers",
+          "permissionsRequired": [
+            "erm.identifiers.collection.get"
+          ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/identifiers/{id}",
+          "permissionsRequired": [
+            "erm.identifiers.item.get"
+          ]
+        },
+        {
+          "methods": [
+            "GET"
+          ],
+          "pathPattern": "/erm/identifiers/namespaces",
+          "permissionsRequired": [
+            "erm.identifiers.namespaces.collection.get"
+          ]
         }
       ]
     },
@@ -1771,6 +1798,31 @@
       ]
     },
     {
+      "permissionName": "erm.identifiers.collection.get",
+      "displayName": "ERM: Identifiers collection get",
+      "description": "Get a collection of identifier records"
+    },
+    {
+      "permissionName": "erm.identifiers.item.get",
+      "displayName": "ERM: Identifiers item get",
+      "description": "Get an identifier record"
+    },
+    {
+      "permissionName": "erm.identifiers.namespaces.collection.get",
+      "displayName": "ERM: Identifier namespaces get",
+      "description": "Get a collection of identifier namespace records"
+    },
+    {
+      "permissionName": "erm.identifiers.view",
+      "displayName": "ERM: Identifier view",
+      "description": "Permissions to view identifier records",
+      "subPermissions": [
+        "erm.identifiers.collection.get",
+        "erm.identifiers.item.get",
+        "erm.identifiers.namespaces.collection.get"
+      ]
+    },
+    {
       "permissionName": "erm.resources.view",
       "subPermissions": [
         "erm.resources.collection.get",
@@ -1781,7 +1833,8 @@
         "erm.resources.entitlementOptions.collection.get",
         "erm.resources.entitlementOptions.static.collection.get",
         "erm.entitlements.view",
-        "erm.kbs.collection.get"
+        "erm.kbs.collection.get",
+        "erm.identifiers.view"
       ]
     },
     {
