@@ -172,8 +172,8 @@ if (sources) {
 
       // If there was nothing in the buffer then pull down the next item. 
       if (currentRow == null) {
-        // Grab the next.
-        currentRow = currentPointers[i].hasNext() ? currentPointers[i].next() : null
+        // Grab the next. For Grails 6.2.3 need to cast currentPointers[i].next() to Object[] or static type checking fails.
+        currentRow = currentPointers[i].hasNext() ? (Object[])  currentPointers[i].next() : null
       } else {
         // Buffer had data... Null it out.
         currentRowBuffers[i] = null
@@ -206,8 +206,8 @@ if (sources) {
                 GrailsHibernateUtil.unwrapIfProxy(currentRow[1]) as PlatformTitleInstance, ti,
                 (currentRow.length == 4 ? GrailsHibernateUtil.unwrapIfProxy(currentRow[3]) : null) as Entitlement)
             
-            // Grab the next row if there is one.
-            currentRow = currentPointers[i].hasNext() ? currentPointers[i].next() : null
+            // Grab the next row if there is one. For Grails 6.2.3 need to cast currentPointers[i].next() to Object[] or static type checking fails
+            currentRow = currentPointers[i].hasNext() ? (Object[])  currentPointers[i].next() : null
             ti = (currentRow ? GrailsHibernateUtil.unwrapIfProxy(currentRow[2]) : null) as TitleInstance
           }
           

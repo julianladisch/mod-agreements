@@ -5,7 +5,7 @@ import groovy.transform.CompileStatic
 import groovyx.net.http.HttpBuilder
 import groovyx.net.http.HttpConfig
 import groovyx.net.http.HttpObjectConfig
-
+import java.net.HttpURLConnection
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor
@@ -34,6 +34,7 @@ public abstract class WebSourceAdapter {
           )
           
           client.clientCustomizer { HttpURLConnection conn ->
+            conn = (HttpURLConnection) conn // For some reason compiler treats 'conn' as an Object which fails static type checking without this cast.
             conn.connectTimeout = 5000    // 5 Seconds
             conn.readTimeout    = 900000  // 15 Mins
           }
