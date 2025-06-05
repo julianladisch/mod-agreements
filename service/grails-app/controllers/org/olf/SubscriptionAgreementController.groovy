@@ -147,15 +147,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
                     ge 'activeTo', today
                   }
                 }
-                or {
-                  isNull 'accessStart'
-                  le 'accessStart', today
-                }
-                or {
-                  isNull 'accessEnd'
-                  ge 'accessEnd', today
-                }
-                  
+
                 projections {
                   property ('id')
                 }

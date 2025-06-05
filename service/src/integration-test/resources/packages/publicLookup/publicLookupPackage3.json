@@ -1,0 +1,108 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "test_package_3",
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "kint_test_003",
+    "_intenalId": 276432871388,
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": false
+  },
+  "packageContents": [
+    {
+      "title": "Academy of Management Learning & Education",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1944-9585"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "1537-260X"
+        },
+        {
+          "value": "2106015-0",
+          "namespace": "zdb"
+        }
+      ],
+      "coverage": [
+        {
+          "startVolume": "1",
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "endVolume": "8",
+          "endIssue": "12",
+          "endDate": "2009-12-31"
+        },
+        {
+          "startVolume": "2",
+          "startIssue": "1",
+          "startDate": "2015-01-01",
+          "endVolume": null,
+          "endIssue": null,
+          "endDate": null
+        }
+      ],
+      "embargo": "R10Y;P1M",
+      "coverageDepth": "fulltext",
+      "coverageNote": "New for 2014. This record is a test case for split coverage",
+      "url": "http://jstor.org/amle/",
+      "platformName": "JSTOR",
+      "_platformId": 627,
+      "sourceIdentifierNamespace": "gokb",
+      "sourceIdentifier": "24134b52-05cd-47d3-ae4e-02d1e2d9c4fb",
+      "accessStart": "2014-01-01"
+    },
+    {
+      "title": "The Personal History of David Copperfield",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "9780141974330"
+        }
+      ],
+      "siblingInstanceIdentifiers": [],
+      "coverage": [
+        {
+          "startVolume": "1",
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "endVolume": "8",
+          "endIssue": "12",
+          "endDate": "2009-12-31"
+        },
+        {
+          "startVolume": "2",
+          "startIssue": "1",
+          "startDate": "2015-01-01",
+          "endVolume": null,
+          "endIssue": null,
+          "endDate": null
+        }
+      ],
+      "embargo": null,
+      "coverageDepth": "full text",
+      "coverageNote": "New for 2014. This record is a test case for split coverage",
+      "url": "https://www.gutenberg.org/files/43111/43111-h/43111-h.htm",
+      "platformName": "Project Gutenberg",
+      "_platformId": 627,
+      "sourceIdentifierNamespace": "projectGutenberg",
+      "sourceIdentifier": "43111",
+      "accessStart": "2020-01-01"
+    }
+  ]
+}

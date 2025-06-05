@@ -1,0 +1,64 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "test_package_4",
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "kint_test_004",
+    "_intenalId": 276432871389,
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": false
+  },
+  "packageContents": [
+    {
+      "title": "Academy of Management Journal",
+      "instanceMedium": "electronic",
+      "instanceMedia": "journal",
+      "instanceIdentifiers": [
+        {
+          "namespace": "eissn",
+          "value": "1948-0989"
+        }
+      ],
+      "siblingInstanceIdentifiers": [
+        {
+          "namespace": "issn",
+          "value": "0001-4273"
+        }
+      ],
+      "coverage": [
+        {
+          "startVolume": "1",
+          "startIssue": "1",
+          "startDate": "2002-01-01",
+          "endVolume": "8",
+          "endIssue": "12",
+          "endDate": "2009-12-31"
+        },
+        {
+          "startVolume": "2",
+          "startIssue": "1",
+          "startDate": "2015-01-01",
+          "endVolume": null,
+          "endIssue": null,
+          "endDate": null
+        }
+      ],
+      "embargo": null,
+      "coverageDepth": "fulltext",
+      "coverageNote": "New for 2014. This record is a test case for split coverage",
+      "url": "http://aom.org/amj/",
+      "platformName": "Academy of Management",
+      "_platformId": 627,
+      "sourceIdentifierNamespace": "gokb",
+      "sourceIdentifier": "def0ba15-4215-4630-a90f-4671e524fc09"
+    }
+  ]
+}
