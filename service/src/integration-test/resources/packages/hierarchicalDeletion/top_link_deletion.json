@@ -1,0 +1,39 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "K-Int Link - Deletion Test Package 001",
+    "_intenalId": 276432871385,
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "deletion_test_package_link_1",
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": true
+  },
+  "packageContents": [{
+    "title": "Test aaa-000",
+    "instanceMedium": "electronic",
+    "instanceMedia": "journal",
+    "instanceIdentifiers": [{
+      "namespace": "eissn",
+      "value": "2212-6988"
+    }],
+    "siblingInstanceIdentifiers": [{
+      "namespace": "issn",
+      "value": "2212-697X"
+    }],
+    "embargo": null,
+    "coverage": [],
+    "url": "http://testpackageA.com/journal/index.php?journalID=packageA",
+    "platformName": "K-Int",
+    "sourceIdentifierNamespace": "K-Int",
+    "sourceIdentifier": "aaa-000"
+  }
+]
+}

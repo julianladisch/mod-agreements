@@ -1,0 +1,5048 @@
+{
+    "simple": {
+        "inputResource": {
+            "PCI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                "TI1",
+                                "TI2"
+                            ],
+                            "work": [
+                                "Work1"
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "top-link": {
+        "inputResource": {
+            "PCI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI1,PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                "TI1",
+                                "TI2"
+                            ],
+                            "work": [
+                                "Work1"
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "ti-link": {
+        "inputResource": {
+            "PCI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI1,PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1",
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI1",
+                                "TI2"
+                            ],
+                            "work": [
+                                "Work1"
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1,PTI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+
+                            ],
+                            "ti": [
+
+                            ],
+                            "work": [
+
+                            ],
+                            "pci": [
+
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "work-link": {
+        "inputResource": {
+            "PCI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI2"
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI2"
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI2"
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI2"
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PCI1,PCI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1",
+                                "PTI2"
+                            ],
+                            "ti": [
+                                "TI1",
+                                "TI2"
+                            ],
+                            "work": [
+                                "Work1"
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI2"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                "PTI1"
+                            ],
+                            "ti": [
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1",
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI2"
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                "PCI1"
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "PTI1,PTI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI1": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            },
+            "TI1,TI2": {
+                "agreementLine": {
+                    "Empty": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    },
+                    "PCI1,PCI2,PTI1,PTI2": {
+                        "expectedValue": {
+                            "pti": [
+                                
+                            ],
+                            "ti": [
+                                
+                            ],
+                            "work": [
+                                
+                            ],
+                            "pci": [
+                                
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

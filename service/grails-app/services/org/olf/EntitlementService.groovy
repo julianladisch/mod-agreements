@@ -37,6 +37,8 @@ public class EntitlementService {
     WHERE ent.resource.id = :resId
   """
 
+
+
   @Transactional(propagation = MANDATORY)
   public void handleErmResourceChange(ErmResource res) {
     Date now = new Date();

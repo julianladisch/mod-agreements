@@ -981,6 +981,24 @@
         },
         {
           "methods": [
+            "POST"
+          ],
+          "pathPattern": "/erm/resource/delete/*",
+          "permissionsRequired": [
+            "erm.resources.delete.collection.execute"
+          ]
+        },
+        {
+          "methods": [
+            "POST"
+          ],
+          "pathPattern": "/erm/resource/markForDelete/*",
+          "permissionsRequired": [
+            "erm.resources.markForDelete.collection.execute"
+          ]
+        },
+        {
+          "methods": [
             "GET"
           ],
           "pathPattern": "/erm/settings*",
@@ -1226,6 +1244,15 @@
       "permissionName": "erm.agreements.property.validate",
       "displayName": "Validate SubscriptionAgreement property",
       "description": "Validate a property on a SubscriptionAgreement record"
+    },
+    {
+      "permissionName": "erm.resources.delete",
+      "displayName": "ERM delete resources",
+      "description": "Mark resources for deletion and delete them",
+      "subPermissions": [
+        "erm.resources.delete.collection.execute",
+        "erm.resources.markForDelete.collection.execute"
+      ]
     },
     {
       "permissionName": "erm.agreements.view",
@@ -2063,6 +2090,18 @@
       "replaces": [
         "erm.admin.action"
       ]
+    },
+    {
+      "permissionName": "erm.resources.markForDelete.collection.execute",
+      "displayName": "ERM: Mark for delete resource collection",
+      "description": "Allows POST to mark resources for deletion.",
+      "visible": false
+    },
+    {
+      "permissionName": "erm.resources.delete.collection.execute",
+      "displayName": "ERM: Delete resource collection",
+      "description": "Allows DELETE of resources from the DB",
+      "visible": false
     },
     {
       "permissionName": "erm.statistics.get",

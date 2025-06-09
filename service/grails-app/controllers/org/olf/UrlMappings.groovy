@@ -109,7 +109,7 @@ class UrlMappings {
       "/metadata"        (controller: 'packageIngressMetadata', action: 'getMetadataForPackage', method: 'GET')
     }
 
-    "/erm/pci"(resources:'packageContentItem')
+    "/erm/pci"(resources:'packageContentItem', excludes: ['delete'])
     "/erm/platforms"(resources:'platform')
     "/erm/entitlements"(resources:'entitlement', excludes: ['patch']) {
       collection {
@@ -170,6 +170,20 @@ class UrlMappings {
       "/entitlements/related" ( action:'relatedEntitlements', method: 'GET' )
     }
 
+    group "/erm/resource", {
+      group '/markForDelete', {
+        '/pci'(controller: 'resource', action: 'markPcisForDelete', method: 'POST')
+        '/pti'(controller: 'resource', action: 'markPtisForDelete', method: 'POST')
+        '/ti'(controller: 'resource', action: 'markTisForDelete', method: 'POST')
+      }
+
+      group '/delete', {
+        '/pci'(controller: 'resource', action: 'deletePcis', method: 'POST')
+        '/pti'(controller: 'resource', action: 'deletePtis', method: 'POST')
+        '/ti'(controller: 'resource', action: 'deleteTis', method: 'POST')
+      }
+    }
+
     "/erm/files" ( resources:'fileUpload', excludes: ['update', 'patch', 'save', 'edit', 'create']) {
       collection {
         '/' (controller: "fileUpload", action: "uploadFile", method: 'POST')
@@ -212,11 +226,10 @@ class UrlMappings {
 
     "/dashboard/definitions" (controller: 'dashboardDefinitions', action: 'getDefinitions' ,method: 'GET')
 
-    // Statistics endpoints. I think that we should be able to do this in a better mapping, but I can't figure it out rn
-    "/erm/statistics/kbCount" (controller: 'statistics', action: 'kbCount', method: 'GET')
-    "/erm/statistics/sasCount" (controller: 'statistics', action: 'agreementCount', method: 'GET')
-
-
+    group '/erm/statistics', {
+      '/kbCount'(controller: 'statistics', action: 'kbCount', method: 'GET')
+      '/sasCount'(controller: 'statistics', action: 'agreementCount', method: 'GET')
+    }
 
     "/erm/identifiers"(resources: 'identifier', excludes: ['update', 'patch', 'save', 'edit', 'create']) { // GET ONLY
       // TODO Other endpoints here

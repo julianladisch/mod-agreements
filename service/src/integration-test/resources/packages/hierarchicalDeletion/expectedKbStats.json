@@ -1,0 +1,33 @@
+{
+  "simple": {
+    "ErmResource":5,
+    "Pkg":1,
+    "PackageContentItem":1,
+    "PlatformTitleInstance":1,
+    "TitleInstance":2,
+    "Work":1},
+  "ti-link": {
+    "ErmResource":7,
+    "Pkg":2,
+    "PackageContentItem":2,
+    "PlatformTitleInstance":2,
+    "TitleInstance":2,
+    "Work":1
+  },
+  "top-link": {
+    "ErmResource":6,
+    "Pkg":2,
+    "PackageContentItem":2,
+    "PlatformTitleInstance":1,
+    "TitleInstance":2,
+    "Work":1
+  },
+  "work-link": {
+    "ErmResource":8,
+    "Pkg":2,
+    "PackageContentItem":2,
+    "PlatformTitleInstance":2,
+    "TitleInstance":2,
+    "Work":1
+  }
+}

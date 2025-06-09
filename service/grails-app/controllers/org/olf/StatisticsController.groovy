@@ -26,7 +26,7 @@ class StatisticsController {
 
 
   public kbCount() {
-    respond getCounts(["ErmResource", "Pkg", "PackageContentItem", "PlatformTitleInstance", "TitleInstance"])
+    respond getCounts(["ErmResource", "Pkg", "PackageContentItem", "PlatformTitleInstance", "TitleInstance", "Work"])
   }
 
   public agreementCount() {

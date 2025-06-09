@@ -1,9 +1,7 @@
 package org.olf
 
-import grails.converters.JSON
-import org.hibernate.Hibernate
-import org.hibernate.sql.JoinType
 
+import org.hibernate.Hibernate
 import org.olf.erm.Entitlement
 import org.olf.kb.ErmResource
 import org.olf.kb.PackageContentItem
@@ -13,11 +11,12 @@ import org.olf.kb.TitleInstance
 
 import com.k_int.okapi.OkapiTenantAwareController
 import grails.gorm.DetachedCriteria
-import org.hibernate.criterion.CriteriaSpecification
-import org.hibernate.criterion.Projections
 import grails.gorm.multitenancy.CurrentTenant
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
+import org.olf.kb.http.request.body.DeleteBody
+import org.springframework.http.HttpStatus
+
 import java.time.Duration
 import java.time.Instant
 
@@ -26,10 +25,13 @@ import static org.olf.general.Constants.Queries.*
 @Slf4j
 @CurrentTenant
 class ResourceController extends OkapiTenantAwareController<ErmResource> {
+  ErmResourceService ermResourceService
+  UtilityService utilityService
 
   ResourceController() {
     // True means read only. This should block post and puts to this.
     super(ErmResource, true)
+
   }
 
   DetachedCriteria pciSubQuery = PackageContentItem.where({
@@ -455,6 +457,85 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
       })
     })
     log.debug("completed in ${Duration.between(start, Instant.now()).toSeconds()} seconds")
+  }
+
+  // For /erm/resources/markForDelete/pcis
+  def markPcisForDelete(DeleteBody deleteBody) {
+    log.info("ResourceController::markPcisForDelete({})", deleteBody)
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.markForDelete(ids, PackageContentItem.class)
+    }
+  }
+
+  // For /erm/resources/markForDelete/ptis
+  def markPtisForDelete(DeleteBody deleteBody) {
+    log.info("ResourceController::markPtisForDelete({})", deleteBody)
+
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.markForDelete(ids, PlatformTitleInstance.class);
+    }
+  }
+
+  // For /erm/resources/markForDelete/tis
+  def markTisForDelete(DeleteBody deleteBody) {
+    log.info("ResourceController::markTisForDelete({})", deleteBody)
+
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.markForDelete(ids, TitleInstance.class);
+    }
+  }
+
+  // For /erm/resources/delete/pci
+  def deletePcis(DeleteBody deleteBody) {
+    log.info("ResourceController::deletePcis({})", deleteBody)
+
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.deleteResources(ids, PackageContentItem.class)
+    }
+  }
+
+  // For /erm/resources/delete/ptis
+  def deletePtis(DeleteBody deleteBody) {
+    log.info("ResourceController::deletePtis({})", deleteBody)
+
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.deleteResources(ids, PlatformTitleInstance.class)
+    }
+  }
+
+  // For /erm/resources/delete/tis
+  def deleteTis(DeleteBody deleteBody) {
+    log.info("ResourceController::deleteTis({})", deleteBody)
+
+    handleDeleteCall(deleteBody) { ids ->
+      return ermResourceService.deleteResources(ids, TitleInstance.class)
+    }
+  }
+
+  /**
+   * Private helper method to handle the common logic for delete actions (markForDelete/delete).
+   * @param deleteBody The deleteBody object (must implement Validateable and have a resources property corresponding to ErmResource IDs)
+   * @param serviceCall A closure that takes a List<String> of IDs and calls the appropriate service method.
+   */
+  private void handleDeleteCall(DeleteBody deleteBody, Closure serviceCall) {
+    if (deleteBody == null) {
+      log.warn("Received null delete body for handleDeleteCall({})", deleteBody)
+      respond([message: "Nothing in delete request body.", statusCode: HttpStatus.BAD_REQUEST.value()], status: HttpStatus.BAD_REQUEST.value())
+      return
+    }
+
+    if (!utilityService.checkValidBinding(deleteBody)) {
+      // NOTE!! We can only assume this because there is only one validation rule on DeleteBody
+      respond([message: "DeleteBody.resources must be non-null and not empty", statusCode: HttpStatus.BAD_REQUEST.value()], status: HttpStatus.BAD_REQUEST.value())
+      return
+    }
+
+    try {
+      respond serviceCall.call(deleteBody.resources)
+    } catch (Exception e) {
+      log.error("Error during delete service call for IDs {}: {}", deleteBody.resources, e.message, e)
+      respond ([message: "Error during delete call", statusCode: HttpStatus.INTERNAL_SERVER_ERROR.value()], status: HttpStatus.INTERNAL_SERVER_ERROR.value())
+    }
   }
 }
 
