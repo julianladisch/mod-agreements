@@ -49,12 +49,17 @@ Deletes each resource type and saves which IDs are deleted in the response. Any 
 
 Endpoints look like: 
 
-- {{baseUrl}}/erm/resource/markForDelete/pci
-- {{baseUrl}}/erm/resource/delete/pci
+POST {{baseUrl}}/erm/resource/markForDelete/[resource_type]
 
-and accept a request body like: 
+POST {{baseUrl}}/erm/resource/delete/[resource_type]
+
+where *resource_type* can be one of "pci", "pti", "ti".
+
+Both endpoints accept a request body like: 
 
 ```{"resources": ["resource_id"]}```
+
+The request body requires a minimum size of one resource id, or it will throw a validation error. The request body should only include resource ids of the resource_type parameter used. Any ids that cannot be found for a chosen resource_type will be skipped.
 
 We implemented separate [/delete](https://github.com/folio-org/mod-agreements/blob/da1f030fd174d3efab1aa38aca5b7553331f58c0/service/grails-app/controllers/org/olf/ResourceController.groovy#L489) and [/markForDelete](https://github.com/folio-org/mod-agreements/blob/da1f030fd174d3efab1aa38aca5b7553331f58c0/service/grails-app/controllers/org/olf/ResourceController.groovy#L463) endpoints. This allows potential in the future for users to query which resources will be deleted, prior to carrying out the delete.
 
@@ -96,6 +101,62 @@ And /markForDelete returns a response shape like:
 }
 ```
 
+## Permissions
+
+Group-level perms:
+
+```
+{
+  "permissionName": "erm.resources.delete",
+  "displayName": "ERM delete resources",
+  "description": "Mark resources for deletion and delete them",
+  "subPermissions": [
+    "erm.resources.delete.collection.execute",
+    "erm.resources.markForDelete.collection.execute"
+  ]
+}
+```
+
+Endpoint-level perms:
+
+```
+{
+  "methods": [
+    "POST"
+  ],
+  "pathPattern": "/erm/resource/delete/*",
+  "permissionsRequired": [
+    "erm.resources.delete.collection.execute"
+  ]
+},
+{
+  "methods": [
+    "POST"
+  ],
+  "pathPattern": "/erm/resource/markForDelete/*",
+  "permissionsRequired": [
+    "erm.resources.markForDelete.collection.execute"
+  ]
+}
+
+```
+
+Perm descriptions:
+
+```
+ {
+    "permissionName": "erm.resources.markForDelete.collection.execute",
+    "displayName": "ERM: Mark for delete resource collection",
+    "description": "Allows POST to mark resources for deletion.",
+    "visible": false
+  },
+  {
+    "permissionName": "erm.resources.delete.collection.execute",
+    "displayName": "ERM: Delete resource collection",
+    "description": "Allows DELETE of resources from the DB",
+    "visible": false
+  }
+```
 
 ## Testing
 
