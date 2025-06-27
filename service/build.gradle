@@ -110,8 +110,6 @@ dependencies {
   // 5.8.15 of spring-security-core and spring-security-web are affected by https://spring.io/security/cve-2024-38827
   implementation("org.springframework.security:spring-security-core:5.8.16")
   implementation("org.springframework.security:spring-security-web:5.8.16")
-  // 5.3.38 is affected by https://spring.io/security/cve-2024-38808
-  implementation("org.springframework:spring-expression:5.3.39")
 
   implementation("org.grails.plugins:views-json")
   implementation("org.grails.plugins:views-json-templates")
@@ -165,7 +163,7 @@ dependencies {
 
 
   implementation 'com.opencsv:opencsv:5.7.1'
-  implementation 'commons-io:commons-io:2.7'
+  implementation 'commons-io:commons-io:2.14.0'
   // Grails 5 and up no longer supports groovy files for logback config
   implementation('io.github.virtualdogbert:logback-groovy-config:1.14.1')
   compileOnly 'ch.qos.logback:logback-classic:1.4.7'
