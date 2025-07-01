@@ -6,7 +6,7 @@ public class DeleteBody implements Validateable {
   List<String> resources
 
   static constraints = {
-    resources nullable: true, minSize: 1
+    resources nullable: false, minSize: 1
   }
 
   @Override

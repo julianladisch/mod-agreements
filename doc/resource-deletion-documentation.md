@@ -63,43 +63,148 @@ The request body requires a minimum size of one resource id, or it will throw a 
 
 We implemented separate [/delete](https://github.com/folio-org/mod-agreements/blob/da1f030fd174d3efab1aa38aca5b7553331f58c0/service/grails-app/controllers/org/olf/ResourceController.groovy#L489) and [/markForDelete](https://github.com/folio-org/mod-agreements/blob/da1f030fd174d3efab1aa38aca5b7553331f58c0/service/grails-app/controllers/org/olf/ResourceController.groovy#L463) endpoints. This allows potential in the future for users to query which resources will be deleted, prior to carrying out the delete.
 
-The /delete endpoint returns a response shape like:
+The /delete/pkg endpoint creates a job to run the delete, as for large packages the delete can take a long time. It returns a response shape like:
 
 ```
 {
-  "deletedIds": {
-    "pci": [
-      "3ccc4f35-3cae-4cf5-af5e-f20b044ae7c3"
-    ],
-    "pti": [
-      "5f2aa89e-fa56-4595-993c-7008ccf11f06"
-    ],
-    "ti": [
-      "02ca4d9f-c3c2-4a46-859f-c706611ca4e5",
-      "e781e8ed-6b76-4123-b159-3e115ee9c7f6"
-    ],
-    "work": [
-      "090ea8b5-2aed-4ba8-b7c8-420e0b3e569a"
-    ]
-  },
-  "statistics": {
-    "pciDeleted": 1,
-    "ptiDeleted": 1,
-    "tiDeleted": 2,
-    "workDeleted": 1
+  "id": "645f10c3-9529-4257-89ae-d89d9c91b04c",
+  "deletionJobType": "PackageDeletionJob",
+  "dateCreated": 1750859036777,
+  "packageIds": "[\"8def5448-0a20-4740-955d-597ae3bfc11d\"]",
+  "name": "ResourceDeletionJob, package IDs: [8def5448-0a20-4740-955d-597ae3bfc11d] 2025-06-25T13:43:56.679467501Z",
+  "status": {
+    "id": "ff80818197a6e1b00197a6e1f5010035"
   }
 }
 ```
 
-And /markForDelete returns a response shape like:
+The /delete/{pci/pti/ti} endpoint returns a response shape like:
+
 ```
 {
-  "pci": [],
-  "pti": [],
-  "ti": [],
-  "work": []
+  "deleted": {
+    "resourceIds": {
+      "pci": [
+        "cd72744d-7f8c-44d0-b783-353cff04118e"
+      ],
+      "pti": [
+        "8fc228b7-d59f-41b1-b7a8-f5099d66df49"
+      ],
+      "ti": [
+        "5deff56b-431b-4803-8816-7055ef28b0b4",
+        "ca965893-e3e4-4a65-b7fa-2bb9af17bf40"
+      ],
+      "work": [
+        "0fdbe743-31be-471e-bcd4-3f7236c99a8c"
+      ]
+    },
+    "statistics": {
+      "pci": 1,
+      "pti": 1,
+      "ti": 2,
+      "work": 1
+    }
+  },
+  "markedForDeletion": {
+    "resourceIds": {
+      "pci": [
+        "cd72744d-7f8c-44d0-b783-353cff04118e"
+      ],
+      "pti": [
+        "8fc228b7-d59f-41b1-b7a8-f5099d66df49"
+      ],
+      "ti": [
+        "5deff56b-431b-4803-8816-7055ef28b0b4",
+        "ca965893-e3e4-4a65-b7fa-2bb9af17bf40"
+      ],
+      "work": [
+        "0fdbe743-31be-471e-bcd4-3f7236c99a8c"
+      ]
+    },
+    "statistics": {
+      "pci": 1,
+      "pti": 1,
+      "ti": 2,
+      "work": 1
+    }
+  }
 }
 ```
+
+/markForDelete/pkg returns a response shape like:
+
+```
+{
+  "packages": {
+    "e787f741-ef80-4f85-9ba0-1a68083ede13": {
+      "resourceIds": {
+        "pci": [
+          "cd72744d-7f8c-44d0-b783-353cff04118e"
+        ],
+        "pti": [
+          "8fc228b7-d59f-41b1-b7a8-f5099d66df49"
+        ],
+        "ti": [
+          "5deff56b-431b-4803-8816-7055ef28b0b4",
+          "ca965893-e3e4-4a65-b7fa-2bb9af17bf40"
+        ],
+        "work": [
+          "0fdbe743-31be-471e-bcd4-3f7236c99a8c"
+        ]
+      },
+      "statistics": {
+        "pci": 1,
+        "pti": 1,
+        "ti": 2,
+        "work": 1
+      }
+    }
+  },
+  "statistics": {
+    "pci": 1,
+    "pti": 1,
+    "ti": 2,
+    "work": 1
+  }
+}
+```
+
+/markForDelete/{pci/pti/ti} returns a response shape like:
+```
+{
+  "resourceIds": {
+    "pci": [
+      "cd72744d-7f8c-44d0-b783-353cff04118e"
+    ],
+    "pti": [
+      "8fc228b7-d59f-41b1-b7a8-f5099d66df49"
+    ],
+    "ti": [
+      "5deff56b-431b-4803-8816-7055ef28b0b4",
+      "ca965893-e3e4-4a65-b7fa-2bb9af17bf40"
+    ],
+    "work": [
+      "0fdbe743-31be-471e-bcd4-3f7236c99a8c"
+    ]
+  },
+  "statistics": {
+    "pci": 1,
+    "pti": 1,
+    "ti": 2,
+    "work": 1
+  }
+}
+```
+
+We would expect users to be deleting all resources inside a package. Therefore a /pkg endpoint exists:
+
+POST {{baseUrl}}/erm/resource/markForDelete/pkg 
+
+This endpoint collects all the IDs for PCIs in the package, then runs the internal delete method using that list of PCIs.
+
+The /pkg endpoint only accepts one Pkg ID in the list in the request body.
+
+The /pkg endpoint response shape will 
 
 ## Permissions
 
@@ -224,8 +329,3 @@ If we decided another structure needed testing, several updates would need to be
 
 
 ## Notes
-
-
-## Future
-
-- Select a package for deletion

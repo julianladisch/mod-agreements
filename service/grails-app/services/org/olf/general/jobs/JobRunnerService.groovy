@@ -1,5 +1,6 @@
 package org.olf.general.jobs
 
+import org.olf.ErmResourceService
 import services.k_int.core.SystemDataService
 
 import static org.springframework.transaction.annotation.Propagation.MANDATORY
@@ -66,6 +67,7 @@ class JobRunnerService implements EventPublisher {
   IdentifierService identifierService
   SessionFactory sessionFactory
   PackageSyncService packageSyncService
+  ErmResourceService ermResourceService
   GrailsApplication grailsApplication
 
   // Access to the inputStream of FileObjects is now via this service instead of directly

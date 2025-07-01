@@ -172,12 +172,14 @@ class UrlMappings {
 
     group "/erm/resource", {
       group '/markForDelete', {
+        '/pkg'(controller: 'resource', action: 'markPackageForDelete', method: 'POST')
         '/pci'(controller: 'resource', action: 'markPcisForDelete', method: 'POST')
         '/pti'(controller: 'resource', action: 'markPtisForDelete', method: 'POST')
         '/ti'(controller: 'resource', action: 'markTisForDelete', method: 'POST')
       }
 
       group '/delete', {
+        '/pkg'(controller: 'resource', action: 'deletePackage', method: 'POST')
         '/pci'(controller: 'resource', action: 'deletePcis', method: 'POST')
         '/pti'(controller: 'resource', action: 'deletePtis', method: 'POST')
         '/ti'(controller: 'resource', action: 'deleteTis', method: 'POST')

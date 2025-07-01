@@ -1,54 +1,51 @@
 package org.olf.kb.http.response
 
-class DeleteResponse {
-
-  DeletionCounts statistics;
-  MarkForDeleteResponse deletedIds;
-
-  DeleteResponse() {
-  }
-
-  DeleteResponse(DeletionCounts statistics) {
-    this.statistics = statistics
-  }
-
-  DeleteResponse(DeletionCounts statistics, MarkForDeleteResponse deletedIds) {
-    this.statistics = statistics
-    this.deletedIds = deletedIds
-  }
-
-  @Override
-  public String toString() {
-    return "DeleteResponse{" +
-      "deletedIds=" + deletedIds +
-      "statistics=" + statistics +
-      '}';
-  }
+// Store markForDelete data
+class MarkForDeletionGroup {
+  MarkForDeleteMap resourceIds = new MarkForDeleteMap()
+  DeletionCounts statistics = new DeletionCounts()
 }
 
+// Store deletion data
+class DeletedGroup {
+  MarkForDeleteMap resourceIds = new MarkForDeleteMap()
+  DeletionCounts statistics = new DeletionCounts()
+}
+
+// The final response object
+class DeleteResponse {
+  MarkForDeletionGroup markedForDeletion = new MarkForDeletionGroup()
+  DeletedGroup deleted = new DeletedGroup()
+}
+
+// Store the number of resources for markForDelete or delete methods.
 class DeletionCounts {
-  Integer pciDeleted;
-  Integer ptiDeleted;
-  Integer tiDeleted;
-  Integer workDeleted;
+  Integer pci;
+  Integer pti;
+  Integer ti;
+  Integer work;
 
   DeletionCounts() {
+    this.pci = 0
+    this.pti = 0
+    this.ti = 0
+    this.work = 0
   }
 
-  DeletionCounts(Integer pciDeleted, Integer ptiDeleted, Integer tiDeleted, Integer workDeleted) {
-    this.pciDeleted = pciDeleted
-    this.ptiDeleted = ptiDeleted
-    this.tiDeleted = tiDeleted
-    this.workDeleted = workDeleted
+  DeletionCounts(Integer pci, Integer pti, Integer ti, Integer work) {
+    this.pci = pci
+    this.pti = pti
+    this.ti = ti
+    this.work = work
   }
 
   @Override
   public String toString() {
     return "DeletionCounts{" +
-      "pciDeleted=" + pciDeleted +
-      ", ptiDeleted=" + ptiDeleted +
-      ", tiDeleted=" + tiDeleted +
-      ", workDeleted=" + workDeleted +
+      "pciDeleted=" + pci +
+      ", ptiDeleted=" + pti +
+      ", tiDeleted=" + ti +
+      ", workDeleted=" + work +
       '}';
   }
 }

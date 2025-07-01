@@ -1,11 +1,8 @@
 package org.olf.DeleteResources
 
 import grails.testing.mixin.integration.Integration
-import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpException
-import org.apache.http.client.HttpResponseException
-import org.olf.kb.http.response.MarkForDeleteResponse
 
 @Integration
 @Slf4j
@@ -43,10 +40,10 @@ class NegativeTestSpec extends DeletionBaseSpec {
     then:
     log.info(operationResponse.toString())
     // Nothing deleted when id doesn't exist.
-    operationResponse.deletedIds.pci.size() == 0
-    operationResponse.deletedIds.pti.size() == 0
-    operationResponse.deletedIds.ti.size() == 0
-    operationResponse.deletedIds.work.size() == 0
+    operationResponse.deleted.statistics.pci == 0
+    operationResponse.deleted.statistics.pti == 0
+    operationResponse.deleted.statistics.ti == 0
+    operationResponse.deleted.statistics.work == 0
   }
 
   void "Request body contains valid resource ID and an ID that does not exist" () {
@@ -63,11 +60,11 @@ class NegativeTestSpec extends DeletionBaseSpec {
     then:
     log.info(operationResponse.toString())
     // Only resources from the valid PCI are deleted.
-    operationResponse.statistics.pciDeleted == 1
-    operationResponse.statistics.ptiDeleted == 1
-    operationResponse.statistics.tiDeleted == 2
-    operationResponse.statistics.workDeleted == 1
-    operationResponse.deletedIds.pci as Set == expectedPcis
+    operationResponse.deleted.statistics.pci == 1
+    operationResponse.deleted.statistics.pti == 1
+    operationResponse.deleted.statistics.ti == 2
+    operationResponse.deleted.statistics.work == 1
+    operationResponse.deleted.resourceIds.pci as Set == expectedPcis
   }
 
   void "The request body contains a valid PTI ID, but the PCI endpoint is hit" () {
@@ -84,10 +81,10 @@ class NegativeTestSpec extends DeletionBaseSpec {
     then:
     log.info(operationResponse.toString())
     // Nothing deleted because the ID doesn't exist in the PCIs table.
-    operationResponse.deletedIds.pci.size() == 0
-    operationResponse.deletedIds.pti.size() == 0
-    operationResponse.deletedIds.ti.size() == 0
-    operationResponse.deletedIds.work.size() == 0
+    operationResponse.deleted.statistics.pci == 0
+    operationResponse.deleted.statistics.pti == 0
+    operationResponse.deleted.statistics.ti == 0
+    operationResponse.deleted.statistics.work == 0
   }
 
   void "The request body has an invalid key name - i.e. the key is not 'resources'" () {
@@ -103,7 +100,7 @@ class NegativeTestSpec extends DeletionBaseSpec {
 
     then:
     def e = thrown(HttpException)
-    e.statusCode == 500
-    e.body.message=="Error during delete call"
+    e.statusCode == 400
+    e.body.message=="DeleteBody.resources must be non-null and not empty"
   }
 }

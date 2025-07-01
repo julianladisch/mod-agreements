@@ -177,6 +177,11 @@
     <appender-ref ref="JOB" />
   </logger>
 
+  <logger name="org.olf.ErmResourceService">
+    <level value="DEBUG" />
+    <appender-ref ref="JOB" />
+  </logger>
+
   <!-- PushKBSpecific ones -->
   <logger name="org.olf.general.pushKB.PushKBService">
     <level value="DEBUG" />
