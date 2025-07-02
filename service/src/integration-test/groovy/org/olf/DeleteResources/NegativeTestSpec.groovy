@@ -53,7 +53,7 @@ class NegativeTestSpec extends DeletionBaseSpec {
     when:
     Map operationResponse
     Set<String> expectedPcis = findInputResourceIds(["PCI1"] as List, "simple")
-    String endpoint = "/erm/resource/delete/pci"
+    String endpoint = "/erm/resource/delete/pci?includeIds=true"
     List<String> idsForProcessing = ["thisIdDoesNotExist", expectedPcis[0]]
     operationResponse = doPost(endpoint, [resources: idsForProcessing])
 
@@ -74,7 +74,7 @@ class NegativeTestSpec extends DeletionBaseSpec {
     when:
     Map operationResponse
     Set<String> Pti = findInputResourceIds(["PTI1"] as List, "simple")
-    String endpoint = "/erm/resource/delete/pci"
+    String endpoint = "/erm/resource/delete/pci?includeIds=true"
     List<String> idsForProcessing = [Pti[0]]
     operationResponse = doPost(endpoint, [resources: idsForProcessing])
 

@@ -133,7 +133,7 @@ class ResourceDeletionSpec extends DeletionBaseSpec {
 
     // Only make a call if there are IDs to process for the designated resource type
     if (!testCase.resourceTypeToMark.isEmpty() && !idsForProcessing.isEmpty()) {
-      String endpoint = "/erm/resource/markForDelete/${testCase.resourceTypeToMark}" // e.g., /pci, /pti, /ti
+      String endpoint = "/erm/resource/markForDelete/${testCase.resourceTypeToMark}?includeIds=true" // IncludeIds flag is required for tests.
       String payloadKey = "resources"
       operationResponse = doPost(endpoint, [(payloadKey): idsForProcessing])
     } else {

@@ -16,6 +16,10 @@ import grails.gorm.multitenancy.CurrentTenant
 import grails.gorm.transactions.Transactional
 import groovy.util.logging.Slf4j
 import org.olf.kb.http.request.body.DeleteBody
+import org.olf.kb.http.response.DeleteResponse
+import org.olf.kb.http.response.DeletionCounts
+import org.olf.kb.http.response.MarkForDeleteResponse
+import org.olf.kb.http.response.PackageMarkForDeleteResponse
 import org.springframework.http.HttpStatus
 
 import java.time.Duration
@@ -461,38 +465,58 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
   }
 
   // For /erm/resources/markForDelete/pkg
-  def markPackageForDelete(DeleteBody deleteBody) {
+  PackageMarkForDeleteResponse markPackageForDelete(DeleteBody deleteBody) {
     log.info("ResourceController::markPackageForDelete({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-
-      return ermResourceService.markForDeleteFromPackage(ids)
+      PackageMarkForDeleteResponse response = ermResourceService.markForDeleteFromPackage(ids)
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
   // For /erm/resources/markForDelete/pcis
   def markPcisForDelete(DeleteBody deleteBody) {
     log.info("ResourceController::markPcisForDelete({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
+
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.markForDelete(ids, PackageContentItem.class)
+      def response = ermResourceService.markForDelete(ids, PackageContentItem.class)
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
   // For /erm/resources/markForDelete/ptis
   def markPtisForDelete(DeleteBody deleteBody) {
     log.info("ResourceController::markPtisForDelete({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.markForDelete(ids, PlatformTitleInstance.class);
+      def response = ermResourceService.markForDelete(ids, PlatformTitleInstance.class);
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
   // For /erm/resources/markForDelete/tis
   def markTisForDelete(DeleteBody deleteBody) {
     log.info("ResourceController::markTisForDelete({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.markForDelete(ids, TitleInstance.class);
+      def response = ermResourceService.markForDelete(ids, TitleInstance.class);
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
@@ -501,34 +525,50 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
     log.info("ResourceController::deletePackage({})", deleteBody)
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.createDeleteResourcesJob(ids, ResourceDeletionJobType.PackageDeletionJob)
+      def response = ermResourceService.createDeleteResourcesJob(ids, ResourceDeletionJobType.PackageDeletionJob)
+      return response
     }
   }
 
   // For /erm/resources/delete/pci
   def deletePcis(DeleteBody deleteBody) {
     log.info("ResourceController::deletePcis({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.deleteResources(ids, PackageContentItem)
+      def response = ermResourceService.deleteResources(ids, PackageContentItem)
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
   // For /erm/resources/delete/ptis
   def deletePtis(DeleteBody deleteBody) {
     log.info("ResourceController::deletePtis({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.deleteResources(ids, PlatformTitleInstance)
+      def response = ermResourceService.deleteResources(ids, PlatformTitleInstance)
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
   // For /erm/resources/delete/tis
   def deleteTis(DeleteBody deleteBody) {
     log.info("ResourceController::deleteTis({})", deleteBody)
+    Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      return ermResourceService.deleteResources(ids, TitleInstance)
+      def response = ermResourceService.deleteResources(ids, TitleInstance)
+      if (!includeIds) {
+        response = hideIds(response)
+      }
+      return response
     }
   }
 
@@ -557,5 +597,36 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
       respond ([message: "Error during delete call", statusCode: HttpStatus.INTERNAL_SERVER_ERROR.value()], status: HttpStatus.INTERNAL_SERVER_ERROR.value())
     }
   }
+
+  // Helper methods to hide IDs from /markForDelete and /delete endpoint responses.
+  private DeleteResponse hideIds(DeleteResponse response) {
+    response.markedForDeletion.resourceIds = null
+    response.deleted.resourceIds = null
+    return response
+  }
+
+  private MarkForDeleteResponse hideIds(MarkForDeleteResponse response) {
+    response.resourceIds = null
+    return response
+  }
+
+  private PackageMarkForDeleteResponse hideIds(PackageMarkForDeleteResponse response) {
+    Map<String, DeletionCounts> countsOnlyResponse = [:]
+
+    response.packages.keySet().each { packageId ->
+      // In the other hideIds methods, we can set resourceIds = null and it is no longer parsed shown in the response object.
+      // However, Grails seems to treat nested layers of response objects differently, so "resourceIds: null" appears in
+      // the response. The below is a workaround which takes the statistics from the original response and builds a new response
+      // shape *for each package* that omits the resourceIds property.
+      MarkForDeleteResponse originalResponse = response.packages[packageId]
+      countsOnlyResponse[packageId] = [statistics: originalResponse.statistics]
+    }
+    return [
+      packages: countsOnlyResponse,
+      statistics: response.statistics
+    ]
+  }
+
+
 }
 
