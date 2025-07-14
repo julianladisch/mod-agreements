@@ -171,14 +171,6 @@ databaseChangeLog = {
     addPrimaryKey(tableName: "string_template", columnNames: "strt_id", constraintName: "string_templatePK")
   }
 
-  // 4-0
-  changeSet(author: "mchaib (manual)", id: "20250627-1424-023") {
-    preConditions(onFail: 'MARK_RAN') {
-      not { primaryKeyExists(tableName: 'string_template_scopes') }
-    }
-    addPrimaryKey(tableName: "string_template_scopes", columnNames: "string_template_id", constraintName: "string_template_scopesPK")
-  }
-
   //5-5
   changeSet(author: "mchaib (manual)", id: "20250627-1424-024") {
     preConditions(onFail: 'MARK_RAN') {
@@ -193,22 +185,6 @@ databaseChangeLog = {
       not { primaryKeyExists(tableName: 'subscription_agreement_document_attachment') }
     }
     addPrimaryKey(tableName: "subscription_agreement_document_attachment", columnNames: "subscription_agreement_docs_id", constraintName: "subscription_agreement_document_attachmentPK")
-  }
-
-  // docs changelog
-  changeSet(author: "mchaib (manual)", id: "20250627-1424-026") {
-    preConditions(onFail: 'MARK_RAN') {
-      not { primaryKeyExists(tableName: 'subscription_agreement_ext_lic_doc') }
-    }
-    addPrimaryKey(tableName: "subscription_agreement_ext_lic_doc", columnNames: "saeld_sa_fk", constraintName: "subscription_agreement_ext_lic_docPK")
-  }
-
-  // suppl docs changelog
-  changeSet(author: "mchaib (manual)", id: "20250627-1424-027") {
-    preConditions(onFail: 'MARK_RAN') {
-      not { primaryKeyExists(tableName: 'subscription_agreement_supp_doc') }
-    }
-    addPrimaryKey(tableName: "subscription_agreement_supp_doc", columnNames: "sasd_sa_fk", constraintName: "subscription_agreement_supp_docPK")
   }
 
   // initial model changelog
