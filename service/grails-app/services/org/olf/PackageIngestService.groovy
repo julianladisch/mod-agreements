@@ -333,6 +333,14 @@ AccessEnd/${result.updatedAccessEnd}\
         pkg.availabilityScopeFromString = package_data.header.availabilityScope
       }
 
+      if (package_data.header.sourceTitleCount) {
+        pkg.sourceTitleCount = package_data.header.sourceTitleCount
+      }
+
+      if (package_data.header.sourceDataCreated) {
+        pkg.sourceDataCreated = package_data.header.sourceDataCreated
+      }
+
       // DO NOT UPDATE syncContentsFromSource.
 
       pkg.vendor = vendor
