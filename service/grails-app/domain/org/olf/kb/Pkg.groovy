@@ -38,6 +38,7 @@ public class Pkg extends ErmResource implements MultiTenant<Pkg> {
   
   // Declaring this here will provide defaults for the type defined in ErmResource but not create
   // a subclass specific column
+  // NOTE: This column does not exist on the Pkg table in the database, so we shouldn't try and reference it.
   @Defaults(['Aggregated Full Text', 'Abstracts and Index', 'Package'])
   RefdataValue type
 

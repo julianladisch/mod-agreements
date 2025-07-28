@@ -50,17 +50,20 @@ public class TitleInstance extends ErmResource implements MultiTenant<TitleInsta
   
   // For grouping sibling title instances together - EG Print and Electronic editions of the same thing
   Work work
-  
+
   // Journal/Book/...
+  // NOTE: This column does not exist on the TitleInstance table in the database, so we shouldn't try and reference it.
   @CategoryId(defaultInternal=false)
   RefdataValue publicationType
 
   // serial / monograph system
+  // NOTE: This column does not exist on the TitleInstance table in the database, so we shouldn't try and reference it.
   @CategoryId(defaultInternal=true)
   @Defaults(['Monograph', 'Serial'])
   RefdataValue type
 
   // Print/Electronic
+  // NOTE: This column does not exist on the TitleInstance table in the database, so we shouldn't try and reference it.
   @CategoryId(defaultInternal=true)
   @Defaults(['Print', 'Electronic'])
   RefdataValue subType
