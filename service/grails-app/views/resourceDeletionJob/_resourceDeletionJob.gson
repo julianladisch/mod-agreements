@@ -1,0 +1,16 @@
+import org.olf.general.jobs.ResourceDeletionJob
+import groovy.json.JsonSlurper
+
+model {
+    ResourceDeletionJob resourceDeletionJob
+}
+
+// Get fields from the persistent job template
+String templateJsonString = g.render(template: "/persistentJob/persistentJob", model: [persistentJob: resourceDeletionJob])
+Map jobTemplate = new JsonSlurper().parseText(templateJsonString) as Map
+
+// Add additional fields to the standard job template view
+jobTemplate.deletionJobType = resourceDeletionJob.deletionJobType
+jobTemplate.resourceInputs = resourceDeletionJob.resourceInputs
+
+json jobTemplate

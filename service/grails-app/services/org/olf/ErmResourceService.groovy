@@ -394,7 +394,7 @@ public class ErmResourceService {
   @CompileStatic(SKIP)
   public createDeleteResourcesJob(List<String> idInputs, ResourceDeletionJobType type) {
     ResourceDeletionJob job = new ResourceDeletionJob([
-      name: "ResourceDeletionJob, resource IDs: ${idInputs?.size()?.toString()} ${Instant.now()}",
+      name: "${type.toString()} for ${idInputs?.size()?.toString()} resources. ${Instant.now()}",
       resourceInputs: new JSON(idInputs).toString(), // Should always be a list of strings for now.
       deletionJobType: type
     ])
