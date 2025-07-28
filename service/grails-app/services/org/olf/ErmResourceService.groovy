@@ -288,7 +288,6 @@ public class ErmResourceService {
 
   // Delete Resources Internal --- steps through resource types and deletes at each step. Collects IDs and counts of deleted resources for response.
   @CompileStatic(SKIP)
-  @Transactional
   private DeleteResponse deleteResourcesInternal(MarkForDeleteMap resourcesToDelete) {
     DeleteResponse response = new DeleteResponse()
 
@@ -300,21 +299,24 @@ public class ErmResourceService {
       return response
     }
 
-    // Delete each type of resource.
-    if (resourcesToDelete.pci && !resourcesToDelete.pci.isEmpty()) {
-      response.deleted.resourceIds.pci = deleteIds(PackageContentItem, resourcesToDelete.pci)
-    }
+    // Create a transaction to ensure all related resources are deleted together or rolled back on failure.
+    ErmResource.withNewTransaction{
+      // Delete each type of resource.
+      if (resourcesToDelete.pci && !resourcesToDelete.pci.isEmpty()) {
+        response.deleted.resourceIds.pci = deleteIds(PackageContentItem, resourcesToDelete.pci)
+      }
 
-    if (resourcesToDelete.pti && !resourcesToDelete.pti.isEmpty()) {
-      response.deleted.resourceIds.pti = deleteIds(PlatformTitleInstance, resourcesToDelete.pti)
-    }
+      if (resourcesToDelete.pti && !resourcesToDelete.pti.isEmpty()) {
+        response.deleted.resourceIds.pti = deleteIds(PlatformTitleInstance, resourcesToDelete.pti)
+      }
 
-    if (resourcesToDelete.ti && !resourcesToDelete.ti.isEmpty()) {
-      response.deleted.resourceIds.ti = deleteIds(TitleInstance, resourcesToDelete.ti)
-    }
+      if (resourcesToDelete.ti && !resourcesToDelete.ti.isEmpty()) {
+        response.deleted.resourceIds.ti = deleteIds(TitleInstance, resourcesToDelete.ti)
+      }
 
-    if (resourcesToDelete.work && !resourcesToDelete.work.isEmpty()) {
-      response.deleted.resourceIds.work = deleteIds(Work, resourcesToDelete.work)
+      if (resourcesToDelete.work && !resourcesToDelete.work.isEmpty()) {
+        response.deleted.resourceIds.work = deleteIds(Work, resourcesToDelete.work)
+      }
     }
 
     log.info("Deletion complete.")
@@ -331,25 +333,23 @@ public class ErmResourceService {
   private Set<String> deleteIds(Class domainClass, Collection<String> ids) {
     Set<String> successfullyDeletedIds = new HashSet<>()
 
-    // Transaction magic is crucial for this method to run efficiently.
-    domainClass.withSession { currentSess ->
-      domainClass.withTransaction {
-        domainClass.withNewSession { newSess ->
-          domainClass.withTransaction {
-            ids.each { String id ->
+    // Session magic is needed to keep the deletion efficient.
+    domainClass.withSession { session ->
+      ids.eachWithIndex { String id, int i ->
               // For each ID, find the domain instance (e.g. the PCI with id xyz)
               def instance = domainClass.get(id)
 
               if (instance) {
-                instance.delete() // delete the instance using GORM (will cascade to related objects)
+                instance.delete(flush: false) // Use flush:false to batch the deletes. The final flush happens on transaction commit.
                 successfullyDeletedIds.add(id) // track the id that has been deleted
               } else {
                 log.warn("Could not find instance of {} with id {} to delete.", domainClass.name, id)
                 // we should never hit this, but useful to log incase.
               }
-            }
-          }
-          newSess.clear()
+        if (i > 0 && i % 100 == 0) {
+          // Flush and clear every 100 ids. The flush is used to clear memory by sending a batch of deletes to the DB (WITHOUT comitting them - which happens at the end of the transaction)
+          session.flush()
+          session.clear() // After the flush sends the deletes to the DB, we can clear the session, freeing up memory. Note - clear should never be called before flush.
         }
       }
     }
@@ -375,7 +375,9 @@ public class ErmResourceService {
 
     // Each package is passed to deleteResources individually.
     pkgIds.forEach{ String id -> {
+      log.info("Starting delete for pkg: {} at {}", id, Instant.now())
       outputMap.put(id, deleteResources([id], Pkg))
+      log.info("Deletion finished for pkg: {} at {}", id, Instant.now())
     }}
 
     // return a map of form: {pkgId1: {DeleteResponse}, pkdId2: {DeleteResponse}} or {}
