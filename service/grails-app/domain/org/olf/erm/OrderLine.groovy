@@ -1,8 +1,9 @@
-package org.olf.erm;
+package org.olf.erm
 
 import com.k_int.web.toolkit.domain.traits.Clonable
 
 import grails.gorm.MultiTenant
+import groovy.util.logging.Slf4j
 
 public class OrderLine implements MultiTenant<OrderLine>, Clonable<OrderLine> {
 	

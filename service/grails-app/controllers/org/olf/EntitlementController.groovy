@@ -1,8 +1,7 @@
 package org.olf
 
+import com.k_int.accesscontrol.grails.AccessPolicyAwareController
 import org.olf.erm.Entitlement
-
-import com.k_int.okapi.OkapiTenantAwareController
 
 import grails.gorm.multitenancy.CurrentTenant
 import groovy.util.logging.Slf4j
@@ -15,8 +14,7 @@ import grails.gorm.transactions.Transactional
  */
 @Slf4j
 @CurrentTenant
-class EntitlementController extends OkapiTenantAwareController<EntitlementController>  {
-
+class EntitlementController extends AccessPolicyAwareController<Entitlement> {
   EntitlementController() {
     super(Entitlement)
   }

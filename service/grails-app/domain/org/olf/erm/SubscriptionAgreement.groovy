@@ -1,5 +1,7 @@
 package org.olf.erm
 
+import com.k_int.accesscontrol.core.policycontrolled.PolicyControlled
+
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -28,6 +30,10 @@ import javax.persistence.Transient
  * Subscription agreement - object holding details about an SA connecting a resource list (Composed Of packages and platform-titles).
  */
 @Slf4j
+@PolicyControlled(
+  resourceIdColumn = "sa_id", // For grails modules we use SQL Column name for resourceId
+  resourceIdField = "id"
+)
 public class SubscriptionAgreement extends ErmTitleList implements CustomProperties,MultiTenant<SubscriptionAgreement>, Clonable<SubscriptionAgreement> {
 
   static cloneStaticValues = [

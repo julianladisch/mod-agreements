@@ -5,6 +5,10 @@
 }
 */
 
+configurations {
+  lombokDelombok
+}
+
 buildscript {
   repositories {
 		//mavenLocal()
@@ -40,6 +44,7 @@ else {
 version "${calculated_version}"
 group 'org.olf'
 
+apply plugin:"java"
 apply plugin:"eclipse"
 apply plugin:"idea"
 //apply plugin:"war"
@@ -191,6 +196,12 @@ dependencies {
 	implementation "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
 	implementation "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
 
+  /* FIXME Temporary imports for accesscontrol work -- SHOULD BE EXTERNAL LIBRARY */
+  lombokDelombok 'org.projectlombok:lombok:1.18.38'
+  compileOnly("org.projectlombok:lombok:1.18.38")
+  annotationProcessor("org.projectlombok:lombok:1.18.38")
+  implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.0' // For Java 8 date/time support in Jackson
+
 	/* ---- Custom non profile deps ---- */
 	implementation 'org.apache.kafka:kafka-clients:3.7.2'
 	implementation 'com.github.everit-org.json-schema:org.everit.json.schema:1.14.4'
@@ -326,6 +337,57 @@ tasks.withType(GroovyCompile) {
 		forkOptions.jvmArgs = ['-Xmx1024m']
 	}
 }
+
+// Set up delomboking task for javadoc generation
+task delombok(type: JavaExec) {
+  // This task implicitly depends on the resolution of 'configurations.lombokDelombok'
+  // when we access its 'resolve()' method.
+
+  // Define the output directory for delomboked sources
+  def delombokOutputDir = layout.buildDirectory.dir("delombok").get().asFile
+
+  // Clear the output directory before delomboking
+  doFirst {
+    delete delombokOutputDir
+    delombokOutputDir.mkdirs()
+  }
+
+  // Resolve the lombokDelombok configuration to get the actual JAR file(s)
+  // .singleFile will throw an error if more than one file is resolved, which is what we want for lombok.jar
+  def lombokJarFile = configurations.lombokDelombok.resolve()
+
+
+  // Set the classpath for the JavaExec task to the resolved lombok.jar file
+  classpath = files(lombokJarFile)
+
+  // Main class to execute within lombok.jar for delomboking
+  main = 'lombok.launch.Main'
+
+  // Arguments for the delombok command:
+  // 'delombok' command, source directory, '-d', and destination directory
+  args 'delombok', sourceSets.main.java.srcDirs.join(' '), '-d', delombokOutputDir.getAbsolutePath()
+
+  // Store the output directory for later use by the javadoc task
+  ext.outputDir = delombokOutputDir
+}
+
+
+
+task generateJavadocs(type: Javadoc) {
+  dependsOn delombok
+  source = delombok.ext.outputDir
+}
+
+tasks.withType(Javadoc).configureEach {
+  classpath += sourceSets.main.compileClasspath
+  classpath += configurations.annotationProcessor
+}
+
+tasks.withType(JavaExec).configureEach {
+  classpath += sourceSets.main.compileClasspath
+  classpath += configurations.annotationProcessor
+}
+
 
 tasks.named('bootJarMainClassName') { it.mustRunAfter(tasks.named('compileGsonViews')) }
 tasks.named('compileIntegrationTestGroovy') { it.mustRunAfter(tasks.named('compileGsonViews')) }

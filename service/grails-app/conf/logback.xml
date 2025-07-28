@@ -11,6 +11,18 @@
     </encoder>
   </appender>
 
+  <!-- ACCESS CONTROL -->
+  <!-- TODO Decisions should be made about the levels for these -->
+  <logger name="com.k_int.folio">
+    <level value="INFO" />
+  </logger>
+
+  <logger name="com.k_int.accesscontrol">
+    <level value="INFO" />
+  </logger>
+  <!-- /ACCESS CONTROL -->
+
+
   <logger name="org.hibernate.orm.deprecation">
     <level value="ERROR" />
   </logger>
@@ -41,20 +53,16 @@
 
 
   <!--LOG SQL - VERBOSE!!!!!!-->
-  <!--
-  <logger name="org.hibernate.SQL">
+  <!--<logger name="org.hibernate.SQL">
     <level value="TRACE" />
     <appender-ref ref="STDOUT" />
-  </logger>
-  -->
+  </logger>-->
 
   <!--This one for SQL bind parameters-->
-  <!--
-  <logger name="org.hibernate.type.descriptor.sql.BasicBinder">
+  <!--<logger name="org.hibernate.type.descriptor.sql.BasicBinder">
     <level value="TRACE" />
     <appender-ref ref="STDOUT" />
-  </logger>
-  -->
+  </logger>-->
 
   <appender name="JOB" class="org.olf.general.jobs.JobAwareAppender"/>
 

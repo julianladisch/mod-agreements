@@ -1,5 +1,7 @@
 package org.olf.erm
 
+import com.k_int.accesscontrol.core.policycontrolled.PolicyControlled
+
 import java.time.LocalDate
 
 import javax.persistence.Transient
@@ -30,6 +32,11 @@ import groovy.util.logging.Slf4j
  *
  */
 @Slf4j
+@PolicyControlled(
+  ownerColumn = 'ent_owner_fk',
+  ownerField = 'owner',
+  ownerClass = SubscriptionAgreement.class
+)
 public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitlement> {
   public static final Class<? extends ErmResource>[] ALLOWED_RESOURCES = [Pkg, PackageContentItem, PlatformTitleInstance] as Class[]
   

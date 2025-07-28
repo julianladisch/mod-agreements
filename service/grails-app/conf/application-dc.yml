@@ -32,6 +32,25 @@ concurrentJobsGlobal: "${CONCURRENT_JOBS_GLOBAL:3}"
 endpoints:
   include-stack-trace: true # This being true for dev builds allows us to see stacktraces in the responses
 
+# BF Sunflower folio client config override
+accesscontrol:
+  folio:
+    baseokapiurl: "https://kong-bugfest-sunflower.int.aws.folio.org"
+    tenantname: "fs09000000"
+    patronid: "9eb67301-6f6e-468f-9b1a-6134dc39a684"
+    userlogin: "folio"
+    userpassword: "folio"
+  acqunits:
+    enabled: true
+
+# Eureka Snapshot folio client config override
+#accesscontrol:
+#  folio:
+#    baseokapiurl: "https://folio-etesting-snapshot-kong.ci.folio.org"
+#    tenantname: "diku"
+#    patronid: "7d17383e-c8b5-40ab-a0a3-4a06a1bff3e1" # THIS WILL CHANGE DAILY
+#    userlogin: "diku_admin"
+#    userpassword: "admin"
 
 #    register: true
 #    deploy: true

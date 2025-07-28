@@ -11,6 +11,18 @@
     </encoder>
   </appender>
 
+  <!-- ACCESS CONTROL -->
+  <!-- TODO is TRACE the right level for development? -->
+  <logger name="com.k_int.folio">
+    <level value="TRACE" />
+  </logger>
+
+  <logger name="com.k_int.accesscontrol">
+    <level value="TRACE" />
+  </logger>
+  <!-- /ACCESS CONTROL -->
+
+
   <logger name="org.hibernate.orm.deprecation">
     <level value="ERROR" />
   </logger>
@@ -109,10 +121,10 @@
   </if>
 
   <!--LOG SQL - VERBOSE!!!!!!-->
-  <!-- <logger name="org.hibernate.SQL">
+  <!--<logger name="org.hibernate.SQL">
     <level value="TRACE" />
     <appender-ref ref="STDOUT" />
-  </logger> -->
+  </logger>-->
 
   <!--This one for SQL bind parameters-->
   <!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder">

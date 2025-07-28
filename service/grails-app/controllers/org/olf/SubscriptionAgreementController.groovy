@@ -1,5 +1,6 @@
 package org.olf
 
+import com.k_int.accesscontrol.grails.AccessPolicyAwareController
 import java.time.LocalDate
 import org.grails.web.json.JSONObject
 import org.hibernate.sql.JoinType
@@ -8,9 +9,6 @@ import org.olf.kb.ErmResource
 import org.olf.kb.PackageContentItem
 import org.olf.kb.Pkg
 import org.olf.kb.PlatformTitleInstance
-import org.olf.erm.Entitlement
-
-import com.k_int.okapi.OkapiTenantAwareController
 
 import grails.gorm.DetachedCriteria
 import grails.gorm.multitenancy.CurrentTenant
@@ -19,9 +17,6 @@ import groovy.util.logging.Slf4j
 
 import static org.springframework.http.HttpStatus.*
 
-import java.time.Duration
-import java.time.Instant
-
 /**
  * Control access to subscription agreements.
  * A subscription agreement (SA) is the connection between a set of resources (Which could be packages or individual titles) and a license. 
@@ -29,7 +24,7 @@ import java.time.Instant
  */
 @Slf4j
 @CurrentTenant
-class SubscriptionAgreementController extends OkapiTenantAwareController<SubscriptionAgreement>  {
+class SubscriptionAgreementController extends AccessPolicyAwareController<SubscriptionAgreement> {
   
   CoverageService coverageService
   ExportService exportService
@@ -47,7 +42,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
   def show() {
     super.show()
   }
-  
+
   @Transactional(readOnly=true)
   def publicLookup () {
     final List<String> referenceIds = params.list('referenceId')
@@ -519,7 +514,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
   }
 
   private String buildStaticResourceIdsHQL(String subset) {
-    String topLine = """SELECT res.id FROM PackageContentItem as res""";
+    String topLine = """SELECT res.id FROM PackageContentItem as res"""
 
     switch (subset) {
       case 'current':
@@ -558,7 +553,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessEnd > :today
             )
           )
-        """.toString();
+        """.toString()
       case 'dropped':
         return """${topLine}
           LEFT OUTER JOIN res.entitlements AS direct_ent
@@ -586,7 +581,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessEnd < :today
             )
           )
-        """.toString();
+        """.toString()
       case 'future':
         return """${topLine}
           LEFT OUTER JOIN res.entitlements AS direct_ent
@@ -614,7 +609,7 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
               res.accessStart > :today
             )
           )
-        """.toString();
+        """.toString()
       case 'all':
       default:
         return """${topLine}
@@ -639,23 +634,23 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
     String subquery = """(
       ${buildStaticResourceIdsHQL(subset)}
     )
-    """;
+    """
 
     return """
       SELECT ${isCount ? 'COUNT(res.id)' : 'res'} FROM PackageContentItem as res
       WHERE res.id IN ${subquery}
       ${isCount ? '' : 'ORDER BY res.pti.titleInstance.name'}
-    """.toString();
+    """.toString()
   }
 
   // I'd like to move this "static fetch" code into a shared space if we get a chance before some kind of OS/ES implementation
   @Transactional(readOnly=true)
   private def doStaticResourcesFetch (final String subset = 'all') {
     final String subscriptionAgreementId = params.get("subscriptionAgreementId")
-    final Integer perPage = (params.get("perPage") ?: "10").toInteger();
+    final Integer perPage = (params.get("perPage") ?: "10").toInteger()
     
     // Funky things will happen if you pass 0 or negative numbers...
-    final Integer page = (params.get("page") ?: "1").toInteger();
+    final Integer page = (params.get("page") ?: "1").toInteger()
 
     if (subscriptionAgreementId) {
       // Now
@@ -678,13 +673,13 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
           offset: (page - 1) * perPage
           //readOnly: true -- handled in the transaction, no?
         ]
-      );
+      )
 
       if (params.boolean('stats')) {
         final Integer count = PackageContentItem.executeQuery(
           finalQueryCount,
           queryParams,
-        )[0].toInteger();
+        )[0].toInteger()
 
         final def resultsMap = [
           pageSize: perPage,
@@ -694,15 +689,15 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
           totalRecords: count,
           total: count,
           results: results
-        ];
+        ]
         // This method writes to the web request if there is one (which of course there should be as we are in a controller method)
-        coverageService.lookupCoverageOverrides(resultsMap, "${subscriptionAgreementId}");
+        coverageService.lookupCoverageOverrides(resultsMap, "${subscriptionAgreementId}")
 
         // respond with full result set
-        return resultsMap;
+        return resultsMap
       } else {
 
-        final def resultsMap = [ results: results ];
+        final def resultsMap = [ results: results ]
         // This method writes to the web request if there is one (which of course there should be as we are in a controller method)
         coverageService.lookupCoverageOverrides(resultsMap, "${subscriptionAgreementId}")
 
@@ -713,19 +708,19 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
   }
 
   List<ErmResource> staticResources () {
-    respond doStaticResourcesFetch();
+    respond doStaticResourcesFetch()
   }
 
   List<ErmResource> staticCurrentResources () {
-    respond doStaticResourcesFetch('current');
+    respond doStaticResourcesFetch('current')
   }
 
   List<ErmResource> staticDroppedResources () {
-    respond doStaticResourcesFetch('dropped');
+    respond doStaticResourcesFetch('dropped')
   }
 
   List<ErmResource> staticFutureResources () {
-    respond doStaticResourcesFetch('future');
+    respond doStaticResourcesFetch('future')
   }
   
   private static final Map<String, List<String>> CLONE_GROUPING = [
@@ -792,41 +787,48 @@ class SubscriptionAgreementController extends OkapiTenantAwareController<Subscri
     }
     respond ([statusCode: 404])
   }
-  
+
+  // EXAMPLE where CRUD operations are overriden in accessControlled controllers, we may need to manually implement checks for access control
+  // This can be done directly with canAccess(PolicyRestriction restriction) or via helper methods canUserCreate() etc.
   @Transactional
   def delete() {
-    SubscriptionAgreement sa = queryForResource(params.id)
-    
-    // Not found.
-    if (sa == null) {
-      transactionStatus.setRollbackOnly()
-      notFound()
+    if (canUserDelete()) {
+      SubscriptionAgreement sa = queryForResource(params.id)
+
+      // Not found.
+      if (sa == null) {
+        transactionStatus.setRollbackOnly()
+        notFound()
+        return
+      }
+
+      // Return the relevant status if not allowed to delete.
+      if ((sa.items?.size() ?: 0) > 0) {
+        transactionStatus.setRollbackOnly()
+        render status: METHOD_NOT_ALLOWED, text: "Agreement has agreement lines"
+        return
+      }
+
+      // Return the relevant status if not allowed to delete.
+      if ((sa.linkedLicenses?.size() ?: 0) > 0) {
+        transactionStatus.setRollbackOnly()
+        render status: METHOD_NOT_ALLOWED, text: "Agreement has license lines"
+        return
+      }
+
+      // Return the relevant status if not allowed to delete.
+      if ((sa.inwardRelationships?.size() ?: 0) > 0 || (sa.outwardRelationships?.size() ?: 0) > 0) {
+        transactionStatus.setRollbackOnly()
+        render status: METHOD_NOT_ALLOWED, text: "Agreement has related agreements"
+        return
+      }
+
+      // Finally delete the license if we get this far and respond.
+      deleteResource sa
+      render status: NO_CONTENT
       return
     }
-    
-    // Return the relevant status if not allowed to delete.
-    if ((sa.items?.size() ?: 0) > 0) {
-      transactionStatus.setRollbackOnly()
-      render status: METHOD_NOT_ALLOWED, text: "Agreement has agreement lines"
-      return
-    }
-    
-    // Return the relevant status if not allowed to delete.
-    if ((sa.linkedLicenses?.size() ?: 0) > 0) {
-      transactionStatus.setRollbackOnly()
-      render status: METHOD_NOT_ALLOWED, text: "Agreement has license lines"
-      return
-    }
-    
-    // Return the relevant status if not allowed to delete.
-    if ((sa.inwardRelationships?.size() ?: 0) > 0 || (sa.outwardRelationships?.size() ?: 0) > 0) {
-      transactionStatus.setRollbackOnly()
-      render status: METHOD_NOT_ALLOWED, text: "Agreement has related agreements"
-      return
-    }
-    
-    // Finally delete the license if we get this far and respond.
-    deleteResource sa
-    render status: NO_CONTENT
+
+    respond ([ message: "PolicyRestriction.DELETE check failed in access control" ], status: 403 )
   }
 }

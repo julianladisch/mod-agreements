@@ -224,6 +224,9 @@ environments:
         aws_secret: "DIKU_AGG_SECRET_KEY"
         aws_bucket: "diku-shared"
         aws_access_key_id: "DIKU_AGG_ACCESS_KEY"
+    accesscontrol:
+      acqunits:
+        enabled: false #Disable acqunits for test by default
 
   dbGen:
     grails:
