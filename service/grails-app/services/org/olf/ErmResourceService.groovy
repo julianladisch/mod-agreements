@@ -385,37 +385,16 @@ public class ErmResourceService {
   }
 
   // Mark a list of package IDs for delete and aggregate responses into one output Map.
-  // Also combine statistics for all packages.
-  public Map markForDeleteFromPackage(List<String> idInputs) {
-    Map<String, MarkForDeleteResponse> deleteResourcesResponseMap = [:]
+  public MarkForDeleteResponse markForDeleteFromPackage(List<String> idInputs) {
 
-    // Collect responses for each package in a Map.
-    idInputs.forEach{String id -> {
-      MarkForDeleteResponse forDeletion = markForDelete([id], Pkg.class); // Finds all PCIs for package and deletes as though the PCI Ids were passed in.
-      deleteResourcesResponseMap.put(id, forDeletion)
-    }}
-
-    // Calculate total deletion counts
-    DeletionCounts totals = new DeletionCounts(0,0,0,0)
-    deleteResourcesResponseMap.keySet().forEach{String packageId -> {
-      totals.pci += deleteResourcesResponseMap.get(packageId).statistics.pci
-      totals.pti += deleteResourcesResponseMap.get(packageId).statistics.pti
-      totals.ti += deleteResourcesResponseMap.get(packageId).statistics.ti
-      totals.work += deleteResourcesResponseMap.get(packageId).statistics.work
-    }}
-
-    Map outputMap = [:]
-
-    outputMap.put("packages", deleteResourcesResponseMap)
-    outputMap.put("statistics", totals)
-
-    return outputMap;
+    // Collect responses for all packages passed in.
+    return markForDelete(idInputs, Pkg.class);
   }
 
   @CompileStatic(SKIP)
   public createDeleteResourcesJob(List<String> idInputs, ResourceDeletionJobType type) {
     ResourceDeletionJob job = new ResourceDeletionJob([
-      name: "ResourceDeletionJob, resource IDs: ${idInputs.toString()} ${Instant.now()}",
+      name: "ResourceDeletionJob, resource IDs: ${idInputs?.size()?.toString()} ${Instant.now()}",
       resourceInputs: new JSON(idInputs).toString(), // Should always be a list of strings for now.
       deletionJobType: type
     ])

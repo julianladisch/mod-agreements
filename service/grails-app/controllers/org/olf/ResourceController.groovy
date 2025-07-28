@@ -470,7 +470,7 @@ class ResourceController extends OkapiTenantAwareController<ErmResource> {
     Boolean includeIds = params.boolean('includeIds')
 
     handleDeleteCall(deleteBody) { ids ->
-      PackageMarkForDeleteResponse response = ermResourceService.markForDeleteFromPackage(ids)
+      MarkForDeleteResponse response = ermResourceService.markForDeleteFromPackage(ids)
       if (!includeIds) {
         response = hideIds(response)
       }
