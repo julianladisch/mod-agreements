@@ -69,6 +69,7 @@ class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
     if (patron.hasProperty("id")) {
       defaultPatronId = patron.id
     }
+    log.trace("defaultPatronId: ${defaultPatronId}")
 
     // Build the folio information via ENV_VARS, grailsApplication defaults OR fallback to "this folio".
     // Should allow devs to control where code is pointing dynamically without needing to comment/uncomment different folioConfigs here
@@ -89,7 +90,7 @@ class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
     FolioClientConfig folioClientConfig = FolioClientConfig.builder()
       .baseOkapiUri(baseOkapiUrl)
       .tenantName(grailsApplication.config.getProperty('accesscontrol.folio.tenantname', String, OkapiTenantResolver.schemaNameToTenantId(Tenants.currentId())))
-      .patronId(grailsApplication.config.getProperty('accesscontrol.folio.patronid', String, OkapiTenantResolver.schemaNameToTenantId(defaultPatronId)))
+      .patronId(grailsApplication.config.getProperty('accesscontrol.folio.patronid', String, defaultPatronId))
       .userLogin(grailsApplication.config.getProperty('accesscontrol.folio.userlogin', String))
       .userPassword(grailsApplication.config.getProperty('accesscontrol.folio.userpassword', String))
       .build()

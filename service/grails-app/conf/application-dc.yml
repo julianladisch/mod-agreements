@@ -54,5 +54,14 @@ accesscontrol:
 
 #    register: true
 #    deploy: true
-        
-      
+
+# Sandbox 2 folio client config override
+#accesscontrol:
+#  folio:
+#    baseokapiurl: "https://folio-snapshot-2-okapi.dev.folio.org"
+#    tenantname: "diku"
+#    patronid: "d85d869b-3205-5c1d-8da6-8d2380772b68" # THIS WILL CHANGE DAILY
+#    userlogin: "diku_admin"
+#    userpassword: "admin"
+#  acqunits:
+#    enabled: true
