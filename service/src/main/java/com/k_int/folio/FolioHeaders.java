@@ -11,6 +11,10 @@ import java.util.Set;
  * </p>
  */
 public class FolioHeaders {
+  public static String OKAPI_TENANT = "x-okapi-tenant";
+  public static String OKAPI_TOKEN = "x-okapi-token";
+  public static String OKAPI_URL = "x-okapi-url";
+
   /**
    * FOLIO headers that are used for authentication and tenant identification.
    * <p>
@@ -18,8 +22,9 @@ public class FolioHeaders {
    * </p>
    */
   public static final Set<String> FOLIO_HEADERS = Set.of(
-    "x-okapi-tenant",
-    "x-okapi-token"
+    OKAPI_TENANT,
+    OKAPI_TOKEN,
+    OKAPI_URL
   );
 
   /**

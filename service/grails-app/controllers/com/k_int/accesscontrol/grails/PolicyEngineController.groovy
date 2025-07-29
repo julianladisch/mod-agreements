@@ -4,7 +4,8 @@ import com.k_int.accesscontrol.acqunits.AcquisitionUnitPolicyEngineConfiguration
 import com.k_int.accesscontrol.main.PolicyEngine
 import com.k_int.accesscontrol.main.PolicyEngineConfiguration
 import com.k_int.folio.FolioClientConfig
-
+import com.k_int.okapi.OkapiClient
+import com.k_int.okapi.OkapiHeaders
 import com.k_int.okapi.OkapiTenantAwareController
 import com.k_int.okapi.OkapiTenantResolver
 import grails.gorm.multitenancy.Tenants
@@ -21,6 +22,10 @@ import javax.servlet.http.HttpServletRequest
  * @param <T> The type of resource this controller manages.
  */
 class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
+  /**
+   * The Okapi client used for interacting with the FOLIO Okapi gateway.
+   */
+  OkapiClient okapiClient
 
   PolicyEngineController(Class<T> resource) {
     super(resource)
@@ -71,7 +76,14 @@ class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
     boolean folioIsExternal = true
     if (baseOkapiUrl == null) {
       folioIsExternal = false
-      baseOkapiUrl = "https://${okapiClient.getOkapiHost()}:${okapiClient.getOkapiPort()}"
+
+      // We need to do some fanagling now. If the okapi client thinks that we have an override, use it
+      if (okapiClient.getOkapiHost() && okapiClient.getOkapiPort()) {
+        baseOkapiUrl = "https://${okapiClient.getOkapiHost()}:${okapiClient.getOkapiPort()}"
+      } else {
+        // Otherwise we should use the X-OKAPI-URL... Use the static from grails-okapi to keep boundaries clean
+        baseOkapiUrl = request.getHeader(OkapiHeaders.URL)
+      }
     }
 
     FolioClientConfig folioClientConfig = FolioClientConfig.builder()

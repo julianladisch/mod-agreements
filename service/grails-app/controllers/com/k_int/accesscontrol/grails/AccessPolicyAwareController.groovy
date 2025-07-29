@@ -36,10 +36,6 @@ import java.time.Duration
  */
 class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
   /**
-   * The Okapi client used for interacting with the FOLIO Okapi gateway.
-   */
-  OkapiClient okapiClient
-  /**
    * The Class object representing the resource entity type managed by this controller.
    */
   final Class<T> resourceClass

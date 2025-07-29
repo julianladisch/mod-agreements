@@ -14,11 +14,11 @@
   <!-- ACCESS CONTROL -->
   <!-- TODO Decisions should be made about the levels for these -->
   <logger name="com.k_int.folio">
-    <level value="INFO" />
+    <level value="TRACE" />
   </logger>
 
   <logger name="com.k_int.accesscontrol">
-    <level value="INFO" />
+    <level value="TRACE" />
   </logger>
   <!-- /ACCESS CONTROL -->
 
