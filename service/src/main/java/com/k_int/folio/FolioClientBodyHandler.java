@@ -78,23 +78,23 @@ public class FolioClientBodyHandler<T> implements HttpResponse.BodyHandler<T> {
 
       if (targetType.equals(String.class)) {
         // If the target type is String, we can directly return a BodySubscriber that reads the body as a String
-        return getInputStreamBodySubscriber();
+        return getStringBodySubscriber();
       }
 
       if (targetType.equals(InputStream.class)) {
         // If the target type is String, we can directly return a BodySubscriber that reads the body as a String
-        return getStringBodySubscriber();
+        return getInputStreamBodySubscriber();
       }
 
       // If successful, we want to deserialize the body
       return HttpResponse.BodySubscribers.mapping(
         HttpResponse.BodySubscribers.ofInputStream(),
         inputStream -> {
-          try (InputStream is = inputStream) { // Ensure stream is closed
-            if (is == null) {
-              return null;
-            }
-            return objectMapper.readValue(is, targetType);
+          if (inputStream == null) {
+            return null;
+          }
+          try {
+            return objectMapper.readValue(inputStream, targetType);
           } catch (IOException e) {
             String errorMessage = "Failed to deserialize response body to " + targetType.getSimpleName();
             log.error(errorMessage, e);
