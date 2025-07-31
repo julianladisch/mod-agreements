@@ -40,6 +40,13 @@ class SubscriptionAgreementController extends AccessPolicyAwareController<Subscr
 
   @Transactional(readOnly=true)
   def show() {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("SUBSCRIPTION AGREEMENT CONTROLLER SHOW")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     super.show()
   }
 

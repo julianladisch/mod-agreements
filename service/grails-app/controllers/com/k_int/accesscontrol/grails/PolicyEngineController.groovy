@@ -62,6 +62,13 @@ class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
    * @return A PolicyEngine instance configured for the current request.
    */
   protected PolicyEngine getPolicyEngine() {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("POLICY ENGINE CONTROLLER GETPOLICYENGINE")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     // This should work regardless of whether we're in a proper FOLIO space or not now.
     // I'm not convinced this is the best way to do it but hey ho
     UserDetails patron = getPatron()

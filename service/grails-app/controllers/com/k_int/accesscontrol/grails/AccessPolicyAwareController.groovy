@@ -149,6 +149,13 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
    * @return A list of SQL string fragments representing the access policies.
    */
   protected List<AccessControlSql> getPolicySql(PolicyRestriction restriction, AccessPolicyQueryType queryType, String resourceId) {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("ACCESS POLICY AWARE CONTROLLER GETPOLICYSQL")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     /* ------------------------------- ACTUALLY DO THE WORK FOR EACH POLICY RESTRICTION ------------------------------- */
 
     // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
@@ -221,6 +228,13 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
    * @throws PolicyEngineException if the provided restriction type is not supported as per {@link #getCanAccessValidPolicyRestrictions()}.
    */
   protected boolean canAccess(PolicyRestriction pr) {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("ACCESS POLICY AWARE CONTROLLER CANACCESS")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     AccessPolicyEntity.withNewSession { Session sess ->
       // Handle OWNER logic
 
@@ -264,6 +278,13 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
   }
 
   boolean canUserRead() {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("ACCESS POLICY AWARE CONTROLLER CANUSERREAD")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     return canAccess(PolicyRestriction.READ)
   }
 
@@ -459,7 +480,21 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
    */
   @Transactional
   def show() {
+    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+    log.info("ACCESS POLICY AWARE CONTROLLER SHOW BEFORE CANUSERREAD")
+    def p = getPatron()
+    log.info("WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.info("WHAT IS PATRON ID: ${p.id}")
+    }
     if (canUserRead()) {
+      // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
+      log.info("ACCESS POLICY AWARE CONTROLLER SHOW AFTER CANUSERREAD")
+      def p2 = getPatron()
+      log.info("WHAT IS PATRON: ${p2}")
+      if (p2.hasProperty("id")) {
+        log.info("WHAT IS PATRON ID: ${p2.id}")
+      }
       super.show()
       return
     }
