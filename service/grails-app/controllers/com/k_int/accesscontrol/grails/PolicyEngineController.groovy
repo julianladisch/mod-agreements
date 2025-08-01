@@ -86,7 +86,7 @@ class PolicyEngineController<T> extends OkapiTenantAwareController<T> {
 
       // We need to do some fanagling now. If the okapi client thinks that we have an override, use it
       if (okapiClient.getOkapiHost() && okapiClient.getOkapiPort()) {
-        baseOkapiUrl = "https://${okapiClient.getOkapiHost()}:${okapiClient.getOkapiPort()}"
+        baseOkapiUrl = "http://${okapiClient.getOkapiHost()}:${okapiClient.getOkapiPort()}"
       } else {
         // Otherwise we should use the X-OKAPI-URL... Use the static from grails-okapi to keep boundaries clean
         baseOkapiUrl = request.getHeader(OkapiHeaders.URL)
