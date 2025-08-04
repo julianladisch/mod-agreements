@@ -62,4 +62,30 @@ beans = {
         break;
     }
   }
+
+	/* Original list
+  okapiAuthenticationFilter
+  securityRequestHolderFilter
+  securityContextPersistenceFilter
+  logoutFilter
+  authenticationProcessingFilter
+  securityContextHolderAwareRequestFilter
+  rememberMeAuthenticationFilter
+  anonymousAuthenticationFilter
+  formContentFilter
+  exceptionTranslationFilter
+  filterInvocationInterceptor
+
+
+  springSecurityFilterChain.filterChainMap = [
+        '/**': [
+            'okapiAuthenticationFilter',
+            'securityRequestHolderFilter',
+            'securityContextHolderAwareRequestFilter',
+            'anonymousAuthenticationFilter',
+            'exceptionTranslationFilter',
+            'filterSecurityInterceptor'
+        ]
+    ]
+  */
 }

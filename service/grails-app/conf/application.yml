@@ -129,11 +129,15 @@ grails:
             pattern: '/**'
             access:
               - 'permitAll'
-        filterChain:
-          chainMap:
-            -
-              pattern: '/**'
-              filters: 'JOINED_FILTERS,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter,-basicAuthenticationFilter'
+      filterChain:
+        chainMap:
+          -
+            pattern: '/**'
+            filters: 'JOINED_FILTERS,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter,-basicAuthenticationFilter'
+            # filters: 'JOINED_FILTERS,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter,-basicAuthenticationFilter'
+            # filters: 'okapiAuthenticationFilter, securityRequestHolderFilter, logoutFilter, authenticationProcessingFilter, securityContextHolderAwareRequestFilter, anonymousAuthenticationFilter, exceptionTranslationFilter, filterInvocationInterceptor'
+            # filters: 'okapiAuthenticationFilter, securityRequestHolderFilter, authenticationProcessingFilter, securityContextHolderAwareRequestFilter, exceptionTranslationFilter, filterInvocationInterceptor'
+
   databinding:
     dateFormats:
       - "yyyy-MM-dd'T'HH:mm:ssX"

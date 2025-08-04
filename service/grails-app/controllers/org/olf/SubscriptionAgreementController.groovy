@@ -17,6 +17,10 @@ import groovy.util.logging.Slf4j
 
 import static org.springframework.http.HttpStatus.*
 
+import org.springframework.security.core.context.SecurityContextHolder
+import grails.plugin.springsecurity.annotation.Secured
+
+
 /**
  * Control access to subscription agreements.
  * A subscription agreement (SA) is the connection between a set of resources (Which could be packages or individual titles) and a license. 
@@ -35,6 +39,14 @@ class SubscriptionAgreementController extends AccessPolicyAwareController<Subscr
 
   @Transactional(readOnly=true)
   def index(Integer max) {
+
+		log.warn("Sec ctx: ${SecurityContextHolder.getContext().getAuthentication()}");
+
+    def p = getPatron()
+    log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON: ${p}")
+    if (p.hasProperty("id")) {
+      log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON ID: ${p.id}")
+    }
     super.index(max)
   }
 
@@ -45,15 +57,15 @@ class SubscriptionAgreementController extends AccessPolicyAwareController<Subscr
     // Logging to dump all http headers here
     Collections.list(request.getHeaderNames()).forEach(headerName -> {
       Collections.list(request.getHeaders(headerName)).forEach(headerValue -> {
-        log.info("SUBSCRIPTION AGREEMENT SHOW HTTP HEADER: ${headerName}:${headerValue}")
+        log.warn("HTTP HEADER: ${headerName}:${headerValue}")
       })
     })
 
     // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
     def p = getPatron()
-    log.info("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON: ${p}")
+    log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON: ${p}")
     if (p.hasProperty("id")) {
-      log.info("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON ID: ${p.id}")
+      log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON ID: ${p.id}")
     }
     super.show()
   }

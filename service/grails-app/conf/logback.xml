@@ -23,6 +23,28 @@
   <!-- /ACCESS CONTROL -->
 
 
+  <!--
+  <logger name="org.olf">
+    <level value="INFO" />
+  </logger>
+
+  <logger name="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+    <level value="TRACE" />
+  </logger>
+
+  <logger name="grails.plugin.springsecurity.web.authentication.GrailsAnonymousAuthenticationFilter">
+    <level value="TRACE" />
+  </logger>
+
+  <logger name="grails.plugin.springsecurity">
+    <level value="DEBUG" />
+  </logger>
+
+  <logger name="org.springframework.security">
+    <level value="DEBUG" />
+  </logger>
+  -->
+
   <logger name="org.hibernate.orm.deprecation">
     <level value="ERROR" />
   </logger>
@@ -43,10 +65,6 @@
     <level value="DEBUG" />
   </logger>
 
-  <logger name="org.olf">
-    <level value="INFO" />
-  </logger>
-  
   <logger name="org.springframework.jdbc.support" >
     <level value="ERROR" />
   </logger>
