@@ -1230,6 +1230,12 @@
       ]
     }
   ],
+  "requires": [
+    {
+      "id": "okapi",
+      "version": "1.9"
+    }
+  ],
   "optional": [
     {
       "id": "usage-data-providers",
@@ -1245,6 +1251,10 @@
     },
     {
       "id": "organizations.organizations",
+      "version": "1.0"
+    },
+    {
+      "id": "acquisitions-units",
       "version": "1.0"
     }
   ],
