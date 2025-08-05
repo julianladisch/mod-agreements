@@ -245,6 +245,10 @@ integrationTest {
   )
 }
 
+// NOTE: We now use ReplaceTokens instead of expand, as expand is restricted to a 64K source file
+// otherwise it blows up, now that the descriptor file is being auto generated it is more than 64K
+import org.apache.tools.ant.filters.ReplaceTokens;
+
 project.gradle.projectsEvaluated {
   task generateDescriptors(type: Copy) {
 
@@ -252,26 +256,22 @@ project.gradle.projectsEvaluated {
 
     File grailsBuildInfoFile = buildProperties.outputs.files.files.find { it.name == 'grails.build.info' }
 
-    final def props = [:]
 
     if(!(grailsBuildInfoFile)) return // No need to continue if the file is not there
+    final Properties props = new Properties()
 
     doFirst {
 
       // Place the loading within a do first as the info file from the buildProperties
-      // task will not be present until it is executed. This owuld cause a file not found
+      // task will not be present until it is executed. This would cause a file not found
       // during task configureation otherwise.
       Properties properties = new Properties()
 
       // Read properties from the file
       grailsBuildInfoFile.withInputStream {
-        properties.load(it)
+        props.load(it)
       }
 
-      // Need to parse multi-dimensional keys.
-      ConfigSlurper cs = new ConfigSlurper()
-      //println("LOGDEBUG CS: ${cs.parse(properties)}")
-      props.putAll(cs.parse(properties))
     }
 
     from ('./src/main/okapi') {
@@ -279,7 +279,7 @@ project.gradle.projectsEvaluated {
     }
     into './build/resources/main/okapi'
     filteringCharset = 'UTF-8'
-    expand(props)
+    filter(ReplaceTokens, tokens: props, beginToken : '${', endToken : '}')
     rename { String fileName ->
       fileName.replace('-template', '')
     }
