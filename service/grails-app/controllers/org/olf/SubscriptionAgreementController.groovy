@@ -39,34 +39,18 @@ class SubscriptionAgreementController extends AccessPolicyAwareController<Subscr
 
   @Transactional(readOnly=true)
   def index(Integer max) {
+    // EXAMPLE Logging to dump all http headers here
+    /*Collections.list(request.getHeaderNames()).forEach(headerName -> {
+      Collections.list(request.getHeaders(headerName)).forEach(headerValue -> {
+        log.warn("HTTP HEADER: ${headerName}:${headerValue}")
+      })
+    })*/
 
-		log.warn("Sec ctx: ${SecurityContextHolder.getContext().getAuthentication()}");
-
-    def p = getPatron()
-    log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON: ${p}")
-    if (p.hasProperty("id")) {
-      log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON ID: ${p.id}")
-    }
     super.index(max)
   }
 
   @Transactional(readOnly=true)
   def show() {
-
-    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
-    // Logging to dump all http headers here
-    Collections.list(request.getHeaderNames()).forEach(headerName -> {
-      Collections.list(request.getHeaders(headerName)).forEach(headerValue -> {
-        log.warn("HTTP HEADER: ${headerName}:${headerValue}")
-      })
-    })
-
-    // FIXME THIS IS HERE FOR LOGGING PURPOSES AND WE SHOULD REMOVE LATER
-    def p = getPatron()
-    log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON: ${p}")
-    if (p.hasProperty("id")) {
-      log.warn("(SUBSCRIPTION AGREEMENT CONTROLLER) WHAT IS PATRON ID: ${p.id}")
-    }
     super.show()
   }
 

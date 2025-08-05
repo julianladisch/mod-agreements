@@ -24,10 +24,6 @@
 
 
   <!--
-  <logger name="org.olf">
-    <level value="INFO" />
-  </logger>
-
   <logger name="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
     <level value="TRACE" />
   </logger>
@@ -63,6 +59,10 @@
 
   <logger name="org.olf.dataimport.internal.titleInstanceResolvers">
     <level value="DEBUG" />
+  </logger>
+
+  <logger name="org.olf">
+    <level value="INFO" />
   </logger>
 
   <logger name="org.springframework.jdbc.support" >

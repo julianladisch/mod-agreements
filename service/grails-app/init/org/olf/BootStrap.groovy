@@ -41,19 +41,20 @@ class BootStrap {
       log.info("    ENV: ${name}=\"${value}\"");
     }
 
-    if (springSecurityFilterChain instanceof FilterChainProxy) {
-      println "== Spring Security Filter Chains =="
-
-      def ctx = grailsApplication.mainContext
-
-      springSecurityFilterChain.filterChains.each { chain ->
-        println "Pattern: ${chain.requestMatcher}"
-        chain.filters.eachWithIndex { filter, i ->
-	        def beanName = ctx.getBeanNamesForType(filter.class).find { ctx.getBean(it).is(filter) }
-		      println "  ${i + 1}. ${beanName ?: filter.class.simpleName} -> ${filter.class.name}"
-        }
-      }
-    }
+    // Debugging for filter chains -- turn on to inspect the security chain
+//    if (springSecurityFilterChain instanceof FilterChainProxy) {
+//      println "== Spring Security Filter Chains =="
+//
+//      def ctx = grailsApplication.mainContext
+//
+//      springSecurityFilterChain.filterChains.each { chain ->
+//        println "Pattern: ${chain.requestMatcher}"
+//        chain.filters.eachWithIndex { filter, i ->
+//	        def beanName = ctx.getBeanNamesForType(filter.class).find { ctx.getBean(it).is(filter) }
+//		      println "  ${i + 1}. ${beanName ?: filter.class.simpleName} -> ${filter.class.name}"
+//        }
+//      }
+//    }
 
 //    jobRunnerService.populateJobQueue()
   }
