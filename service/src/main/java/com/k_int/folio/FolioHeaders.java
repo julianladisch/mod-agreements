@@ -11,8 +11,20 @@ import java.util.Set;
  * </p>
  */
 public class FolioHeaders {
+
+  /**
+   * The HTTP header name used to specify the FOLIO tenant.
+   */
   public static String OKAPI_TENANT = "x-okapi-tenant";
+
+  /**
+   * The HTTP header name used to specify the FOLIO token for authentication.
+   */
   public static String OKAPI_TOKEN = "x-okapi-token";
+
+  /**
+   * The HTTP header name used to specify the base URL for FOLIO.
+   */
   public static String OKAPI_URL = "x-okapi-url";
 
   /**

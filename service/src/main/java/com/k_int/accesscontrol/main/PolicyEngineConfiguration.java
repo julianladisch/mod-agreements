@@ -10,7 +10,15 @@ import lombok.Data;
  */
 @Builder
 @Data
+@SuppressWarnings("javadoc")
 public class PolicyEngineConfiguration {
+  /**
+   * Configuration for the acquisition unit policy engine.
+   * This determines whether acquisition unit-based access restrictions are enabled and how they are evaluated.
+   *
+   * @param acquisitionUnitPolicyEngineConfiguration the {@link AcquisitionUnitPolicyEngineConfiguration} associated with this policy engine
+   * @return the {@link AcquisitionUnitPolicyEngineConfiguration} associated with this policy engine
+   */
   AcquisitionUnitPolicyEngineConfiguration acquisitionUnitPolicyEngineConfiguration;
 
   // Configuration for KI Grants, if applicable. This is an EXTENSION for later, not currently implemented.

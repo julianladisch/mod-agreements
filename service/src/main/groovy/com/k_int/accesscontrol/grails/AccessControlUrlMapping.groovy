@@ -39,6 +39,8 @@ class AccessControlUrlMapping {
           "/createPolicies"(controller: 'accessPolicy', action: 'getCreatePolicyIds', method: 'GET')
           "/claimPolicies"(controller: 'accessPolicy', action: 'getClaimPolicyIds', method: 'GET')
           "/applyPolicies"(controller: 'accessPolicy', action: 'getApplyPolicyIds', method: 'GET')
+
+          "/enabledEngines"(controller: 'accessPolicy', action: 'getEnabledEngines', method: 'GET')
         }
       }
     }

@@ -22,6 +22,9 @@ public class PolicyEngineException extends RuntimeException {
    */
   public static final Long INVALID_QUERY_PARAMETERS = 3L;
 
+  public static final Long INVALID_POLICY_TYPE = 4L;
+
+
   /**
    * The specific error code associated with this exception.
    */

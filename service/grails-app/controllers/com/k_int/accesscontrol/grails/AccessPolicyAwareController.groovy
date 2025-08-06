@@ -1,7 +1,12 @@
 package com.k_int.accesscontrol.grails
 
-import com.k_int.accesscontrol.core.AccessPolicyTypeIds
+import com.k_int.accesscontrol.core.AccessPolicies
+import com.k_int.accesscontrol.core.AccessPolicyType
+import com.k_int.accesscontrol.core.http.bodies.ClaimBody
+import com.k_int.accesscontrol.core.http.bodies.PolicyLink
+import com.k_int.accesscontrol.core.http.responses.BasicClaimBody
 import com.k_int.accesscontrol.core.http.responses.CanAccessResponse
+import com.k_int.accesscontrol.core.http.responses.PolicyIdsResponse
 import com.k_int.accesscontrol.core.sql.AccessControlSql
 import com.k_int.accesscontrol.core.AccessPolicyQueryType
 import com.k_int.accesscontrol.core.policycontrolled.PolicyControlledManager
@@ -14,7 +19,7 @@ import com.k_int.accesscontrol.core.sql.PolicySubqueryParameters
 import com.k_int.accesscontrol.grails.criteria.AccessControlHibernateTypeMapper
 import com.k_int.accesscontrol.main.PolicyEngine
 import com.k_int.accesscontrol.grails.criteria.MultipleAliasSQLCriterion
-import com.k_int.okapi.OkapiClient
+import com.k_int.utils.Json
 import grails.gorm.transactions.Transactional
 import org.hibernate.Criteria
 import org.hibernate.Session
@@ -340,10 +345,10 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
    * the current user's permissions and the specified restriction.
    *
    * @param pr The {@link PolicyRestriction} to check against.
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for the given restriction, {@code false} otherwise.
    */
-  protected boolean arePolicyIdsValid(PolicyRestriction pr, List<AccessPolicyTypeIds> policyIds) {
+  protected boolean arePolicyIdsValid(PolicyRestriction pr, List<AccessPolicies> policyIds) {
     String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
     return policyEngine.arePolicyIdsValid(grailsHeaders, pr, policyIds)
   }
@@ -351,60 +356,60 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
 /**
  * Checks if a given list of policy IDs are valid for the {@code CREATE} policy restriction.
  *
- * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+ * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
  * @return {@code true} if all provided policy IDs are valid for CREATE, {@code false} otherwise.
  */
-  protected boolean areCreateIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areCreateIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.CREATE, policyIds)
   }
 
   /**
    * Checks if a given list of policy IDs are valid for the {@code READ} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for READ, {@code false} otherwise.
    */
-  protected boolean areReadIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areReadIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.READ, policyIds)
   }
 
   /**
    * Checks if a given list of policy IDs are valid for the {@code UPDATE} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for UPDATE, {@code false} otherwise.
    */
-  protected boolean areUpdateIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areUpdateIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.UPDATE, policyIds)
   }
 
   /**
    * Checks if a given list of policy IDs are valid for the {@code DELETE} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for DELETE, {@code false} otherwise.
    */
-  protected boolean areDeleteIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areDeleteIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.DELETE, policyIds)
   }
 
   /**
    * Checks if a given list of policy IDs are valid for the {@code CLAIM} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for CLAIM, {@code false} otherwise.
    */
-  protected boolean areClaimIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areClaimIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.CLAIM, policyIds)
   }
 
   /**
    * Checks if a given list of policy IDs are valid for the {@code APPLY_POLICIES} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicyTypeIds} representing the policy IDs to validate.
+   * @param policyIds A list of {@link AccessPolicies} representing the policy IDs to validate.
    * @return {@code true} if all provided policy IDs are valid for APPLY_POLICIES, {@code false} otherwise.
    */
-  protected boolean areApplyPoliciesIdsValid(List<AccessPolicyTypeIds> policyIds) {
+  protected boolean areApplyPoliciesIdsValid(List<AccessPolicies> policyIds) {
     return arePolicyIdsValid(PolicyRestriction.APPLY_POLICIES, policyIds)
   }
 
@@ -547,8 +552,8 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
       return
     }
 
-    // We need to transform the claimBody into a list of AccessPolicyTypeIds objects to use policyEngine.arePolicyIdsValid
-    List<AccessPolicyTypeIds> policyIds = claimBody.convertToAccessPolicyTypeIds()
+    // We need to transform the claimBody into a list of AccessPolicies objects to use policyEngine.arePolicyIdsValid
+    List<AccessPolicies> policyIds = claimBody.convertToAccessPolicies()
 
     if (!areClaimIdsValid(policyIds)) {
       respond ([ message: "PolicyRestriction.CLAIM not valid for one or more policyIds in claims" ], status: 403 )
@@ -572,9 +577,9 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
         // we don't fail to add it thanks to duplicate check below, and then remove it, leaving resource unprotected
         List<AccessPolicyEntity> accessPoliciesForResource = AccessPolicyEntity.findAllByResourceIdAndResourceClass(resourceId, resourceClass)
         for (AccessPolicyEntity policy : accessPoliciesForResource) {
-          if (!claimBody.claims.any { claim -> claim.id == policy.id || claim.id == null }) {
+          if (!claimBody.claims.any { claim -> claim.id == policy.id }) {
             // If the policy is not in the claimBody, we delete it
-            policy.delete(failOnError: true)
+            policy.delete(flush: true, failOnError: true)
           }
         }
 
@@ -582,7 +587,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
         accessPoliciesForResource = AccessPolicyEntity.findAllByResourceIdAndResourceClass(resourceId, resourceClass)
 
         // For each claim in the body, we need to first check whether the policy currently exists. If it does, we can update it (description ONLY)
-        for(GrailsClaimBody.GrailsPolicyClaim claim  : claimBody.claims) {
+        for(GrailsPolicyLink claim  : claimBody.claims) {
           if (claim.id) {
             // If the claim has an ID, we assume it is an existing policy that needs to be updated
             AccessPolicyEntity existingPolicy = AccessPolicyEntity.findById(claim.id)
@@ -614,16 +619,16 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
             existingPolicy.description = claim.description
             existingPolicy.save(failOnError: true)
           } else if (
-            accessPoliciesForResource.any { ap -> ap.policyId == claim.policyId && ap.type == claim.type } // Only create if there is no existing policy with the same policyId
+            accessPoliciesForResource.any {ap -> ap.policyId == claim.getPolicy().getId() &&ap.type == claim.type } // Only create if there is no existing policy with the same policyId
           ) {
             success = false
-            failureMessage = "Resource ${resourceId} already has an access policy with policyId ${claim.policyId}."
+            failureMessage = "Resource ${resourceId} already has an access policy with policyId ${claim.getPolicy().getId()}."
             log.error(failureMessage)
             break
           } else {
             // If no ID, we create a new policy
             new AccessPolicyEntity(
-              policyId: claim.policyId,
+              policyId: claim.getPolicy().getId(),
               type: claim.type,
               description: claim.description,
               resourceId: resourceId,
@@ -652,10 +657,28 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
 
   @Transactional
   def policies() {
+    String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
     AccessPolicyEntity.withNewSession {
-      respond doTheLookup(AccessPolicyEntity) {
-        eq 'resourceId', resolveRootOwnerId(params.id)
-      }
+      Set<AccessPolicyType> enabledEngines = policyEngine.getEnabledEngineSet()
+
+      // Fetch the ENABLED access policy entities for the resource at hand
+      List<AccessPolicyEntity> accessPoliciesForResource = AccessPolicyEntity.executeQuery(
+        """
+          SELECT ape FROM AccessPolicyEntity ape
+          WHERE
+            resourceId = :resId AND
+            type IN :enabledEngines
+        """.toString(),
+        [
+          resId: resolveRootOwnerId(params.id),
+          enabledEngines: enabledEngines
+        ]
+      )
+
+      List<PolicyLink> policyLinks = policyEngine.getPolicyLinksFromAccessPolicyList(grailsHeaders, accessPoliciesForResource)
+
+      // Grails gets confused with the Policy extensions, so instead lets render it out with Jackson
+      render text: Json.toJson(policyLinks), contentType: 'application/json'
     }
   }
 }

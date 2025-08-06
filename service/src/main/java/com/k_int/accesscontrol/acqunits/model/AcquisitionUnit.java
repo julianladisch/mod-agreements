@@ -1,7 +1,10 @@
 package com.k_int.accesscontrol.acqunits.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.annotation.Nullable;
 
@@ -16,6 +19,8 @@ import javax.annotation.Nullable;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("javadoc")
+@SuperBuilder
+@NoArgsConstructor
 public class AcquisitionUnit {
   /**
    * Unique identifier for the acquisition unit.

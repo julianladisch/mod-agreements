@@ -1,6 +1,7 @@
 package com.k_int.accesscontrol.acqunits.useracquisitionunits;
 
 import com.k_int.accesscontrol.acqunits.model.AcquisitionUnit;
+import com.k_int.accesscontrol.acqunits.responses.AcquisitionUnitPolicy;
 import lombok.Builder;
 import lombok.Data;
 
@@ -33,6 +34,18 @@ public class UserAcquisitionUnits {
    * These units allow access for the user regardless of membership.
    */
   List<AcquisitionUnit> nonRestrictiveUnits;
+
+  /**
+   * Acquisition units that do not restrict access with the user explicitly listed as a member
+   * These units allow access for the user regardless of membership.
+   */
+  List<AcquisitionUnit> memberNonRestrictiveUnits;
+
+  /**
+   * Acquisition units that do not restrict access and the user is not a member
+   * These units allow access for the user regardless of membership.
+   */
+  List<AcquisitionUnit> nonMemberNonRestrictiveUnits;
 
   /**
    * Metadata about the fetched acquisition units, indicating which subsets are present.
@@ -70,5 +83,32 @@ public class UserAcquisitionUnits {
     return nonRestrictiveUnits.stream()
             .map(AcquisitionUnit::getId)
             .toList();
+  }
+
+
+  public List<AcquisitionUnitPolicy> getMemberRestrictiveUnitPolicies() {
+    return memberRestrictiveUnits.stream()
+      .map(mru -> AcquisitionUnitPolicy.fromAcquisitionUnit(mru, true)).toList();
+  }
+
+  public List<AcquisitionUnitPolicy> getNonMemberRestrictiveUnitPolicies() {
+    return nonMemberRestrictiveUnits.stream()
+      .map(mru -> AcquisitionUnitPolicy.fromAcquisitionUnit(mru, false)).toList();
+  }
+
+  public List<AcquisitionUnitPolicy> getNonRestrictiveUnitPolicies() {
+    return nonMemberRestrictiveUnits.stream()
+      .map(mru -> AcquisitionUnitPolicy.fromAcquisitionUnit(mru, null)).toList();
+  }
+
+  public List<AcquisitionUnitPolicy> getNonMemberNonRestrictiveUnitPolicies() {
+    return nonMemberNonRestrictiveUnits.stream()
+      .map(mru -> AcquisitionUnitPolicy.fromAcquisitionUnit(mru, false)).toList();
+  }
+
+  public List<AcquisitionUnitPolicy> getMemberNonRestrictiveUnitPolicies() {
+    return memberNonRestrictiveUnits.stream()
+      .map(mru -> AcquisitionUnitPolicy.fromAcquisitionUnit(mru, true)).toList();
+
   }
 }

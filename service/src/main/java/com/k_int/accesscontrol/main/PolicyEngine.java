@@ -2,14 +2,15 @@ package com.k_int.accesscontrol.main;
 
 import com.k_int.accesscontrol.acqunits.*;
 import com.k_int.accesscontrol.core.*;
+import com.k_int.accesscontrol.core.http.bodies.PolicyLink;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineException;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineImplementor;
 import com.k_int.accesscontrol.core.sql.PolicySubquery;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Core entry point for evaluating policy restrictions within the access control system.
@@ -83,11 +84,11 @@ public class PolicyEngine implements PolicyEngineImplementor {
    *
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @param pr      the policy restriction to filter by
-   * @return a list of {@link AccessPolicyTypeIds} containing policy IDs grouped by type
+   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    * @throws PolicyEngineException if an error occurs while fetching policy IDs
    */
-  public List<AccessPolicyTypeIds> getPolicyIds(String[] headers, PolicyRestriction pr) throws PolicyEngineException {
-    List<AccessPolicyTypeIds> policyIds = new ArrayList<>();
+  public List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr) throws PolicyEngineException {
+    List<AccessPolicies> policyIds = new ArrayList<>();
 
     if (acquisitionUnitPolicyEngine != null) {
       policyIds.addAll(acquisitionUnitPolicyEngine.getPolicyIds(headers, pr));
@@ -106,7 +107,7 @@ public class PolicyEngine implements PolicyEngineImplementor {
    * @return true if all policy IDs are valid, false otherwise
    * @throws PolicyEngineException if an error occurs during validation
    */
-  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicyTypeIds> policyIds) throws PolicyEngineException {
+  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds) throws PolicyEngineException {
     boolean isValid = true;
 
     // Check if isValid is true for each sub policyEngine, so that we can short-circuit if any engine returns false.
@@ -116,5 +117,91 @@ public class PolicyEngine implements PolicyEngineImplementor {
     }
 
     return isValid;
+  }
+
+  /**
+   * A helper method which returns the engines enabled in the config, as sorted by AccessPolicyType
+   * @return A map of each AccessPolicyType and whether it is enabled or not
+   */
+  public Map<AccessPolicyType, Boolean> getEnabledEngines() {
+    return Map.of(
+      AccessPolicyType.ACQ_UNIT, getConfig().getAcquisitionUnitPolicyEngineConfiguration().isEnabled()
+    );
+  }
+
+  /**
+   * A helper method which returns the engines enabled in the config as a Set
+   * @return A set of each enabled AccessPolicyType
+   */
+  public Set<AccessPolicyType> getEnabledEngineSet() {
+    Map<AccessPolicyType, Boolean> enabledEngines = getEnabledEngines();
+    return enabledEngines.keySet().stream().filter(key -> enabledEngines.get(key) == true).collect(Collectors.toSet());
+  }
+
+  /**
+   * A function which takes in a list of {@link AccessPolicy} objects, likely with a
+   * {@link com.k_int.accesscontrol.core.http.responses.Policy} implementation of
+   * {@link com.k_int.accesscontrol.core.http.responses.BasicPolicy}
+   * It should then return
+   * @param policies a list of AccessPolicy objects to enrich, it will use the "type" and the "policy.id" fields to enrich
+   * with Policy implementations from the individual engine plugins
+   * @return A list of AccessPolicy objects with all information provided by the policyEngineImplementors
+   */
+  public List<AccessPolicies> enrichPolicies(String[] headers, List<AccessPolicies> policies) {
+    List<AccessPolicies> enrichedPolicies = new ArrayList<>();
+
+    if (acquisitionUnitPolicyEngine != null) {
+      enrichedPolicies.addAll(acquisitionUnitPolicyEngine.enrichPolicies(headers, policies));
+    }
+
+    return enrichedPolicies;
+  }
+
+  /**
+   * Converts a list of {@link AccessPolicy} entities into a list of {@link PolicyLink} DTOs,
+   * preserving enriched policy metadata and per-resource assignment details.
+   * <p>
+   * This is used primarily when serializing claims or presenting assigned policies
+   * for a specific domain object.
+   * </p>
+   *
+   * @param headers        the request headers
+   * @param policyEntities the access policy entities assigned to a resource
+   * @return a list of enriched {@link PolicyLink} instances
+   */
+  public List<PolicyLink> getPolicyLinksFromAccessPolicyList(String[] headers, Collection<AccessPolicy> policyEntities) {
+    // We want to turn this into the shape List<PolicyLink> (We want the enriched Policy information)
+    // enrichPolicies needs ids and types, so send as AccessPolicies object
+    List<AccessPolicies> accessPoliciesList = AccessPolicies.fromAccessPolicyList(policyEntities);
+
+    // use "enrich" method from policyEngine to get List<AccessPolicies>
+    List<AccessPolicies> enrichedAccessPolicies = enrichPolicies(headers, accessPoliciesList);
+
+    // Then convert into List<PolicyLink> so it's in roughly the same shape we'd send down in a ClaimBody
+    List<PolicyLink> policyLinkList = AccessPolicies.convertListToPolicyLinkList(enrichedAccessPolicies);
+
+    // Finally, we have to add back the descriptions and ids that were set on the AccessPolicyEntities for resource
+    // This isn't strictly necessary, but if not done then description will be reset and the policies will churn on each set
+    return policyLinkList.stream()
+      .map(pll -> {
+
+        Optional<AccessPolicy> relevantAPEOpt = policyEntities.stream()
+          .filter(ape -> Objects.equals(ape.getPolicyId(), pll.getPolicy().getId()))
+          .findFirst();
+
+        if (relevantAPEOpt.isEmpty()) {
+          return pll; // Return the PolicyLink as is if we don't have a relevant AccessPolicy from the DB
+        }
+        AccessPolicy relevantAPE = relevantAPEOpt.get();
+
+
+        pll.setId(relevantAPE.getId());
+        if (relevantAPE.getDescription() != null && relevantAPE.getDescription() != pll.getDescription()) {
+          pll.setDescription(relevantAPE.getDescription());
+        }
+
+        return pll;
+      })
+      .toList();
   }
 }

@@ -1,8 +1,10 @@
 package com.k_int.accesscontrol.acqunits;
 
+import com.k_int.accesscontrol.acqunits.responses.AcquisitionUnitPolicy;
 import com.k_int.accesscontrol.acqunits.useracquisitionunits.UserAcquisitionUnits;
 import com.k_int.accesscontrol.acqunits.useracquisitionunits.UserAcquisitionsUnitSubset;
 import com.k_int.accesscontrol.core.*;
+import com.k_int.accesscontrol.core.http.responses.Policy;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineException;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineImplementor;
 import com.k_int.accesscontrol.core.sql.PolicySubquery;
@@ -14,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -157,33 +160,51 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
    *
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @param pr      the policy restriction to filter by
-   * @return a list of {@link AccessPolicyTypeIds} containing policy IDs grouped by type
+   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    */
-  public List<AccessPolicyTypeIds> getPolicyIds(String[] headers, PolicyRestriction pr) {
+  public List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr) {
     String[] finalHeaders = handleLoginAndGetHeaders(headers);
 
     AcquisitionUnitRestriction acqRestriction = AcquisitionUnitRestriction.getRestrictionFromPolicyRestriction(pr);
     return folioClientExceptionHandler("fetching Acquisition units", () -> {
-      List<AccessPolicyTypeIds> policyIds = new ArrayList<>();
-      UserAcquisitionUnits userAcquisitionUnits = acqClient.getUserAcquisitionUnits(finalHeaders, acqRestriction, Set.of(UserAcquisitionsUnitSubset.MEMBER_RESTRICTIVE, UserAcquisitionsUnitSubset.NON_RESTRICTIVE));
+      List<AccessPolicies> policyIds = new ArrayList<>();
+      UserAcquisitionUnits userAcquisitionUnits = acqClient.getUserAcquisitionUnits(
+        finalHeaders,
+        acqRestriction,
+        Set.of(
+          UserAcquisitionsUnitSubset.MEMBER_RESTRICTIVE,
+          UserAcquisitionsUnitSubset.NON_MEMBER_NON_RESTRICTIVE,
+          UserAcquisitionsUnitSubset.MEMBER_NON_RESTRICTIVE
+        )
+      );
 
       // Add all the member restrictive unit policy IDs to the list
       policyIds.add(
-        AccessPolicyTypeIds
+        AccessPolicies
           .builder()
           .type(AccessPolicyType.ACQ_UNIT)
-          .policyIds(userAcquisitionUnits.getMemberRestrictiveUnitIds())
+          .policies(userAcquisitionUnits.getMemberRestrictiveUnitPolicies())
           .name(UserAcquisitionsUnitSubset.MEMBER_RESTRICTIVE.toString())
           .build()
       );
 
-      // Add all the non-restrictive unit policy IDs to the list
+      // Add all the member non-restrictive unit policy IDs to the list
       policyIds.add(
-        AccessPolicyTypeIds
+        AccessPolicies
           .builder()
           .type(AccessPolicyType.ACQ_UNIT)
-          .policyIds(userAcquisitionUnits.getNonRestrictiveUnitIds())
-          .name(UserAcquisitionsUnitSubset.NON_RESTRICTIVE.toString())
+          .policies(userAcquisitionUnits.getNonMemberNonRestrictiveUnitPolicies())
+          .name(UserAcquisitionsUnitSubset.NON_MEMBER_NON_RESTRICTIVE.toString())
+          .build()
+      );
+
+      // Add all the member non-restrictive unit policy IDs to the list
+      policyIds.add(
+        AccessPolicies
+          .builder()
+          .type(AccessPolicyType.ACQ_UNIT)
+          .policies(userAcquisitionUnits.getMemberNonRestrictiveUnitPolicies())
+          .name(UserAcquisitionsUnitSubset.MEMBER_NON_RESTRICTIVE.toString())
           .build()
       );
 
@@ -191,18 +212,29 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
     });
   }
 
-  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicyTypeIds> policyIds) {
+  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds) {
     String[] finalHeaders = handleLoginAndGetHeaders(headers);
     AcquisitionUnitRestriction acqRestriction = AcquisitionUnitRestriction.getRestrictionFromPolicyRestriction(pr);
 
+    if (policyIds.stream().anyMatch(pid -> pid.getType() != AccessPolicyType.ACQ_UNIT)) {
+      throw new PolicyEngineException("arePolicyIdsValid in AcquisitionUnitPolicyEngine is only valid for policyIds of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
+    }
+
     return folioClientExceptionHandler("fetching Acquisition units", () -> {
-      UserAcquisitionUnits userAcquisitionUnits = acqClient.getUserAcquisitionUnits(finalHeaders, acqRestriction, Set.of(UserAcquisitionsUnitSubset.MEMBER_RESTRICTIVE, UserAcquisitionsUnitSubset.NON_RESTRICTIVE));
+      UserAcquisitionUnits userAcquisitionUnits = acqClient.getUserAcquisitionUnits(
+        finalHeaders,
+        acqRestriction,
+        Set.of(
+          UserAcquisitionsUnitSubset.MEMBER_RESTRICTIVE,
+          UserAcquisitionsUnitSubset.NON_RESTRICTIVE // We don't need to differentiate here since we're not expanding them in the response
+        )
+      );
       // For ACQ_UNITs the policyIds are valid if they're in the member restrictive or non-restrictive units lists
       return policyIds
         .stream()
         .allMatch(pids -> {
-          // For all AccessPolicyTypeIds, we grab the policy IDs, then check that they ALL exist in the user's acquisition units
-          return pids.getPolicyIds()
+          // For all AccessPolicies, we grab the policy IDs, then check that they ALL exist in the user's acquisition units
+          return pids.getPolicies().stream().map(Policy::getId).toList()
             .stream()
             .allMatch(pid -> Stream.concat(
               Optional.ofNullable(userAcquisitionUnits.getMemberRestrictiveUnits()).stream().flatMap(Collection::stream),
@@ -211,5 +243,55 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
             .anyMatch(unit -> Objects.equals(unit.getId(), pid))); // If any unit matches the policy ID, then it's valid
         });
     });
+  }
+
+  public List<AccessPolicies> enrichPolicies(String[] headers, List<AccessPolicies> policies) {
+    if (policies.stream().anyMatch(pol -> pol.getType() != AccessPolicyType.ACQ_UNIT)) {
+      throw new PolicyEngineException("arePolicyIdsValid in AcquisitionUnitPolicyEngine is only valid for AccessPolicies of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
+    }
+
+    String[] finalHeaders = handleLoginAndGetHeaders(headers);
+    // For each AccessPolicy passed in, return an AccessPolicy with the enriched policies information
+    // However it'll be more efficient to fetch all of the necessary policy information in one go and then map from it.
+
+    Set<String> policyIds = policies.stream().reduce(
+      new HashSet<>(),
+      (acc, curr) -> {
+        acc.addAll(curr.getPolicies().stream().map(Policy::getId).collect(Collectors.toSet()));
+        return acc;
+      },
+      (idSet1, idSet2) -> {
+        idSet1.addAll(idSet2);
+        return idSet1;
+      }
+    );
+
+    List<AcquisitionUnitPolicy> acqUnitPolicies = acqClient.getAcquisitionUnitPolicies(finalHeaders, policyIds);
+    // We now have the acqUnitPolicies, so we map back to List<AccessPolicies>
+    return policies.stream()
+      .map(pol -> {
+        // Build new List<Policy> using what we had in pol.getPolicies and acqUnitPolicies
+        List<Policy> innerPolicies = pol.getPolicies().stream()
+          .map(innerPol -> {
+            List<AcquisitionUnitPolicy> acqPolCandidates = acqUnitPolicies.stream()
+              .filter(acqPol -> Objects.equals(acqPol.getId(), innerPol.getId()))
+              .toList();
+
+            // If we can't find one, return innerPol as we found it
+            if (acqPolCandidates.isEmpty()) {
+              return innerPol;
+            }
+            // Should only be one candidate... grab first I guess
+            return acqPolCandidates.get(0);
+          })
+          .toList();
+
+        return AccessPolicies.builder()
+          .type(pol.getType())
+          .name(pol.getName())
+          .policies(innerPolicies)
+          .build();
+      })
+      .toList();
   }
 }

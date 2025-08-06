@@ -1,7 +1,7 @@
 package com.k_int.accesscontrol.core.policyengine;
 
 import com.k_int.accesscontrol.core.AccessPolicyQueryType;
-import com.k_int.accesscontrol.core.AccessPolicyTypeIds;
+import com.k_int.accesscontrol.core.AccessPolicies;
 import com.k_int.accesscontrol.core.PolicyRestriction;
 import com.k_int.accesscontrol.core.sql.PolicySubquery;
 
@@ -32,9 +32,9 @@ public interface PolicyEngineImplementor {
    *
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @param pr      the policy restriction to filter by
-   * @return a list of {@link AccessPolicyTypeIds} containing policy IDs grouped by type
+   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    */
-  List<AccessPolicyTypeIds> getPolicyIds(String[] headers, PolicyRestriction pr);
+  List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr);
 
   /**
    * Validates the policy IDs against the provided headers and policy restriction.
@@ -44,5 +44,15 @@ public interface PolicyEngineImplementor {
    * @param policyIds the list of policy IDs to validate
    * @return true if all policy IDs are valid, false otherwise
    */
-  boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicyTypeIds> policyIds);
+  boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds);
+
+  /**
+   * Enriches the policy information from the `id` provided
+   * (Likely incoming is a {@link com.k_int.accesscontrol.core.http.responses.BasicPolicy} implementation)
+   *
+   * @param policies a list of AccessPolicy objects to enrich, it will use the "type" and the "policy.id" fields to enrich
+   * @param headers the request context headers, used for FOLIO/internal service authentication
+   * @return A list of AccessPolicy objects with all policy information provided
+   */
+  List<AccessPolicies> enrichPolicies(String[] headers, List<AccessPolicies> policies);
 }

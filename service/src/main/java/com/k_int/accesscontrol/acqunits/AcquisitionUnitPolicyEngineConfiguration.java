@@ -12,17 +12,22 @@ import lombok.Data;
  */
 @Data
 @Builder
+@SuppressWarnings("javadoc")
 public class AcquisitionUnitPolicyEngineConfiguration implements PolicyEngineImplementorConfiguration {
   /**
    * Indicates whether the acquisition unit policy engine is enabled.
    * If true, the policy engine will process acquisition unit policies.
    * If false, it will not process any acquisition unit policies.
+   * @param enabled whether the acquisition unit policy engine is enabled
+   * @return whether the acquisition unit policy engine is enabled.
    */
   boolean enabled;
 
   /**
    * Configuration for the FOLIO client used by the acquisition unit policy engine
    * Includes settings for authentication, API endpoints, and other necessary parameters
+   * @param folioClientConfig the configuration for the FOLIO client
+   * @return the configuration for the FOLIO client
    */
   FolioClientConfig folioClientConfig; // Configuration for the FOLIO client, including authentication and API settings
 
@@ -30,6 +35,9 @@ public class AcquisitionUnitPolicyEngineConfiguration implements PolicyEngineImp
    * Indicates whether an external FOLIO login is required.
    * If true, the policy engine will perform a login to the external FOLIO client before processing policies.
    * If false, it will assume that the client is already authenticated.
+   *
+   * @param externalFolioLogin whether an external FOLIO login is required.
+   * @return whether an external FOLIO login is required.
    */
   boolean externalFolioLogin; // When configured for an EXTERNAL folio client, ensure we perform a login first.
 }

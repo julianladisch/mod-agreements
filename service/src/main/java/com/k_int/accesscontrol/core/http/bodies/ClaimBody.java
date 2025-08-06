@@ -1,6 +1,8 @@
 package com.k_int.accesscontrol.core.http.bodies;
 
-import com.k_int.accesscontrol.core.AccessPolicyTypeIds;
+import com.k_int.accesscontrol.core.AccessPolicies;
+import com.k_int.accesscontrol.core.http.responses.BasicPolicy;
+import com.k_int.accesscontrol.core.http.responses.Policy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +18,16 @@ import java.util.List;
  * Should some implementation wish to provide an alternative API then it is free to do so.
  */
 public interface ClaimBody {
-  List<PolicyClaim> getClaims();
-
+  /**
+   * Returns the list of {@link PolicyLink} objects representing the individual policy claims.
+   * <p>
+   * Each {@link PolicyLink} associates a specific access policy with its type,
+   * allowing further processing (e.g., grouping by type or policy evaluation).
+   * </p>
+   *
+   * @return a list of {@link PolicyLink} instances associated with this claim body
+   */
+  List<PolicyLink> getClaims();
 
   /**
    * Returns a list of access policy IDs grouped by their type.
@@ -26,13 +36,13 @@ public interface ClaimBody {
    * based on their associated access policy type.
    * </p>
    *
-   * @return a list of {@link AccessPolicyTypeIds} containing policy IDs grouped by type
+   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    */
-  default List<AccessPolicyTypeIds> convertToAccessPolicyTypeIds() {
+  default List<AccessPolicies> convertToAccessPolicies() {
     return getClaims().stream().reduce(
       new ArrayList<>(),
       (acc, curr) -> {
-        AccessPolicyTypeIds relevantTypeIds = acc.stream()
+        AccessPolicies relevantTypeIds = acc.stream()
           .filter(apti -> apti.getType() == curr.getType())
           .findFirst()
           .orElse(null);
@@ -40,14 +50,14 @@ public interface ClaimBody {
         if (relevantTypeIds != null) {
 
           // Update existing type with new policy ID
-          ArrayList<String> updatedPolicyIds = new ArrayList<>(relevantTypeIds.getPolicyIds());
-          updatedPolicyIds.add(curr.getPolicyId());
-          relevantTypeIds.setPolicyIds(updatedPolicyIds);
+          ArrayList<Policy> updatedPolicyIds = new ArrayList<>(relevantTypeIds.getPolicies());
+          updatedPolicyIds.add(BasicPolicy.builder().id(curr.getPolicy().getId()).build());
+          relevantTypeIds.setPolicies(updatedPolicyIds);
         } else {
           acc.add(
-            AccessPolicyTypeIds.builder()
+            AccessPolicies.builder()
               .type(curr.getType())
-              .policyIds(Collections.singletonList(curr.getPolicyId()))
+              .policies(Collections.singletonList(BasicPolicy.builder().id(curr.getPolicy().getId()).build()))
               .name("POLICY_IDS_FOR_" + curr.getType().toString())
               .build()
           );
@@ -55,9 +65,9 @@ public interface ClaimBody {
 
         return acc;
       },
-      (claim1, claim2) -> {
-        claim1.addAll(claim2);
-        return claim1;
+      (policies1, policies2) -> {
+        policies1.addAll(policies2);
+        return policies1;
       }
     );
   }
