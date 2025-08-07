@@ -79,19 +79,19 @@ public class PolicyEngine implements PolicyEngineImplementor {
 
 
   /**
-   * Retrieves a list of access policy IDs grouped by their type for the given policy restriction.
-   * This method is used to fetch valid policy IDs that can be used for operations like claims.
+   * Retrieves a list of access policies grouped by their type for the given policy restriction.
+   * This method is used to fetch valid policies that can be used for operations like claims.
    *
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @param pr      the policy restriction to filter by
-   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
+   * @return a list of {@link AccessPolicies} containing policies grouped by type
    * @throws PolicyEngineException if an error occurs while fetching policy IDs
    */
-  public List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr) throws PolicyEngineException {
+  public List<AccessPolicies> getRestrictionPolicies(String[] headers, PolicyRestriction pr) throws PolicyEngineException {
     List<AccessPolicies> policyIds = new ArrayList<>();
 
     if (acquisitionUnitPolicyEngine != null) {
-      policyIds.addAll(acquisitionUnitPolicyEngine.getPolicyIds(headers, pr));
+      policyIds.addAll(acquisitionUnitPolicyEngine.getRestrictionPolicies(headers, pr));
     }
 
     return policyIds;
@@ -103,17 +103,17 @@ public class PolicyEngine implements PolicyEngineImplementor {
    *
    * @param headers  the request context headers, used for FOLIO/internal service authentication
    * @param pr       the policy restriction to filter by
-   * @param policyIds the list of policy IDs to validate
+   * @param policies the list of policy IDs to validate
    * @return true if all policy IDs are valid, false otherwise
    * @throws PolicyEngineException if an error occurs during validation
    */
-  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds) throws PolicyEngineException {
+  public boolean arePoliciesValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policies) throws PolicyEngineException {
     boolean isValid = true;
 
     // Check if isValid is true for each sub policyEngine, so that we can short-circuit if any engine returns false.
     // No need to check for the first engine, as it will always start true
     if (acquisitionUnitPolicyEngine != null) {
-      isValid = acquisitionUnitPolicyEngine.arePolicyIdsValid(headers, pr, policyIds.stream().filter(pid -> pid.getType() == AccessPolicyType.ACQ_UNIT).toList());
+      isValid = acquisitionUnitPolicyEngine.arePoliciesValid(headers, pr, policies.stream().filter(pid -> pid.getType() == AccessPolicyType.ACQ_UNIT).toList());
     }
 
     return isValid;
@@ -196,7 +196,7 @@ public class PolicyEngine implements PolicyEngineImplementor {
 
 
         pll.setId(relevantAPE.getId());
-        if (relevantAPE.getDescription() != null && relevantAPE.getDescription() != pll.getDescription()) {
+        if (relevantAPE.getDescription() != null && !Objects.equals(relevantAPE.getDescription(), pll.getDescription())) {
           pll.setDescription(relevantAPE.getDescription());
         }
 

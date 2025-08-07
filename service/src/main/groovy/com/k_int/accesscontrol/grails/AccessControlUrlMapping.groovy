@@ -33,12 +33,12 @@ class AccessControlUrlMapping {
 
       "${basePath}/accessControl"(resources: 'accessPolicy', excludes: ['patch', 'save', 'create', 'edit', 'delete']) {
         collection {
-          "/readPolicies"(controller: 'accessPolicy', action: 'getReadPolicyIds', method: 'GET')
-          "/deletePolicies"(controller: 'accessPolicy', action: 'getDeletePolicyIds', method: 'GET')
-          "/updatePolicies"(controller: 'accessPolicy', action: 'getUpdatePolicyIds', method: 'GET')
-          "/createPolicies"(controller: 'accessPolicy', action: 'getCreatePolicyIds', method: 'GET')
-          "/claimPolicies"(controller: 'accessPolicy', action: 'getClaimPolicyIds', method: 'GET')
-          "/applyPolicies"(controller: 'accessPolicy', action: 'getApplyPolicyIds', method: 'GET')
+          "/readPolicies"(controller: 'accessPolicy', action: 'getReadPolicies', method: 'GET')
+          "/deletePolicies"(controller: 'accessPolicy', action: 'getDeletePolicies', method: 'GET')
+          "/updatePolicies"(controller: 'accessPolicy', action: 'getUpdatePolicies', method: 'GET')
+          "/createPolicies"(controller: 'accessPolicy', action: 'getCreatePolicies', method: 'GET')
+          "/claimPolicies"(controller: 'accessPolicy', action: 'getClaimPolicies', method: 'GET')
+          "/applyPolicies"(controller: 'accessPolicy', action: 'getApplyPolicies', method: 'GET')
 
           "/enabledEngines"(controller: 'accessPolicy', action: 'getEnabledEngines', method: 'GET')
         }

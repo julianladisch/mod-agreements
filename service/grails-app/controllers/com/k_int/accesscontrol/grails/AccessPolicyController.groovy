@@ -4,7 +4,7 @@ import com.k_int.accesscontrol.core.AccessPolicies
 import com.k_int.accesscontrol.core.AccessPolicyType
 import com.k_int.accesscontrol.core.PolicyRestriction
 
-import com.k_int.accesscontrol.core.http.responses.PolicyIdsResponse
+import com.k_int.accesscontrol.core.http.responses.PoliciesResponse
 import com.k_int.utils.Json
 import grails.gorm.multitenancy.CurrentTenant
 import grails.gorm.transactions.Transactional
@@ -29,11 +29,11 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    *
    * @return A PolicyEngine instance configured for the current request.
    */
-  private List<AccessPolicies> getPolicyIds(PolicyRestriction restriction) {
+  private List<AccessPolicies> getPolicies(PolicyRestriction restriction) {
     // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
     String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
 
-    return policyEngine.getPolicyIds(grailsHeaders, restriction)
+    return policyEngine.getRestrictionPolicies(grailsHeaders, restriction)
   }
 
   /**
@@ -43,9 +43,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of read policy IDs.
    */
   @Transactional
-  def getReadPolicyIds() {
-    log.trace("AccessPolicyController::getReadPolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.READ)).build()), contentType: 'application/json'
+  def getReadPolicies() {
+    log.trace("AccessPolicyController::getReadPolicies")
+    render text: Json.toJson(PoliciesResponse.builder().readPolicies(getPolicies(PolicyRestriction.READ)).build()), contentType: 'application/json'
   }
 
   /**
@@ -55,9 +55,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of update policy IDs.
    */
   @Transactional
-  def getUpdatePolicyIds() {
-    log.trace("AccessPolicyController::getUpdatePolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.UPDATE)).build()), contentType: 'application/json'
+  def getUpdatePolicies() {
+    log.trace("AccessPolicyController::getUpdatePolicies")
+    render text: Json.toJson(PoliciesResponse.builder().updatePolicies(getPolicies(PolicyRestriction.UPDATE)).build()), contentType: 'application/json'
   }
 
   /**
@@ -67,9 +67,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of create policy IDs.
    */
   @Transactional
-  def getCreatePolicyIds() {
-    log.trace("AccessPolicyController::getCreatePolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.CREATE)).build()), contentType: 'application/json'
+  def getCreatePolicies() {
+    log.trace("AccessPolicyController::getCreatePolicies")
+    render text: Json.toJson(PoliciesResponse.builder().createPolicies(getPolicies(PolicyRestriction.CREATE)).build()), contentType: 'application/json'
   }
 
   /**
@@ -79,9 +79,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of delete policy IDs.
    */
   @Transactional
-  def getDeletePolicyIds() {
-    log.trace("AccessPolicyController::getDeletePolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.DELETE)).build()), contentType: 'application/json'
+  def getDeletePolicies() {
+    log.trace("AccessPolicyController::getDeletePolicies")
+    render text: Json.toJson(PoliciesResponse.builder().deletePolicies(getPolicies(PolicyRestriction.DELETE)).build()), contentType: 'application/json'
   }
 
   /**
@@ -91,9 +91,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of claim policy IDs.
    */
   @Transactional
-  def getClaimPolicyIds() {
-    log.trace("AccessPolicyController::getClaimPolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.CLAIM)).build()), contentType: 'application/json'
+  def getClaimPolicies() {
+    log.trace("AccessPolicyController::getClaimPolicies")
+    render text: Json.toJson(PoliciesResponse.builder().claimPolicies(getPolicies(PolicyRestriction.CLAIM)).build()), contentType: 'application/json'
   }
 
   /**
@@ -103,9 +103,9 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    * @return A response containing the list of apply policy IDs.
    */
   @Transactional
-  def getApplyPolicyIds() {
-    log.trace("AccessPolicyController::getApplyPolicyIds")
-    render text: Json.toJson(PolicyIdsResponse.builder().claimPolicyIds(getPolicyIds(PolicyRestriction.APPLY_POLICIES)).build()), contentType: 'application/json'
+  def getApplyPolicies() {
+    log.trace("AccessPolicyController::getApplyPolicies")
+    render text: Json.toJson(PoliciesResponse.builder().applyPolicies(getPolicies(PolicyRestriction.APPLY_POLICIES)).build()), contentType: 'application/json'
   }
 
   /**

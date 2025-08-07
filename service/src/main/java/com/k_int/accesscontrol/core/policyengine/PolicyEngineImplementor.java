@@ -34,17 +34,17 @@ public interface PolicyEngineImplementor {
    * @param pr      the policy restriction to filter by
    * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    */
-  List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr);
+  List<AccessPolicies> getRestrictionPolicies(String[] headers, PolicyRestriction pr);
 
   /**
    * Validates the policy IDs against the provided headers and policy restriction.
    *
    * @param headers   the request context headers, used for FOLIO/internal service authentication
    * @param pr        the policy restriction to filter by
-   * @param policyIds the list of policy IDs to validate
+   * @param policies the list of policy IDs to validate
    * @return true if all policy IDs are valid, false otherwise
    */
-  boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds);
+  boolean arePoliciesValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policies);
 
   /**
    * Enriches the policy information from the `id` provided

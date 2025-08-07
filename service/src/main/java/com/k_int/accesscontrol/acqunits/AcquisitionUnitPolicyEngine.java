@@ -162,7 +162,7 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
    * @param pr      the policy restriction to filter by
    * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
    */
-  public List<AccessPolicies> getPolicyIds(String[] headers, PolicyRestriction pr) {
+  public List<AccessPolicies> getRestrictionPolicies(String[] headers, PolicyRestriction pr) {
     String[] finalHeaders = handleLoginAndGetHeaders(headers);
 
     AcquisitionUnitRestriction acqRestriction = AcquisitionUnitRestriction.getRestrictionFromPolicyRestriction(pr);
@@ -212,12 +212,12 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
     });
   }
 
-  public boolean arePolicyIdsValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policyIds) {
+  public boolean arePoliciesValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policies) {
     String[] finalHeaders = handleLoginAndGetHeaders(headers);
     AcquisitionUnitRestriction acqRestriction = AcquisitionUnitRestriction.getRestrictionFromPolicyRestriction(pr);
 
-    if (policyIds.stream().anyMatch(pid -> pid.getType() != AccessPolicyType.ACQ_UNIT)) {
-      throw new PolicyEngineException("arePolicyIdsValid in AcquisitionUnitPolicyEngine is only valid for policyIds of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
+    if (policies.stream().anyMatch(pid -> pid.getType() != AccessPolicyType.ACQ_UNIT)) {
+      throw new PolicyEngineException("arePoliciesValid in AcquisitionUnitPolicyEngine is only valid for policyIds of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
     }
 
     return folioClientExceptionHandler("fetching Acquisition units", () -> {
@@ -230,7 +230,7 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
         )
       );
       // For ACQ_UNITs the policyIds are valid if they're in the member restrictive or non-restrictive units lists
-      return policyIds
+      return policies
         .stream()
         .allMatch(pids -> {
           // For all AccessPolicies, we grab the policy IDs, then check that they ALL exist in the user's acquisition units
@@ -247,7 +247,7 @@ public class AcquisitionUnitPolicyEngine implements PolicyEngineImplementor {
 
   public List<AccessPolicies> enrichPolicies(String[] headers, List<AccessPolicies> policies) {
     if (policies.stream().anyMatch(pol -> pol.getType() != AccessPolicyType.ACQ_UNIT)) {
-      throw new PolicyEngineException("arePolicyIdsValid in AcquisitionUnitPolicyEngine is only valid for AccessPolicies of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
+      throw new PolicyEngineException("enrichPolicies in AcquisitionUnitPolicyEngine is only valid for AccessPolicies of type AccessPolicyType.ACQ_UNIT", PolicyEngineException.INVALID_POLICY_TYPE);
     }
 
     String[] finalHeaders = handleLoginAndGetHeaders(headers);
