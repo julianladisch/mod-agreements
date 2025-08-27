@@ -1,12 +1,12 @@
-package org.olf;
+package org.olf
 
-import grails.testing.mixin.integration.Integration;
-import groovy.util.logging.Slf4j;
+import grails.testing.mixin.integration.Integration
+import groovy.util.logging.Slf4j
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
+import javax.sql.DataSource
+import java.sql.Connection
+import java.sql.DatabaseMetaData
+import java.sql.ResultSet
 
 /*
   This test connects to the database for mod-agreements and checks if all the tables in the
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 @Slf4j
 class PrimaryKeySpec extends BaseSpec {
 
-  DataSource dataSource;
+  DataSource dataSource
 
   // A set of tables to ignore during the check.
   private static final Set<String> IGNORED_TABLES = [
@@ -33,16 +33,19 @@ class PrimaryKeySpec extends BaseSpec {
     'string_template_scopes',  // lookup/mapping table.
     'subscription_agreement_ext_lic_doc',
     'subscription_agreement_supp_doc',
-    'tenant_changelog'
-  ].asImmutable();
+    'tenant_changelog',
+    'entitlement_tag', // Tag tables are join tables and don't need PKs
+    'erm_resource_tag', // Tag tables are join tables and don't need PKs
+    'subscription_agreement_tag' // Tag tables are join tables and don't need PKs
+  ].asImmutable()
 
   // A set of schemas to ignore. For postgres, this prevents checking system tables.
   private static final Set<String> IGNORED_SCHEMAS = [
     'information_schema',
     'pg_catalog'
-  ].asImmutable();
+  ].asImmutable()
 
-  String schema = "primarykeyspec_mod_agreements"; // Not sure how we autogenerate this schema name for tests, so assigning manually.
+  String schema = "primarykeyspec_mod_agreements" // Not sure how we autogenerate this schema name for tests, so assigning manually.
 
   def "all application tables should have a primary key defined"() {
     given: "A list to hold tables that fail the check"
@@ -53,23 +56,23 @@ class PrimaryKeySpec extends BaseSpec {
     withTenant {
       dataSource.connection.withCloseable { Connection connection ->
         DatabaseMetaData metaData = connection.getMetaData()
-        log.debug("Schema: {}", schema.toString());
+        log.debug("Schema: {}", schema.toString())
         ResultSet tables = metaData.getTables(null, schema, "%", ["TABLE"] as String[])
 
         if (!tables.next()) {
           // If we get the schema name wrong, we'll find no tables. The test will then pass, which isn't really what we want, so we should throw.
-          throw new RuntimeException("No tables found for test. Check that the schema name is correct.");
+          throw new RuntimeException("No tables found for test. Check that the schema name is correct.")
         }
 
         while (tables.next()) {
-          String tableName = tables.getString("TABLE_NAME");
-          String tableSchema = tables.getString("TABLE_SCHEM");
+          String tableName = tables.getString("TABLE_NAME")
+          String tableSchema = tables.getString("TABLE_SCHEM")
 
           if (tableName.toLowerCase() in IGNORED_TABLES || (tableSchema && tableSchema.toLowerCase() in IGNORED_SCHEMAS)) {
             continue
           }
 
-          ResultSet pkResultSet = metaData.getPrimaryKeys(null, schema, tableName);
+          ResultSet pkResultSet = metaData.getPrimaryKeys(null, schema, tableName)
 
           if (!pkResultSet.next()) {
             // If the primary key resultSet is empty, then that table is missing a PK
@@ -78,15 +81,15 @@ class PrimaryKeySpec extends BaseSpec {
             tablesWithPks.add(tableName)
           }
 
-          pkResultSet.close();
+          pkResultSet.close()
         }
       }
     }
 
 
     then: "The list of tables without primary keys should be empty"
-    log.debug("Tables found with PKs: {}", tablesWithPks.toListString());
-    log.debug("Tables found missing PKs: {}", tablesWithoutPks.toListString());
+    log.debug("Tables found with PKs: {}", tablesWithPks.toListString())
+    log.debug("Tables found missing PKs: {}", tablesWithoutPks.toListString())
     tablesWithoutPks.isEmpty() // Excepting the tables we ignore, there shouldn't be any tables missing PKs
   }
 }
