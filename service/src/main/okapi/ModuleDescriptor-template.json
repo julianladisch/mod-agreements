@@ -2391,7 +2391,7 @@
       "permissionName": "erm.accesspolicies.view",
       "displayName": "Access policies view",
       "description": "GET all information from AccessPolicy endpoints",
-      "visible": true,
+      "visible": false,
       "subPermissions": [
         "erm.accesspolicies.collection.get",
         "erm.accesspolicies.item.get",
