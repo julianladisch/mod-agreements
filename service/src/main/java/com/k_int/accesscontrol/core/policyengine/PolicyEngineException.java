@@ -1,5 +1,7 @@
 package com.k_int.accesscontrol.core.policyengine;
 
+import lombok.Getter;
+
 /**
  * Custom runtime exception class for errors that occur within the Policy Engine.
  * This exception provides specific error codes and can wrap an underlying cause.
@@ -24,14 +26,38 @@ public class PolicyEngineException extends RuntimeException {
 
   public static final Long INVALID_POLICY_TYPE = 4L;
 
+  // CLAIM exception codes
+  /**
+   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified via an id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink} was not found in the existing policies list
+   */
+  public static final Long ACCESS_POLICY_ID_NOT_FOUND = 5L;
+  /**
+   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified does not match the resource id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
+   */
+  public static final Long ACCESS_POLICY_RESOURCE_ID_DOES_NOT_MATCH = 6L;
+  /**
+   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified does not match the resource class in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
+   */
+  public static final Long ACCESS_POLICY_RESOURCE_CLASS_DOES_NOT_MATCH = 7L;
+  /**
+   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink} specifies a policy id which already exists in the existing policies list.
+   */
+  public static final Long PREEXISTING_ACCESS_POLICY_FOR_POLICY_ID = 8L;
+  /**
+   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink} specifies a changed policy which does not meet the {@link com.k_int.accesscontrol.core.PolicyRestriction#CLAIM} restriction for the user
+   */
+  public static final Long CLAIM_RESTRICTION_NOT_MET = 9L;
+
 
   /**
    * The specific error code associated with this exception.
    */
+  @Getter
   final Long code;
   /**
    * The underlying cause of this exception, if any.
    */
+  @Getter
   final Throwable cause;
 
   /**

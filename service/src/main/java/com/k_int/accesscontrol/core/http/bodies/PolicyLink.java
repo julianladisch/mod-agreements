@@ -1,6 +1,7 @@
 package com.k_int.accesscontrol.core.http.bodies;
 
 import com.k_int.accesscontrol.core.AccessPolicyType;
+import com.k_int.accesscontrol.core.BasicAccessPolicy;
 import com.k_int.accesscontrol.core.http.responses.Policy;
 
 /**
@@ -72,4 +73,27 @@ public interface PolicyLink {
    * @param description The description to set for the policy link.
    */
   void setDescription(String description);
+
+  /**
+   * Creates a {@link BasicAccessPolicy} instance based on this policy link.
+   * <p>
+   * This method constructs a new {@link BasicAccessPolicy} using the details from this policy link,
+   * along with the provided resource ID and resource class. The resulting access policy encapsulates
+   * the relationship between the resource and the associated access policy.
+   * </p>
+   *
+   * @param resourceId    The identifier of the resource to which this access policy applies.
+   * @param resourceClass The class or type of the resource (e.g., "org.olf.erm.SubscriptionAgreement").
+   * @return A new {@link BasicAccessPolicy} instance representing the access control for the specified resource.
+   */
+  default BasicAccessPolicy createBasicAccessPolicy(String resourceId, String resourceClass) {
+    return BasicAccessPolicy.builder()
+      .id(getId())
+      .resourceId(resourceId)
+      .resourceClass(resourceClass)
+      .policyId(getPolicy().getId())
+      .description(getDescription())
+      .type(getType())
+      .build();
+  }
 }

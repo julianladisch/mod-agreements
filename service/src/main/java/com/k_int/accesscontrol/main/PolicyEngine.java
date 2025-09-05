@@ -2,7 +2,9 @@ package com.k_int.accesscontrol.main;
 
 import com.k_int.accesscontrol.acqunits.*;
 import com.k_int.accesscontrol.core.*;
+import com.k_int.accesscontrol.core.http.bodies.ClaimBody;
 import com.k_int.accesscontrol.core.http.bodies.PolicyLink;
+import com.k_int.accesscontrol.core.policyengine.EvaluatedClaimPolicies;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineException;
 import com.k_int.accesscontrol.core.policyengine.PolicyEngineImplementor;
 import com.k_int.accesscontrol.core.sql.PolicySubquery;
@@ -203,5 +205,94 @@ public class PolicyEngine implements PolicyEngineImplementor {
         return pll;
       })
       .toList();
+  }
+
+  /**
+   * Evaluates an incoming {@link ClaimBody} against existing access policies for a resource,
+   * determining which policies need to be added, removed, or updated.
+   * <p>
+   * This method compares the claims in the {@link ClaimBody} with the provided list of existing
+   * {@link AccessPolicy} objects, identifying discrepancies and preparing lists of policies
+   * to be added, removed, or updated accordingly.
+   * </p>
+   *
+   * @param claimBody       the incoming claim body containing desired policy claims
+   * @param existingPolicies the current access policies assigned to the resource
+   * @param resourceId      the identifier of the resource claims are being evaluated against
+   * @param resourceClass  the class/type of the resource claims are being evaluated against
+   * @return an {@link EvaluatedClaimPolicies} object containing lists of policies to add, remove, or update
+   * @throws PolicyEngineException if validation fails (e.g., non-existent policy IDs, mismatched resource IDs/classes)
+   */
+  public EvaluatedClaimPolicies evaluateClaimPolicies(
+    ClaimBody claimBody,
+    List<AccessPolicy> existingPolicies,
+    String resourceId,
+    String resourceClass
+  ) throws PolicyEngineException {
+    // This method will evaulate an incoming claimBody, returning 3 lists of AccessPolicy objects.
+    // One each for "add", "remove" and "update".
+    // This method will throw if
+
+    List<AccessPolicy> accessPoliciesToAdd = new ArrayList<>();
+    List<AccessPolicy> accessPoliciesToRemove = new ArrayList<>();
+    List<AccessPolicy> accessPoliciesToUpdate = new ArrayList<>();
+    for (AccessPolicy policy : existingPolicies) {
+      if (claimBody.getClaims().stream().noneMatch(claim -> Objects.equals(claim.getId(), policy.getId()))) {
+        accessPoliciesToRemove.add(policy);
+      }
+    }
+
+    for(PolicyLink claim  : claimBody.getClaims()) {
+      if (claim.getId() != null) {
+        // If the claim has an ID, we assume it is an existing policy that needs to be updated
+        AccessPolicy existingPolicy = existingPolicies.stream().filter (ape -> Objects.equals(ape.getId(), claim.getId())).findFirst().orElse(null);
+
+        // If we're handed a non existing policy ID, we should fail the request
+        if (existingPolicy == null) {
+          String failureMessage = "Access policy with ID " + claim.getId() + " does not exist.";
+          throw new PolicyEngineException(failureMessage, PolicyEngineException.ACCESS_POLICY_ID_NOT_FOUND);
+        }
+
+        // If existing policy is for a different resource, we should also fail the request
+        if (!Objects.equals(existingPolicy.getResourceId(), resourceId)) {
+          String failureMessage = "Access policy " + existingPolicy.getId() + " has resource ID: " + existingPolicy.getResourceId() + " which does not match resource ID " + resourceId + ".";
+          throw new PolicyEngineException(failureMessage, PolicyEngineException.ACCESS_POLICY_RESOURCE_ID_DOES_NOT_MATCH);
+        }
+
+        // If existing policy is for a different class, we should also fail the request
+        if (!Objects.equals(existingPolicy.getResourceClass(), resourceClass)) {
+          String failureMessage = "Access policy " + existingPolicy.getId() + " has resource class: " + existingPolicy.getResourceClass() + " which does not match resource class " + resourceClass + ".";
+          throw new PolicyEngineException(failureMessage, PolicyEngineException.ACCESS_POLICY_RESOURCE_CLASS_DOES_NOT_MATCH);
+        }
+
+        if (!Objects.equals(existingPolicy.getDescription(), claim.getDescription())) {
+          // Only add to update list if something has actually changed
+
+          accessPoliciesToUpdate.add(
+            // Construct BasicAccessPolicy from PolicyLink to keep all objects in the same shape (We will only be updating the description anyway in the framework layer)
+            claim.createBasicAccessPolicy(resourceId, resourceClass)
+          );
+        }
+      } else if (
+          // We don't have an ID, so we are creating a new policy
+          // Only create if there is no existing policy with the same policyId and type for this resource
+          existingPolicies.stream().anyMatch(ap -> Objects.equals(ap.getPolicyId(), claim.getPolicy().getId()) && ap.getType() == claim.getType())
+        ) {
+        String failureMessage = "Resource " + resourceId + " already has an access policy with policyId " + claim.getPolicy().getId() + ".";
+        throw new PolicyEngineException(failureMessage, PolicyEngineException.PREEXISTING_ACCESS_POLICY_FOR_POLICY_ID);
+      } else {
+        // If no ID, we create a new policy
+        accessPoliciesToAdd.add(
+          // Construct BasicAccessPolicy from PolicyLink to keep all objects in the same shape
+          claim.createBasicAccessPolicy(resourceId, resourceClass)
+        );
+      }
+    }
+
+    return EvaluatedClaimPolicies.builder()
+      .policiesToAdd(accessPoliciesToAdd)
+      .policiesToRemove(accessPoliciesToRemove)
+      .policiesToUpdate(accessPoliciesToUpdate)
+      .build();
   }
 }
