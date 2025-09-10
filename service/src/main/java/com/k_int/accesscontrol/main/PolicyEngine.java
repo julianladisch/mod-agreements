@@ -174,6 +174,8 @@ public class PolicyEngine implements PolicyEngineImplementor {
   public List<PolicyLink> getPolicyLinksFromAccessPolicyList(String[] headers, Collection<AccessPolicy> policyEntities) {
     // We want to turn this into the shape List<PolicyLink> (We want the enriched Policy information)
     // enrichPolicies needs ids and types, so send as AccessPolicies object
+
+    // This will lose us all id and description information on the AccessPolicy objects for the resource -- we will add those back later
     List<AccessPolicies> accessPoliciesList = AccessPolicies.fromAccessPolicyList(policyEntities);
 
     // use "enrich" method from policyEngine to get List<AccessPolicies>
@@ -187,19 +189,18 @@ public class PolicyEngine implements PolicyEngineImplementor {
     return policyLinkList.stream()
       .map(pll -> {
 
-        Optional<AccessPolicy> relevantAPEOpt = policyEntities.stream()
+        Optional<AccessPolicy> relevantAccessPolicyOpt = policyEntities.stream()
           .filter(ape -> Objects.equals(ape.getPolicyId(), pll.getPolicy().getId()))
           .findFirst();
 
-        if (relevantAPEOpt.isEmpty()) {
+        if (relevantAccessPolicyOpt.isEmpty()) {
           return pll; // Return the PolicyLink as is if we don't have a relevant AccessPolicy from the DB
         }
-        AccessPolicy relevantAPE = relevantAPEOpt.get();
+        AccessPolicy relevantAccessPolicy = relevantAccessPolicyOpt.get();
 
-
-        pll.setId(relevantAPE.getId());
-        if (relevantAPE.getDescription() != null && !Objects.equals(relevantAPE.getDescription(), pll.getDescription())) {
-          pll.setDescription(relevantAPE.getDescription());
+        pll.setId(relevantAccessPolicy.getId());
+        if (relevantAccessPolicy.getDescription() != null && !Objects.equals(relevantAccessPolicy.getDescription(), pll.getDescription())) {
+          pll.setDescription(relevantAccessPolicy.getDescription());
         }
 
         return pll;

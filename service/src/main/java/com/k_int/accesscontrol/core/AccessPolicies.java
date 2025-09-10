@@ -106,9 +106,12 @@ public class AccessPolicies {
       new ArrayList<>(),
       (acc, curr) -> {
         // Construct a PolicyLink for EACH accessPolicies.policy entry
+
+        // We don't currently keep any of the description or id information about AccessPolicy objects in the DB against
+        // the AccessPolicies List<? extends Policy> policies, so we cannot guess at a description or id
+        // We might wish to do so in future, but for now we ignore and we trust upstream callers to populate these fields if needed
         List<BasicPolicyLink> innerPolicyLinks = curr.getPolicies().stream().map(pol -> BasicPolicyLink.builder()
           .policy(pol)
-          .description(curr.getName() + "::" + pol.getId())
           .type(curr.getType())
           .build()
         ).toList();
