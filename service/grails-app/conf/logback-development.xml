@@ -99,7 +99,11 @@
 
   <logger name="com.k_int.web.toolkit.refdata.GrailsDomainRefdataHelpers">
     <!-- Set to INFO to see logs like TitleInstance.setTypeFromString ( 'monograph' ) -->
-    <level value="ERROR" />
+    <level value="DEBUG" />
+  </logger>
+
+  <logger name="com.k_int.okapi.remote_resources.*">
+    <level value="DEBUG" />
   </logger>
 
   <if condition='isDefined("grails.util.BuildSettings.TARGET_DIR")'>

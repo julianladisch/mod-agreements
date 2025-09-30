@@ -1,10 +1,8 @@
 package org.olf.erm
 
-import grails.databinding.SimpleMapDataBindingSource
-import grails.persistence.Entity
+
 import grails.plugin.json.view.test.JsonViewTest
 import grails.testing.gorm.DataTest
-import grails.web.databinding.DataBindingUtils
 import grails.web.databinding.GrailsWebDataBinder
 import spock.lang.Specification
 import spock.lang.Unroll

@@ -1,0 +1,25 @@
+<!-- File: src/test/resources/logback-test.xml -->
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- A simpler pattern is often better for tests -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- THIS IS THE MOST IMPORTANT PART -->
+    <!-- It sets the logging level for your specific test classes. -->
+    <!-- Using DEBUG will show .debug(), .info(), .warn(), and .error() logs -->
+    <logger name="com.k_int.web.toolkit.testing" level="DEBUG" />
+
+    <!-- You can also set other loggers to be less noisy during tests -->
+    <logger name="org.hibernate" level="ERROR" />
+    <logger name="com.zaxxer.hikari" level="ERROR" />
+    <logger name="org.olf.erm" level="DEBUG" />
+    <!-- The root logger catches everything else. Setting it to INFO is a good default for tests. -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

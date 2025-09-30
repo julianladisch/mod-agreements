@@ -24,7 +24,7 @@ import groovy.util.logging.Slf4j
 
 
 /**
- * Entitlement (A description of a right to access a specific digital resource, which can be an 
+ * Entitlement (A description of a right to access a specific digital resource, which can be an
  * title on a platform (But not listed in a package), a title named in a package, a full package of resources
  *
  * OFTEN attached to an agreement, but it's possible we know we have the right to access a resource
@@ -39,7 +39,7 @@ import groovy.util.logging.Slf4j
 )
 public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitlement> {
   public static final Class<? extends ErmResource>[] ALLOWED_RESOURCES = [Pkg, PackageContentItem, PlatformTitleInstance] as Class[]
-  
+
   static copyByCloning = ['docs'];
 
   /**
@@ -49,8 +49,8 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
   public Entitlement clone () {
     Clonable.super.clone()
   }
-  
-  
+
+
   String id
   Date dateCreated
   Date lastUpdated
@@ -58,10 +58,10 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
   ErmResource resource
 
   // The date ranges on which this line item is active. These date ranges allow the system to determine
-  // what content is "Live" in an agreement. Content can be "Live" without being switched on, and 
+  // what content is "Live" in an agreement. Content can be "Live" without being switched on, and
   // vice versa. The dates indicate that we believe the agreement is in force for the items specified.
   // For Trials, these dates will indicate the dates of the trial, for live agreements the agreement item dates
-  LocalDate activeFrom 
+  LocalDate activeFrom
   LocalDate activeTo
 
   Date contentUpdated
@@ -75,21 +75,25 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
   // entitlement does not link to a resource in the tenant database, but instead will use API calls to define its contents
   String authority
 
-  boolean suppressFromDiscovery = false 
-  
+  boolean suppressFromDiscovery = false
+
   String description
-  
+
+  // Holds the gkb package title name for external gkb resources.
+  String resourceName
+
+  // For External gokb resources, reference should be in the form: packageUuid:titleUuid
   @OkapiLookup(
     value = '${obj.authority?.toLowerCase() == "ekb-package" ? "/eholdings/packages" : "/eholdings/resources" }/${obj.reference}${obj.authority?.toLowerCase() == "ekb-package" ? "" : "?include=package" }',
     converter = {
       // delegate, owner and thisObject should be the instance of Entitlement
       final Entitlement outerEntitlement = delegate
-      
+
       log.debug "Converter called with delegate: ${outerEntitlement} and it: ${it}"
-      
+
       final String theType = it.data?.attributes?.publicationType ?:
         it.data?.type?.replaceAll(/^\s*([\S])(.*?)s?\s*$/, {match, String firstChar, String nonePlural -> "${firstChar.toUpperCase()}${nonePlural}"})
-      
+
       def map = [
         label: it.data?.attributes?.name,
         type: (theType),
@@ -135,7 +139,7 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
         def identifiers = it.data?.attributes?.identifiers
         if (identifiers) {
           def combinedIdentifiers = [];
-          
+
           identifiers.each {
             def typeString = it.type.toLowerCase();
             def subtypeString = it.subtype.toLowerCase();
@@ -166,11 +170,11 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
           if (authors.size() > 0) {
             map.authors = authors
           }
-           if (editors.size() > 0) {
+          if (editors.size() > 0) {
             map.editors = editors
           }
         }
-        
+
         Map packageData = [:]
 
         packageData.authority = "EKB-PACKAGE"
@@ -178,7 +182,7 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
         if (packageId) {
           packageData.reference = packageId
         }
-        
+
         def includedPackage = it?.included.find { it.id == packageId && it.type == "packages"  }
         if (includedPackage) {
           def name = includedPackage.attributes?.name
@@ -240,13 +244,13 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
           map.accessStatusType = accessStatusType
         }
       }
-      
+
       // Merge external coverages.
       final boolean isPackage = theType?.toLowerCase() == 'package'
-      
+
       log.debug "${isPackage ? 'Is' : 'Is not'} Package"
       outerEntitlement.metaClass.external_customCoverage = false
-      
+
       def custCoverage = it.data?.attributes?.getAt("customCoverage${isPackage ? '' : 's'}")
       log.debug "Custom Coverage: ${custCoverage}"
 
@@ -270,7 +274,7 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
 
         // Apply all coverages to metaClass at the end
         outerEntitlement.metaClass.coverage = coverageToApply
-        
+
       } else if (!isPackage) {
         log.debug "Adding managed title coverages."
         it.data?.attributes?.managedCoverages?.each { Map <String, String> coverageEntry ->
@@ -282,7 +286,7 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
         // Apply all coverages to metaClass at the end
         outerEntitlement.metaClass.coverage = coverageToApply
       }
-      
+
       map
     }
   )
@@ -301,18 +305,18 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
   ]
 
   Set<HoldingsCoverage> coverage = []
-  
+
   static mappedBy = [
     coverage: 'entitlement',
     poLines: 'owner'
   ]
-  
+
   // We should use a beforeValidate handler to set related values.
   def beforeValidate() {
     this.type = this.type?.toLowerCase()
     this.authority = this.authority?.toUpperCase()
-    
-    /* 
+
+    /*
      * Type 'internal' can be explicitly sent, or implicitly defined as no type being sent.
      * Either way we want to remove any coverage before attempting to validate.
      */
@@ -321,7 +325,6 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
       this.coverage?.clear()
     }
   }
-  
 
   // Allow users to individually switch on or off this content item. If null, should default to the agreement
   // enabled setting. The activeFrom and activeTo dates determine if a content item is "live" or not. This flag
@@ -349,7 +352,8 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
           description column: 'ent_description'
           dateCreated column: 'ent_date_created'
           lastUpdated column: 'ent_last_updated'
-             poLines cascade: 'all-delete-orphan'
+          resourceName column: 'ent_resource_name'
+    poLines cascade: 'all-delete-orphan'
             coverage cascade: 'all-delete-orphan'
                 tags cascade: 'save-update'
                 docs cascade: 'all-delete-orphan', joinTable: [name: 'entitlement_document_attachment', key: 'entitlement_docs_id', column: 'document_attachment_id']
@@ -386,7 +390,7 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
                 break;
             }
           })
-          
+
           coverage (validator: HoldingsCoverage.STATEMENT_COLLECTION_VALIDATOR, sort:'startDate')
 
                      type(nullable:true, blank:false)
@@ -401,7 +405,8 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
            contentUpdated(nullable:true, blank:false)
                activeFrom(nullable:true, blank:false)
                  activeTo(nullable:true, blank:false)
-          
+          resourceName(nullable: true)
+
          authority(nullable:true, blank:false, validator: { val, inst ->
             switch (inst.type?.toLowerCase()) {
               case 'external':
@@ -418,7 +423,7 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
                 break;
             }
           })
-         
+
          reference (nullable:true, blank:false, validator: { val, inst ->
             switch (inst.type?.toLowerCase()) {
               case 'external':
@@ -436,12 +441,12 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
             }
           })
   }
-  
+
   @Transient
   public String getExplanation() {
-    
+
     String result = null
-    
+
     if (resource) {
       // Get the class using the hibernate helper so we can
       // be sure we have the target class and not a proxy wrapper.
@@ -467,7 +472,7 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
   }
 
   /**
-   * If activeFrom <= date <= activeTo 
+   * If activeFrom <= date <= activeTo
    */
   public boolean haveAccessAsAt(LocalDate point_in_time) {
     boolean result = false;
@@ -486,5 +491,5 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
     }
     return result;
   }
- 
+
 }

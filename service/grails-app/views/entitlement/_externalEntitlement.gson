@@ -22,12 +22,14 @@ import groovyx.net.http.HttpException
 final String objectProperty = 'reference_object'
 def remoteObjValue
 
-if(params.fetchExternalResources != 'false' && entitlement.respondsTo(objectProperty)){
-  try {
-    remoteObjValue = entitlement.invokeMethod(objectProperty, null)
-    if (remoteObjValue instanceof Future) {
-      remoteObjValue = (remoteObjValue as Future)?.get()
-    }
+if((params.fetchExternalResources != 'false' && entitlement.respondsTo(objectProperty))){
+      try {
+      if (entitlement.getAuthority()?.toLowerCase() != "gokb-resource") {
+        remoteObjValue = entitlement.invokeMethod(objectProperty, null)
+        if (remoteObjValue instanceof Future) {
+          remoteObjValue = (remoteObjValue as Future)?.get()
+        }
+      }
   } catch (ExecutionException e) {
     
     if (e.cause instanceof HttpException) {
@@ -61,6 +63,10 @@ json {
   'suppressFromDiscovery' entitlement.suppressFromDiscovery
   'note' entitlement.note
   'docs'  g.render(entitlement.docs)
+
+  if (entitlement.getAuthority()?.toLowerCase() == "gokb-resource") {
+  'resourceName' entitlement.getResourceName()
+  }
   
   if (renderOwnerSnippet) {
     'owner' g.render(entitlement.owner, [includes: ['id', 'name']])
