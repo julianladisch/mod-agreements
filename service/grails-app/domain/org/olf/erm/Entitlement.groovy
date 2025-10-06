@@ -75,16 +75,20 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
   // entitlement does not link to a resource in the tenant database, but instead will use API calls to define its contents
   String authority
 
+  // This isn't used in okapiLookup, and we don't have statica et for EKB-PACKAGE or EKB-TITLE which we probably should
+  static final String GOKB_RESOURCE_AUTHORITY = "GOKB-RESOURCE"
+
   boolean suppressFromDiscovery = false
 
   String description
 
-  // Holds the gkb package title name for external gkb resources.
+  // Store the external resource (EKB or Gokb etc) name so that we can search for entitlements with it.
   String resourceName
 
-  // For External gokb resources, reference should be in the form: packageUuid:titleUuid
+  // For External gokb resources, reference should be in the form: packageUuid:titleUuid.
+  // The _externalEntitlement.gson view should prevent a call being made by OkapiLookup, but if it is we set the url to '', which will cause okapiLookup to throw a 'java.lang.IllegalArgumentException: URI is not absolute',  but not make a call.
   @OkapiLookup(
-    value = '${obj.authority?.toLowerCase() == "ekb-package" ? "/eholdings/packages" : "/eholdings/resources" }/${obj.reference}${obj.authority?.toLowerCase() == "ekb-package" ? "" : "?include=package" }',
+    value = '${obj.authority?.toLowerCase() == "gokb-resource" ? "" : obj.authority?.toLowerCase() == "ekb-package" ? "/eholdings/packages" : "/eholdings/resources" }/${obj.reference}${obj.authority?.toLowerCase() == "ekb-package" ? "" : "?include=package" }',
     converter = {
       // delegate, owner and thisObject should be the instance of Entitlement
       final Entitlement outerEntitlement = delegate
@@ -352,11 +356,11 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
           description column: 'ent_description'
           dateCreated column: 'ent_date_created'
           lastUpdated column: 'ent_last_updated'
-          resourceName column: 'ent_resource_name'
-    poLines cascade: 'all-delete-orphan'
-            coverage cascade: 'all-delete-orphan'
-                tags cascade: 'save-update'
-                docs cascade: 'all-delete-orphan', joinTable: [name: 'entitlement_document_attachment', key: 'entitlement_docs_id', column: 'document_attachment_id']
+         resourceName column: 'ent_resource_name'
+              poLines cascade: 'all-delete-orphan'
+             coverage cascade: 'all-delete-orphan'
+                 tags cascade: 'save-update'
+                 docs cascade: 'all-delete-orphan', joinTable: [name: 'entitlement_document_attachment', key: 'entitlement_docs_id', column: 'document_attachment_id']
   }
 
   static constraints = {
@@ -405,7 +409,7 @@ suppressFromDiscovery column: 'ent_suppress_discovery'
            contentUpdated(nullable:true, blank:false)
                activeFrom(nullable:true, blank:false)
                  activeTo(nullable:true, blank:false)
-          resourceName(nullable: true)
+             resourceName(nullable: true, blank:false)
 
          authority(nullable:true, blank:false, validator: { val, inst ->
             switch (inst.type?.toLowerCase()) {

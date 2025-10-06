@@ -1,5 +1,6 @@
 package org.olf.general.jobs
 
+import org.olf.EntitlementService
 import org.olf.ErmResourceService
 import services.k_int.core.SystemDataService
 
@@ -68,6 +69,7 @@ class JobRunnerService implements EventPublisher {
   SessionFactory sessionFactory
   PackageSyncService packageSyncService
   ErmResourceService ermResourceService
+  EntitlementService entitlementService
   GrailsApplication grailsApplication
 
   // Access to the inputStream of FileObjects is now via this service instead of directly

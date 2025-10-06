@@ -195,6 +195,8 @@ dependencies {
 	testImplementation "org.seleniumhq.selenium:selenium-support:3.14.0"
 	implementation "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
 	implementation "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
+  testImplementation("org.awaitility:awaitility:4.2.0")
+
 
   /* FIXME Temporary imports for accesscontrol work -- SHOULD BE EXTERNAL LIBRARY */
   lombokDelombok 'org.projectlombok:lombok:1.18.38'

@@ -4,7 +4,7 @@
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-      <charset>UTF-8</charset> 
+      <charset>UTF-8</charset>
       <pattern>
         <!--Date-->%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} <!--Log level--> %clr(%5p) <!--Thread--> %clr(---){faint} %clr([%15.15t]){faint} <!--Logger-->%clr(%-30.30logger{29} %15(%replace([%X{tenant:-_NO_TENANT_}]){'\\[_NO_TENANT_\\]',''})){cyan} %clr(:){faint} %m%n%wex
       </pattern>
@@ -47,7 +47,7 @@
   <logger name="org.olf">
     <level value="DEBUG" />
   </logger>
-  
+
   <logger name="org.springframework.jdbc.support" >
     <level value="ERROR" />
   </logger>
@@ -84,7 +84,7 @@
   <logger name="com.zaxxer.hikari.pool.HikariPool">
     <level value="WARN" />
   </logger>
-  
+
   <logger name="services.k_int">
     <level value="TRACE" />
   </logger>
@@ -110,7 +110,7 @@
     <then>
       <appender name="FULL_STACKTRACE" class="ch.qos.logback.core.FileAppender" append="true">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-          <file>${grails.util.BuildSettings.TARGET_DIR}/stacktrace.log</file> 
+          <file>${grails.util.BuildSettings.TARGET_DIR}/stacktrace.log</file>
           <pattern>
             %level %logger - %msg%n
           </pattern>
@@ -220,4 +220,4 @@
   </logger>
 </configuration>
 
-<!-- For GROOVY file see logback.xml -->
+        <!-- For GROOVY file see logback.xml -->

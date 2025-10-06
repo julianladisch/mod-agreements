@@ -24,7 +24,7 @@ def remoteObjValue
 
 if((params.fetchExternalResources != 'false' && entitlement.respondsTo(objectProperty))){
       try {
-      if (entitlement.getAuthority()?.toLowerCase() != "gokb-resource") {
+      if (entitlement.getAuthority()?.toLowerCase() != Entitlement.GOKB_RESOURCE_AUTHORITY.toLowerCase()) {
         remoteObjValue = entitlement.invokeMethod(objectProperty, null)
         if (remoteObjValue instanceof Future) {
           remoteObjValue = (remoteObjValue as Future)?.get()
@@ -64,7 +64,7 @@ json {
   'note' entitlement.note
   'docs'  g.render(entitlement.docs)
 
-  if (entitlement.getAuthority()?.toLowerCase() == "gokb-resource") {
+  if (entitlement.getAuthority()?.toLowerCase() == Entitlement.GOKB_RESOURCE_AUTHORITY.toLowerCase()) {
   'resourceName' entitlement.getResourceName()
   }
   

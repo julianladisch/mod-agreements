@@ -275,18 +275,18 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
 
       GrailsWebRequest gwr = attributes as GrailsWebRequest
 
-      log.debug "Is within a request context"
+      log.trace "Is within a request context"
       TimeZone tz = RequestContextUtils.getTimeZone(gwr.currentRequest) ?: TimeZone.getDefault()
 
-      log.debug "Using TZ ${tz}"
+      log.trace "Using TZ ${tz}"
       ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.now(), tz.toZoneId())
 
-      log.debug "Now in ${tz} is ${zdt}"
+      log.trace "Now in ${tz} is ${zdt}"
       ld = zdt.toLocalDate()
 
-      log.debug "LocalDate of ${ld} extracted for query"
+      log.trace "LocalDate of ${ld} extracted for query"
     } else {
-      log.debug "Is not within a request context, using default TZ (${TimeZone.getDefault()})"
+      log.trace "Is not within a request context, using default TZ (${TimeZone.getDefault()})"
       ld = LocalDate.now()
     }
 
@@ -295,7 +295,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
 
   @Transient
   public String findCurrentPeriod() {
-    log.debug "Find current period"
+    log.trace "Find current period"
     LocalDate ld = getLocalDate()
 
     String cpId = this.periods.find(p ->
@@ -308,7 +308,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
 
   @Transient
   public String findPreviousPeriod() {
-    log.debug "Find previous period"
+    log.trace "Find previous period"
     LocalDate ld = getLocalDate()
     String ppId = this.periods.findAll(p -> (p.endDate != null && p.endDate < ld)).max({a,b -> a.startDate - b.startDate})?.id;
 
@@ -317,7 +317,7 @@ public class SubscriptionAgreement extends ErmTitleList implements CustomPropert
 
   @Transient
   public String findNextPeriod() {
-    log.debug "Find next period"
+    log.trace "Find next period"
     LocalDate ld = getLocalDate()
     String npId = this.periods.findAll(p -> p.startDate > ld).min({a,b -> a.startDate - b.startDate})?.id;
 

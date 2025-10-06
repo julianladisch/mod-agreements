@@ -1,0 +1,72 @@
+{
+  "header": {
+    "availability": {
+      "type": "general"
+    },
+    "packageProvider": {
+      "name": "Knowledge Integration Ltd"
+    },
+    "packageSource": "k-int",
+    "packageName": "Sync True Test Package",
+    "startDate": "2015-01-01T00:00:00Z",
+    "endDate": "2020-12-31T00:00:00Z",
+    "packageSlug": "kint_test_001",
+    "_intenalId": 276432871386,
+    "availabilityScope": "Global",
+    "lifecycleStatus": "Current",
+    "syncContentsFromSource": true
+  },
+  "packageContents": [{
+    "title": "Clinical Cancer Drugs",
+    "instanceMedium": "electronic",
+    "instanceMedia": "journal",
+    "instanceIdentifiers": [{
+      "namespace": "gokb_uuid",
+      "value": "26929514-237c-11ed-861d-0242ac120001"
+    }],
+    "siblingInstanceIdentifiers": [{
+      "namespace": "issn",
+      "value": "2212-697X"
+    },
+      {
+        "namespace": "eissn",
+        "value": "2212-6988"
+      }],
+    "coverage": [
+      {
+      "startVolume": "1",
+      "startIssue": "1",
+      "startDate": "2014-01-01",
+      "endVolume": "1",
+      "endIssue": "4",
+      "endDate": "2014-12-31"
+      },
+      {
+      "startVolume": "2",
+      "startIssue": "1",
+      "startDate": "2015-01-01",
+      "endVolume": null,
+      "endIssue": null,
+      "endDate": null
+      }
+    ],
+    "embargo": null,
+    "coverageDepth": "fulltext",
+    "coverageNote": "New for 2014. This record is a test case for split coverage",
+    "url": "http://benthamscience.com/journal/index.php?journalID=ccand",
+    "platformName": "Bentham Science",
+    "_platformId": 627,
+    "sourceIdentifierNamespace": "gokb_uuid",
+    "sourceIdentifier": "shouldNotFindThisInTest"
+  }],
+  "identifiers": [
+    {
+      "namespace": "gokb_uuid",
+      "value": "26929514-237c-11ed-861d-0242ac120002"
+    },
+    {
+      "namespace": "gokb_id",
+      "value": "6406628"
+    }
+  ]
+}
