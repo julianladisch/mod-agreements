@@ -376,6 +376,8 @@ task delombok(type: JavaExec) {
 
 
 task generateJavadocs(type: Javadoc) {
+  options.addStringOption("Xmaxwarns", "1000")
+  options.addStringOption("Xmaxerrs", "1000")
   dependsOn delombok
   source = delombok.ext.outputDir
 }

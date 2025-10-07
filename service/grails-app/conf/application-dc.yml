@@ -55,13 +55,16 @@ accesscontrol:
 #    register: true
 #    deploy: true
 
-# Sandbox 2 folio client config override
+# Snapshot folio client config override
 #accesscontrol:
 #  folio:
-#    baseokapiurl: "https://folio-snapshot-2-okapi.dev.folio.org"
+#    baseokapiurl: "https://folio-snapshot-okapi.dev.folio.org" # SNAPSHOT
+#    #baseokapiurl: "https://folio-snapshot-2-okapi.dev.folio.org" # SNAPSHOT 2
 #    tenantname: "diku"
-#    patronid: "d85d869b-3205-5c1d-8da6-8d2380772b68" # THIS WILL CHANGE DAILY
+#    #patronid: "6d4357a4-6237-594c-a3f5-fb5847eeba26" # THIS WILL CHANGE DAILY
+#    patronid: "defaultPatronId" ## Current bug... is this causing issues?
 #    userlogin: "diku_admin"
 #    userpassword: "admin"
 #  acqunits:
 #    enabled: true
+

@@ -8,6 +8,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.http.HttpResponse;
 
+/**
+ * A custom BodyHandler for handling HTTP responses in the Folio client.
+ * <p>
+ * This class is responsible for deserializing the response body into a specified target type
+ * using Jackson's ObjectMapper. It supports String and InputStream types directly,
+ * and can deserialize other types as well.
+ * </p>
+ *
+ * @param <T> The type to which the response body should be deserialized.
+ */
 @Slf4j
 public class FolioClientBodyHandler<T> implements HttpResponse.BodyHandler<T> {
   /**

@@ -43,7 +43,15 @@ public class FolioClientException extends RuntimeException {
    */
   public static final Long INTERRUPTED_ERROR = 6L;
 
+  /**
+   * The code representing the specific error, should be set using one of the predefined constants.
+   * If no specific code is applicable, it defaults to {@link #GENERIC_ERROR}.
+   */
   final Long code;
+  /**
+   * The underlying cause of this exception, if any.
+   * This can be used to retrieve more information about the error.
+   */
   final Throwable cause;
 
   /**

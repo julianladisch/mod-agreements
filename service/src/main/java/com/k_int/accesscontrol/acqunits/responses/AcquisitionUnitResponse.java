@@ -15,15 +15,20 @@ import java.util.List;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@SuppressWarnings("javadoc")
 public class AcquisitionUnitResponse {
   /**
    * List of acquisition units.
    * Each unit represents a distinct acquisition unit in the access control system.
+   * @param acquisitionsUnits List of acquisition units
+   * @return List of acquisition units
    */
   List<AcquisitionUnit> acquisitionsUnits;
   /**
    * Total number of acquisition unit records.
    * This is used for pagination and to inform the client about the total available units.
+   * @param totalRecords Total number of acquisition unit records
+   * @return Total number of acquisition unit records
    */
   int totalRecords;
 }

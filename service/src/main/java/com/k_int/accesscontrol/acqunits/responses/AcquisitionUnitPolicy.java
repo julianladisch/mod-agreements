@@ -18,6 +18,7 @@ public class AcquisitionUnitPolicy extends AcquisitionUnit implements Policy {
   // Should contain all the useful information on an AcquisitionUnit AND whether the user is a member
   /**
    * A boolean representing whether the user is a member of the acquistion unit
+   * @param isMember A boolean representing whether the user is a member of the acquistion unit
    * @return A boolean representing whether the user is a member of the acquistion unit
    */
   @Getter

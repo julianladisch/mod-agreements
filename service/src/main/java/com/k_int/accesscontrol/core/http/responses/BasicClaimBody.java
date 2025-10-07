@@ -20,11 +20,14 @@ import java.util.List;
  */
 @Data
 @Builder
+@SuppressWarnings("javadoc")
 public class BasicClaimBody implements ClaimBody {
 
   /**
    * The list of {@link PolicyLink} instances that represent access policy claims.
    * Each entry in this list associates a resource with a specific policy.
+   * @param claims The list of policy claims, each represented as a {@link PolicyLink}.
+   * @return The list of policy claims, each represented as a {@link PolicyLink}.
    */
   List<PolicyLink> claims;
 }

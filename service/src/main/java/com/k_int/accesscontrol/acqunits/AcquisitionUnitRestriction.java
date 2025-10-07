@@ -19,6 +19,7 @@ import lombok.Getter;
  * mapping logic for acquisition units where 'create' might refer to 'claiming' or associating.</p>
  */
 @Getter
+@SuppressWarnings("javadoc")
 public enum AcquisitionUnitRestriction {
   /**
    * Corresponds to the `protectRead` flag in FOLIO acquisition unit settings,
@@ -56,6 +57,7 @@ public enum AcquisitionUnitRestriction {
   /**
    * The JSON key or accessor string used in FOLIO responses/configurations
    * to represent this acquisition unit restriction (e.g., "protectRead").
+   * @return The string accessor for this acquisition unit restriction.
    */
   private final String restrictionAccessor;
 

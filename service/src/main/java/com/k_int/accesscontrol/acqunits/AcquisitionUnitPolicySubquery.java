@@ -21,21 +21,24 @@ import java.util.List;
  * </p>
  */
 @Builder
+@SuppressWarnings("javadoc")
 public class AcquisitionUnitPolicySubquery implements PolicySubquery {
   /**
    * The user acquisition units that this subquery will use to determine access.
    * This should be populated by the PolicyEngine before calling getSql().
-   *
+   * @param userAcquisitionUnits The user acquisition units to use for this subquery
    */
   private final UserAcquisitionUnits userAcquisitionUnits;
   /**
    * The type of query being generated, either LIST or SINGLE.
    * This determines how the SQL will be structured.
+   * @param queryType The type of query to generate (LIST or SINGLE)
    */
   private final AccessPolicyQueryType queryType;
   /**
    * The restriction type for which this subquery is being generated.
    * This should not be CLAIM, as acquisition units do not support that restriction.
+   * @param restriction The policy restriction type for this subquery
    */
   private final PolicyRestriction restriction;
 

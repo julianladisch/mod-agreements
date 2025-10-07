@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents a collection of access policy IDs grouped by their type.
+ * Represents a collection of access policies grouped by their type.
  * <p>
  * This class is used to encapsulate the relationship between an access policy type
  * and the list of policy IDs associated with that type.

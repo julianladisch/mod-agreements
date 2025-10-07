@@ -23,7 +23,9 @@ public class PolicyEngineException extends RuntimeException {
    * Error code indicating that policy query parameters were invalid or insufficient.
    */
   public static final Long INVALID_QUERY_PARAMETERS = 3L;
-
+  /**
+   * Error code indicating that an invalid policy type was encountered.
+   */
   public static final Long INVALID_POLICY_TYPE = 4L;
 
   // CLAIM exception codes
