@@ -33,12 +33,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Generate javadocs
         run: |
+          # cd into service directory
+          cd service
           # Generate Javadocs using Gradle
           ./gradlew generateJavadocs
           # The generated Javadocs will be in build/docs/javadoc
           ls -la build/docs/javadoc
-          # Move the generated Javadocs to the root for deployment
-          mv build/docs/javadoc ./javadoc
+          # cd back to root directory
+          cd ..
+          # Move the generated Javadocs to the root for deployment (up one level)
+          mv service/build/docs/javadoc ./javadoc
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
