@@ -105,5 +105,8 @@ public class FolioClientException extends RuntimeException {
     this.cause = cause;
   }
 
-
+  @Override
+  public Throwable getCause() {
+    return cause;
+  }
 }

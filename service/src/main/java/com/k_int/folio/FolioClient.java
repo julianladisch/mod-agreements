@@ -144,7 +144,7 @@ public class FolioClient {
    * Keys and values will be URL-encoded. Can be {@code null} or empty if no query parameters are needed.
    * @return A {@link URI} object representing the full request URL.
    */
-  private URI buildUri(String path, Map<String, String> queryParams) {
+  protected URI buildUri(String path, Map<String, String> queryParams) {
     StringBuilder url = new StringBuilder(baseUrl).append(path);
 
     if (queryParams != null && !queryParams.isEmpty()) {

@@ -1,7 +1,7 @@
 package com.k_int.accesscontrol.core.policyengine;
 
-import com.k_int.accesscontrol.core.AccessPolicies;
-import com.k_int.accesscontrol.core.AccessPolicy;
+import com.k_int.accesscontrol.core.GroupedExternalPolicies;
+import com.k_int.accesscontrol.core.DomainAccessPolicy;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,19 +24,19 @@ public class EvaluatedClaimPolicies {
    * @param policiesToAdd the list of policies to add
    * @return the list of policies to add
    */
-  List<AccessPolicy> policiesToAdd;
+  List<DomainAccessPolicy> policiesToAdd;
   /**
    * List of access policies to be removed
    * @param policiesToRemove the list of policies to remove
    * @return the list of policies to remove
    */
-  List<AccessPolicy> policiesToRemove;
+  List<DomainAccessPolicy> policiesToRemove;
   /**
    * List of access policies to be updated
    * @param policiesToUpdate the list of policies to update
    * @return the list of policies to update
    */
-  List<AccessPolicy> policiesToUpdate;
+  List<DomainAccessPolicy> policiesToUpdate;
 
   /**
    * Returns a consolidated list of all access policies that have changed
@@ -48,8 +48,8 @@ public class EvaluatedClaimPolicies {
    *
    * @return a list of all changed access policies
    */
-  public List<AccessPolicies> changedPolicies() {
-    return AccessPolicies.fromAccessPolicyList(
+  public List<GroupedExternalPolicies> changedPolicies() {
+    return GroupedExternalPolicies.fromAccessPolicyList(
       Stream.concat(
         getPoliciesToAdd().stream(),
         Stream.concat(

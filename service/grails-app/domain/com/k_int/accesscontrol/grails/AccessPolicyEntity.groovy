@@ -1,6 +1,6 @@
 package com.k_int.accesscontrol.grails
 
-import com.k_int.accesscontrol.core.AccessPolicy
+import com.k_int.accesscontrol.core.DomainAccessPolicy
 import com.k_int.accesscontrol.core.AccessPolicyType
 import grails.gorm.MultiTenant
 
@@ -13,7 +13,7 @@ import java.time.Instant
  * This class maps to the `access_policy` table and connects access control
  * data with internal ERM resources (e.g., SubscriptionAgreements).
  */
-class AccessPolicyEntity implements MultiTenant<AccessPolicyEntity>, AccessPolicy {
+class AccessPolicyEntity implements MultiTenant<AccessPolicyEntity>, DomainAccessPolicy {
   String id
 
   // Access policy itself

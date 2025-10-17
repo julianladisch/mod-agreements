@@ -1,7 +1,7 @@
 package com.k_int.accesscontrol.core.policyengine;
 
 import com.k_int.accesscontrol.core.AccessPolicyQueryType;
-import com.k_int.accesscontrol.core.AccessPolicies;
+import com.k_int.accesscontrol.core.GroupedExternalPolicies;
 import com.k_int.accesscontrol.core.PolicyRestriction;
 import com.k_int.accesscontrol.core.sql.PolicySubquery;
 
@@ -32,9 +32,9 @@ public interface PolicyEngineImplementor {
    *
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @param pr      the policy restriction to filter by
-   * @return a list of {@link AccessPolicies} containing policy IDs grouped by type
+   * @return a list of {@link GroupedExternalPolicies} containing policy IDs grouped by type
    */
-  List<AccessPolicies> getRestrictionPolicies(String[] headers, PolicyRestriction pr);
+  List<GroupedExternalPolicies> getRestrictionPolicies(String[] headers, PolicyRestriction pr);
 
   /**
    * Validates the policy IDs against the provided headers and policy restriction.
@@ -44,7 +44,7 @@ public interface PolicyEngineImplementor {
    * @param policies the list of policy IDs to validate
    * @return true if all policy IDs are valid, false otherwise
    */
-  boolean arePoliciesValid(String[] headers, PolicyRestriction pr, List<AccessPolicies> policies);
+  boolean arePoliciesValid(String[] headers, PolicyRestriction pr, List<GroupedExternalPolicies> policies);
 
   /**
    * Enriches the policy information from the `id` provided
@@ -54,5 +54,5 @@ public interface PolicyEngineImplementor {
    * @param headers the request context headers, used for FOLIO/internal service authentication
    * @return A list of AccessPolicy objects with all policy information provided
    */
-  List<AccessPolicies> enrichPolicies(String[] headers, List<AccessPolicies> policies);
+  List<GroupedExternalPolicies> enrichPolicies(String[] headers, List<GroupedExternalPolicies> policies);
 }

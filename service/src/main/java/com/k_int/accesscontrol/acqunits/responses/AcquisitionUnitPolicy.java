@@ -2,7 +2,7 @@ package com.k_int.accesscontrol.acqunits.responses;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.k_int.accesscontrol.acqunits.model.AcquisitionUnit;
-import com.k_int.accesscontrol.core.http.responses.Policy;
+import com.k_int.accesscontrol.core.ExternalPolicy;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @JsonTypeName("ACQ_UNITS")
 @SuppressWarnings("javadoc")
-public class AcquisitionUnitPolicy extends AcquisitionUnit implements Policy {
+public class AcquisitionUnitPolicy extends AcquisitionUnit implements ExternalPolicy {
 
   // Should contain all the useful information on an AcquisitionUnit AND whether the user is a member
   /**

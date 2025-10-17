@@ -1,9 +1,11 @@
 package com.k_int.accesscontrol.grails
 
-import com.k_int.accesscontrol.core.AccessPolicies
-import com.k_int.accesscontrol.core.AccessPolicy
+
+import com.k_int.accesscontrol.core.GroupedExternalPolicies
+import com.k_int.accesscontrol.core.DomainAccessPolicy
 import com.k_int.accesscontrol.core.AccessPolicyType
 import com.k_int.accesscontrol.core.http.bodies.PolicyLink
+import com.k_int.accesscontrol.core.http.filters.PoliciesFilter
 import com.k_int.accesscontrol.core.http.responses.CanAccessResponse
 import com.k_int.accesscontrol.core.policyengine.EvaluatedClaimPolicies
 import com.k_int.accesscontrol.core.sql.AccessControlSql
@@ -30,7 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 import javax.annotation.PostConstruct
 import java.time.Duration
-import java.util.stream.Stream
 
 /**
  * Extends com.k_int.okapi.OkapiTenantAwareController to incorporate access policy enforcement for resources.
@@ -124,7 +125,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
     hql.append(" WHERE t0.id = :leafResourceId") // Filter by the requested leaf resource ID
 
     // Execute the HQL query and return the id at hand
-    String resolvedRootId = AccessPolicyEntity.executeQuery(hql.toString(), ["leafResourceId": leafResourceId])[0]
+    String resolvedRootId = AccessPolicyEntity.executeQuery(hql.toString(), ["leafResourceId": leafResourceId]).getAt(0)
 
     // Return the resolved ID, or fallback to the leaf ID if resolution fails (e.g., entity not found)
     return resolvedRootId ?: leafResourceId
@@ -143,32 +144,21 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
   }
 
   /**
-   * Generates a list of SQL fragments (policy subqueries) based on a given policy restriction,
-   * query type, and the resource ID to which the policy applies.
-   * This method communicates with the {@link PolicyEngine} to retrieve the policy definitions
-   * and formats them into SQL suitable for database queries.
+   * Constructs a {@link PolicySubqueryParameters} object for use in policy subqueries.
+   * This method sets up the necessary parameters based on the resource ID and the
+   * ownership chain configuration.
    *
-   * @param restriction The type of policy restriction (e.g., READ, UPDATE, DELETE).
-   * @param queryType The type of query (e.g., SINGLE for individual resource checks, LIST for collection checks).
-   * @param resourceId The ID of the resource to apply the policy to. Can be {@code null} for LIST queries.
-   * @return A list of SQL string fragments representing the access policies.
+   * @param resourceId The ID of the resource to which the policies apply. Can be {@code null} for LIST queries.
+   * @return A {@link PolicySubqueryParameters} object populated with the relevant parameters.
    */
-  protected List<AccessControlSql> getPolicySql(PolicyRestriction restriction, AccessPolicyQueryType queryType, String resourceId) {
-    /* ------------------------------- ACTUALLY DO THE WORK FOR EACH POLICY RESTRICTION ------------------------------- */
-
-    // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
-    String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
-
-    List<PolicySubquery> policySubqueries = policyEngine.getPolicySubqueries(grailsHeaders, restriction, queryType)
-
+  protected PolicySubqueryParameters getPolicySubqueryParameters(String resourceId) {
     String resourceAlias = '{alias}'
     PolicyControlledMetadata rootPolicyControlledMetadata = policyControlledManager.getRootPolicyControlledMetadata()
     if (policyControlledManager.hasOwners()) {
       resourceAlias = rootPolicyControlledMetadata.getAliasName()
     } // If there are no "owners" then rootPolicyControlledMetadata should equal leafPolicyControlledMetadata ie, resourceClass
 
-    // We build a parameter block to use on the policy subqueries. Some of these we can probably set up ahead of time...
-    PolicySubqueryParameters params = PolicySubqueryParameters
+    return PolicySubqueryParameters
       .builder()
       .accessPolicyTableName(AccessPolicyEntity.TABLE_NAME)
       .accessPolicyTypeColumnName(AccessPolicyEntity.TYPE_COLUMN)
@@ -180,8 +170,44 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
       .resourceId(resourceId) // This might be null (For LIST type queries)
       .resourceClass(rootPolicyControlledMetadata.resourceClassName)
       .build()
+  }
 
-    log.trace("PolicySubqueryParameters configured: ${params}")
+  /**
+   * Generates a list of SQL fragments (policy subqueries) based on a given policy restriction,
+   * query type, and the resource ID to which the policy applies.
+   * This method communicates with the {@link PolicyEngine} to retrieve the policy definitions
+   * and formats them into SQL suitable for database queries.
+   *
+   * @param restriction The type of policy restriction (e.g., READ, UPDATE, DELETE).
+   * @param queryType The type of query (e.g., SINGLE for individual resource checks, LIST for collection checks).
+   * @param resourceId The ID of the resource to apply the policy to. Can be {@code null} for LIST queries.
+   * @return A list of SQL string fragments representing the access policies.
+   */
+  protected List<AccessControlSql> getPolicySql(PolicyRestriction restriction, AccessPolicyQueryType queryType, String resourceId) {
+    return getPolicySql(restriction, queryType, resourceId, null)
+  }
+
+  /**
+   * Generates a list of SQL fragments (policy subqueries) based on a given policy restriction,
+   * query type, the resource ID to which the policy applies, and optional policy filters.
+   * This method communicates with the {@link PolicyEngine} to retrieve the policy definitions
+   * and formats them into SQL suitable for database queries.
+   *
+   * @param restriction The type of policy restriction (e.g., READ, UPDATE, DELETE).
+   * @param queryType The type of query (e.g., SINGLE for individual resource checks, LIST for collection checks).
+   * @param resourceId The ID of the resource to apply the policy to. Can be {@code null} for LIST queries.
+   * @param filters Optional list of {@link PoliciesFilter} to refine which policies are considered.
+   * @return A list of SQL string fragments representing the access policies.
+   */
+  protected List<AccessControlSql> getPolicySql(PolicyRestriction restriction, AccessPolicyQueryType queryType, String resourceId, List<PoliciesFilter> filters) {
+    /* ------------------------------- ACTUALLY DO THE WORK FOR EACH POLICY RESTRICTION ------------------------------- */
+
+    // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
+    String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
+    List<PolicySubquery> policySubqueries = policyEngine.getPolicySubqueries(grailsHeaders, restriction, queryType, filters)
+
+    PolicySubqueryParameters params = getPolicySubqueryParameters(resourceId)
+    log.trace("AccessPolicyAwareController::getPolicySql PolicySubqueryParameters configured: ${params}")
 
     return policySubqueries.collect { psq -> psq.getSql(params)}
   }
@@ -345,10 +371,10 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
    * the current user's permissions and the specified restriction.
    *
    * @param pr The {@link PolicyRestriction} to check against.
-   * @param policies A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policies A list of {@link GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for the given restriction, {@code false} otherwise.
    */
-  protected boolean arePoliciesValid(PolicyRestriction pr, List<AccessPolicies> policies) {
+  protected boolean arePoliciesValid(PolicyRestriction pr, List<GroupedExternalPolicies> policies) {
     String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
     return policyEngine.arePoliciesValid(grailsHeaders, pr, policies)
   }
@@ -356,60 +382,60 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
 /**
  * Checks if a given list of policies are valid for the {@code CREATE} policy restriction.
  *
- * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+ * @param policyIds A list of {@link GroupedExternalPolicies} representing the policies to validate.
  * @return {@code true} if all provided policies are valid for CREATE, {@code false} otherwise.
  */
-  protected boolean areCreatePoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areCreatePoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.CREATE, policies)
   }
 
   /**
    * Checks if a given list of policies are valid for the {@code READ} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policyIds A list of {@link com.k_int.accesscontrol.core.GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for READ, {@code false} otherwise.
    */
-  protected boolean areReadPoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areReadPoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.READ, policies)
   }
 
   /**
    * Checks if a given list of policies are valid for the {@code UPDATE} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policyIds A list of {@link GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for UPDATE, {@code false} otherwise.
    */
-  protected boolean areUpdatePoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areUpdatePoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.UPDATE, policies)
   }
 
   /**
    * Checks if a given list of policies are valid for the {@code DELETE} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policyIds A list of {@link GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for DELETE, {@code false} otherwise.
    */
-  protected boolean areDeletePoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areDeletePoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.DELETE, policies)
   }
 
   /**
    * Checks if a given list of policies are valid for the {@code CLAIM} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policyIds A list of {@link GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for CLAIM, {@code false} otherwise.
    */
-  protected boolean areClaimPoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areClaimPoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.CLAIM, policies)
   }
 
   /**
    * Checks if a given list of policies are valid for the {@code APPLY_POLICIES} policy restriction.
    *
-   * @param policyIds A list of {@link AccessPolicies} representing the policies to validate.
+   * @param policyIds A list of {@link GroupedExternalPolicies} representing the policies to validate.
    * @return {@code true} if all provided policies are valid for APPLY_POLICIES, {@code false} otherwise.
    */
-  protected boolean areApplyPoliciesPoliciesValid(List<AccessPolicies> policies) {
+  protected boolean areApplyPoliciesPoliciesValid(List<GroupedExternalPolicies> policies) {
     return arePoliciesValid(PolicyRestriction.APPLY_POLICIES, policies)
   }
 
@@ -425,7 +451,23 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
   def index(Integer max) {
     // Protect the index method with access control -- replace the built in "index" method
     AccessPolicyEntity.withNewSession {
-      List<AccessControlSql> policySql = getPolicySql(PolicyRestriction.READ, AccessPolicyQueryType.LIST, null)
+      // We have special logic for filtering by access control policies here.
+      // If the user sends down queryParams policiesFilter=A,B,C then we will perform an ORed filter on those policies
+      // If the user sends down queryParams policiesFilter=A, policiesFilter=B, policiesFilter=C then we will perform an ANDed filter on those policies.
+
+      // This means we can perform a query like: ( A OR B ) AND C, but can't go arbitrarily deep at the moment.
+
+      // Policy filters (eg "A") MUST be formatted like: "AccessPolicyType:AccessPolicyEntity.id" eg "ACQ_UNIT:e7aa4d3a-d686-42b4-8371-a7055ce95239"
+      // Build the PoliciesFilter list here from the params pushed down.
+      Collection<String> policiesFilterParams = params.list('policiesFilter') // This will be a List of Strings, or an empty list if not present
+      List<PoliciesFilter> policiesFilters = PoliciesFilter.fromStringCollection(policiesFilterParams)
+
+      // Remove policiesFilter params from the params map so that the default criteria builder doesn't try to handle them
+      params.remove('policiesFilter')
+
+      log.trace("policiesFilters: ${"(" + policiesFilters.collect{ it.filters.collect {"${it.type}:[${it.policies.collect {it.id }.join(', ')}]"}.join(', ') }.join(', ') + ")"}")
+
+      List<AccessControlSql> policySql = getPolicySql(PolicyRestriction.READ, AccessPolicyQueryType.LIST, null, policiesFilters)
       log.trace("AccessControl generated PolicySql: ${policySql.collect{ it.sqlString }.join(', ')}")
       log.trace("AccessControl generated PolicySql parameters: ${policySql.collect{ it.parameters.collect { it.toString() } }.join(', ')}")
       log.trace("AccessControl generated PolicySql types: ${policySql.collect{ it.types.collect { it.toString() } }.join(', ')}")
@@ -439,6 +481,8 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
           return new MultipleAliasSQLCriterion.SubCriteriaAliasContainer(pcm.getAliasName(), aliasCriteria)
         }
 
+        // This is effectively an AND across all policySql entries
+        // We would need Restrictions.disjunction for OR
         policySql.each {psql ->
           String sqlString = psql.getSqlString()
           Object[] parameters = psql.getParameters()
@@ -446,6 +490,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
 
           criteria.add(new MultipleAliasSQLCriterion(sqlString, parameters, types, subCriteria))
         }
+
         // Ensure we return criteria at the bottom?
         return criteria
       }
@@ -599,8 +644,8 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
         }
 
         // We must now check whether all policies to add/remove/update are valid for CLAIM
-        // EvaluatedClaimPolicies includes a helper method to transform to List<AccessPolicies> for use in arePoliciesValid
-        List<AccessPolicies> changedPolicies = evaluatedClaimPolicies.changedPolicies()
+        // EvaluatedClaimPolicies includes a helper method to transform to List<GroupedPolicyList> for use in arePoliciesValid
+        List<GroupedExternalPolicies> changedPolicies = evaluatedClaimPolicies.changedPolicies()
 
         if (!areClaimPoliciesValid(changedPolicies)) {
           success = false
@@ -617,7 +662,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
           // We will then add/update policies from the claimBody
           // We do the delete first so that if we are accidentally replacing a policy like-for-like without an id,
           // we don't fail to add it thanks to duplicate check below, and then remove it, leaving resource unprotected
-          for (AccessPolicy policy : evaluatedClaimPolicies.policiesToRemove) {
+          for (DomainAccessPolicy policy : evaluatedClaimPolicies.policiesToRemove) {
             AccessPolicyEntity policyEntity = accessPoliciesForResource.find {AccessPolicyEntity ape -> ape.id == policy.id }
 
             // This shouldn't happen since the removed ids will be from the existing policies, but just in case
@@ -630,7 +675,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
           }
 
           // Now we can update policies from the claimBody
-          for (AccessPolicy policy  : evaluatedClaimPolicies.policiesToUpdate) {
+          for (DomainAccessPolicy policy  : evaluatedClaimPolicies.policiesToUpdate) {
             AccessPolicyEntity policyEntity = accessPoliciesForResource.find {AccessPolicyEntity ape -> ape.id == policy.id }
 
             // This shouldn't happen since the updated ids will be from the existing policies, but just in case
@@ -644,7 +689,7 @@ class AccessPolicyAwareController<T> extends PolicyEngineController<T> {
           }
 
           // Finally we can add any new policies from the claimBody
-          for (AccessPolicy policy  : evaluatedClaimPolicies.policiesToAdd) {
+          for (DomainAccessPolicy policy  : evaluatedClaimPolicies.policiesToAdd) {
             new AccessPolicyEntity(
               policyId: policy.policyId,
               type: policy.type,

@@ -2,7 +2,7 @@ package com.k_int.accesscontrol.grails
 
 import com.k_int.accesscontrol.core.AccessPolicyType
 import com.k_int.accesscontrol.core.http.bodies.PolicyLink
-import com.k_int.accesscontrol.core.http.responses.Policy
+import com.k_int.accesscontrol.core.ExternalPolicy
 import grails.databinding.BindUsing
 import grails.validation.Validateable
 
@@ -26,7 +26,7 @@ class GrailsPolicyLink implements PolicyLink, Validateable {
   AccessPolicyType type
   String description
 
-  void setPolicy(Policy p) {
+  void setPolicy(ExternalPolicy p) {
     this.policy = (GrailsPolicy) p
   }
 

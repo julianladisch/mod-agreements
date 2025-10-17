@@ -1,11 +1,13 @@
 package com.k_int.accesscontrol.core.policyengine;
 
+import com.k_int.accesscontrol.core.DomainAccessPolicy;
 import lombok.Getter;
 
 /**
  * Custom runtime exception class for errors that occur within the Policy Engine.
  * This exception provides specific error codes and can wrap an underlying cause.
  */
+@SuppressWarnings("javadoc")
 public class PolicyEngineException extends RuntimeException {
   /**
    * Generic error code, used when no more specific code is applicable.
@@ -30,15 +32,15 @@ public class PolicyEngineException extends RuntimeException {
 
   // CLAIM exception codes
   /**
-   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified via an id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink} was not found in the existing policies list
+   * During a CLAIM operation, this error indicates that the {@link DomainAccessPolicy} specified via an id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink} was not found in the existing policies list
    */
   public static final Long ACCESS_POLICY_ID_NOT_FOUND = 5L;
   /**
-   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified does not match the resource id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
+   * During a CLAIM operation, this error indicates that the {@link DomainAccessPolicy} specified does not match the resource id in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
    */
   public static final Long ACCESS_POLICY_RESOURCE_ID_DOES_NOT_MATCH = 6L;
   /**
-   * During a CLAIM operation, this error indicates that the {@link com.k_int.accesscontrol.core.AccessPolicy} specified does not match the resource class in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
+   * During a CLAIM operation, this error indicates that the {@link DomainAccessPolicy} specified does not match the resource class in the {@link com.k_int.accesscontrol.core.http.bodies.PolicyLink}
    */
   public static final Long ACCESS_POLICY_RESOURCE_CLASS_DOES_NOT_MATCH = 7L;
   /**
@@ -53,11 +55,13 @@ public class PolicyEngineException extends RuntimeException {
 
   /**
    * The specific error code associated with this exception.
+   * @return The specific error code associated with this exception.
    */
   @Getter
   final Long code;
   /**
    * The underlying cause of this exception, if any.
+   * @return The underlying cause of this exception, if any.
    */
   @Getter
   final Throwable cause;

@@ -2,7 +2,7 @@ package com.k_int.accesscontrol.core.http.bodies;
 
 import com.k_int.accesscontrol.core.AccessPolicyType;
 import com.k_int.accesscontrol.core.BasicAccessPolicy;
-import com.k_int.accesscontrol.core.http.responses.Policy;
+import com.k_int.accesscontrol.core.ExternalPolicy;
 
 /**
  * Represents a policy link in the context of access control.
@@ -35,14 +35,14 @@ public interface PolicyLink {
    *
    * @return The associated policy.
    */
-  Policy getPolicy();
+  ExternalPolicy getPolicy();
 
   /**
    * Sets the policy to which this link pertains.
    *
    * @param policy The policy to associate with this link.
    */
-  void setPolicy(Policy policy);
+  void setPolicy(ExternalPolicy policy);
 
   /**
    * Retrieves the type of access policy that this link represents.

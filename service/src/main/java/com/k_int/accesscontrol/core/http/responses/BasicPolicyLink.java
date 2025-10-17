@@ -1,6 +1,7 @@
 package com.k_int.accesscontrol.core.http.responses;
 
 import com.k_int.accesscontrol.core.AccessPolicyType;
+import com.k_int.accesscontrol.core.ExternalPolicy;
 import com.k_int.accesscontrol.core.http.bodies.PolicyLink;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.Data;
  * This implementation is designed to serve as a simple DTO (Data Transfer Object) for
  * transferring access policy link data over HTTP or between components.
  * It provides the minimal required structure to represent a link between a resource and
- * an associated {@link Policy}, including its identifier, type, and human-readable description.
+ * an associated {@link ExternalPolicy}, including its identifier, type, and human-readable description.
  * </p>
  *
  * <p>
@@ -20,7 +21,7 @@ import lombok.Data;
  * </p>
  *
  * @see PolicyLink
- * @see Policy
+ * @see ExternalPolicy
  */
 @Data
 @Builder
@@ -36,12 +37,12 @@ public class BasicPolicyLink implements PolicyLink {
   String id;
 
   /**
-   * The {@link Policy} object associated with this link.
+   * The {@link ExternalPolicy} object associated with this link.
    * This links the resource to a specific access policy.
    * @param policy The policy
    * @return The policy
    */
-  Policy policy;
+  ExternalPolicy policy;
 
   /**
    * The {@link AccessPolicyType} indicating the type of policy this link represents.

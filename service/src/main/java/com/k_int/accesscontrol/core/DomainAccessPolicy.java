@@ -3,12 +3,12 @@ package com.k_int.accesscontrol.core;
 import java.time.Instant;
 
 /**
- * Interface representing an access policy rule.
+ * Interface representing an access policy rule in the implementing system's database.
  * An access policy links a specific policy ID to a target resource class and ID,
  * and is typed according to a known `AccessPolicyType` (e.g., ACQ_UNIT).
  * Each implementation (Grails, micronaut, etc) will need to provide its own "entity" class implementing this interface.
  */
-public interface AccessPolicy {
+public interface DomainAccessPolicy {
   /**
    * Gets the unique identifier for the access policy in the database.
    * This is typically a UUID or similar unique string.

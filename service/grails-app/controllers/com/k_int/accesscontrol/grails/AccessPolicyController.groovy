@@ -1,6 +1,6 @@
 package com.k_int.accesscontrol.grails
 
-import com.k_int.accesscontrol.core.AccessPolicies
+import com.k_int.accesscontrol.core.GroupedExternalPolicies
 import com.k_int.accesscontrol.core.AccessPolicyType
 import com.k_int.accesscontrol.core.PolicyRestriction
 
@@ -29,7 +29,7 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
    *
    * @return A PolicyEngine instance configured for the current request.
    */
-  private List<AccessPolicies> getPolicies(PolicyRestriction restriction) {
+  private List<GroupedExternalPolicies> getPolicies(PolicyRestriction restriction) {
     // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
     String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
 
@@ -109,7 +109,7 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
   }
 
   /**
-   * Override save method to prevent direct creation of AccessPolicies.
+   * Override save method to prevent direct creation of {@link AccessPolicyEntity} objects.
    * Instead, resources must be claimed via accessControl endpoints.
    */
   @Transactional
@@ -118,7 +118,7 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
   }
 
   /**
-   * Override update method to prevent direct updates of AccessPolicies.
+   * Override update method to prevent direct updates of {@link AccessPolicyEntity} objects.
    * Instead, resources must be claimed via accessControl endpoints.
    */
   @Transactional
@@ -127,7 +127,7 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
   }
 
   /**
-   * Override delete method to prevent direct deletion of AccessPolicies.
+   * Override delete method to prevent direct deletion of {@link AccessPolicyEntity} objects.
    * Instead, resources must be claimed via accessControl endpoints.
    */
   @Transactional

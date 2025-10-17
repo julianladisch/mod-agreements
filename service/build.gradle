@@ -204,6 +204,19 @@ dependencies {
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.0' // For Java 8 date/time support in Jackson
 
+  // JUNIT Nonsense just to be able to use parameterized tests... this will hopefully be better when we move
+  // this lib away from a grails project
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.14.0' // Enforce newer versions for junit, as params relies on it -- this may get better outside of grails
+  testImplementation 'org.junit.jupiter:junit-jupiter-params:5.14.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.14.0'
+
+  testImplementation 'org.junit.platform:junit-platform-commons:1.10.2' // Corresponds to JUnit 5.10.x
+  testImplementation 'org.junit.platform:junit-platform-engine:1.10.2'
+
+  testImplementation 'org.junit.platform:junit-platform-commons:1.14.0'
+  testImplementation 'org.junit.platform:junit-platform-engine:1.14.0'
+  testImplementation 'org.junit.platform:junit-platform-launcher:1.14.0'
+
 	/* ---- Custom non profile deps ---- */
 	implementation 'org.apache.kafka:kafka-clients:3.7.2'
 	implementation 'com.github.everit-org.json-schema:org.everit.json.schema:1.14.4'
