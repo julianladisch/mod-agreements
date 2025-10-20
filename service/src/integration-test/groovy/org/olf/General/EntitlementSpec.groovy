@@ -245,7 +245,8 @@ class EntitlementSpec extends BaseSpec  {
       assert entitlement.reference == "26929514-237c-11ed-861d-0242ac120002:26929514-237c-11ed-861d-0242ac120001"
       assert updatedEntitlement.reference == null
       assert updatedEntitlement.authority == null
-      assert updatedEntitlement.type == "internal"
+      // assert updatedEntitlement.type == 'internal'
+      assert updatedEntitlement.type == null // Internal type is implicit from NULL right now. See comments in Entitlement and EntitlementService.
       assert updatedEntitlement.resourceName == null
       assert updatedEntitlement.resource
       assert updatedEntitlement.resource.id == pci.id

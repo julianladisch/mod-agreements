@@ -145,7 +145,10 @@ public class EntitlementService {
                   log.info("Found internal PCI ({}) for TitleInstance ({}) in Package ({}), updating Entitlement ({}) to be internal.", pciInLocalKb.name, titleInstanceInLocalKb.name, packageInLocalKb.name, entitlement.id)
                   entitlement.setReference(null);
                   entitlement.authority = null;
-                  entitlement.type = "internal";
+                  // Internal type is implicit from NULL right now. This is a bit shaky, and potentially needs an
+                  // across-the-board rethink, as `type` is a String field. We should look into using an Enum or a
+                  // reference data value here, or remodelling the Entitlements wholesale.
+                  entitlement.type = null;
                   entitlement.resource = pciInLocalKb;
                   entitlement.resourceName = null;
                   entitlement.save(failOnError: true);

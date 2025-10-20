@@ -66,7 +66,15 @@ public class Entitlement implements MultiTenant<Entitlement>, Clonable<Entitleme
 
   Date contentUpdated
 
-  // Type - must be set to external for externally defined packages, null or local for things defined in the local DB, or detached if added without resource, just description
+  /**
+   * Type of entitlement: internal/null, external, detached.
+   * Internal type is implicit from NULL right now. This is a bit shaky, and potentially needs an across-the-board
+   * rethink, as `type` is a String field. We should look into using an Enum or a reference data value here, or
+   * remodelling the Entitlements wholesale.
+   *
+   * Previous comment suggested `local` as a valid alternate value for 'internal', but as far as I can see that is not
+   * supported at the moment.
+   */
   String type
 
   String note
