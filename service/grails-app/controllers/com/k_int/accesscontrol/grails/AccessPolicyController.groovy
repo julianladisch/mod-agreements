@@ -33,7 +33,8 @@ class AccessPolicyController extends PolicyEngineController<AccessPolicyEntity> 
     // This should pass down all headers to the policyEngine. We can then choose to ignore those should we wish (Such as when logging into an external FOLIO)
     String[] grailsHeaders = convertGrailsHeadersToStringArray(request)
 
-    return policyEngine.getRestrictionPolicies(grailsHeaders, restriction)
+    AccessPolicyType filterType = params.type ? policyEngine.getTypeFromString(params.type.toString()) : null
+    return policyEngine.getRestrictionPolicies(grailsHeaders, restriction, filterType)
   }
 
   /**
